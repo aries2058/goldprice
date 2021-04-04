@@ -1,0 +1,18 @@
+.keypad {
+    display: none;
+    z-index: 9999;
+}
+.keypad td{
+    color:#fff;
+    text-align: center;
+}
+.key{
+    text-align: right;
+    padding-right: 4px;
+}
+.stone-form{
+    display: none;
+}
+.stone-form.on{
+    display: flex;
+}

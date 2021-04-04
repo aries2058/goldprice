@@ -1,0 +1,16 @@
+.nav-price a.on{
+    background: #FFC107;
+    color:#000;
+}
+.nav-price a{
+    color:#fff
+}
+.tmpl-price{
+    display: none;
+}
+.tmpl-price.on{
+    display: block;
+}
+.tbl-parice{
+    font-size: 0.8rem;
+}

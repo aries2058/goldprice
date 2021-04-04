@@ -1,0 +1,22 @@
+.scroll-x {
+  white-space: nowrap;
+  overflow-x: auto; 
+  -webkit-overflow-scrolling: touch;
+}
+.btn-whole-area{
+    height: 28px;
+}
+.btn-whole{
+    padding:8px 16px;
+    color: #000;   
+}
+.btn-whole span{
+    padding-bottom: 3px;
+    border-bottom: 3px solid #fff;
+}
+.btn-whole.on span{
+    border-bottom: 3px solid #555;
+}
+.card img{
+    height: 96px;
+}

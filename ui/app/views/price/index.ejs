@@ -1,0 +1,30 @@
+<$ include ../_shared/header $>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/css/price.index.css" />
+<script src="/js/price.index.js"></script>
+
+    <div class="container-fluid fixed-top bg-dark" style="top:55px;">
+        <ul class="nav justify-content-between nav-price mt-2">
+            <li class="nav-item">
+              <a class="btn <$- idx==0?'on':'' $>">금/은</a>
+            </li>
+              <a class="btn <$- idx==1?'on':'' $>">다이아</a>
+            </li>
+              <a class="btn <$- idx==2?'on':'' $>">쓰브</a>
+            </li>
+              <a class="btn <$- idx==3?'on':'' $>">진주</a>
+            </li>
+        </ul>
+        <div class="row">
+            <div class="col-12 text-end text-light">
+                <small>(VAT별도)</small>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" style="height: 70px;"></div>
+    <$ include gold $>
+    <$ include dia $>
+    <$ include subu $>
+    <$ include pearl $>
+<$ include ../_shared/footer $>
