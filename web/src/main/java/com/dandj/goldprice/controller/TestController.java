@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Log4j2
-@RequestMapping("/test/")
+@RequestMapping("test")
 @RequiredArgsConstructor
 public class TestController {
     @GetMapping(value="/001")
