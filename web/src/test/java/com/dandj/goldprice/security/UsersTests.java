@@ -18,8 +18,9 @@ public class UsersTests {
 
     @Test
     public void updatePassword(){
-        Member user = Member.builder().password(passwordEncoder.encode("1111")).build();
-        user.addUserRole(MemberRole.ADMIN);
-        repository.save(user);
+//        Member user = Member.builder().password(passwordEncoder.encode("1111")).build();
+//        user.addUserRole(MemberRole.ADMIN);
+//        repository.save(user);
+        System.out.println(passwordEncoder.encode("1111"));
     }
 }

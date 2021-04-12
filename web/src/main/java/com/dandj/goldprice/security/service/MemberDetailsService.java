@@ -26,7 +26,7 @@ public class MemberDetailsService implements UserDetailsService {
         log.info("loadUserByUserName: " + username);
         Optional<Member> result = memberRepository.findByUserId(username);
 
-        if(result.isEmpty()){
+        if(result == null){
             throw new UsernameNotFoundException("Check userId");
         }
 

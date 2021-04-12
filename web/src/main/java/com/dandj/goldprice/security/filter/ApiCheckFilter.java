@@ -32,7 +32,9 @@ public class ApiCheckFilter extends OncePerRequestFilter {
         log.info("RequestURI:" + request.getRequestURI());
         log.info(antPathMatcher.match(pattern, request.getRequestURI()));
 
-        if(antPathMatcher.match(pattern, request.getRequestURI())){
+        String uri = request.getRequestURI().replace("/goldprice", "");
+
+        if(antPathMatcher.match(pattern, uri)){
             log.info("ApiCheckFilter.....................................");
             log.info("ApiCheckFilter.....................................");
             log.info("ApiCheckFilter.....................................");
