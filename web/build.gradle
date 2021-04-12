@@ -17,6 +17,8 @@ configurations {
 
 bootWar{
     archiveBaseName="goldprice"
+    archiveFileName="goldprice.war"
+    archiveVersion="0.0.1"
 }
 
 repositories {
