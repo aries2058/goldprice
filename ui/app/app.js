@@ -14,6 +14,7 @@ var mypageRouter = require('./routes/mypage');
 var priceRouter = require('./routes/price');
 var productRouter = require('./routes/product');
 var shoppingRouter = require('./routes/shopping');
+var adminRouter = require('./routes/admin');
 
 var app = express();
 
@@ -45,6 +46,7 @@ app.use('/mypage', mypageRouter);
 app.use('/price', priceRouter);
 app.use('/product', productRouter);
 app.use('/shopping', shoppingRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -64,6 +66,6 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-// app.listen(3000, function(){
-//   console.log(`App listening on port 3000!`)
-// });
+app.listen(3000, function(){
+  console.log(`App listening on port 3000!`)
+});

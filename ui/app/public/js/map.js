@@ -8,6 +8,7 @@ $(function(){
     };
     
     var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+<<<<<<< HEAD
     var geocoder = new kakao.maps.services.Geocoder();
     customOverlay = new kakao.maps.CustomOverlay({}),
     infowindow = new kakao.maps.InfoWindow({removable: true});
@@ -61,6 +62,9 @@ $(function(){
         });
         customOverlay.setMap(map);
     }
+=======
+    map.addOverlayMapTypeId(kakao.maps.MapTypeId.USE_DISTRICT);
+>>>>>>> 65cd80ee25c46388fb634421c4f95591f86c44be
 })
 
 var data = {
