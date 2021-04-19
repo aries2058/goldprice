@@ -7,5 +7,6 @@ $(function(){
     };
     
     var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+    map.addOverlayMapTypeId(kakao.maps.MapTypeId.USE_DISTRICT);
 })
 

@@ -1,2 +1,5 @@
-package com.dandj.goldprice.entity;public class PriceGold {
+package com.dandj.goldprice.entity;
+
+public class PriceGold {
+
 }

@@ -42,7 +42,7 @@ public class MemberDetailsService implements UserDetailsService {
                 .map(role-> new SimpleGrantedAuthority("ROLE_"+role.name())).collect(Collectors.toList())
         );
 
-        authMember.setUserId(member.getUserId());
+        //authMember.setUserId(member.getUserId());
 
         return authMember;
     }
