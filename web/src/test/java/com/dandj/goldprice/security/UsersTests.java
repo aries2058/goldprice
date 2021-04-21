@@ -1,7 +1,5 @@
 package com.dandj.goldprice.security;
 
-import com.dandj.goldprice.entity.MemberRole;
-import com.dandj.goldprice.entity.Member;
 import com.dandj.goldprice.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
