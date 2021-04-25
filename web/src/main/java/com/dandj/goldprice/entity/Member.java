@@ -14,22 +14,22 @@ import java.util.Set;
 @ToString
 public class Member extends BaseEntity {
     @Id
+    @Column(length = 20, nullable = false)
     private String userId;
     private String password;
     private String userNm;
-    private String userTyp;
-    private String compNm;
+    private String bizNm;
     private String bizNo;
     private String tel;
     private String mobile;
-    private String email;
+    private String confirmYn;
 
     @ElementCollection(fetch=FetchType.LAZY)
     @Builder.Default
     private Set<MemberRole> roleSet = new HashSet<>();
 
-    public void addUserRole(MemberRole userRole){
-        roleSet.add(userRole);
+    public void addMemberRole(MemberRole memberRole){
+        roleSet.add(memberRole);
     }
 }
 

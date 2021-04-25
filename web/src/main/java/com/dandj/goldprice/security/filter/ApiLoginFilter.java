@@ -1,6 +1,6 @@
 package com.dandj.goldprice.security.filter;
 
-import com.dandj.goldprice.dto.AuthMemberDTO;
+import com.dandj.goldprice.dto.AuthDto;
 import com.dandj.goldprice.util.JWTUtil;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -49,7 +49,7 @@ public class ApiLoginFilter extends AbstractAuthenticationProcessingFilter {
         log.info("successfulAuthentication: " + authResult);
         log.info(authResult.getPrincipal());
 
-        String userid = ((AuthMemberDTO)authResult.getPrincipal()).getUsername();
+        String userid = ((AuthDto)authResult.getPrincipal()).getUsername();
 
         String token = null;
         try{

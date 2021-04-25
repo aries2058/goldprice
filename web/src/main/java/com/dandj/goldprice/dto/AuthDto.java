@@ -13,9 +13,9 @@ import java.util.Collection;
 @Getter
 @Setter
 @ToString
-public class AuthMemberDTO extends User {
+public class AuthDto extends User {
     private String userId;
-    public AuthMemberDTO(String username, String password, Collection<?extends GrantedAuthority> authorities){
+    public AuthDto(String username, String password, Collection<?extends GrantedAuthority> authorities){
         super(username, password, authorities);
         this.userId = username;
     }

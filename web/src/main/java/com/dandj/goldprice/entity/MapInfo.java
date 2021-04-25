@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "MemberUserId")
 public class MapInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +22,4 @@ public class MapInfo {
 
     private Double lat;
     private Double lng;
-
-    @OneToOne
-    private Member MemberUserId;
 }

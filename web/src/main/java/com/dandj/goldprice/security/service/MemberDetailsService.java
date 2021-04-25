@@ -1,6 +1,6 @@
 package com.dandj.goldprice.security.service;
 
-import com.dandj.goldprice.dto.AuthMemberDTO;
+import com.dandj.goldprice.dto.AuthDto;
 import com.dandj.goldprice.entity.Member;
 import com.dandj.goldprice.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +35,7 @@ public class MemberDetailsService implements UserDetailsService {
         log.info("====================");
         log.info(member);
 
-        AuthMemberDTO authMember = new AuthMemberDTO(
+        AuthDto dto = new AuthDto(
                 member.getUserId(),
                 member.getPassword(),
                 member.getRoleSet().stream()
@@ -44,6 +44,6 @@ public class MemberDetailsService implements UserDetailsService {
 
         //authMember.setUserId(member.getUserId());
 
-        return authMember;
+        return dto;
     }
 }
