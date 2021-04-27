@@ -3,6 +3,9 @@ package com.dandj.goldprice.dto;
 import com.dandj.goldprice.entity.MemberFile;
 import lombok.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 @Getter
 @Setter
 @ToString

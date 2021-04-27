@@ -32,13 +32,18 @@ public class MemberService {
 
     public List<MemberDto> getMemberListByBizNo(String bizNo){
         List<MemberDto> list = new ArrayList<>();
-        memberRepository.findMembersByBizNo(bizNo).forEach(v->list.add(entityToDto(v)));
+        memberRepository.findMembersByBizNo(bizNo).forEach(v->list.add(entityToDto(v, null)));
 
         return list;
     }
     public List<MemberDto> getNewMemberList(){
         List<MemberDto> list = new ArrayList<>();
-        memberRepository.findMembersByConfirmYnIsNull().forEach(v->list.add(entityToDto(v)));
+        memberRepository.findMembersByConfirmYnIsNull().forEach(member->{
+            List<MemberFile> fileList = memberFileRepository.findMemberFilesByMember_UserId(member.getUserId());
+            List<MemberFileDto> fileDto = new ArrayList<>();
+            fileList.forEach(file -> fileDto.add(new MemberFileDto(file.getFilePath())));
+            list.add(entityToDto(member, fileDto));
+        });
 
         return list;
     }
@@ -58,7 +63,10 @@ public class MemberService {
         Page<Member> result = memberRepository.findAll(spec, pageable);
 
         result.forEach(member -> {
-            list.add(entityToDto(member));
+            List<MemberFile> fileList = memberFileRepository.findMemberFilesByMember_UserId(member.getUserId());
+            List<MemberFileDto> fileDto = new ArrayList<>();
+            fileList.forEach(file -> fileDto.add(new MemberFileDto(file.getFilePath())));
+            list.add(entityToDto(member, fileDto));
         });
 
         return list;
@@ -66,8 +74,11 @@ public class MemberService {
 
     public MemberDto getMember(String userId){
         Member member = memberRepository.findMemberByUserId(userId);
+        List<MemberFile> fileList = memberFileRepository.findMemberFilesByMember_UserId(userId);
         if(member != null){
-            return entityToDto(member);
+            List<MemberFileDto> fileDto = new ArrayList<>();
+            fileList.forEach(file -> fileDto.add(new MemberFileDto(file.getFilePath())));
+            return entityToDto(member, fileDto);
         }else{
             return new MemberDto();
         }
@@ -86,7 +97,7 @@ public class MemberService {
         return member.getUserId();
     }
 
-    private MemberDto entityToDto(Member entity){
+    private MemberDto entityToDto(Member entity, List<MemberFileDto> files){
         MemberDto dto = MemberDto.builder()
                 .user_id(entity.getUserId())
                 .user_nm(entity.getUserNm())
@@ -95,6 +106,7 @@ public class MemberService {
                 .mobile(entity.getMobile())
                 .tel(entity.getTel())
                 .confirm_yn(entity.getConfirmYn())
+                .fileDtoList(files)
                 .roleSet(entity.getRoleSet().stream()
                         .map(role->role.name()).collect(Collectors.toList())).build();
         return dto;
@@ -120,7 +132,7 @@ public class MemberService {
         if(memberFileDtoList != null && memberFileDtoList.size() > 0){
             List<MemberFile> memberFileList = memberFileDtoList.stream().map(memberFileDto -> {
                MemberFile memberFile = MemberFile.builder()
-                      // .filePath("https://" + cloudfront + "/" + memberFileDto.getFilePath())
+                        .filePath("/display/" + memberFileDto.getFilePath())
                        .ipAddr(memberDto.getIpaddr())
                        .member(member).build();
                return memberFile;

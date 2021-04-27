@@ -24,7 +24,7 @@ public class AuthController {
         return service.getMemberListByBizNo(bizno);
     }
 
-    @GetMapping(value="/auth/checkUserId")
+    @GetMapping(value="/auth/getMember")
     public MemberDto checkUserId(String userid){
         return service.getMember(userid);
     }
@@ -43,5 +43,4 @@ public class AuthController {
     public List<MemberDto> getMemberList(int sttPage, int perPage, String searchVal, String confirm){
         return service.getMemberList(sttPage, perPage, searchVal, confirm);
     }
-
 }
