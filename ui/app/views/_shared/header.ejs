@@ -17,12 +17,17 @@
 <script src="/plugins/node_modules/jquery.cookie/jquery.cookie.js"></script>
 <script src="/js/comm.js"></script>
 </head>
-
 <$ if(page == '/'){$>
     <body class="bg-warning">
-<$}else if(page.indexOf('calc')>0){$>
+<$}else if(page.indexOf('calc')>0 || page.indexOf('auth') > 0){$>
     <body>
-<$}else{ if(page.indexOf('main') || page.indexOf('price') > 0){$><body class="bg-dark"><$}else{$><body><$}$>
+<$}else{ 
+    if(page.indexOf('main') > 0 || page.indexOf('price') > 0){
+        $><body class="bg-dark"><$
+    }else{
+        $><body><$
+    }$>
+
     <$ include ../common/topNav $>
     
     <$ include ../common/sidebar $>

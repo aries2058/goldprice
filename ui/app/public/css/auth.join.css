@@ -1,0 +1,24 @@
+.step {
+    display: none;
+}
+.step.on{
+    display: block;
+}
+
+h2, label{
+    margin-top:32px;
+}
+
+.fa-minus{
+    font-size: 2rem;
+    margin-left: 4px;
+    margin-right: 4px;
+    color: #ccc
+}
+.fa-minus.on{
+    color: #00f
+}
+
+.info{
+    display: none;
+}

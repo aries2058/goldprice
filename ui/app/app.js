@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var ip = require("ip");
 
 var authRouter = require('./routes/auth');
 var commonRouter = require('./routes/common');
@@ -32,6 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
+  res.locals.ipaddr = ip.address();
   res.locals.page = req.url;
   next();
 });
@@ -66,6 +68,6 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-// app.listen(3000, function(){
-//   console.log(`App listening on port 3000!`)
-// });
+app.listen(3000, function(){
+  console.log(`App listening on port 3000!`)
+});

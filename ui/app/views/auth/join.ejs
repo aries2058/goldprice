@@ -1,13 +1,74 @@
 <$ include ../_shared/header $>
 <link rel="stylesheet" href="/css/auth.join.css" />
+<script src="/js/auth.join.js"></script>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+<form id="form">
+    <div class="container-fluid mt-3 step on" id="step0">
+        <h2>사업자번호</h2>
+        <input type="number" class="form-control" id="biz_no" name="biz_no" />
+        <small>'-'기호 제외</small>
+        <a class="btn btn-primary w-100 mt-2" id="btn-check-bizno">입력</a>
+        <p class="result mt-5"></p>
+    </div>
+
+    <div class="container-fluid mt-3 step" id="step1">
+        <h2>개인정보이용동의</h2>
+        <p>어쩌구저쩌구</p>
+        <a class="btn btn-primary w-100 mt-2" onclick="goStep2();">동의합니다</a>
+    </div>
+
+    <div class="container-fluid mt-3 step" id="step2">
+        <h2>가입유형</h2>
+        <div class="row">
+            <!--RETAIL, SOLE, WHOLE, FACTORY, SALES, ETC, ADMIN-->
+            <div class="col-4 p-1"><a class="btn btn-primary w-100 btn-typ biz" data-val="RETAIL">소매</a></div>
+            <div class="col-4 p-1"><a class="btn btn-primary w-100 btn-typ biz" data-val="SOLE">도매</a></div>
+            <div class="col-4 p-1"><a class="btn btn-primary w-100 btn-typ biz" data-val="WHOLE">총판</a></div>
+            <div class="col-4 p-1"><a class="btn btn-primary w-100 btn-typ biz" data-val="FACTORY">공장</a></div>
+            <div class="col-4 p-1"><a class="btn btn-primary w-100 btn-typ other" data-val="SALES">영업사원</a></div>
+            <div class="col-4 p-1"><a class="btn btn-primary w-100 btn-typ other" data-val="ETC">기타</a></div>
+            <input type="hidden" name="user_typ" id="user_typ" />
+        </div>
+        <div class="info">
+            <label>사업자등록번호</label>
+            <input type="number" class="form-control" id="disp-bizno" readonly />
+            <label>사업장 이름</label>
+            <input type="text" class="form-control" name="biz_nm" id="biz_nm" />
+            <label>사용자 이름</label>
+            <input type="text" class="form-control" name="user_nm" id="user_nm" />
+            <label>사업장 전화번호</label>
+            <input type="number" class="form-control" name="tel" id="tel" />
+            <label>휴대폰번호</label>
+            <input type="text" class="form-control" name="mobile" id="mobile" value="010-3224-3931" readonly />
+            <label>사업자등록증</label>
+            <input type="file" class="form-control" id="img1" multiple />
+            <div class="biz">
+                <label>매장사진</label>
+                <input type="file" class="form-control" id="img2" multiple />
+            </div>
+            <div class="other">
+                <label>명함</label>
+                <input type="file" class="form-control" id="img3" multiple />
+            </div>
+            <input type="hidden" name="fileDtoList" id="fileDtoList" />
+            <a class="btn btn-primary w-100 mt-5" onclick="goStep3();">다음</a>
         </div>
     </div>
-</div>
 
+    <div class="container-fluid mt-3 step" id="step3">
+        <h2>아이디 <a class="btn btn-sm btn-primary" id="btn-check-userid">중복확인</a></h2>
+        <input type="text" class="form-control" name="user_id" id="user_id" />
+        <input type="hidden" id="check-userid" />
+        <input type="hidden" id="ipaddr" name="ipaddr" value="<$- ipaddr $>" />
+        <h2>비밀번호</h2>
+        <input type="password" class="form-control" name="password" id="password" />
+        <h2>비밀번호확인</h2>
+        <input type="password" class="form-control" id="confirm-password" />
+        <small id="msg-password"></small>
+        <a class="btn btn-primary w-100 mt-5" onclick="goStep4();">가입신청</a>
+    </div>
+</form>
+<div class="container-fluid mt-3 step" id="step4">
+    가입신청 완료!!(최대1일 소요)
+</div>
 <$ include ../_shared/footer $>

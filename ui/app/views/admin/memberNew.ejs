@@ -1,0 +1,29 @@
+<$ include ../_shared/admin_header $>
+<script src="/js/admin.memberNew.js"></script>
+<div class="container-fluid mt-3">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <input class="form-check-input me-1" type="checkbox" value="" /> 전체선택
+        <a class="btn btn-primary float-end">일괄승인</a>
+      </li>
+    </ul>
+    <ul class="list-group list-group-flush" id="list">
+        
+    </ul>
+</div>
+
+<script id="tmpl-list" type="text/template">
+  <%_.each(data, function(v, i){%>
+    <li class="list-group-item border-top item">
+      <input class="form-check-input me-1" type="checkbox" value="" />
+      <label class="badge bg-danger">도매</label> 골드앤스톤<br />
+      <span style="margin-left: 24px;">노윤수</span> | <span>02-123-4567</span> | <span>010-123-4567</span>
+    </li>  
+    <li class="list-group-item bg-light file-area">
+      <% _.each(v.fileDtoList, function(xv, xi){%>
+      <a href="http://mnisdh.synology.me:7070/goldprice/api/display?fileName=<%- xv.fileUrl %>">파일<%- xi+1 %></a>
+      <%})%>
+    </li>
+  <%})%>
+</script>
+<$ include ../_shared/footer $>

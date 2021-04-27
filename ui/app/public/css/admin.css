@@ -1,0 +1,6 @@
+.file-area{
+    display: none;
+}
+.file-area.on{
+    display: block;
+}

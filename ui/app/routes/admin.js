@@ -2,7 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-  res.render('admin/gold');
+  res.render('admin/memberNew');
+});
+router.get('/member', function(req, res, next) {
+  res.render('admin/member');
 });
 
 router.get('/gold', function(req, res, next) {
