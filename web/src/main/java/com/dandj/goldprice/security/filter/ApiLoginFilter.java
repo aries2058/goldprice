@@ -50,7 +50,7 @@ public class ApiLoginFilter extends AbstractAuthenticationProcessingFilter {
         log.info(authResult.getPrincipal());
 
         String userid = ((AuthDto)authResult.getPrincipal()).getUsername();
-
+        log.info("=============userid: " + userid);
         String token = null;
         try{
             token = jwtUtil.generateToken(userid);

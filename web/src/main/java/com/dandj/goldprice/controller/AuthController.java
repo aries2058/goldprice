@@ -15,32 +15,28 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @Log4j2
-@RequestMapping("api")
+@RequestMapping("auth")
 public class AuthController {
     private final MemberService service;
 
-    @GetMapping(value="/auth/checkBizNo")
+    @GetMapping(value="/checkBizNo")
     public List<MemberDto> checkBizNo(String bizno){
         return service.getMemberListByBizNo(bizno);
     }
 
-    @GetMapping(value="/auth/getMember")
+    @GetMapping(value="/getMember")
     public MemberDto checkUserId(String userid){
         return service.getMember(userid);
     }
 
-    @PostMapping(value = "/auth/register")
+    @PostMapping(value = "/register")
     public String register(MemberDto memberDto){
         String userId = service.register(memberDto);
         return userId;
     }
-
-    @GetMapping(value="/auth/getNewMemberList")
-    public List<MemberDto> getNewMemberList(){
-        return service.getNewMemberList();
-    }
-    @GetMapping(value="/auth/getMemberList")
-    public List<MemberDto> getMemberList(int sttPage, int perPage, String searchVal, String confirm){
-        return service.getMemberList(sttPage, perPage, searchVal, confirm);
+    @PostMapping(value = "/login")
+    public String login(String userid, String pw){
+        String token = service.checkMember(userid, pw);
+        return token;
     }
 }

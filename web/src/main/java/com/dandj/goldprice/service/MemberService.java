@@ -8,8 +8,11 @@ import com.dandj.goldprice.entity.MemberRole;
 import com.dandj.goldprice.repository.MemberFileRepository;
 import com.dandj.goldprice.repository.MemberRepository;
 import com.dandj.goldprice.spec.MemberSpec;
+import com.dandj.goldprice.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Log4j2
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -70,6 +74,22 @@ public class MemberService {
         });
 
         return list;
+    }
+
+    public String checkMember(String userId, String password){
+        Member member = memberRepository.findMemberByUserId(userId);
+        String token = null;
+        log.info(member.getConfirmYn().equals("Y"));
+        if(member != null && passwordEncoder.matches(password, member.getPassword()) && member.getConfirmYn().equals("Y")){
+            try{
+                JWTUtil jwtUtil = new JWTUtil();
+                token = jwtUtil.generateToken(userId);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        return token;
     }
 
     public MemberDto getMember(String userId){

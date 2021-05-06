@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public ApiCheckFilter apiCheckFilter(){
-        return new ApiCheckFilter("/test/**/*", jwtUtil());
+        return new ApiCheckFilter("/api/**/*", jwtUtil());
     }
 
     @Bean
@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout();
 
         http.addFilterBefore(apiCheckFilter(), UsernamePasswordAuthenticationFilter.class);
-        http.addFilterBefore(apiLoginFilter(), UsernamePasswordAuthenticationFilter.class);
+        //http.addFilterBefore(apiLoginFilter(), UsernamePasswordAuthenticationFilter.class);
 
         http.authorizeRequests().antMatchers("**/*").permitAll();
     }
