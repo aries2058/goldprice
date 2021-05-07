@@ -24,6 +24,7 @@ public class MemberDto {
     private String user_nm;
     private String ipaddr;
     private String user_typ;
+    private String token;
 
     @Builder.Default
     private List<MemberFileDto> fileDtoList = new ArrayList<>();

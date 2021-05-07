@@ -35,8 +35,7 @@ public class AuthController {
         return userId;
     }
     @PostMapping(value = "/login")
-    public String login(String userid, String pw){
-        String token = service.checkMember(userid, pw);
-        return token;
+    public MemberDto login(String userid, String pw){
+        return service.checkMember(userid, pw);
     }
 }

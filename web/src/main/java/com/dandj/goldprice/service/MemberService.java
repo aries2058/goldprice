@@ -36,7 +36,7 @@ public class MemberService {
 
     public List<MemberDto> getMemberListByBizNo(String bizNo){
         List<MemberDto> list = new ArrayList<>();
-        memberRepository.findMembersByBizNo(bizNo).forEach(v->list.add(entityToDto(v, null)));
+        memberRepository.findMembersByBizNo(bizNo).forEach(v->list.add(entityToDto(v)));
 
         return list;
     }
@@ -76,7 +76,7 @@ public class MemberService {
         return list;
     }
 
-    public String checkMember(String userId, String password){
+    public MemberDto checkMember(String userId, String password){
         Member member = memberRepository.findMemberByUserId(userId);
         String token = null;
         log.info(member.getConfirmYn().equals("Y"));
@@ -84,12 +84,13 @@ public class MemberService {
             try{
                 JWTUtil jwtUtil = new JWTUtil();
                 token = jwtUtil.generateToken(userId);
+                return entityToDto(member, token);
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
 
-        return token;
+        return entityToDto(member);
     }
 
     public MemberDto getMember(String userId){
@@ -117,6 +118,19 @@ public class MemberService {
         return member.getUserId();
     }
 
+    private MemberDto entityToDto(Member entity){
+        MemberDto dto = MemberDto.builder()
+                .user_id(entity.getUserId())
+                .user_nm(entity.getUserNm())
+                .biz_nm(entity.getBizNm())
+                .biz_no(entity.getBizNo())
+                .mobile(entity.getMobile())
+                .tel(entity.getTel())
+                .confirm_yn(entity.getConfirmYn())
+                .roleSet(entity.getRoleSet().stream()
+                        .map(role->role.name()).collect(Collectors.toList())).build();
+        return dto;
+    }
     private MemberDto entityToDto(Member entity, List<MemberFileDto> files){
         MemberDto dto = MemberDto.builder()
                 .user_id(entity.getUserId())
@@ -127,6 +141,20 @@ public class MemberService {
                 .tel(entity.getTel())
                 .confirm_yn(entity.getConfirmYn())
                 .fileDtoList(files)
+                .roleSet(entity.getRoleSet().stream()
+                        .map(role->role.name()).collect(Collectors.toList())).build();
+        return dto;
+    }
+    private MemberDto entityToDto(Member entity, String token){
+        MemberDto dto = MemberDto.builder()
+                .user_id(entity.getUserId())
+                .user_nm(entity.getUserNm())
+                .biz_nm(entity.getBizNm())
+                .biz_no(entity.getBizNo())
+                .mobile(entity.getMobile())
+                .tel(entity.getTel())
+                .token(token)
+                .confirm_yn(entity.getConfirmYn())
                 .roleSet(entity.getRoleSet().stream()
                         .map(role->role.name()).collect(Collectors.toList())).build();
         return dto;
