@@ -9,17 +9,32 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MapInfo {
+public class Comp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long mapInfoId;
+    private Long id;
 
     @Column(length = 100, nullable = false)
     private String placeNm;
 
+    @Column(length = 20)
+    private String tel;
+
+    @Column(length = 500)
+    private String imgUrl;
+
+    @Column(length = 2000)
+    private String contents;
+
+    @Column(length = 1)
+    private String useYn;
+
     @Column(length = 500, nullable = false)
     private String addr;
+    @Column(length = 500, nullable = false)
+    private String addrDetail;
 
     private Double lat;
     private Double lng;
+    private String userId;
 }

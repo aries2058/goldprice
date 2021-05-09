@@ -18,7 +18,6 @@ public class WebConfig implements WebMvcConfigurer {
         return builder.build();
     }
 
-
     @Value("${app.upload.path}")
     private String uploadPath;
 

@@ -180,7 +180,7 @@ public class MemberService {
         if(memberFileDtoList != null && memberFileDtoList.size() > 0){
             List<MemberFile> memberFileList = memberFileDtoList.stream().map(memberFileDto -> {
                MemberFile memberFile = MemberFile.builder()
-                        .filePath("/display/" + memberFileDto.getFilePath())
+                        .filePath(memberFileDto.getFilePath())
                        .ipAddr(memberDto.getIpaddr())
                        .member(member).build();
                return memberFile;
