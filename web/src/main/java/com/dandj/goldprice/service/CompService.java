@@ -20,6 +20,16 @@ public class CompService {
         Comp comp = compRepository.findCompByUserId(id);
         return comp == null ? new CompDto() : compEntityToDto(comp);
     }
+    public CompDto getCompInfoByCompId(Long id){
+        Comp comp = compRepository.findById(id).get();
+        return comp == null ? new CompDto() : compEntityToDto(comp);
+    }
+    public List<CompDto> getCompList(){
+        List<CompDto> list = new ArrayList<>();
+        compRepository.findAll().forEach(x -> list.add(compEntityToDto(x)));
+        return list;
+    }
+
 
     private CompDto compEntityToDto(Comp entity){
         CompDto dto = CompDto.builder()

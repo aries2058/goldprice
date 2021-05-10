@@ -32,13 +32,21 @@ public class CompController {
 
     @GetMapping(value="/map/getMapInfo")
     public List<MapInfoDto> getMapInfo(){
-
         return mapService.getList();
+    }
+
+    @GetMapping(value="/comp/getCompList")
+    public List<CompDto> getCompList(){
+        return compService.getCompList();
     }
 
     @GetMapping(value="/comp/getCompInfo")
     public CompDto getCompInfo(String user_id){
         return compService.getCompInfo(user_id);
+    }
+    @GetMapping(value="/comp/getCompInfoByCompId")
+    public CompDto getCompInfoByCompId(Long comp_id){
+        return compService.getCompInfoByCompId(comp_id);
     }
 
     @PostMapping(value="/comp/register")

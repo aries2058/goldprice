@@ -22,7 +22,7 @@ public class CompInfoTests {
 
     @Test
     public void test001(){
-        Comp comp = repository.findByMember_UserId("system");
+        Comp comp = repository.findCompByUserId("system");
         System.out.println(comp);
     }
     @Test

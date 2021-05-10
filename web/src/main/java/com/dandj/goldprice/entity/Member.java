@@ -24,6 +24,7 @@ public class Member extends BaseEntity {
     private String bizNo;
     private String tel;
     private String mobile;
+    private String email;
     private String confirmYn;
 
     @ElementCollection(fetch=FetchType.LAZY)

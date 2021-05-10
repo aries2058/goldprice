@@ -79,7 +79,6 @@ public class MemberService {
     public MemberDto checkMember(String userId, String password){
         Member member = memberRepository.findMemberByUserId(userId);
         String token = null;
-        log.info(member.getConfirmYn().equals("Y"));
         if(member != null && passwordEncoder.matches(password, member.getPassword()) && member.getConfirmYn().equals("Y")){
             try{
                 JWTUtil jwtUtil = new JWTUtil();
@@ -90,7 +89,7 @@ public class MemberService {
             }
         }
 
-        return entityToDto(member);
+        return new MemberDto();
     }
 
     public MemberDto getMember(String userId){
@@ -111,10 +110,11 @@ public class MemberService {
         List<MemberFile> memberFileList = (List<MemberFile>) entityMap.get("fileList");
 
         memberRepository.save(member);
-        memberFileList.forEach(file ->{
-            memberFileRepository.save(file);
-        });
-
+        if(memberFileList != null){
+            memberFileList.forEach(file ->{
+                memberFileRepository.save(file);
+            });
+        }
         return member.getUserId();
     }
 
@@ -172,8 +172,12 @@ public class MemberService {
                 .bizNo(memberDto.getBiz_no())
                 .bizNm(memberDto.getBiz_nm())
                 .tel(memberDto.getTel())
+                .email(memberDto.getEmail())
                 .mobile(memberDto.getMobile()).build();
-        member.addMemberRole(MemberRole.valueOf(memberDto.getUser_typ()));
+        String[] arr = memberDto.getUser_typ().split(",");
+        for (String typ:arr ) {
+            member.addMemberRole(MemberRole.valueOf(typ));
+        }
         entityMap.put("member", member);
         List<MemberFileDto> memberFileDtoList = memberDto.getFileDtoList();
 
