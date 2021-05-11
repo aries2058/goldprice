@@ -50,9 +50,8 @@ public class CompController {
     }
 
     @PostMapping(value="/comp/register")
-    public Long register(CompDto compDto){
-        Long compId = compService.register(compDto);
-        return compId;
+    public String register(CompDto compDto){
+        return compService.register(compDto);
     }
 
 

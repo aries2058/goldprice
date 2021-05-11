@@ -34,6 +34,16 @@ public class AuthController {
         String userId = service.register(memberDto);
         return userId;
     }
+    @PostMapping(value = "/update")
+    public String update(MemberDto memberDto){
+        String userId = service.update(memberDto);
+        return userId;
+    }
+    @PostMapping(value = "/updatePassword")
+    public String updatePassword(String userid, String password){
+        String userId = service.updatePassword(userid, password);
+        return userId;
+    }
     @PostMapping(value = "/login")
     public MemberDto login(String userid, String pw){
         return service.checkMember(userid, pw);

@@ -126,6 +126,26 @@ public class MemberService {
         }
         return member.getUserId();
     }
+    public String update(MemberDto dto){
+        Member member = memberRepository.findMemberByUserId(dto.getUser_id());
+        member.setTel(dto.getTel());
+        member.setMobile(dto.getMobile());
+        member.setEmail(dto.getEmail());
+        member.setPushYn(dto.getPush_yn());
+        memberRepository.save(member);
+
+        return member.getUserId();
+    }
+    public String updatePassword(String userid, String password){
+        String enPw = passwordEncoder.encode(password);
+        Member member = memberRepository.findMemberByUserId(userid);
+        member.setPassword(enPw);
+        memberRepository.save(member);
+
+        return member.getUserId();
+    }
+
+
 
     public String confrimMember(String userid, String confirm){
         Member member = memberRepository.findMemberByUserId(userid);
@@ -152,6 +172,7 @@ public class MemberService {
                 .tel(entity.getTel())
                 .email(entity.getEmail())
                 .confirm_yn(entity.getConfirmYn())
+                .push_yn(entity.getPushYn())
                 .roleSet(entity.getRoleSet().stream()
                         .map(role->role.name()).collect(Collectors.toList())).build();
         return dto;
@@ -167,6 +188,7 @@ public class MemberService {
                 .email(entity.getEmail())
                 .confirm_yn(entity.getConfirmYn())
                 .fileDtoList(files)
+                .push_yn(entity.getPushYn())
                 .roleSet(entity.getRoleSet().stream()
                         .map(role->role.name()).collect(Collectors.toList())).build();
         return dto;

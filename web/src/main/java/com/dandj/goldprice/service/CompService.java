@@ -47,12 +47,12 @@ public class CompService {
         return dto;
     }
 
-    public Long register(CompDto compDto){
+    public String register(CompDto compDto){
         Map<String, Object> entityMap = dtoToEntity(compDto);
         Comp comp = (Comp) entityMap.get("comp");
         compRepository.save(comp);
 
-        return comp.getId();
+        return comp.getImgUrl();
     }
 
     private Map<String, Object> dtoToEntity(CompDto compDto){
