@@ -31,4 +31,8 @@ public class AdminController {
     public List<MemberDto> getMemberList(int sttPage, int perPage, String searchVal, String confirm){
         return service.getMemberList(sttPage, perPage, searchVal, confirm);
     }
+    @GetMapping(value = "/auth/confirmMember")
+    public String confirmMember(String userid, String confirm){
+        return service.confrimMember(userid, confirm);
+    }
 }

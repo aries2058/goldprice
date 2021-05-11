@@ -1,5 +1,6 @@
 package com.dandj.goldprice.dto;
 
+import com.dandj.goldprice.entity.Comp;
 import com.dandj.goldprice.entity.MemberRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,9 +27,13 @@ public class MemberDto {
     private String user_typ;
     private String token;
     private String email;
+    private String push_yn;
+    private String imgUrl;
 
     @Builder.Default
     private List<MemberFileDto> fileDtoList = new ArrayList<>();
+    @Builder.Default
+    private CompDto compDto = new CompDto();
     @Builder.Default
     private Collection<String> roleSet = new HashSet<>();
 }

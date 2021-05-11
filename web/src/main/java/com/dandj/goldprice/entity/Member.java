@@ -10,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,13 +20,25 @@ public class Member extends BaseEntity {
     @Column(length = 20, nullable = false)
     private String userId;
     private String password;
+    @Column(length = 20)
     private String userNm;
+    @Column(length = 100)
     private String bizNm;
+    @Column(length = 20)
     private String bizNo;
+    @Column(length = 20)
     private String tel;
+    @Column(length = 20)
     private String mobile;
+    @Column(length = 100)
     private String email;
+    @Column(length = 1)
     private String confirmYn;
+    @Column(length = 1)
+    private String pushYn;
+    private String pushToken;
+    @Column(length = 10)
+    private String pushType;
 
     @ElementCollection(fetch=FetchType.LAZY)
     @Builder.Default

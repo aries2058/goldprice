@@ -38,4 +38,8 @@ public class AuthController {
     public MemberDto login(String userid, String pw){
         return service.checkMember(userid, pw);
     }
+    @PostMapping(value = "/setPushToken")
+    public String setPushToken(String userid, String token, String typ){
+        return service.setPushToken(userid, token, typ);
+    }
 }
