@@ -13,8 +13,6 @@ import com.dandj.goldprice.spec.MemberSpec;
 import com.dandj.goldprice.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,10 +20,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Log4j2
@@ -145,6 +140,25 @@ public class MemberService {
         return member.getUserId();
     }
 
+    public String findId(String email, String mobile){
+        Member member = memberRepository.findMemberByEmailAndMobile(email, mobile);
+        if(member != null){
+            Random random = new Random();
+            String pw = random.ints(48, 123)
+                    .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                    .limit(6)
+                    .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                    .toString();
+
+            String enPw = passwordEncoder.encode(pw);
+            member.setPassword(enPw);
+            memberRepository.save(member);
+
+            return member.getUserId() +","+pw;
+        }else{
+            return "정보가 일치하는 계정이 없습니다.";
+        }
+    }
 
 
     public String confrimMember(String userid, String confirm){

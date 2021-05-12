@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RequiredArgsConstructor
@@ -48,8 +49,14 @@ public class AuthController {
     public MemberDto login(String userid, String pw){
         return service.checkMember(userid, pw);
     }
+
     @PostMapping(value = "/setPushToken")
     public String setPushToken(String userid, String token, String typ){
         return service.setPushToken(userid, token, typ);
+    }
+
+    @GetMapping(value = "findId")
+    public String findId(String email, String mobile){
+        return service.findId(email, mobile);
     }
 }
