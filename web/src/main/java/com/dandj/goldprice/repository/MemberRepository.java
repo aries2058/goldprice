@@ -25,5 +25,5 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 
     Page<Member> findAll(Specification<Member> spec, Pageable pageable);
 
-    Member findMemberByEmailAndMobile(String email, String mobile);
+    Member findOne(Specification<Member> spec);
 }

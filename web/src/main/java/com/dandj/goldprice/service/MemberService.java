@@ -141,7 +141,9 @@ public class MemberService {
     }
 
     public String findId(String email, String mobile){
-        Member member = memberRepository.findMemberByEmailAndMobile(email, mobile);
+        Specification<Member> spec = Specification.where(MemberSpec.email(email));
+        spec = spec.and(Specification.where(MemberSpec.mobile(mobile)));
+        Member member = memberRepository.findOne(spec);
         if(member != null){
             Random random = new Random();
             String pw = random.ints(48, 123)
@@ -153,11 +155,11 @@ public class MemberService {
             String enPw = passwordEncoder.encode(pw);
             member.setPassword(enPw);
             memberRepository.save(member);
-
-            return member.getUserId() +","+pw;
+            return member.getUserId() + "," + pw;
         }else{
-            return "정보가 일치하는 계정이 없습니다.";
+            return "";
         }
+
     }
 
 

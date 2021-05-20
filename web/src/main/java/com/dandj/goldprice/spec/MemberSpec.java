@@ -50,4 +50,20 @@ public class MemberSpec {
             }
         };
     }
+    public static Specification<Member> email(String email){
+        return new Specification<Member>() {
+            @Override
+            public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                return criteriaBuilder.equal(root.get("email"), email);
+            }
+        };
+    }
+    public static Specification<Member> mobile(String mobile){
+        return new Specification<Member>() {
+            @Override
+            public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                return criteriaBuilder.equal(root.get("mobile"), mobile);
+            }
+        };
+    }
 }
