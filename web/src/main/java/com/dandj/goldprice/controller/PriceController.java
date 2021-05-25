@@ -1,7 +1,9 @@
 package com.dandj.goldprice.controller;
 
 import com.dandj.goldprice.dto.MapInfoDto;
+import com.dandj.goldprice.dto.PriceDiaDto;
 import com.dandj.goldprice.dto.PriceGoldDto;
+import com.dandj.goldprice.dto.PriceSubuDto;
 import com.dandj.goldprice.entity.PriceGold;
 import com.dandj.goldprice.service.CompService;
 import com.dandj.goldprice.service.MapService;
@@ -30,5 +32,15 @@ public class PriceController {
     @PostMapping(value = "/price/registerGold")
     public String registerGold(PriceGoldDto priceGoldDto){
         return priceService.registerGold(priceGoldDto);
+    }
+
+
+    @GetMapping(value="/price/getDia")
+    public List<PriceDiaDto> getDia() {
+        return priceService.getDia();
+    }
+    @GetMapping(value="/price/getSubu")
+    public List<PriceSubuDto> getSubu() {
+        return priceService.getSubu();
     }
 }

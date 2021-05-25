@@ -11,11 +11,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class PriceGoldDto {
-    private Long price_id;
+public class PriceSubuDto {
+    private Long subu_id;
     private String typ;
-    private Long vat;
-    private Long buy;
-    private Long sell;
+    private Double mm;
+    private Long price1;
+    private Long price2;
+    private Long price3;
+    private Long price4;
+    private Long price5;
     private LocalDateTime regdate;
 }
