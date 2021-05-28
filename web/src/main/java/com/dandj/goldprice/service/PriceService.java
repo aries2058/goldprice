@@ -2,14 +2,8 @@ package com.dandj.goldprice.service;
 
 import com.dandj.goldprice.GoldpriceApplication;
 import com.dandj.goldprice.dto.*;
-import com.dandj.goldprice.entity.Comp;
-import com.dandj.goldprice.entity.PriceDia;
-import com.dandj.goldprice.entity.PriceGold;
-import com.dandj.goldprice.entity.PriceSubu;
-import com.dandj.goldprice.repository.CompRepository;
-import com.dandj.goldprice.repository.PriceDiaRepository;
-import com.dandj.goldprice.repository.PriceGoldRepository;
-import com.dandj.goldprice.repository.PriceSubuRepository;
+import com.dandj.goldprice.entity.*;
+import com.dandj.goldprice.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +16,7 @@ public class PriceService {
     private final PriceGoldRepository priceGoldRepository;
     private final PriceDiaRepository priceDiaRepository;
     private final PriceSubuRepository priceSubuRepository;
+    private final PricePearlRepository pricePearlRepository;
 
     public List<PriceGoldDto> getGold(String typ){
         List<PriceGoldDto> list = new ArrayList<>();
@@ -92,6 +87,24 @@ public class PriceService {
                 .regdate(entity.getRegDate()).build();
         return dto;
     }
+
+
+    public List<PricePearlDto> getPearl(){
+        List<PricePearlDto> list = new ArrayList<>();
+        pricePearlRepository.findAll().forEach(x-> list.add(pearlEntityToDto(x)));
+        return list;
+    }
+
+    private PricePearlDto pearlEntityToDto(PricePearl entity){
+        PricePearlDto dto = PricePearlDto.builder()
+                .typ(entity.getTyp())
+                .mm(entity.getMm())
+                .min(entity.getMin())
+                .max(entity.getMax())
+                .regdate(entity.getRegDate()).build();
+        return dto;
+    }
+
 
     public String registerGold(PriceGoldDto priceGoldDto){
         PriceGold priceGold = goldDtoToEntity(priceGoldDto);

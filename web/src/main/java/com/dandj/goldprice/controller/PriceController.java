@@ -1,12 +1,9 @@
 package com.dandj.goldprice.controller;
 
-import com.dandj.goldprice.dto.MapInfoDto;
 import com.dandj.goldprice.dto.PriceDiaDto;
 import com.dandj.goldprice.dto.PriceGoldDto;
+import com.dandj.goldprice.dto.PricePearlDto;
 import com.dandj.goldprice.dto.PriceSubuDto;
-import com.dandj.goldprice.entity.PriceGold;
-import com.dandj.goldprice.service.CompService;
-import com.dandj.goldprice.service.MapService;
 import com.dandj.goldprice.service.PriceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -21,6 +18,7 @@ import java.util.List;
 @Log4j2
 @RequestMapping("api")
 @RequiredArgsConstructor
+
 public class PriceController {
     private final PriceService priceService;
 
@@ -42,5 +40,9 @@ public class PriceController {
     @GetMapping(value="/price/getSubu")
     public List<PriceSubuDto> getSubu() {
         return priceService.getSubu();
+    }
+    @GetMapping(value="/price/getPearl")
+    public List<PricePearlDto> getPearl() {
+        return priceService.getPearl();
     }
 }

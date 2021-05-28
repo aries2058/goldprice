@@ -28,6 +28,8 @@ public class MemberDto {
     private String token;
     private String email;
     private String push_yn;
+    private String push_token;
+    private String push_typ;
     private String imgUrl;
 
     @Builder.Default

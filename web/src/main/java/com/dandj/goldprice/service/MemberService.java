@@ -126,7 +126,6 @@ public class MemberService {
         member.setTel(dto.getTel());
         member.setMobile(dto.getMobile());
         member.setEmail(dto.getEmail());
-        member.setPushYn(dto.getPush_yn());
         memberRepository.save(member);
 
         return member.getUserId();
@@ -172,8 +171,6 @@ public class MemberService {
 
     public String setPushToken(String userid, String token, String typ){
         Member member = memberRepository.findMemberByUserId(userid);
-        member.setPushToken(token);
-        member.setPushType(typ);
         memberRepository.save(member);
         return "OK";
     }
@@ -188,7 +185,6 @@ public class MemberService {
                 .tel(entity.getTel())
                 .email(entity.getEmail())
                 .confirm_yn(entity.getConfirmYn())
-                .push_yn(entity.getPushYn())
                 .roleSet(entity.getRoleSet().stream()
                         .map(role->role.name()).collect(Collectors.toList())).build();
         return dto;
@@ -204,7 +200,6 @@ public class MemberService {
                 .email(entity.getEmail())
                 .confirm_yn(entity.getConfirmYn())
                 .fileDtoList(files)
-                .push_yn(entity.getPushYn())
                 .roleSet(entity.getRoleSet().stream()
                         .map(role->role.name()).collect(Collectors.toList())).build();
         return dto;
@@ -218,7 +213,6 @@ public class MemberService {
                 .mobile(entity.getMobile())
                 .tel(entity.getTel())
                 .email(entity.getEmail())
-                .push_yn(entity.getPushYn())
                 .token(token)
                 .confirm_yn(entity.getConfirmYn())
                 .roleSet(entity.getRoleSet().stream()
@@ -239,8 +233,7 @@ public class MemberService {
                 .bizNm(memberDto.getBiz_nm())
                 .tel(memberDto.getTel())
                 .email(memberDto.getEmail())
-                .mobile(memberDto.getMobile())
-                .pushYn("Y").build();
+                .mobile(memberDto.getMobile()).build();
         String[] arr = memberDto.getUser_typ().split(",");
         for (String typ:arr ) {
             member.addMemberRole(MemberRole.valueOf(typ));

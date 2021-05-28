@@ -34,11 +34,7 @@ public class Member extends BaseEntity {
     private String email;
     @Column(length = 1)
     private String confirmYn;
-    @Column(length = 1)
-    private String pushYn;
-    private String pushToken;
-    @Column(length = 10)
-    private String pushType;
+    private Long uuid;
 
     @ElementCollection(fetch=FetchType.LAZY)
     @Builder.Default
