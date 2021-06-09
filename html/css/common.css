@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+.p-20{
+    padding: 20px;
+}
+.ps-20{
+    padding-left: 20px;
+}
+.pe-20{
+    padding-right: 20px;
+}
+*{
+    font-family:'Noto Sans KR', sans-serif;
+}
+
+.text-yellow{
+    color:#EBF22E;
+}
+.msg{
+    color:#868686;
+    font-weight: 100;
+    font-size: 12px;
+}
