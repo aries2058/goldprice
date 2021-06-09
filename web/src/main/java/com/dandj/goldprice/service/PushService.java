@@ -3,6 +3,7 @@ package com.dandj.goldprice.service;
 import com.dandj.goldprice.dto.PriceGoldDto;
 import com.dandj.goldprice.entity.Member;
 import com.dandj.goldprice.entity.PriceGold;
+import com.dandj.goldprice.entity.PushParam;
 import com.dandj.goldprice.entity.PushToken;
 import com.dandj.goldprice.repository.MemberRepository;
 import com.dandj.goldprice.repository.PushTokenRepository;
@@ -40,24 +41,19 @@ public class PushService {
         String[] uuids = list.toArray(new String[list.size()]);
         JSONObject PushMsgJson = new JSONObject();
         JSONObject for_fcm = new JSONObject();
-        for_fcm.put("collapse", "articleId123");
-        for_fcm.put("delay_while_idle",false);
-        for_fcm.put("time_to_live",17200);
-        for_fcm.put("dry_run",false);
-        for_fcm.put("priority","high");
-        JSONObject custom_field = new JSONObject();
-        custom_field.put("comment_preview", message);
-        for_fcm.put("custom_field",custom_field);
+        JSONObject notification = new JSONObject();
+        notification.put("body", message);
+        for_fcm.put("notification", notification);
         PushMsgJson.put("for_fcm", for_fcm);
-
-        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
-        params.add("uuids", uuids);
-        params.add("push_message", PushMsgJson);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "KakaoAK " + apikey);
 
-        HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(params, headers);
+        PushParam pushParam = PushParam.builder()
+                .uuids(uuids)
+                .push_message(PushMsgJson).build();
+
+        HttpEntity<PushParam> entity = new HttpEntity<>(pushParam, headers);
         ResponseEntity<String> response = restTemplate.exchange(
                 "https://kapi.kakao.com/v2/push/send",
                 HttpMethod.POST,

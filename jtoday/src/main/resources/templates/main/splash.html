@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/_layout/introLayout :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+        <div class="text-center w-100" style="margin-top:30%"><img src="/images/splash02.svg" /></div>
+        <div class="text-center w-100"><img src="/images/splash01.svg" /></div>
+        <div class="container-fluid" id="btn-area" style="margin-top:20%; display: none">
+            <a href="/auth/join" class="btn btn-lg w-75" style="display: block; margin:0px auto; background: #fff; color: #6CD1CB; border: 1px solid #fff; border-radius: 4px">회원가입</a>
+            <a href="/auth/login" class="btn btn-lg w-75" style="display: block; margin:0px auto; background: #6CD1CB; color: #fff; border: 1px solid #fff; border-radius: 4px; margin-top:16px">로그인</a>
+        </div>
+        <div class="fixed-bottom text-center w-100" style="margin-bottom:80px"><img src="/images/logo.svg" /></div>
+
+        <script>
+            $(function (){
+                setTimeout(function (){
+                    $('#btn-area').fadeIn(500)
+                }, 300)
+            })
+        </script>
+    </th:block>
+</th:block>
