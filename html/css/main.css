@@ -10,12 +10,12 @@ body{
     z-index: 9999;
     background: url('../images/topback.svg') no-repeat;
     background-size: cover;
-    padding-top:12px;
-    padding-bottom:12px;
+    padding:12px 20px
 }
 .top-area-tit{
     color: #fff;
     font-size: 28px;
+    margin-bottom: 8px;
 }
 .top-area-date{
     color:#C3F2E7;
@@ -68,6 +68,12 @@ body{
 .price-area .clac{
     width:44px
 }
+.msg{
+    color:#868686;
+    font-weight: 100;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
 .bottom-bar{
     background: #fff;
     box-shadow: 0px 1px 2px #000029;
@@ -83,9 +89,13 @@ body{
     text-align: center;
     text-decoration: none;
     background: #F5F5F5;
-    box-shadow: 1px 1px 2px #00000029;
-    margin-bottom: 8px;
+    box-shadow: 1px 1px 6px #00000029;
+    margin-bottom: 6px;
     position: relative;
+    border-radius: 12px;
+    height: 89px;
+    line-height: 18px;
+    padding-top:18px
 }
 .main-btn-area .btn-right:first-child{
     margin-top:18px
@@ -95,9 +105,26 @@ body{
     width: 100%;
     text-align: center;
     color: #333;
+    font-size: 14px;
+    margin-top:4px
 }
 .main-btn-area .btn-right img{
     display:block;
-    margin:0 auto;
     width: 28px;
+    margin:0px auto
+}
+
+.market-area .tit{
+    font-size: 16px;
+    font-width: bold;
+    color: #3B3B3B
+}
+.market-area .btn-register{
+    color:#868686;
+    background: #ECECEC;
+    font-size: 12px;
+    display: inline-block;
+    padding:0px 8px 2px;
+    text-decoration: none;
+    border-radius: 4px;
 }
