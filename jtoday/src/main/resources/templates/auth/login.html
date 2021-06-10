@@ -3,11 +3,26 @@
 
 <th:block th:replace="~{/_layout/basicLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
-        <div class="text-center w-100" style="margin-top:30%"><img src="/images/logo_green.svg" /></div>
 
-        <div class="container-fluid">
-            
+        <script th:src="@{/js/auth/login.js}"></script>
+
+        <div class="text-center w-100" style="margin-top:30%"><img th:src="@{/images/logo_green.svg}" /></div>
+
+        <div class="container-fluid" style="margin-top:20%">
+            <ul class="list-group rounded-0 mb-2">
+                <li class="list-group-item">
+                    <input type="text" id="userid" class="form-control border-0" placeholder="아이디" />
+                </li>
+                <li class="list-group-item">
+                    <input type="password" id="pw" class="form-control border-0" placeholder="비밀번호" />
+                </li>
+            </ul>
+            <a class="btn btn-primary w-100" id="btn-login">로그인</a>
+            <label class="mt-3"><input type="checkbox" id="autologin" class="form-check-input" /> 로그인 유지</label>
+            <div class="mt-3 d-flex justify-content-between">
+                <a class="text-dark" href="/auth/findid"><small>계정찾기</small></a>
+                <a class="text-dark" href="/auth/join"><small>회원가입</small></a>
+            </div>
         </div>
-
     </th:block>
 </th:block>

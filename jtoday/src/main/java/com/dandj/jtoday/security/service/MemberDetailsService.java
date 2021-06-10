@@ -2,7 +2,7 @@ package com.dandj.jtoday.security.service;
 
 import com.dandj.jtoday.dto.security.AuthDto;
 import com.dandj.jtoday.entity.member.Member;
-import com.dandj.jtoday.repository.MemberRepository;
+import com.dandj.jtoday.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

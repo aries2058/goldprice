@@ -1,4 +1,4 @@
-package com.dandj.jtoday.repository;
+package com.dandj.jtoday.repository.member;
 
 import com.dandj.jtoday.entity.member.Member;
 import org.springframework.data.domain.Page;

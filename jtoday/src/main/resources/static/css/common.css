@@ -21,6 +21,12 @@
 .text-yellow{
     color:#EBF22E;
 }
-.bg-green{
+.bg-jr{
     background: #0DAE99 !important;
+}
+.border-jr{
+    border-color:#6CD1CB !import;
+}
+.text-jr{
+    color:#6CD1CB !import
 }

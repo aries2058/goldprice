@@ -54,7 +54,6 @@ public class AuthController {
     public String setPushToken(String userid, String token, String typ){
         return service.setPushToken(userid, token, typ);
     }
-
     @GetMapping(value = "findId")
     public String findId(String email, String mobile){
         return service.findId(email, mobile);
