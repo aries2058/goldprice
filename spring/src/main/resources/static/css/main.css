@@ -1,0 +1,130 @@
+body{
+    background:#F5F5F5;
+}
+.bg-top{
+    background: url('../images/bg.png') no-repeat;
+    background-size: cover;
+    z-index: -1;
+}
+.top-bar{
+    z-index: 9999;
+    background: url('../images/topback.svg') no-repeat;
+    background-size: cover;
+    padding:12px 20px
+}
+.top-area-tit{
+    color: #fff;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+.top-area-date{
+    color:#C3F2E7;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+.price-area{
+    border-radius: 10px;
+    background: #fff;
+    padding:10px 10px 6px 10px;
+    margin-top:6px;
+    box-shadow: 1px 1px 2px #00000029;
+}
+.price-area .tit{
+    position: relative;
+    margin-left: 24px;
+    font-size: 15px;
+}
+.price-area .tit.tit1{
+    color:#00B5D3;
+}
+.price-area .tit.tit2{
+    color:#11AE99;
+}
+.price-area .tit.tit3{
+    color:#4ED1C5;
+    width:74px;
+}
+.price-area .price{
+    position: relative;
+    text-align: right;
+    font-size: 24px;
+    font-weight:bold;
+    margin-top:4px;
+    color:#3B3B3B;
+    margin-right:36px;
+}
+.price-area .chk{
+    position: absolute;
+    left:-20px;
+    top:20px
+}
+.price-area .unit{
+    position: absolute;
+    right:-34px;
+    top:10px;
+    font-size:14px;
+    font-weight: normal;
+}
+.price-area .clac{
+    width:44px
+}
+.msg{
+    color:#868686;
+    font-weight: 100;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+.bottom-bar{
+    background: #fff;
+    box-shadow: 0px 1px 2px #000029;
+}
+.bottom-bar .btn-menu{
+    display: block;
+}
+.bottom-bar .btn-menu img{
+    height:50px;
+}
+.main-btn-area .btn-right{
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    background: #F5F5F5;
+    box-shadow: 1px 1px 6px #00000029;
+    margin-bottom: 6px;
+    position: relative;
+    border-radius: 12px;
+    height: 89px;
+    line-height: 18px;
+    padding-top:18px
+}
+.main-btn-area .btn-right:first-child{
+    margin-top:18px
+}
+.main-btn-area .btn-right span{
+    display:block;
+    width: 100%;
+    text-align: center;
+    color: #333;
+    font-size: 14px;
+    margin-top:4px
+}
+.main-btn-area .btn-right img{
+    display:block;
+    width: 28px;
+    margin:0px auto
+}
+
+.market-area .tit{
+    font-size: 16px;
+    font-width: bold;
+    color: #3B3B3B
+}
+.market-area .btn-register{
+    color:#868686;
+    background: #ECECEC;
+    font-size: 12px;
+    display: inline-block;
+    padding:0px 8px 2px;
+    text-decoration: none;
+    border-radius: 4px;
+}

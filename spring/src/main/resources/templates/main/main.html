@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/_layout/mainLayout :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+        <div class="container-fluid">
+            <div class="text-center top-area-tit">
+                오늘 종로의<br />
+                <span class="text-yellow">금 판매 시세</span>는?
+            </div>
+            <div class="text-center top-area-date">
+                업데이트 2021.06.02 15:58:11
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="price-area d-flex">
+                <div class="tit tit1">
+                    <img class="chk" th:src="@{/images/left_check1.svg}" />
+                    부가세<br />별도판매
+                </div>
+                <div class="flex-grow-1 price">259,000<span class="unit">원/돈</span></div>
+                <div class="calc"><img th:src="@{/images/btn_calc_icon1.svg}" /></div>
+            </div>
+            <div class="price-area d-flex justify-content-between">
+                <div class="tit tit2">
+                    <img class="chk" th:src="@{/images/left_check2.svg}" />
+                    부가세<br />포함판매
+                </div>
+                <div class="flex-grow-1 price">259,000<span class="unit">원/돈</span></div>
+                <div class="calc"><img th:src="@{/images/btn_calc_icon2.svg}" /></div>
+            </div>
+            <div class="price-area d-flex justify-content-between">
+                <div class="tit tit3">
+                    <img class="chk" th:src="@{/images/left_check3.svg}" />
+                    종로<br />평균판매
+                </div>
+                <div class="flex-grow-1 price">259,000<span class="unit">원/돈</span></div>
+                <div class="calc"><img th:src="@{/images/btn_calc_icon3.svg}" /></div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <small class="msg">* 평균시세입니다. 금액은 변동될 수 있습니다.</small>
+            </div>
+        </div>
+        <div class="container-fluid ps-4 pe-4">
+            <div class="row">
+                <div class="col-3 p-0 text-center">
+                    <a><img th:src="@{/images/btn_price1.svg}" /></a></a></div>
+                <div class="col-3 p-0 text-center">
+                    <a><img th:src="@{/images/btn_price2.svg}" /></a></div>
+                <div class="col-3 p-0 text-center">
+                    <a><img th:src="@{/images/btn_price3.svg}" /></a></div>
+                <div class="col-3 p-0 text-center">
+                    <a><img th:src="@{/images/btn_price4.svg}" /></a></div>
+            </div>
+        </div>
+        <div class="container-fluid main-btn-area">
+            <div class="row">
+                <div class="col-9 pe-0">
+                    <a class="w-100">
+                        <img class="w-100" id="img-btn-calc" th:src="@{/images/btn_main_calc.svg}" />
+                    </a>
+                </div>
+                <div class="col-3 ps-0">
+                    <a class="w-100 btn-right">
+                        <img th:src="@{/images/icon_map.svg}" />
+                        <span>종로 지도</span>
+                    </a>
+                    <a class="w-100 btn-right btn-gold-dark text-white">잡금교환<br />계산기</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid market-area mt-5">
+            <div class="row">
+                <div class="col tit">종로 도매 업체</div>
+                <div class="col text-end"><a class="btn-register">업체 등록하기</a></div>
+            </div>
+        </div>
+
+        <div style="height: 160px;">&nbsp;</div>
+    </th:block>
+</th:block>

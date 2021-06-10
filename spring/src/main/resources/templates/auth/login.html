@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/_layout/basicLayout :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+
+        <link th:href="@{/css/auth/login.css}" rel="stylesheet" />
+        <script th:src="@{/js/auth/login.js}"></script>
+
+        <div class="text-center w-100" style="margin-top:30%"><img th:src="@{/images/logo_green.svg}" /></div>
+
+        <div class="container-fluid">
+            <input type="text" id="userid" class="form-control w-100 border fw-light" placeholder="아이디" />
+            <input type="password" id="pw" class="form-control w-100 border fw-light" placeholder="비밀번호" />
+            <a class="btn w-100 btn-gold text-white fw-light" id="btn-login">로그인</a>
+            <label class="lb-autologin fw-light"><input type="checkbox" id="autologin" class="form-check-input" />
+                <span class="spn-checkbox">
+                <img th:src="@{/images/chkbox_on.svg}" style="display: none;" />
+            </span>
+                <span>로그인 유지</span>
+            </label>
+            <div class="d-flex justify-content-center">
+                <a class="btn-gray" th:href="@{/auth/findId}"><small>계정찾기</small></a>
+                <small class="sm-bar">|</small>
+                <a class="btn-gray" th:href="@{/auth/join}"><small>회원가입</small></a>
+            </div>
+        </div>
+    </th:block>
+</th:block>

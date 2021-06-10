@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/_layout/basicLayout :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+
+        <link th:href="@{/css/auth/join.css}" rel="stylesheet" />
+        <script th:src="@{/js/auth/join.js}"></script>
+
+        <div class="fixed-top text-center top-bar">
+            <a class="position-absolute" id="btn-back"><img th:src="@{/images/icon_back.svg}" /></a>
+            <span class="title">회원가입</span>
+        </div>
+
+        <form id="form">
+            <input type="hidden" id="update_yn" value="<%= userid == null ? 'N': 'Y'%>" />
+
+            <div class="container-fluid on step" id="step0">
+                <h2 class="text-gold">사업자번호</h2>
+                <input type="number" class="form-control border" id="biz_no" name="biz_no" value="1283809049" placeholder="'-'기호 제외" />
+                <a class="btn w-100 btn-gold text-white fw-light" id="btn-check-bizno">입력</a>
+                <p class="result mt-5"></p>
+            </div>
+
+            <div class="container-fluid mt-3 step" id="step1">
+                <h2 class="text-gold">개인정보이용동의</h2>
+                <div class="mb-4">
+                    <strong>1. 개인정보 수집목적 및 이용목적</strong>
+                    (1) 홈페이지 회원 가입 및 관리
+                    회원 가입 의사 확인, 회원제 서비스 제공에 따른 본인 식별․인증, 회원자격 유지․관리, 제한적 본인확인제 시행에 따른 본인확인, 서비스 부정 이용 방지, 만 14세 미만 아동의 개인정보 처리시 법정대리인의 동의 여부 확인, 각종 고지․통지, 고충 처리 등의 목적
+
+                    (2) 재화 또는 서비스 제공
+                    서비스 제공, 콘텐츠 제공, 맞춤 서비스 제공, 본인인증 등의 목적
+
+                    (3) 고충 처리
+                    민원인의 신원 확인, 민원사항 확인, 사실조사를 위한 연락․통지, 처리 결과 통보 등
+
+                    <strong>2. 수집하는 개인정보 항목</strong>
+                    ID, 성명, 비밀번호, 주소, 휴대폰 번호, 이메일, 14세 미만 가입자의 경우 법정대리인 정보
+
+                    <strong>3. 개인정보 보유 및 이용기간</strong>
+                    <strong>회원탈퇴 시까지</strong> (단, 관계 법령에 보존 근거가 있는 경우 해당 기간 시까지 보유, 개인정보처리방침에서 확인 가능)
+                </div>
+                <a class="btn w-100 btn-gold text-white fw-light" onclick="goStep2();">동의합니다</a>
+            </div>
+
+            <div class="container-fluid mt-3 step <$= userid != null ? 'on' : ''$>" id="step2">
+                <$ if(userid != null){$>
+                <div class="alert alert-danger">미승인 상태입니다.</div>
+                <$}$>
+                <h2 class="text-gold">가입유형</h2>
+                <div class="row">
+                    <!--RETAIL, SOLE, WHOLE, FACTORY, SALES, ETC, ADMIN-->
+                    <div class="col-4 p-1"><a class="btn btn-light w-100 btn-typ biz" data-val="RETAIL">소매</a></div>
+                    <div class="col-4 p-1"><a class="btn btn-light w-100 btn-typ biz" data-val="SOLE">도매</a></div>
+                    <div class="col-4 p-1"><a class="btn btn-light w-100 btn-typ biz" data-val="WHOLE">총판</a></div>
+                    <div class="col-4 p-1"><a class="btn btn-light w-100 btn-typ biz" data-val="FACTORY">공장</a></div>
+                    <div class="col-4 p-1"><a class="btn btn-light w-100 btn-typ other" data-val="SALES">영업사원</a></div>
+                    <div class="col-4 p-1"><a class="btn btn-light w-100 btn-typ other" data-val="ETC">기타</a></div>
+                    <input type="hidden" name="user_typ" id="user_typ" />
+                </div>
+                <div class="info">
+                    <label>사업자등록번호</label>
+                    <input type="number" class="form-control border" id="disp-bizno" readonly />
+                    <label>사업장 이름</label>
+                    <input type="text" class="form-control border" name="biz_nm" id="biz_nm" />
+                    <label>사용자 이름</label>
+                    <input type="text" class="form-control border" name="user_nm" id="user_nm" />
+                    <label>사업장 전화번호</label>
+                    <input type="number" class="form-control border" name="tel" id="tel" />
+                    <label>휴대폰번호</label>
+                    <input type="number" class="form-control border" name="mobile" id="mobile" />
+                    <label>이메일주소</label>
+                    <input type="text" class="form-control border" name="email" id="email" />
+                    <small class="text-secondary">*이메일주소는 비밀번호찾기 시 사용됩니다.</small>
+                    <label>사업자등록증</label>
+                    <input type="file" class="form-control" id="img1" accept="image/*;capture=camera" />
+                    <canvas id="canvas1" style="display: none;"></canvas>
+                    <img id="dispImg1" class="mt-3" />
+                    <div class="biz" style="display:none">
+                        <label>매장사진</label>
+                        <input type="file" class="form-control" id="img2" accept="image/*;capture=camera" />
+                        <canvas id="canvas2" style="display: none;"></canvas>
+                        <img id="dispImg2" class="mt-3" />
+                    </div>
+                    <div class="other" style="display:none">
+                        <label>명함</label>
+                        <input type="file" class="form-control" id="img3" accept="image/*;capture=camera" />
+                        <canvas id="canvas3" style="display: none;"></canvas>
+                        <img id="dispImg3" class="mt-3" />
+                    </div>
+                    <div id="img-area"></div>
+                    <input type="hidden" name="fileDtoList" id="fileDtoList" />
+                    <a class="btn w-100 btn-gold text-white fw-light" onclick="goStep3();">다음</a>
+                </div>
+            </div>
+
+            <div class="container-fluid mt-3 step" id="step3">
+                <label>아이디 <a class="btn btn-sm btn-gold" id="btn-check-userid">중복확인</a></label>
+                <input type="text" class="form-control border" name="user_id" id="user_id" value="<$= userid $>" />
+                <input type="hidden" id="check-userid" />
+                <input type="hidden" id="ipaddr" name="ipaddr" value="<$- ipaddr $>" />
+                <label>비밀번호</label>
+                <input type="password" class="form-control border" name="password" id="password" />
+                <label>비밀번호확인</label>
+                <input type="password" class="form-control border" id="confirm-password" />
+                <small id="msg-password" class="mt-2 text-danger"></small>
+                <a class="btn w-100 btn-gold text-white fw-light" id="btn-submit" onclick="goStep4();">가입신청</a>
+            </div>
+        </form>
+    </th:block>
+</th:block>
