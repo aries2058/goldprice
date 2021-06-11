@@ -53,7 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 로그인 필요없는 화면
         http.authorizeRequests()
                 .antMatchers("/main/*").permitAll()
-                .antMatchers("/auth/*").permitAll();
+                .antMatchers("/auth/*").permitAll()
+                .antMatchers("/func/*").permitAll();
 
         //http.rememberMe().tokenValiditySeconds(60*60*7).userDetailsService(memberDetailsService);
     }

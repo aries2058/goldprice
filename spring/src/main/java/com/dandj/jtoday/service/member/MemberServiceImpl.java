@@ -2,11 +2,16 @@ package com.dandj.jtoday.service.member;
 
 import com.dandj.jtoday.dto.member.MemberDto;
 import com.dandj.jtoday.dto.member.MemberFileDto;
+import com.dandj.jtoday.entity.comm.Images;
 import com.dandj.jtoday.entity.market.Market;
 import com.dandj.jtoday.entity.member.Member;
 import com.dandj.jtoday.entity.member.MemberFile;
+import com.dandj.jtoday.entity.member.MemberImages;
+import com.dandj.jtoday.repository.ImagesRepository;
+import com.dandj.jtoday.repository.market.MarketImagesRepository;
 import com.dandj.jtoday.repository.market.MarketRepository;
 import com.dandj.jtoday.repository.member.MemberFileRepository;
+import com.dandj.jtoday.repository.member.MemberImagesRepository;
 import com.dandj.jtoday.repository.member.MemberRepository;
 import com.dandj.jtoday.spec.MemberSpec;
 import com.dandj.jtoday.util.JWTUtil;
@@ -19,10 +24,9 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import javax.swing.text.html.Option;
+import java.sql.Blob;
+import java.util.*;
 
 @Service
 @Log4j2
@@ -30,33 +34,39 @@ import java.util.Random;
 public class MemberServiceImpl implements MemberService {
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
-    private final MemberFileRepository memberFileRepository;
-    private final MarketRepository marketRepository;
+    private final MemberImagesRepository memberImagesRepository;
 
     @Override
     public List<MemberDto> getMemberListByBizNo(String bizNo) {
-        List<MemberDto> list = new ArrayList<>();
-        memberRepository.findMembersByBizNo(bizNo).forEach(v->list.add(entityToDto(v)));
+        List<MemberDto> ret = new ArrayList<>();
+        Optional<List<Member>> data = memberRepository.findMembersByBizNo(bizNo);
 
-        return list;
+        data.ifPresent(x->{
+            x.forEach(member -> {
+                ret.add(entityToDto(member));
+            });
+        });
+
+        return ret;
     }
 
     @Override
     public List<MemberDto> getNewMemberList() {
-        List<MemberDto> list = new ArrayList<>();
-        memberRepository.findMembersByConfirmYnIsNull().forEach(member->{
-            List<MemberFile> fileList = memberFileRepository.findMemberFilesByMember_UserId(member.getUserId());
-            List<MemberFileDto> fileDto = new ArrayList<>();
-            fileList.forEach(file -> fileDto.add(new MemberFileDto(file.getFilePath())));
-            list.add(entityToDto(member, fileDto));
+        List<MemberDto> ret = new ArrayList<>();
+        Optional<List<Member>> data = memberRepository.findMembersByConfirmYnIsNull();
+
+        data.ifPresent(x->{
+            x.forEach(member -> {
+                ret.add(entityToDto(member));
+            });
         });
 
-        return list;
+        return  ret;
     }
 
     @Override
     public List<MemberDto> getMemberList(int sttPage, int perPage, String searchVal, String confirm) {
-        List<MemberDto> list = new ArrayList<>();
+        List<MemberDto> ret = new ArrayList<>();
 
         Specification<Member> spec = Specification.where(MemberSpec.bizNoLike(searchVal));
         spec = spec.or(Specification.where(MemberSpec.bizNmLike(searchVal)));
@@ -68,89 +78,89 @@ public class MemberServiceImpl implements MemberService {
         }
 
         Pageable pageable = PageRequest.of(sttPage, perPage);
-        Page<Member> result = memberRepository.findAll(spec, pageable);
+        Page<Member> data = memberRepository.findAll(spec, pageable);
 
-        result.forEach(member -> {
-            List<MemberFile> fileList = memberFileRepository.findMemberFilesByMember_UserId(member.getUserId());
-            List<MemberFileDto> fileDto = new ArrayList<>();
-            fileList.forEach(file -> fileDto.add(new MemberFileDto(file.getFilePath())));
-            list.add(entityToDto(member, fileDto));
+        data.forEach(x -> {
+            ret.add(entityToDto(x));
         });
 
-        return list;
+        return ret;
     }
 
     @Override
     public MemberDto checkMember(String userId, String password) {
-        Member member = memberRepository.findMemberByUserId(userId);
-        String token = null;
-        if(member != null && passwordEncoder.matches(password, member.getPassword())){
-            try{
-                JWTUtil jwtUtil = new JWTUtil();
-                token = jwtUtil.generateToken(userId);
-                MemberDto dto = entityToDto(member, token);
-                Market market = marketRepository.findCompByUserId(userId);
-                if(market != null){
-                    dto.setImgUrl(market.getImgUrl());
+        // 로그인할 때 정보
+        MemberDto ret = new MemberDto();
+        Optional<Member> data = memberRepository.findByUserId(userId);
+
+        if(data.isPresent()){
+            if(passwordEncoder.matches(password, data.get().getPassword())){
+                try{
+                    JWTUtil jwtUtil = new JWTUtil();
+                    String token = jwtUtil.generateToken(userId);
+                    ret = entityToDto(data.get(), token);
+                    return ret;
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
-                return dto;
-            }catch (Exception e){
-                e.printStackTrace();
+            }else{
+                ret.setLogin_msg("비밀번호를 확인해주세요.");
             }
         }
 
-        return new MemberDto();
+        ret.setLogin_msg("존재하지 않는 계정입니다.");
+        return ret;
     }
 
     @Override
     public MemberDto getMember(String userId) {
-        Member member = memberRepository.findMemberByUserId(userId);
-        List<MemberFile> fileList = memberFileRepository.findMemberFilesByMember_UserId(userId);
-        if(member != null){
-            List<MemberFileDto> fileDto = new ArrayList<>();
-            fileList.forEach(file -> fileDto.add(new MemberFileDto(file.getFilePath())));
-            Market market = marketRepository.findCompByUserId(userId);
-            return entityToDto(member, fileDto);
-        }else{
-            return new MemberDto();
+        // 마이페이지 조회 등
+        MemberDto ret = new MemberDto();
+        Optional<Member> data = memberRepository.findByUserId(userId);
+
+        if(data.isPresent()){
+            ret = entityToDto(data.get());
         }
+        return  ret;
     }
 
     @Override
     public String register(MemberDto memberDto) {
         String enPw = passwordEncoder.encode(memberDto.getPassword());
-        Map<String, Object> entityMap = dtoToEntity(memberDto, enPw);
-        Member member = (Member) entityMap.get("member");
-        List<MemberFile> memberFileList = (List<MemberFile>) entityMap.get("fileList");
-
+        Member member = dtoToEntity(memberDto, enPw);
         memberRepository.save(member);
-        if(memberFileList != null){
-            memberFileList.forEach(file ->{
-                memberFileRepository.save(file);
-            });
-        }
+        memberDto.getImages().forEach(x->{
+            MemberImages images = MemberImages.builder()
+                    .imageId(x)
+                    .member(member).build();
+            memberImagesRepository.save(images);
+        });
         return member.getUserId();
     }
 
     @Override
     public String update(MemberDto dto) {
-        Member member = memberRepository.findMemberByUserId(dto.getUser_id());
-        member.setTel(dto.getTel());
-        member.setMobile(dto.getMobile());
-        member.setEmail(dto.getEmail());
-        memberRepository.save(member);
+        Optional<Member> member = memberRepository.findByUserId(dto.getUser_id());
+        List<String> ret = new ArrayList<>();
+        member.ifPresent(x->{
+            x.setTel(dto.getTel());
+            x.setMobile(dto.getMobile());
+            x.setEmail(dto.getEmail());
+            memberRepository.save(x);
+            ret.add(x.getUserId());
+        });
 
-        return member.getUserId();
+        return ret.get(0);
     }
 
     @Override
-    public String updatePassword(String userid, String password) {
+    public void updatePassword(String userid, String password) {
         String enPw = passwordEncoder.encode(password);
-        Member member = memberRepository.findMemberByUserId(userid);
-        member.setPassword(enPw);
-        memberRepository.save(member);
-
-        return member.getUserId();
+        Optional<Member> member = memberRepository.findByUserId(userid);
+        member.ifPresent(x ->{
+            x.setPassword(enPw);
+            memberRepository.save(x);
+        });
     }
 
     @Override
@@ -176,17 +186,16 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String confirmMember(String userid, String confirm) {
-        Member member = memberRepository.findMemberByUserId(userid);
-        member.setConfirmYn(confirm);
-        memberRepository.save(member);
-        return "OK";
+    public void confirmMember(String userid, String confirm) {
+        Optional<Member> member = memberRepository.findByUserId(userid);
+        member.ifPresent(x->{
+            x.setConfirmYn(confirm);
+            memberRepository.save(x);
+        });
     }
 
     @Override
     public String setPushToken(String userid, String token, String typ) {
-        Member member = memberRepository.findMemberByUserId(userid);
-        memberRepository.save(member);
-        return "OK";
+        return "";
     }
 }

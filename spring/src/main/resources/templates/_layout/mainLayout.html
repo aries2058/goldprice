@@ -12,17 +12,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/plugins/bootstrap/bootstrap.min.css}" rel="stylesheet" />
     <link th:href="@{/css/common.css}" rel="stylesheet" />
-    <link th:href="@{/css/main.css}" rel="stylesheet">
     <title>종로투데이</title>
+
+    <script th:src="@{/plugins/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/plugins/underscore/underscore-min.js}"></script>
+    <script th:src="@{/plugins/jquery.cookie/jquery.cookie.js}"></script>
+    <script th:src="@{/plugins/bootstrap/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap/popper.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap/bootstrap.min.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
 </head>
     <body>
     <div class="fixed-top top-bar d-flex justify-content-between">
-        <a><img th:src="@{/images/logo.svg}" /></a>
-        <a><img th:src="@{/images/top_menu.svg}" /></a>
+        <a th:href="@{/main/main}"><img th:src="@{/images/logo.svg}" /></a>
+        <a class="btn-open-sidebar"><img th:src="@{/images/top_menu.svg}" /></a>
     </div>
     <div class="bg-top position-absolute w-100 top-0"></div>
 
     <th:block th:replace="${content}"></th:block>
+    <div class="back"></div>
+    <div class="container-fluid sidebar">
+        <div class="pt-2 pb-2 text-end">
+            <a class="btn btn-close-sidebar"><i class="fas fa-times"></i></a>
+            <div class="compinfo" id="btn-update-cominfo">
+                <img class="rounded" />
+                <a class="badge bg-gold" id="btn-compinfo">업체정보변경</a>
+            </div>
+            <div class="compinfo" id="btn-register-compinfo">
+                <a class="btn btn-gold w-100">업체를 등록해보세요.</a>
+            </div>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item pb-3 border-0"><a class="text-dark" href="/mypage/myinfo">내 정보 변경 <i class="far fa-user text-secondary"></i></a></li>
+            <li class="list-group-item pb-3 border-0"><a class="text-dark" href="/mypage/chat">문의하기</a></li>
+            <li class="list-group-item pb-3 border-0">도움말 <i class="fas fa-info-circle text-info"></i></li>
+            <li class="list-group-item pb-3 border-0"><a class="text-dark" href="/auth/login">로그아웃</a></li>
+            <li class="list-group-item pb-3 border-0"><a class="text-dark" href="/admin">관리자</a></li>
+        </ul>
+    </div>
 
     <div class=" fixed-bottom bottom-bar d-flex justify-content-around">
         <a class="btn-menu">
@@ -41,14 +68,6 @@
             <img th:src="@{/images/menu05_off.svg}" />
         </a>
     </div>
-
-    <script th:src="@{/plugins/jquery-3.6.0.min.js}"></script>
-    <script th:src="@{/plugins/underscore/underscore-min.js}"></script>
-    <script th:src="@{/plugins/jquery.cookie/jquery.cookie.js}"></script>
-    <script th:src="@{/plugins/bootstrap/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/plugins/bootstrap/popper.min.js}"></script>
-    <script th:src="@{/plugins/bootstrap/bootstrap.min.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
     </body>
 </th:block>
 </html>

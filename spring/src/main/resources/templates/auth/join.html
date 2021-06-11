@@ -45,9 +45,7 @@
             </div>
 
             <div class="container-fluid mt-3 step <$= userid != null ? 'on' : ''$>" id="step2">
-                <$ if(userid != null){$>
                 <div class="alert alert-danger">미승인 상태입니다.</div>
-                <$}$>
                 <h2 class="text-gold">가입유형</h2>
                 <div class="row">
                     <!--RETAIL, SOLE, WHOLE, FACTORY, SALES, ETC, ADMIN-->
@@ -90,7 +88,7 @@
                         <img id="dispImg3" class="mt-3" />
                     </div>
                     <div id="img-area"></div>
-                    <input type="hidden" name="fileDtoList" id="fileDtoList" />
+                    <input type="hidden" name="images" id="images" />
                     <a class="btn w-100 btn-gold text-white fw-light" onclick="goStep3();">다음</a>
                 </div>
             </div>
@@ -106,6 +104,10 @@
                 <input type="password" class="form-control border" id="confirm-password" />
                 <small id="msg-password" class="mt-2 text-danger"></small>
                 <a class="btn w-100 btn-gold text-white fw-light" id="btn-submit" onclick="goStep4();">가입신청</a>
+            </div>
+
+            <div class="container-fluid mt-3 step" id="step4">
+                가입신청 완료!!(최대1일 소요)
             </div>
         </form>
     </th:block>

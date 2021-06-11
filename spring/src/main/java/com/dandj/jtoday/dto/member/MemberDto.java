@@ -1,6 +1,7 @@
 package com.dandj.jtoday.dto.member;
 
 import com.dandj.jtoday.dto.market.MarketDto;
+import com.dandj.jtoday.entity.comm.Images;
 import com.dandj.jtoday.entity.member.Member;
 import com.dandj.jtoday.entity.member.MemberFile;
 import com.dandj.jtoday.entity.member.MemberRole;
@@ -10,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.sql.Blob;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -33,14 +35,12 @@ public class MemberDto {
     private String push_yn;
     private String push_token;
     private String push_typ;
-    private String imgUrl;
+    private Blob photo;
+    private String login_msg;
+    private List<Long> images;
 
-    @Builder.Default
-    private List<MemberFileDto> fileDtoList = new ArrayList<>();
     @Builder.Default
     private MarketDto marketDto = new MarketDto();
     @Builder.Default
     private Collection<String> roleSet = new HashSet<>();
-
-
 }

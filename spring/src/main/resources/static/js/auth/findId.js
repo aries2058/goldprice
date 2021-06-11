@@ -7,7 +7,7 @@ $(function(){
         }else{
             $.ajax({
                 type: 'post',
-                url: '/auth/findIdPw',
+                url: _host + '/auth/findIdPw',
                 data: {
                     email: $('#email').val(),
                     mobile: $('#mobile').val()
@@ -20,7 +20,7 @@ $(function(){
 
                         $.ajax({
                             type: 'post',
-                            url: '/mail',
+                            url: _host + '/func/mail',
                             data: {
                                 title: '[종로투데이] 귀하의 계정정보입니다.',
                                 message: message,

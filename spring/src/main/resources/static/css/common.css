@@ -64,3 +64,55 @@ input[type=text], input[type=number], input[type=password]{
 input[type=text]:focus, input[type=number]:focus, input[type=password]:focus{
     border-color: #6CD1CB !important;
 }
+
+
+
+/* ========= top-bar, side-bar, bottom-bar ========= */
+
+.bg-top{
+    background: url('../images/bg.png') no-repeat;
+    background-size: cover;
+    z-index: -1;
+}
+.top-bar{
+    z-index: 9997;
+    background: url('../images/topback.svg') no-repeat;
+    background-size: cover;
+    padding:12px 20px
+}
+.back{
+    position:fixed;
+    z-index:9998;
+    width:100%;
+    top:0px;
+    background-color: rgba(0,0,0,0.5);
+    display:none;
+}
+.sidebar{
+    background: #fff;
+    position: fixed;
+    width:75%;
+    right:-75%;
+    top:0px;
+    z-index: 9999;
+}
+
+.btn-close-sidebar{
+  position: absolute;
+  top:8px;
+  right:8px;
+  z-index: 9999;
+  color:#fff
+}
+.bottom-bar{
+    background: #fff;
+    box-shadow: 0px 1px 2px #000029;
+}
+.bottom-bar .btn-menu{
+    display: block;
+}
+.bottom-bar .btn-menu img{
+    height:50px;
+}
+
+/* ========= top-bar, side-bar, bottom-bar ========= */

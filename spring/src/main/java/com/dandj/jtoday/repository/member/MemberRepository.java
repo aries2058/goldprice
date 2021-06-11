@@ -16,11 +16,9 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     @Query("select m from Member m where m.userId =:userId")
     Optional<Member> findByUserId(String userId);
 
-    List<Member> findMembersByBizNo(String bizNo);
+    Optional<List<Member>> findMembersByBizNo(String bizNo);
 
-    List<Member> findMembersByConfirmYnIsNull();
-
-    Member findMemberByUserId(String userId);
+    Optional<List<Member>> findMembersByConfirmYnIsNull();
 
     Page<Member> findAll(Specification<Member> spec, Pageable pageable);
 

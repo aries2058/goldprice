@@ -1,17 +1,6 @@
 body{
     background:#F5F5F5;
 }
-.bg-top{
-    background: url('../images/bg.png') no-repeat;
-    background-size: cover;
-    z-index: -1;
-}
-.top-bar{
-    z-index: 9999;
-    background: url('../images/topback.svg') no-repeat;
-    background-size: cover;
-    padding:12px 20px
-}
 .top-area-tit{
     color: #fff;
     font-size: 28px;
@@ -73,16 +62,6 @@ body{
     font-weight: 100;
     font-size: 12px;
     margin-bottom: 8px;
-}
-.bottom-bar{
-    background: #fff;
-    box-shadow: 0px 1px 2px #000029;
-}
-.bottom-bar .btn-menu{
-    display: block;
-}
-.bottom-bar .btn-menu img{
-    height:50px;
 }
 .main-btn-area .btn-right{
     display: inline-block;

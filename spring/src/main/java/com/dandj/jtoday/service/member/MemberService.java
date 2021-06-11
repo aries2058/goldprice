@@ -20,13 +20,13 @@ public interface MemberService {
     MemberDto getMember(String userId);
     String register(MemberDto memberDto);
     String update(MemberDto dto);
-    String updatePassword(String userid, String password);
+    void updatePassword(String userid, String password);
     String findId(String email, String mobile);
-    String confirmMember(String userid, String confirm);
+    void confirmMember(String userid, String confirm);
     String setPushToken(String userid, String token, String typ);
 
 
-    default Map<String, Object> dtoToEntity(MemberDto memberDto , String enPw){
+    default Member dtoToEntity(MemberDto memberDto , String enPw){
         Map<String, Object> entityMap = new HashMap<>();
         Member member = Member.builder()
                 .userId(memberDto.getUser_id())
@@ -42,20 +42,7 @@ public interface MemberService {
             member.addMemberRole(MemberRole.valueOf(typ));
         }
         entityMap.put("member", member);
-        List<MemberFileDto> memberFileDtoList = memberDto.getFileDtoList();
-
-        if(memberFileDtoList != null && memberFileDtoList.size() > 0){
-            List<MemberFile> memberFileList = memberFileDtoList.stream().map(memberFileDto -> {
-                MemberFile memberFile = MemberFile.builder()
-                        .filePath(memberFileDto.getFilePath())
-                        .ipAddr(memberDto.getIpaddr())
-                        .member(member).build();
-                return memberFile;
-            }).collect(Collectors.toList());
-
-            entityMap.put("fileList", memberFileList);
-        }
-        return entityMap;
+        return member;
     }
 
     default MemberDto entityToDto(Member entity){
@@ -72,21 +59,21 @@ public interface MemberService {
                         .map(role->role.name()).collect(Collectors.toList())).build();
         return dto;
     }
-    default MemberDto entityToDto(Member entity, List<MemberFileDto> files){
-        MemberDto dto = MemberDto.builder()
-                .user_id(entity.getUserId())
-                .user_nm(entity.getUserNm())
-                .biz_nm(entity.getBizNm())
-                .biz_no(entity.getBizNo())
-                .mobile(entity.getMobile())
-                .tel(entity.getTel())
-                .email(entity.getEmail())
-                .confirm_yn(entity.getConfirmYn())
-                .fileDtoList(files)
-                .roleSet(entity.getRoleSet().stream()
-                        .map(role->role.name()).collect(Collectors.toList())).build();
-        return dto;
-    }
+//    default MemberDto entityToDto(Member entity, List<MemberFileDto> files){
+//        MemberDto dto = MemberDto.builder()
+//                .user_id(entity.getUserId())
+//                .user_nm(entity.getUserNm())
+//                .biz_nm(entity.getBizNm())
+//                .biz_no(entity.getBizNo())
+//                .mobile(entity.getMobile())
+//                .tel(entity.getTel())
+//                .email(entity.getEmail())
+//                .confirm_yn(entity.getConfirmYn())
+//                .fileDtoList(files)
+//                .roleSet(entity.getRoleSet().stream()
+//                        .map(role->role.name()).collect(Collectors.toList())).build();
+//        return dto;
+//    }
     default MemberDto entityToDto(Member entity, String token){
         MemberDto dto = MemberDto.builder()
                 .user_id(entity.getUserId())

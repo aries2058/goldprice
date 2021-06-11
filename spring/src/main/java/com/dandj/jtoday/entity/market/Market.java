@@ -24,14 +24,13 @@ public class Market extends BaseEntity {
     @Column(length = 20)
     private String tel;
 
-    @Column(length = 500)
-    private String imgUrl;
+    private Long imageId;
 
     @Column(length = 2000)
     private String contents;
 
     @Column(length = 1)
-    private String useYn;
+    private String delYn;
 
     @Column(length = 500, nullable = false)
     private String addr;

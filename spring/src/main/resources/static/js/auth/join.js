@@ -1,53 +1,31 @@
+var arrIds = [];
+
 $(function(){
     if($('#step2').hasClass('on')){
         $('#user_id').prop('readonly', true)
         $('#btn-submit').text('수정')
         $('#btn-check-userid').hide();
-        // $.ajax({
-        //     url: '/auth/getMember',
-        //     data: {userid : $('#user_id').val() },
-        //     success: function(res){
-        //         console.log(res)
-        //         $('#step2 .info').show()
-        //         $('#biz_no').val(res.biz_no)
-        //         $('#disp-bizno').val(res.biz_no)
-        //         $('#biz_nm').val(res.biz_nm);
-        //         $('#user_nm').val(res.user_nm);
-        //         $('#tel').val(res.tel);
-        //         $('#mobile').val(res.mobile);
-        //         $('#email').val(res.email);
-        //         var strtyp = '';
-        //         _.each(res.roleSet, function(v){
-        //             strtyp += v + ','
-        //             $('.btn-typ[data-val='+v+']').addClass('on')
-        //             $('.btn-typ[data-val='+v+']').addClass('btn-gold')
-        //             if($('.btn-typ[data-val='+v+']').hasClass('biz')){
-        //                 $('.info .biz').show()
-        //                 $('.info .biz').addClass('on')
-        //             }
-        //             if($('.btn-typ[data-val='+v+']').hasClass('other')){
-        //                 $('.info .other').show()
-        //                 $('.info .other').addClass('on')
-        //             }
-        //         })
-        //         if(strtyp != ''){
-        //             $('#user_typ').val(strtyp.substr(0, strtyp.length - 1))
-        //         }
-        //         _.each(res.fileDtoList, function(v, i){
-        //             var src = _dispurl +v.filePath;
-        //             $('#img-area').append("<img src='"+src+"' class='dispImg' />")
-        //         })
-        //     }
-        // })
     }
 
+    // 뒤로가기 버튼
+    $('#btn-back').click(function(){
+        if($('#step3').hasClass('on')){
+            $('#step3').removeClass('on')
+            $('#step2').addClass('on')
+        }else if($('#step2').hasClass('on')){
+            $('#step2').removeClass('on')
+            $('#step0').addClass('on')
+        }else if($('#step0').hasClass('on')){
+             history.back();
+         }
+    })
 
     // 사업자등록번호 체크
     $('#btn-check-bizno').click(function(){
         // if($('#biz_no').val() != '' && checkBizno($('#biz_no').val())){ // 사업자등록번호 유효성 체크
         if($('#biz_no').val() != ''){
             $.ajax({
-                url: '/auth/checkBizNo',
+                url: _host + '/auth/checkBizNo',
                 data: {
                     bizno : $('#biz_no').val()
                 },
@@ -78,10 +56,13 @@ $(function(){
     })
 
     // 아이디 중복확인
+    $('#user_id').keyup(function(){
+        $('#check-userid').val('N');
+    })
     $('#btn-check-userid').click(function(){
         if($('#user_id').val() != ''){
             $.ajax({
-                url: '/auth/getMember',
+                url: _host + '/auth/getMember',
                 data: {
                     userid : $('#user_id').val()
                 },
@@ -90,7 +71,6 @@ $(function(){
                         alert('중복 된 아이디입니다.')
                     }else {
                         alert('사용하실 수 있는 아이디입니다.')
-                        $('#user_id').attr('readonly', true)
                         $('#check-userid').val('Y');
                     }
                 }
@@ -154,10 +134,49 @@ $(function(){
         }
     });
 
-    // imageConverter($('#img1'), 'canvas1', 'dispImg1');
-    // imageConverter($('#img2'), 'canvas2', 'dispImg2');
-    // imageConverter($('#img3'), 'canvas3', 'dispImg3');
+     imageConverter($('#img1'), 'canvas1', 'dispImg1');
+     imageConverter($('#img2'), 'canvas2', 'dispImg2');
+     imageConverter($('#img3'), 'canvas3', 'dispImg3');
 })
+
+function getUserInfo(){
+     $.ajax({
+         url: _host + '/auth/getMember',
+         data: {userid : $('#user_id').val() },
+         success: function(res){
+             console.log(res)
+             $('#step2 .info').show()
+             $('#biz_no').val(res.biz_no)
+             $('#disp-bizno').val(res.biz_no)
+             $('#biz_nm').val(res.biz_nm);
+             $('#user_nm').val(res.user_nm);
+             $('#tel').val(res.tel);
+             $('#mobile').val(res.mobile);
+             $('#email').val(res.email);
+             var strtyp = '';
+             _.each(res.roleSet, function(v){
+                 strtyp += v + ','
+                 $('.btn-typ[data-val='+v+']').addClass('on')
+                 $('.btn-typ[data-val='+v+']').addClass('btn-gold')
+                 if($('.btn-typ[data-val='+v+']').hasClass('biz')){
+                     $('.info .biz').show()
+                     $('.info .biz').addClass('on')
+                 }
+                 if($('.btn-typ[data-val='+v+']').hasClass('other')){
+                     $('.info .other').show()
+                     $('.info .other').addClass('on')
+                 }
+             })
+             if(strtyp != ''){
+                 $('#user_typ').val(strtyp.substr(0, strtyp.length - 1))
+             }
+             _.each(res.fileDtoList, function(v, i){
+                 var src = _dispurl +v.filePath;
+                 $('#img-area').append("<img src='"+src+"' class='dispImg' />")
+             })
+         }
+     })
+}
 
 function checkBizno(bizno)
 {
@@ -210,48 +229,101 @@ function goStep4(){
     }else if($('#password').val() == '' ||  $('#msg-password').html() != ''){
         alert('비밀번호를 입력하세요.')
     }else{
-        var cv = '';
-        if($('#img1').val()!=''){
-            cv += 'canvas1,'
+        var prms = [];
+        var p = null;
+        if($('#dispImg1').attr('src') != null){
+            p = new Promise(function(resolve, reject){
+                uploadImage($('#dispImg1').attr('src'), resolve)
+            })
+            prms.push(p)
         }
-        if($('#img2').val()!=''){
-            cv += 'canvas2,'
+        if($('#dispImg2').attr('src') != null){
+           p = new Promise(function(resolve, reject){
+               uploadImage($('#dispImg2').attr('src'), resolve)
+           })
+           prms.push(p)
         }
-        if($('#img3').val()!=''){
-            cv += 'canvas3,'
+        if($('#dispImg3').attr('src') != null){
+           p = new Promise(function(resolve, reject){
+               uploadImage($('#dispImg3').attr('src'), resolve)
+           })
+           prms.push(p)
         }
-        if(cv == ''){
+
+        Promise.all(prms).then(function(values){
+            $('#images').val(values)
             $.ajax({
-                url: '/auth/register',
+                url: _host + '/auth/register',
                 data: $('#form').serialize(),
                 type: 'post',
-                success: function(res2){
+                success: function(res){
+                    console.log(res)
                     $('.step.on').removeClass('on')
                     $('#step4').addClass('on')
                 }
             })
-        }else{
-            cv = cv.substr(0, cv.length - 1)
-            $.ajax({
-                url: '/uploadFile',
-                processData: false,
-                contentType: false,
-                data: imageFormData(cv),
-                type: 'POST',
-                dataType: 'json',
-                success: function(res){
-                    $('#fileDtoList').val(res)
-                    $.ajax({
-                        url: '/auth/register',
-                        data: $('#form').serialize(),
-                        type: 'post',
-                        success: function(res2){
-                            $('.step.on').removeClass('on')
-                            $('#step4').addClass('on')
-                        }
-                    })
-                }
-            })
-        }
+        })
+
+
+
+
+//        var cv = '';
+//        if($('#img1').val()!=''){
+//            cv += 'canvas1,'
+//        }
+//        if($('#img2').val()!=''){
+//            cv += 'canvas2,'
+//        }
+//        if($('#img3').val()!=''){
+//            cv += 'canvas3,'
+//        }
+//        if(cv == ''){
+//            $.ajax({
+//                url: _host + '/auth/register',
+//                data: $('#form').serialize(),
+//                type: 'post',
+//                success: function(res2){
+//                    $('.step.on').removeClass('on')
+//                    $('#step4').addClass('on')
+//                }
+//            })
+//        }else{
+//            cv = cv.substr(0, cv.length - 1)
+//            $.ajax({
+//                url: _host + '/uploadFile',
+//                processData: false,
+//                contentType: false,
+//                data: imageFormData(cv),
+//                type: 'POST',
+//                dataType: 'json',
+//                success: function(res){
+//                    $('#fileDtoList').val(res)
+//                    $.ajax({
+//                        url: _host + '/auth/register',
+//                        data: $('#form').serialize(),
+//                        type: 'post',
+//                        success: function(res2){
+//                            $('.step.on').removeClass('on')
+//                            $('#step4').addClass('on')
+//                        }
+//                    })
+//                }
+//            })
+//        }
     }
+}
+
+
+function uploadImage(imageString, resolve){
+    $.ajax({
+        type: 'post',
+        url: _host + '/func/uploadImage',
+        data: {
+            imageString : imageString
+        },
+        success: function(res){
+            console.log('uploadImage: ' + res)
+            resolve(res)
+        }
+    })
 }

@@ -44,3 +44,7 @@ strong{
 .step label{
     margin-top:20px;
 }
+
+#dispImg1, #dispImg2, #dispImg3 {
+    width: 100%;
+}

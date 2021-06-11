@@ -3,6 +3,9 @@
 
 <th:block th:replace="~{/_layout/mainLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
+        <link th:href="@{/css/main.css}" rel="stylesheet">
+        <script th:src="@{/js/main.js}"></script>
+
         <div class="container-fluid">
             <div class="text-center top-area-tit">
                 오늘 종로의<br />

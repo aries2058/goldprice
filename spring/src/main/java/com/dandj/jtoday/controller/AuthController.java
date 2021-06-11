@@ -29,7 +29,7 @@ public class AuthController {
     }
 
     @GetMapping(value="/getMember")
-    public ResponseEntity<MemberDto> checkUserId(String userid){
+    public ResponseEntity<MemberDto> getMember(String userid){
         return new ResponseEntity<>(service.getMember(userid), HttpStatus.OK);
     }
 
@@ -45,8 +45,8 @@ public class AuthController {
     }
     @PostMapping(value = "/updatePassword")
     public ResponseEntity<String> updatePassword(String userid, String password){
-        String userId = service.updatePassword(userid, password);
-        return new ResponseEntity<>(userId, HttpStatus.OK);
+        service.updatePassword(userid, password);
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
     @PostMapping(value = "/login")
     public ResponseEntity<MemberDto> login(String userid, String pw){
