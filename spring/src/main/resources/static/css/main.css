@@ -1,6 +1,9 @@
 body{
     background:#F5F5F5;
 }
+.top-empty{
+    display: none;
+}
 .top-area-tit{
     color: #fff;
     font-size: 28px;
@@ -63,6 +66,22 @@ body{
     font-size: 12px;
     margin-bottom: 8px;
 }
+.main-btn-area{
+    margin-top:20px
+}
+.main-btn-area .btn-left{
+    display: inline-block;
+    text-decoration: none;
+    background: #F5F5F5;
+    box-shadow: 1px 1px 6px #00000029;
+    margin-bottom: 6px;
+    position: relative;
+    border-radius: 12px;
+    height: 184px;
+    line-height: 18px;
+    padding:15px;
+    margin-top: 18px;
+}
 .main-btn-area .btn-right{
     display: inline-block;
     text-align: center;
@@ -103,7 +122,14 @@ body{
     background: #ECECEC;
     font-size: 12px;
     display: inline-block;
-    padding:0px 8px 2px;
+    padding: 4px 12px 6px;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 12px;
+}
+.market-area .market-btn-area{
+    margin-top:20px
+}
+.market-area .market-btn-area img{
+    width:100%;
+    margin:4px 0px
 }

@@ -1,6 +1,6 @@
 package com.dandj.jtoday.controller;
 
-import com.dandj.jtoday.dto.apis.MailDto;
+import com.dandj.jtoday.dto.comm.MailDto;
 import com.dandj.jtoday.service.func.ImageService;
 import com.dandj.jtoday.service.func.MailService;
 import lombok.AllArgsConstructor;
@@ -9,21 +9,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
-import sun.security.util.IOUtils;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @AllArgsConstructor
@@ -38,7 +31,7 @@ public class FuncController {
         return new ResponseEntity("", HttpStatus.OK);
     }
 
-    @PostMapping("/getImageList")
+    @GetMapping("/getImageList")
     public ResponseEntity<List<byte[]>> getImageList(List<Long> ids){
         HttpHeaders headers = new HttpHeaders();
         headers.setCacheControl(CacheControl.noCache().getHeaderValue());
@@ -47,8 +40,8 @@ public class FuncController {
 
         return new ResponseEntity<>(contents, headers, HttpStatus.OK);
     }
-    @PostMapping("/getImage")
-    public ResponseEntity<byte[]> getImage(Long id){
+    @GetMapping("/getImage")
+    public ResponseEntity<byte[]> getImage(Long id) throws SQLException {
         HttpHeaders headers = new HttpHeaders();
         headers.setCacheControl(CacheControl.noCache().getHeaderValue());
         byte[] contents = imageService.getImage(id);

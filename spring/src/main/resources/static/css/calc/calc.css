@@ -1,0 +1,22 @@
+.keypad {
+    display: none;
+    z-index: 9999;
+}
+.keypad td{
+    color:#fff;
+    text-align: center;
+    line-height: 32px;
+}
+.key{
+    text-align: right;
+    padding-right: 4px;
+}
+.stone-form{
+    display: none;
+}
+.stone-form.on{
+    display: flex;
+}
+.keypad tbody, .keypad td, .keypad tfoot, .keypad th, .keypad thead, .keypad tr {
+    border-width: 0;
+}

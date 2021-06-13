@@ -16,6 +16,8 @@ public class MarketImages extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long imageId;
+
     @Column(length = 1)
     private String delYn;
 

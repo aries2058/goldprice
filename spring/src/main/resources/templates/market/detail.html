@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/_layout/mainLayout :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+        <link th:href="@{/css/board/detail.css}" rel="stylesheet">
+
+        <div class="container-fluid board-info">
+            <input type="hidden" th:value="${param.id}" id="bid" />
+            <input type="hidden" th:value="${param.typ}" id="typ" />
+            <a class="btn btn-gold text-white w-100 mb-3" id="btn-list">목록</a>
+            <label>제목</label>
+            <p id="title"></p>
+            <label>내용</label>
+            <div id="contents"></div>
+        </div>
+
+        <div class="container-fluid comment-list">
+            <p>답글 <span class="badge bg-primary" id="comment-cnt"></span></p>
+            <table class="table" id="list"></table>
+        </div>
+
+        <div class="container-fluid bg-white border-top fixed-bottom p-0 comment-area">
+            <div class="d-flex">
+                <div class="flex-grow-1">
+                    <textarea id="text-comment" rows="4" class="w-100 form-control rounded-0 border-0"></textarea>
+                </div>
+                <div id="btn-reply" class="bg-primary">
+                    <small>댓글<br />달기</small>
+                </div>
+            </div>
+        </div>
+
+        <div style="height: 200px"></div>
+        <script type="text/template" id="tmpl-list">
+            <% _.each(data, function(v, i){%>
+            <tr>
+                <td><%- v.contents %></td>
+                <td><%- v.writer %></td>
+                <td><%- v.moddt.substr(0,10) %></td>
+            </tr>
+            <%})%>
+        </script>
+
+        <script th:src="@{/js/board/detail.js}"></script>
+    </th:block>
+</th:block>

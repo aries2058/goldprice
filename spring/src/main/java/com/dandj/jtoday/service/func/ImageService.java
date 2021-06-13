@@ -1,23 +1,18 @@
 package com.dandj.jtoday.service.func;
 
 import com.dandj.jtoday.entity.comm.Images;
-import com.dandj.jtoday.repository.ImagesRepository;
+import com.dandj.jtoday.repository.comm.ImagesRepository;
+import com.dandj.jtoday.service.market.MarketServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.rowset.serial.SerialBlob;
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -39,20 +34,14 @@ public class ImageService {
         });
         return ret;
     }
-
-    public byte[] getImage(Long imageId){
-        List<byte[]> ret = new ArrayList<>();
+    public byte[] getImage(Long imageId) throws SQLException {
+        byte[] ret = new byte[0];
         Optional<Images> img = imagesRepository.findById(imageId);
-        img.ifPresent(x->{
-            try {
-                int len = (int)x.getContent().length();
-                ret.add(x.getContent().getBytes(1, len));
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        });
-
-        return ret.get(0);
+        if(img.isPresent()){
+            int len = (int)img.get().getContent().length();
+            ret = img.get().getContent().getBytes(1, len);
+        }
+        return ret;
     }
 
     public List<Long> uploadImageFiles(MultipartFile[] uploadFiles) throws IOException, SQLException {

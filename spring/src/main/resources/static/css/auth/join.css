@@ -5,6 +5,7 @@
     position: relative;
     border-bottom:1px solid #d9d9d9;
     margin-bottom: 25px;
+    background: #fff;
 }
 #btn-back{
     top:13px;
@@ -20,15 +21,6 @@
 .step.on{
     display: block;
 }
-h2{
-    font-size: 34px;
-    text-align: center;
-    font-weight: lighter;
-    margin-bottom: 32px;
-}
-.btn.fw-light.w-100{
-    margin-top:20px;
-}
 #step1 {
     color:#3B3B3B;
     font-size: 16px;
@@ -43,8 +35,45 @@ strong{
 }
 .step label{
     margin-top:20px;
+    margin-bottom:4px
 }
 
 #dispImg1, #dispImg2, #dispImg3 {
     width: 100%;
+}
+#btn-check-userid{
+    padding:12px 0px
+}
+
+.btn-typ{
+    border: 1px solid #BFC1C3;
+    color:#BFC1C3;
+    padding:12px 0px
+}
+.btn-typ.on{
+    background: #28A197;
+    border: 1px solid #28A197;
+    color:#fff;
+}
+
+.result p{
+    font-size: 20px;
+    font-width: bold;
+    text-align: center;
+}
+.result .idlist{
+    background: #F8F8F8;
+    color:#868686;
+    text-align: center;
+    padding:12px 0px;
+    margin-bottom: 34px;
+}
+.result .idlist a{
+    display: block;
+    font-size:16px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+.result .btn{
+    padding: 12px 0px
 }

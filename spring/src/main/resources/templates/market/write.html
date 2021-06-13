@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+        <link th:href="@{/css/market/write.css}" rel="stylesheet">
+        <input type="hidden" th:value="${param.id}" id="market_id" />
+
+        <div class="fixed-top top-bar">
+            <span class="title">업체 정보 변경</span>
+            <a class="position-absolute" id="btn-close"><img th:src="@{/images/btn_close.svg}" /></a>
+        </div>
+
+        <div class="container-fluid">
+            <div class="info">
+                <div class="d-flex">
+                    <input type="hidden" id="image_id" />
+                    <div class="main-photo-area">
+                        <div class="position-relative" id="btn-main-photo">
+                            <span class="icon-camera">
+                            <img th:src="@{/images/icon_camera.svg}" />
+                        </span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="hid-main-photo" />
+                    <input type="file" id="file-main-photo" accept="image/*;capture=camera" style="display: none" />
+                    <div class="flex-grow-1 market_nm">골드 앤 스톤</div>
+                </div>
+                <div class="mt-3">
+                    <label>매장구분</label>
+                    <select class="form-select market_typ">
+                        <option>선택하세요.</option>
+                        <option value="RETAIL">도매</option>
+                        <option value="SOLE">소매</option>
+                        <option value="WHOLE">총판</option>
+                        <option value="FACTORY">공장</option>
+                        <option value="ETC">기타</option>
+                    </select>
+                    <div class="itemtyp-area">
+                        <label>상품구분</label>
+                        <div class="row gx-1">
+                            <div class="col-4"><label class="lb-checkbox fw-light"><input type="checkbox" class="item_typ" name="item_typ" value="01" />
+                                <img th:src="@{/images/check_off.svg}" />
+                                <span>순금</span>
+                            </label></div><div class="col-4"><label class="lb-checkbox fw-light"><input type="checkbox" class="item_typ" name="item_typ" value="02" />
+                                <img th:src="@{/images/check_off.svg}" />
+                                <span>웨딩</span>
+                            </label></div><div class="col-4"><label class="lb-checkbox fw-light"><input type="checkbox" class="item_typ" name="item_typ" value="03" />
+                                <img th:src="@{/images/check_off.svg}" />
+                                <span>패션</span>
+                            </label></div><div class="col-4"><label class="lb-checkbox fw-light"><input type="checkbox" class="item_typ" name="item_typ" value="04" />
+                                <img th:src="@{/images/check_off.svg}" />
+                                <span>귀걸이</span>
+                            </label></div><div class="col-4"><label class="lb-checkbox fw-light"><input type="checkbox" class="item_typ" name="item_typ" value="05" />
+                                <img th:src="@{/images/check_off.svg}" />
+                                <span>체인</span>
+                            </label></div><div class="col-4"><label class="lb-checkbox fw-light"><input type="checkbox" class="item_typ" name="item_typ" value="06" />
+                                <img th:src="@{/images/check_off.svg}" />
+                                <span>커플링</span>
+                            </label></div><div class="col-4"><label class="lb-checkbox fw-light"><input type="checkbox" class="item_typ" name="item_typ" value="07" />
+                                <img th:src="@{/images/check_off.svg}" />
+                                <span>진주/유색</span>
+                            </label></div><div class="col-8"><label class="lb-checkbox fw-light"><input type="checkbox" class="item_typ" name="item_typ" value="08" />
+                                <img th:src="@{/images/check_off.svg}" />
+                                <span>레이저각인/땜</span>
+                            </label></div><div class="col-4"><label class="lb-checkbox fw-light"><input type="checkbox" class="item_typ" name="item_typ" value="09" />
+                                <img th:src="@{/images/check_off.svg}" />
+                                <span>도금</span>
+                            </label></div>
+                            </div>
+                            <div>
+                    </div>
+
+
+                    </div>
+                    <label>전화번호</label>
+                    <input type="number" class="form-control border" name="tel" id="tel" placeholder="'-' 기호 제외" />
+
+                    <label>매장주소</label>
+                    <input type="text" id="addr" name="addr" class="form-control border" onclick="goPopup();" readonly placeholder="주소를 입력해주세요." />
+                    <input type="text" id="addr_detail" class="form-control border mt-2" name="addr_detail" placeholder="상세주소를 입력해주세요." />
+                    <input type="hidden" id="lat" name="lat" />
+                    <input type="hidden" id="lng" name="lng" />
+
+                    <label>업체소개</label>
+                </div>
+            </div>
+            <div class="edit-mode text-end"><a class="btn" id="btn-ok">완료</a></div>
+            <textarea class="form-control" id="contents" rows="5"></textarea>
+        </div>
+        <div class="container-fluid">
+            <div class="col-12"><label>매장사진</label></div>
+            <a class="btn btn-gold" id="btn-add-photo">추가</a>
+            <input type="file" id="file-photo" multiple accept="image/*;capture=camera" style="display: none" />
+
+            <div class="added-photos row"></div>
+            <script type="text/template" id="tmpl-added-photos">
+                <div class="photo col-3" style="background-image: url(<%- data %>)">
+                    <a class="btn-del-photo">삭제</a>
+                    <input type="hidden" class="hid-photo" value="<%- data %>" />
+                </div>
+            </script>
+        </div>
+
+        <div class="container-fluid">
+            <div th:if="${!param.id.toString().isEmpty()}" class="text-end">
+                <small>최초등록일자: <span id="regdt"></span></small><br />
+                <small>마지막수정일: <span id="moddt"></span></small>
+            </div>
+
+            <a class="btn w-100 btn-gold text-white fw-light" id="btn-register">등록</a>
+        </div>
+
+        <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+        <script th:src="@{/js/market/write.js}"></script>
+    </th:block>
+</th:block>

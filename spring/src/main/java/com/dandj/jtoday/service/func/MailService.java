@@ -1,6 +1,6 @@
 package com.dandj.jtoday.service.func;
 
-import com.dandj.jtoday.dto.apis.MailDto;
+import com.dandj.jtoday.dto.comm.MailDto;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;

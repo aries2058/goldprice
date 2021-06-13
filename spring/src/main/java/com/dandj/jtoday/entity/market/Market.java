@@ -1,12 +1,15 @@
 package com.dandj.jtoday.entity.market;
 
 import com.dandj.jtoday.entity.comm.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.dandj.jtoday.entity.comm.Images;
+import com.dandj.jtoday.entity.member.MemberRole;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -19,25 +22,29 @@ public class Market extends BaseEntity {
     private Long id;
 
     @Column(length = 100, nullable = false)
-    private String placeNm;
+    private String marketNm;
+    @Column(length = 20)
+    private String bizNo;
 
     @Column(length = 20)
     private String tel;
-
-    private Long imageId;
-
+    @Column(length = 100)
+    private String email;
     @Column(length = 2000)
     private String contents;
-
-    @Column(length = 1)
-    private String delYn;
 
     @Column(length = 500, nullable = false)
     private String addr;
     @Column(length = 500, nullable = false)
     private String addrDetail;
 
-    private Double lat;
-    private Double lng;
-    private String userId;
+    private Long imageId;   // 대표이미지
+    private Long mapId;     // 빌딩
+
+    private String marketTyp;   // 매장구분
+    private String itemTyp;      // 취급상품구분
+
+
+    @Column(length = 20)
+    private String writer;
 }

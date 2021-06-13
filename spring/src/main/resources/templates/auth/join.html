@@ -15,12 +15,30 @@
         <form id="form">
             <input type="hidden" id="update_yn" value="<%= userid == null ? 'N': 'Y'%>" />
 
-            <div class="container-fluid on step" id="step0">
+            <div class="container-fluid step on" id="step0">
                 <h2 class="text-gold">사업자번호</h2>
-                <input type="number" class="form-control border" id="biz_no" name="biz_no" value="1283809049" placeholder="'-'기호 제외" />
+                <input type="number" class="form-control border" id="biz_no" name="biz_no" value="1283809049" placeholder="'-' 기호 제외" />
                 <a class="btn w-100 btn-gold text-white fw-light" id="btn-check-bizno">입력</a>
-                <p class="result mt-5"></p>
+                <div class="result mt-5">
+                </div>
             </div>
+
+            <script type="text/template" id="tmpl-result">
+
+                <p clss="text-center">이미 가입된 정보가 있습니다.</p>
+                <div class="idlist">
+                    <% _.each(data, function(v, i){%>
+                    <a><%- v.user_id %>
+                    <%if(v.confirm_yn != "Y"){%>
+                    <span>(가입승인중)</span>
+                    <%}%></a>
+                    <%})%>
+                </div>
+                <div class="row">
+                    <div class="col-6 pe-2"><a id="btn-login" class="btn border-gold text-gold w-100">로그인</a></div>
+                    <div class="col-6 ps-2"><a class="btn border-gold btn-gold text-white w-100" onclick="goStep1()">계속하기</a></div>
+                </div>
+            </script>
 
             <div class="container-fluid mt-3 step" id="step1">
                 <h2 class="text-gold">개인정보이용동의</h2>
@@ -44,17 +62,17 @@
                 <a class="btn w-100 btn-gold text-white fw-light" onclick="goStep2();">동의합니다</a>
             </div>
 
-            <div class="container-fluid mt-3 step <$= userid != null ? 'on' : ''$>" id="step2">
-                <div class="alert alert-danger">미승인 상태입니다.</div>
+            <div class="container-fluid mt-3 step" id="step2">
                 <h2 class="text-gold">가입유형</h2>
+                <small style="color:#D15241" class="mb-2">* 입력하신 사업자 등록 번호는 미승인 상태입니다.</small>
                 <div class="row">
                     <!--RETAIL, SOLE, WHOLE, FACTORY, SALES, ETC, ADMIN-->
-                    <div class="col-4 p-1"><a class="btn btn-light w-100 btn-typ biz" data-val="RETAIL">소매</a></div>
-                    <div class="col-4 p-1"><a class="btn btn-light w-100 btn-typ biz" data-val="SOLE">도매</a></div>
-                    <div class="col-4 p-1"><a class="btn btn-light w-100 btn-typ biz" data-val="WHOLE">총판</a></div>
-                    <div class="col-4 p-1"><a class="btn btn-light w-100 btn-typ biz" data-val="FACTORY">공장</a></div>
-                    <div class="col-4 p-1"><a class="btn btn-light w-100 btn-typ other" data-val="SALES">영업사원</a></div>
-                    <div class="col-4 p-1"><a class="btn btn-light w-100 btn-typ other" data-val="ETC">기타</a></div>
+                    <div class="col-4 p-1"><a class="btn w-100 btn-typ biz" data-val="RETAIL">소매</a></div>
+                    <div class="col-4 p-1"><a class="btn w-100 btn-typ biz" data-val="SOLE">도매</a></div>
+                    <div class="col-4 p-1"><a class="btn w-100 btn-typ biz" data-val="WHOLE">총판</a></div>
+                    <div class="col-4 p-1"><a class="btn w-100 btn-typ biz" data-val="FACTORY">공장</a></div>
+                    <div class="col-4 p-1"><a class="btn w-100 btn-typ other" data-val="SALES">영업사원</a></div>
+                    <div class="col-4 p-1"><a class="btn w-100 btn-typ other" data-val="ETC">기타</a></div>
                     <input type="hidden" name="user_typ" id="user_typ" />
                 </div>
                 <div class="info">
@@ -94,8 +112,16 @@
             </div>
 
             <div class="container-fluid mt-3 step" id="step3">
-                <label>아이디 <a class="btn btn-sm btn-gold" id="btn-check-userid">중복확인</a></label>
-                <input type="text" class="form-control border" name="user_id" id="user_id" value="<$= userid $>" />
+                <h2 class="text-gold">가입 계정</h2>
+                <label>아이디</label>
+                <div class="row">
+                    <div class="col-8 pe-1">
+                        <input type="text" class="form-control border w-100" name="user_id" id="user_id" th:value="${param.userid}" />
+                    </div>
+                    <div class="col-4 ps-1">
+                        <a class="btn w-100 text-gold border-gold" id="btn-check-userid">중복확인</a>
+                    </div>
+                </div>
                 <input type="hidden" id="check-userid" />
                 <input type="hidden" id="ipaddr" name="ipaddr" value="<$- ipaddr $>" />
                 <label>비밀번호</label>
@@ -107,7 +133,13 @@
             </div>
 
             <div class="container-fluid mt-3 step" id="step4">
-                가입신청 완료!!(최대1일 소요)
+                <h2 class="text-gold">가입 신청 완료</h2>
+                <div class="text-center" style="font-size: 20px; margin-top:64px">
+                    가입 신청이 완료되었습니다.<br />
+                    가입 승인까지 <b>최대 1일</b> 소요되며<br />
+                    승인 완료 시 문자가 전송됩니다.
+                </div>
+                <a class="btn w-100 btn-gold text-white fw-light" th:href="@{/main/splash}">확인</a>
             </div>
         </form>
     </th:block>

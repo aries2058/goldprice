@@ -5,19 +5,33 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class MarketDto {
-    private Long comp_id;
-    private String place_nm;
+    private Long id;
+    private String market_nm;
+    private String biz_no;
     private String addr;
-    private String addrDetail;
-    private Double lat;
-    private Double lng;
+    private String addr_detail;
     private String tel;
-    private String imgUrl;
+    private String email;
     private String contents;
-    private String user_id;
+    private Long image_id;
+    private Long map_id;
+    private String writer;
+    private LocalDateTime regdt;
+    private LocalDateTime moddt;
+    private String market_typ;
+    private String item_typ;
+
+    @Builder.Default
+    private List<Long> image_ids = new ArrayList<>();
 }

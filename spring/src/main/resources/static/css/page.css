@@ -1,0 +1,16 @@
+
+.top-bar{
+    padding: 11px 20px;
+    position: relative;
+    margin-bottom: 25px;
+    background: #fff;
+    font-size: 20px;
+}
+#btn-back{
+    top:13px;
+    left: 20px
+}
+#btn-close{
+    top:7px;
+    right: 20px
+}

@@ -3,21 +3,39 @@
 
 <th:block th:replace="~{/_layout/basicLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
-
+        <style>
+            .top-bar{
+                padding: 11px 20px;
+                position: relative;
+                margin-bottom: 25px;
+                background: #fff;
+            }
+            #btn-back{
+                top:13px;
+                left: 20px
+            }
+        </style>
         <script th:src="@{/js/auth/findId.js}"></script>
-        <div class="container-fluid mt-5 pe-5 ps-5">
-            <ul class="list-group rounded-0 mb-2">
-                <li class="list-group-item">
-                    <input type="eamil" id="email" class="form-control border-0" placeholder="이메일주소" />
-                </li>
-                <li class="list-group-item">
-                    <input type="number" id="mobile" class="form-control border-0" placeholder="핸드폰번호" />
-                </li>
-            </ul>
-            <p>회원가입 시 등록한 이메일주소와 핸드폰번호를 입력하세요.</p>
-            <a class="btn btn-primary w-100 mb-3" id="btn-findid">찾기</a>
-            <p class="alert alert-secondary" style="display: none;">입력하신 이메일주소로 계정정보가 발송되었습니다.</p>
+
+        <div class="fixed-top text-center top-bar">
+            <a class="position-absolute" th:href="@{/auth/login}" id="btn-back"><img th:src="@{/images/icon_back.svg}" /></a>
+            <span class="title">&nbsp;</span>
         </div>
+
+        <div class="container-fluid">
+            <h2 class="text-gold mt-5">계정 찾기</h2>
+            <p class="text-secondary fw-light">회원가입 시 등록한 이메일주소와 핸드폰번호를 입력하세요.</p>
+
+            <input type="email" id="email" class="form-control w-100 border fw-light mb-2" placeholder="이메일주소" />
+            <input type="number" id="mobile" class="form-control w-100 border fw-light" placeholder="핸드폰번호" />
+
+            <p class="alert alert-secondary" style="display: none;">입력하신 이메일주소로 계정정보가 발송되었습니다.</p>
+
+            <a class="btn w-100 btn-gold text-white fw-light" id="btn-findid">찾기</a>
+        </div>
+
+
+
 
         <script id="tmpl-mail" type="text/template">
             <div style='padding:24px;'>

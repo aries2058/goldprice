@@ -60,9 +60,16 @@
         </div>
         <div class="container-fluid main-btn-area">
             <div class="row">
-                <div class="col-9 pe-0">
-                    <a class="w-100">
-                        <img class="w-100" id="img-btn-calc" th:src="@{/images/btn_main_calc.svg}" />
+                <div class="col-9 pe-3">
+                    <a class="w-100 btn-left" th:href="@{/calc/gold}">
+                        <p style="margin-bottom:6px; color:#868686; font-size: 12px">중량 얼마? 공임 얼마?</p>
+                        <p style="margin-bottom:4px; color:#3B3B3B; font-size: 16px; font-weight: bold;">계산기 두드리고 하는 실수,</p>
+                        <p style="margin-bottom:16px; color:#3B3B3B; font-size: 16px; font-weight: bold;">제품 소싱할 때
+                            <span style="color:#11AE99; font-size: 16px; font-weight: bold; text-decoration: underline">간단 계산법</span></p>
+                        <p>
+                            <img style="margin-top:38px" class="float-start" th:src="@{/images/icon_calc_sm.svg}" />
+                            <img class="float-end" th:src="@{/images/icon_calc.svg}" />
+                        </p>
                     </a>
                 </div>
                 <div class="col-3 ps-0">
@@ -70,7 +77,7 @@
                         <img th:src="@{/images/icon_map.svg}" />
                         <span>종로 지도</span>
                     </a>
-                    <a class="w-100 btn-right btn-gold-dark text-white">잡금교환<br />계산기</a>
+                    <a th:href="@{/calc/etc}" class="w-100 btn-right btn-gold-dark text-white">잡금교환<br />계산기</a>
                 </div>
             </div>
         </div>
@@ -80,8 +87,35 @@
                 <div class="col tit">종로 도매 업체</div>
                 <div class="col text-end"><a class="btn-register">업체 등록하기</a></div>
             </div>
+            <div class="row market-btn-area">
+                <div class="col-3">
+                    <a><img th:src="@{/images/순금.png}" /></a>
+                </div>
+                <div class="col-3">
+                    <a><img th:src="@{/images/웨딩.png}" /></a>
+                </div>
+                <div class="col-3">
+                    <a><img th:src="@{/images/패션.png}" /></a>
+                </div>
+                <div class="col-3">
+                    <a><img th:src="@{/images/귀걸이.png}" /></a>
+                </div>
+                <div class="col-3">
+                    <a><img th:src="@{/images/체인.png}" /></a>
+                </div>
+                <div class="col-3">
+                    <a><img th:src="@{/images/커플링.png}" /></a>
+                </div>
+                <div class="col-3">
+                    <a><img th:src="@{/images/진주.png}" /></a>
+                </div>
+                <div class="col-3">
+                    <a><img th:src="@{/images/레이저각인.png}" /></a>
+                </div>
+                <div class="col-3">
+                    <a><img th:src="@{/images/도금.png}" /></a>
+                </div>
+            </div>
         </div>
-
-        <div style="height: 160px;">&nbsp;</div>
     </th:block>
 </th:block>

@@ -1,9 +1,7 @@
 package com.dandj.jtoday.config;
 
 
-import com.dandj.jtoday.handler.ApiLoginFailHandler;
 import com.dandj.jtoday.security.filter.ApiCheckFilter;
-import com.dandj.jtoday.security.filter.ApiLoginFilter;
 import com.dandj.jtoday.security.service.MemberDetailsService;
 import com.dandj.jtoday.util.JWTUtil;
 import lombok.extern.log4j.Log4j2;

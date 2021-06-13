@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="fragment-footer">
+    <div class=" fixed-bottom bottom-bar d-flex justify-content-around">
+        <a th:href="@{/main/main}" class="btn-menu">
+            <img th:if="${#httpServletRequest.requestURI.contains('main')}" th:src="@{/images/menu01_on.svg}" />
+            <img th:if="${!#httpServletRequest.requestURI.contains('main')}" th:src="@{/images/menu01_off.svg}" />
+        </a>
+        <a th:href="@{/board/list?typ=01}" class="btn-menu">
+            <img th:if="${#httpServletRequest.requestURI.contains('board')&&#httpServletRequest.requestURI.contains('typ=01')}" th:src="@{/images/menu02_on.svg}" />
+            <img th:if="${!(#httpServletRequest.requestURI.contains('board')&&#httpServletRequest.requestURI.contains('typ=01'))}" th:src="@{/images/menu02_off.svg}" />
+        </a>
+        <a class="btn-menu">
+            <img th:src="@{/images/menu03_off.svg}" />
+        </a>
+        <a  th:href="@{/calc/gold}" class="btn-menu">
+            <img th:if="${#httpServletRequest.requestURI.contains('calc')}" th:src="@{/images/menu04_on.svg}" />
+            <img th:if="${!#httpServletRequest.requestURI.contains('calc')}" th:src="@{/images/menu04_off.svg}" />
+        </a>
+        <a class="btn-menu">
+            <img th:src="@{/images/menu05_off.svg}" />
+        </a>
+    </div>
+</div>
+
+</html>

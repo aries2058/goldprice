@@ -33,8 +33,8 @@ public class Member extends BaseEntity {
     private String email;
     @Column(length = 1)
     private String confirmYn;
+    private Long marketId;
     private Long imageId;
-
     private Long uuid;
 
     @ElementCollection(fetch= FetchType.LAZY)

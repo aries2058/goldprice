@@ -1,13 +1,5 @@
 
 $(function(){
-    $('#autologin').change(function(){
-        if($(this).is(':checked')){
-            $('.spn-checkbox img').show();
-        }else{
-            $('.spn-checkbox img').hide();
-        }
-    })
-
     $('#btn-login').click(function(){
         login()
     })

@@ -1,0 +1,44 @@
+.main-photo-area{
+    width:88px;
+    height: 76px;
+}
+#btn-main-photo{
+    width: 88px;
+    height: 88px;
+    border-radius: 88px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../../images/icon_market.svg")
+}
+.icon-camera{
+    position: absolute;
+    bottom:0px;
+    right:0px;
+    display: block;
+    width:32px;
+    height:32px;
+    border-radius: 32px;
+    border:1px solid #ECECEC;
+    background: #fff;
+    text-align: center;
+}
+.market_nm{
+    font-size: 20px;
+    color:#3B3B3B;
+    padding:20px;
+    font-weight: bold;
+}
+.info label{
+    margin-top:20px;
+    margin-bottom:4px
+}
+.edit-mode{
+    display: none;
+}
+.photo{
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.itemtyp-area, .item_typ {
+    display: none;
+}

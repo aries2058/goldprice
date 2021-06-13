@@ -1,16 +1,8 @@
 package com.dandj.jtoday.service.member;
 
 import com.dandj.jtoday.dto.member.MemberDto;
-import com.dandj.jtoday.dto.member.MemberFileDto;
-import com.dandj.jtoday.entity.comm.Images;
-import com.dandj.jtoday.entity.market.Market;
 import com.dandj.jtoday.entity.member.Member;
-import com.dandj.jtoday.entity.member.MemberFile;
 import com.dandj.jtoday.entity.member.MemberImages;
-import com.dandj.jtoday.repository.ImagesRepository;
-import com.dandj.jtoday.repository.market.MarketImagesRepository;
-import com.dandj.jtoday.repository.market.MarketRepository;
-import com.dandj.jtoday.repository.member.MemberFileRepository;
 import com.dandj.jtoday.repository.member.MemberImagesRepository;
 import com.dandj.jtoday.repository.member.MemberRepository;
 import com.dandj.jtoday.spec.MemberSpec;
@@ -24,8 +16,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
-import java.sql.Blob;
 import java.util.*;
 
 @Service
@@ -129,7 +119,7 @@ public class MemberServiceImpl implements MemberService {
         String enPw = passwordEncoder.encode(memberDto.getPassword());
         Member member = dtoToEntity(memberDto, enPw);
         memberRepository.save(member);
-        memberDto.getImages().forEach(x->{
+        memberDto.getImages_ids().forEach(x->{
             MemberImages images = MemberImages.builder()
                     .imageId(x)
                     .member(member).build();
@@ -151,6 +141,18 @@ public class MemberServiceImpl implements MemberService {
         });
 
         return ret.get(0);
+    }
+
+    @Override
+    public void updateMarketId(String bizNo, Long marketId) {
+        Optional<List<Member>> data = memberRepository.findMembersByBizNo(bizNo);
+        data.ifPresent(members->{
+            members.forEach(x->{
+                x.setMarketId(marketId);
+                x.setImageId(marketId);
+                memberRepository.save(x);
+            });
+        });
     }
 
     @Override

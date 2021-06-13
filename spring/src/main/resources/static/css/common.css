@@ -54,14 +54,14 @@ input[type=number]:focus,
     font-size: 16px;
 }
 
-input[type=text], input[type=number], input[type=password]{
+input[type=text], input[type=number], input[type=password], input[type=email], textarea{
     padding:12px 20px;
     font-size: 16px;
     border:1px; 
     border-color: #d9d9d9 !important;
 }
 
-input[type=text]:focus, input[type=number]:focus, input[type=password]:focus{
+input[type=text]:focus, input[type=number]:focus, input[type=password]:focus, input[type=email]:focus, textarea:focus{
     border-color: #6CD1CB !important;
 }
 
@@ -96,6 +96,37 @@ input[type=text]:focus, input[type=number]:focus, input[type=password]:focus{
     top:0px;
     z-index: 9999;
 }
+.sidebar .userinfo{
+    margin-top:62px;
+    margin-bottom: 4px;
+    width:100%;
+    text-align: center;
+}
+.sidebar .userinfo .biznm{
+    font-size: 16px;
+    color:#3B3B3B;
+    font-weight: bold;
+    margin-top:8px;
+}
+.sidebar .list-group{
+    border-color: #f5f5f5;
+}
+.sidebar .list-group li:first-child{
+    margin-top:16px
+}
+.sidebar .list-group li{
+    font-size: 14px;
+    color:#3B3B3B
+}
+.sidebar .list-group li a{
+    text-decoration: none;
+    padding: 6px 0px 6px;
+    display: block;
+    width: 100%;
+}
+.sidebar .list-group li a img{
+    margin-right:6px;
+}
 
 .btn-close-sidebar{
   position: absolute;
@@ -116,3 +147,26 @@ input[type=text]:focus, input[type=number]:focus, input[type=password]:focus{
 }
 
 /* ========= top-bar, side-bar, bottom-bar ========= */
+
+
+h2{
+    font-size: 34px;
+    text-align: center;
+    font-weight: lighter;
+    margin-bottom: 32px;
+    margin-top:12px;
+}
+.btn.fw-light.w-100{
+    margin-top:20px;
+}
+
+#btn-main-photo{
+    width: 88px;
+    height: 88px;
+    border-radius: 88px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../images/icon_market.svg");
+    display: inline-block
+;
+}

@@ -1,0 +1,12 @@
+
+#btn-reply{
+    padding: 28px 18px;
+    text-align: center;
+    color:#fff;
+}
+.comment-area{
+    bottom:50px
+}
+.bottom-empty{
+    display: none;
+}

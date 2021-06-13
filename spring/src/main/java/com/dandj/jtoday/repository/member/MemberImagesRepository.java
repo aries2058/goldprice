@@ -1,6 +1,5 @@
 package com.dandj.jtoday.repository.member;
 
-import com.dandj.jtoday.entity.member.MemberFile;
 import com.dandj.jtoday.entity.member.MemberImages;
 import org.springframework.data.jpa.repository.JpaRepository;
 
