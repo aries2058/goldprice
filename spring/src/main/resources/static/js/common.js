@@ -18,6 +18,7 @@ $(function(){
     })
 })
 
+
 function dispSidebar(){
     $('.sidebar, .back').height($(window).height())
     $('.btn-open-sidebar').on('click', ()=>{
@@ -115,4 +116,50 @@ function dateFormat(d, format){
     }else if(format == 'yyyy-MM-dd hh:mm:ss'){
         return d.substr(0, 10) + ' ' + d.substr(11, 8);
     }
+}
+
+
+function role(r){
+    if(r == "RETAIL"){
+        return "소매"
+    }else if(r == "SOLE"){
+        return "도매"
+    }else if(r == "WHOLE"){
+        return "총판"
+    }else if(r == "FACTORY"){
+        return "공장"
+    }else if(r == "SALES"){
+        return "영업사원"
+    }else if(r == "ETC"){
+        return "기타"
+    }else{
+        return "관리자"
+    }
+}
+
+
+function itemtyp(items){
+    let ret = [];
+    _.each(items.split(','), function (v){
+        if(v == "01") {
+            ret.push("순금")
+        }else if(v == "02") {
+            ret.push("웨딩")
+        }else if(v == "03") {
+            ret.push("패션")
+        }else if(v == "04") {
+            ret.push("귀걸이")
+        }else if(v == "05") {
+            ret.push("체인")
+        }else if(v == "06") {
+            ret.push("커플링")
+        }else if(v == "07") {
+            ret.push("진주/유색")
+        }else if(v == "08") {
+            ret.push("레이저각인/땜")
+        }else if(v == "09") {
+            ret.push("도금")
+        }
+    })
+    return ret;
 }

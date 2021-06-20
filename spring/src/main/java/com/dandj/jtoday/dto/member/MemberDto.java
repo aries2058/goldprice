@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Blob;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Builder
@@ -34,6 +35,8 @@ public class MemberDto {
     private Blob photo;
     private String login_msg;
     private List<Long> images_ids;
+    private String str_images_ids;
+    private LocalDateTime regdt;
 
     @Builder.Default
     private Collection<String> roleSet = new HashSet<>();

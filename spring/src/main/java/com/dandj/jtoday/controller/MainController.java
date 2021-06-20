@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Log4j2
 @RequestMapping("/main")
 public class MainController {
-    @GetMapping({"/main", "/splash"})
+    @GetMapping({"/main", "/splash", "viewPhoto"})
     public void View(){
 
     }

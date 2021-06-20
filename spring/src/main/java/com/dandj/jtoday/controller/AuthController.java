@@ -1,5 +1,6 @@
 package com.dandj.jtoday.controller;
 
+import com.dandj.jtoday.dto.comm.BoardDto;
 import com.dandj.jtoday.dto.member.MemberDto;
 import com.dandj.jtoday.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,11 @@ public class AuthController {
         return new ResponseEntity<>(service.getMember(userid), HttpStatus.OK);
     }
 
+    @GetMapping("/getMemberList")
+    public ResponseEntity<List<MemberDto>> getMemberList(int sttPage, int perPage, String searchVal, String confirm){
+        return new ResponseEntity<>(service.getMemberList(sttPage, perPage, searchVal, confirm), HttpStatus.OK);
+    }
+
     @PostMapping(value = "/register")
     public ResponseEntity<String> register(MemberDto memberDto){
         String userId = service.register(memberDto);
@@ -40,12 +46,17 @@ public class AuthController {
     }
     @PostMapping(value = "/update")
     public ResponseEntity<String> update(MemberDto memberDto){
-        String userId = service.update(memberDto);
-        return new ResponseEntity<>(userId, HttpStatus.OK);
+        service.update(memberDto);
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
     @PostMapping(value = "/updatePassword")
     public ResponseEntity<String> updatePassword(String userid, String password){
         service.updatePassword(userid, password);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+    @PostMapping(value = "/confirmMember")
+    public ResponseEntity<String> confirmMember(String userid, String confirm){
+        service.confirmMember(userid, confirm);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
     @PostMapping(value = "/login")

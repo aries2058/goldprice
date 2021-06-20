@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,15 +32,6 @@ public class FuncController {
         return new ResponseEntity("", HttpStatus.OK);
     }
 
-    @GetMapping("/getImageList")
-    public ResponseEntity<List<byte[]>> getImageList(List<Long> ids){
-        HttpHeaders headers = new HttpHeaders();
-        headers.setCacheControl(CacheControl.noCache().getHeaderValue());
-
-        List<byte[]> contents = imageService.getImages(ids);
-
-        return new ResponseEntity<>(contents, headers, HttpStatus.OK);
-    }
     @GetMapping("/getImage")
     public ResponseEntity<byte[]> getImage(Long id) throws SQLException {
         HttpHeaders headers = new HttpHeaders();

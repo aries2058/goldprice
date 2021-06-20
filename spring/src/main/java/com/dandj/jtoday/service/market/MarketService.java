@@ -2,8 +2,10 @@ package com.dandj.jtoday.service.market;
 
 
 import com.dandj.jtoday.dto.market.MarketDto;
+import com.dandj.jtoday.dto.market.MarketMapDto;
 import com.dandj.jtoday.entity.market.Market;
 import com.dandj.jtoday.entity.market.MarketImages;
+import com.dandj.jtoday.entity.market.MarketMap;
 
 import java.util.List;
 
@@ -11,6 +13,8 @@ public interface MarketService {
     Long register(MarketDto marketDto);
     List<MarketDto> getMarketList(MarketDto marketDto);
     MarketDto getMarket(Long id);
+    List<MarketMapDto> getMap();
+    List<MarketDto> getMarketList(Long mapid);
 
     default Market dtoToEntity(MarketDto dto){
         Market entity = Market.builder()
@@ -23,6 +27,7 @@ public interface MarketService {
                 .email(dto.getEmail())
                 .tel(dto.getTel())
                 .imageId(dto.getImage_id())
+                .mapId(dto.getMap_id())
                 .itemTyp(dto.getItem_typ())
                 .marketTyp(dto.getMarket_typ())
                 .writer(dto.getWriter()).build();
@@ -47,6 +52,19 @@ public interface MarketService {
                 .item_typ(entity.getItemTyp())
                 .regdt(entity.getRegDate())
                 .moddt(entity.getModDate()).build();
+        return dto;
+    }
+
+    default MarketMapDto entityToMarketMapDto(MarketMap entity, List<MarketDto> marketDto){
+        MarketMapDto dto = MarketMapDto.builder()
+                .id(entity.getId())
+                .place_nm(entity.getPlaceNm())
+                .addr(entity.getAddr())
+                .addr_detail(entity.getAddrDetail())
+                .lat(entity.getLat())
+                .lng(entity.getLng())
+                .use_yn(entity.getUseYn())
+                .market(marketDto).build();
         return dto;
     }
 

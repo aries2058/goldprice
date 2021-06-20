@@ -1,12 +1,14 @@
 let _flag_main_photo = false;
 let _flag_photos = false;
+let _market = null;
 $(function (){
     if($('#market_id').val() != ''){
         $.ajax({
             url: _host + '/market/getMarket',
             data: {id : $('#market_id').val() },
             success: function (res){
-                $('#image_id').val(res.image_id);
+                _market = res;
+                $('.market_nm').text(res.market_nm)
                 $('#tel').val(res.tel);
                 $('#addr').val(res.addr);
                 $('#addr_detail').val(res.addr_detail);
@@ -21,6 +23,7 @@ $(function (){
                         if(res.item_typ.indexOf($(v).val())>-1){
                             p = $(v).parents('.lb-checkbox')
                             $('img', p).attr('src', $('img', p).attr('src').replace('off', 'on'));
+                            $(v).prop('checked', true)
                         }
                     })
                 }
@@ -238,6 +241,7 @@ function uploadMarketPhotos(callback, image_id){
 let register = function(image_id, values){
     let item_typ = '';
     _.each($('.item_typ'), function(v){
+        console.log(v)
         if($(v).is(':checked')){
             item_typ += $(v).val() + ',';
         }
@@ -252,7 +256,8 @@ let register = function(image_id, values){
             addr_detail: $('#addr_detail').val(),
             tel: $('#tel').val(),
             contents: $('#contents').val(),
-            image_id: image_id,
+            image_id: image_id ==null ? _market.image_id : image_id,
+            map_id: _market.map_id,
             writer: _user.user_id,
             image_ids: values,
             market_typ: $('.market_typ').val(),

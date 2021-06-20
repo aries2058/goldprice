@@ -1,0 +1,42 @@
+#list{
+    overflow-y: auto;
+    z-index: 1029;
+    position: absolute;
+    bottom:0px;
+    left:0px;
+    background: #fff;
+}
+#detail{
+    overflow-y: auto;
+    z-index: 1029;
+    position: absolute;
+    bottom:64px;
+    left:0px;
+    padding:8px 4px;
+    display: none;
+}
+#detail #btn-list{
+    z-index: 1029;
+    display: block;
+    text-align: right;
+}
+#detail #btn-list a{
+    background: #fff;
+    border-top-left-radius: 8px;
+    display: inline-block;
+    padding:4px 8px;
+    font-size: 0.9rem;
+}
+#detail img{
+    width:92px;
+    height:92px
+}
+#search-list{
+    z-index: 1028;
+    position: absolute;
+    padding-top:12px;
+    top:64px;
+    left:0px;
+    background: #fff;
+    overflow-y: auto;
+}

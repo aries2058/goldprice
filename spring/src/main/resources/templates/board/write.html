@@ -15,14 +15,10 @@
                 <h1>제품요청</h1>
                 <p>필요한 제품이 있으면 도매상인들에게 제품을 요청하세요.</p>
             </div>
-            <div class="info" th:if="${param.typ.toString().equals('02')}">
-                <h1>문의</h1>
-                <p>문의하실 사항이 있으면 운영자에게 문의하세요.</p>
-            </div>
             <a id="btn-submit" class="btn btn-gold w-50 text-white mb-4">등록</a>
             <form id="frm">
                 <input type="hidden" id="board_typ" name="board_typ" th:value="${param.typ}" />
-                <input type="hidden" id="writer" name="writer" th:value="${'system'}" />
+                <input type="hidden" id="writer" name="writer" />
                 <div class="edit-area">
                     <input type="text" class="form-control border mb-2" id="title" name="title" placeholder="제목을 입력하세요." />
                     <div class="btn-area" style="display: none">

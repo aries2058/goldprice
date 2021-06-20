@@ -1,4 +1,5 @@
 $(function(){
+    $('#writer').val(_user.user_id)
     $('#contents').summernote({
         height: $(window).height() - $('.board-info').height() - $('.top-bar').height() - $('.bottom-bar').height() - 12,
         lang: "ko-KR",

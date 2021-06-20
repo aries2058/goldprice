@@ -21,19 +21,6 @@ import java.util.*;
 public class ImageService {
     final private ImagesRepository imagesRepository;
 
-    public List<byte[]> getImages(List<Long> imageId){
-        List<byte[]> ret = new ArrayList<>();
-        List<Images> img = imagesRepository.findAllById(imageId);
-        img.forEach(x->{
-            try {
-                int len = (int)x.getContent().length();
-                ret.add(x.getContent().getBytes(1, len));
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        });
-        return ret;
-    }
     public byte[] getImage(Long imageId) throws SQLException {
         byte[] ret = new byte[0];
         Optional<Images> img = imagesRepository.findById(imageId);

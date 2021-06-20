@@ -62,16 +62,21 @@ public class MemberServiceImpl implements MemberService {
         spec = spec.or(Specification.where(MemberSpec.bizNmLike(searchVal)));
         spec = spec.or(Specification.where(MemberSpec.telLike(searchVal)));
         spec = spec.or(Specification.where(MemberSpec.userIdLike(searchVal)));
+        spec = spec.or(Specification.where(MemberSpec.userNmLike(searchVal)));
 
-        if(confirm.equals("Y")){
-            spec = spec.and(Specification.where(MemberSpec.confirmedMember()));
+        if(!confirm.isEmpty()){
+            spec = spec.and(Specification.where(MemberSpec.confirmedMember(confirm)));
         }
 
         Pageable pageable = PageRequest.of(sttPage, perPage);
         Page<Member> data = memberRepository.findAll(spec, pageable);
 
+        List<Long> imageIds = new ArrayList<>();
         data.forEach(x -> {
-            ret.add(entityToDto(x));
+            memberImagesRepository.findMemberImagesByMember_UserId(x.getUserId()).forEach(y->{
+                imageIds.add(y.getImageId());
+            });
+            ret.add(entityToDto(x, imageIds));
         });
 
         return ret;
@@ -129,18 +134,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String update(MemberDto dto) {
+    public void update(MemberDto dto) {
         Optional<Member> member = memberRepository.findByUserId(dto.getUser_id());
-        List<String> ret = new ArrayList<>();
         member.ifPresent(x->{
             x.setTel(dto.getTel());
             x.setMobile(dto.getMobile());
             x.setEmail(dto.getEmail());
             memberRepository.save(x);
-            ret.add(x.getUserId());
         });
-
-        return ret.get(0);
     }
 
     @Override

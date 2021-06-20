@@ -2,7 +2,9 @@ package com.dandj.jtoday.service.func;
 
 import com.dandj.jtoday.dto.comm.BoardDto;
 import com.dandj.jtoday.entity.comm.Board;
+import com.dandj.jtoday.entity.member.Member;
 import com.dandj.jtoday.repository.comm.BoardRepository;
+import com.dandj.jtoday.repository.member.MemberRepository;
 import com.dandj.jtoday.spec.BoardSpec;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -26,6 +28,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BoardService {
     private final BoardRepository boardRepository;
+    private final MemberRepository memberRepository;
 
     public List<BoardDto> getList(int sttPage, int perPage, String typ, String searchTyp, String searchVal){
         List<BoardDto> ret = new ArrayList<>();
@@ -48,7 +51,8 @@ public class BoardService {
 
         data.forEach(x->{
             try {
-                ret.add(entityToDto(x));
+                Optional<Member> member = memberRepository.findByUserId(x.getWriter());
+                ret.add(entityToDto(x, member.get()));
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
@@ -64,7 +68,8 @@ public class BoardService {
         if(data.isPresent()){
             data.get().forEach(x->{
                 try {
-                    ret.add(entityToDto(x));
+                    Optional<Member> member = memberRepository.findByUserId(x.getWriter());
+                    ret.add(entityToDto(x, member.get()));
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -78,7 +83,8 @@ public class BoardService {
         BoardDto ret = new BoardDto();
         Optional<Board> data = boardRepository.findById(id);
         if(data.isPresent()){
-            ret = entityToDto(data.get());
+            Optional<Member> member = memberRepository.findByUserId(data.get().getWriter());
+            ret = entityToDto(data.get(), member.get());
         }
         return ret;
     }
@@ -104,7 +110,7 @@ public class BoardService {
         return board.getId();
     }
 
-    private BoardDto entityToDto(Board entity) throws SQLException {
+    private BoardDto entityToDto(Board entity, Member member) throws SQLException {
         int len = (int)entity.getContents().length();
         byte[] bytes = entity.getContents().getBytes(1, len);
         String contents = new String(bytes);
@@ -116,6 +122,8 @@ public class BoardService {
                 .writer(entity.getWriter())
                 .regdt(entity.getRegDate())
                 .moddt(entity.getModDate())
+                .biz_nm(member.getBizNm())
+                .user_nm(member.getUserNm())
                 .cmt_cnt(entity.getCmtCnt()).build();
         return dto;
     }

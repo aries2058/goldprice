@@ -1,0 +1,51 @@
+.qnatab div{
+    color:#868686;
+    border-bottom:2px solid #ECECEC;
+    font-width: bold;
+}
+.qnatab div.on{
+     color:#6CD1CB;
+     border-color:#6CD1CB;
+ }
+.screen {
+    display: none;
+}
+.screen.on {
+    display: block;
+}
+.moddt{
+    color:#BFC1C3; padding-left:90px;
+    font-weight: lighter;
+    padding-bottom: 16px;
+    font-size: 12px;
+}
+.text-red{
+    color:#D15241
+}
+.text-green{
+    color:#28A197
+}
+
+.qna-item .contents{
+    display: none;
+}
+.qna-item.on .contents{
+    display: block;
+}
+.comment-area{
+    background: #F5F5F5;
+    color:#868686;
+}
+.comment-area div{
+    padding:4px 12px 8px;
+}
+.comment-area .moddt{
+    color:#BFC1C3;
+    font-size: 12px;
+    font-weight: lighter;
+    padding-left: 8px;
+}
+.comment-area .writer{
+    color:#11AE99;
+    font-size: 12px;
+}

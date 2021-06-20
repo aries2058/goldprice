@@ -11,8 +11,9 @@
             <img th:if="${#httpServletRequest.requestURI.contains('board')&&#httpServletRequest.requestURI.contains('typ=01')}" th:src="@{/images/menu02_on.svg}" />
             <img th:if="${!(#httpServletRequest.requestURI.contains('board')&&#httpServletRequest.requestURI.contains('typ=01'))}" th:src="@{/images/menu02_off.svg}" />
         </a>
-        <a class="btn-menu">
-            <img th:src="@{/images/menu03_off.svg}" />
+        <a th:href="@{/market/map}" class="btn-menu">
+            <img th:if="${#httpServletRequest.requestURI.contains('map')}" th:src="@{/images/menu03_on.svg}" />
+            <img th:if="${!#httpServletRequest.requestURI.contains('map')}" th:src="@{/images/menu03_off.svg}" />
         </a>
         <a  th:href="@{/calc/gold}" class="btn-menu">
             <img th:if="${#httpServletRequest.requestURI.contains('calc')}" th:src="@{/images/menu04_on.svg}" />
@@ -23,5 +24,4 @@
         </a>
     </div>
 </div>
-
 </html>

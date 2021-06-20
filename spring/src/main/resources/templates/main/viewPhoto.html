@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/_layout/basicLayout :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+        <style>
+            body{
+                background: #000;
+            }
+            img{
+                display: block;
+                width:100%;
+                margin:16px 0px
+            }
+        </style>
+
+        <div id="list"></div>
+
+        <script>
+            $(function (){
+                let idx = document.location.href.indexOf("=");
+                let p = document.location.href.substr(idx+1, document.location.href.length - idx -1)
+
+                _.each(p.split(","), function (v){
+                    $.ajax({
+                        url: _host + '/func/getImage',
+                        data: {id: v},
+                        success: function (res){
+                            $('#list').append('<img src="'+ res +'" />')
+                        }
+                    })
+                })
+            })
+        </script>
+    </th:block>
+</th:block>

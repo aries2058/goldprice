@@ -1,10 +1,17 @@
 package com.dandj.jtoday.entity.market;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
+@Entity
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class MarketMap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,0 +1,24 @@
+
+.scroll-x {
+    white-space: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.btn-nav-area{
+    height: 38px;
+    margin-top:28px;
+}
+.btn-nav{
+    padding:8px 16px;
+    color: #000;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 32px;
+    margin-left: 8px;
+    background: #F8F8F8;
+    color:#868686;
+}
+.btn-nav.on {
+    background: #6CD1CB;
+    color:#fff;
+}

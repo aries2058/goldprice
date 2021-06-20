@@ -34,6 +34,14 @@ public class MemberSpec {
             }
         };
     }
+    public static Specification<Member> userNmLike(final String searchVal){
+        return new Specification<Member>() {
+            @Override
+            public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                return criteriaBuilder.like(root.get("userNm"), "%"+searchVal+"%");
+            }
+        };
+    }
     public static Specification<Member> userIdLike(final String searchVal){
         return new Specification<Member>() {
             @Override
@@ -42,14 +50,15 @@ public class MemberSpec {
             }
         };
     }
-    public static Specification<Member> confirmedMember(){
+    public static Specification<Member> confirmedMember(final String searchVal){
         return new Specification<Member>() {
             @Override
             public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-                return criteriaBuilder.equal(root.get("confirmYn"), "Y");
+                return criteriaBuilder.equal(root.get("confirmYn"), searchVal);
             }
         };
     }
+
     public static Specification<Member> email(String email){
         return new Specification<Member>() {
             @Override

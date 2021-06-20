@@ -3,7 +3,7 @@ $(function (){
    getList()
 
    $(document).on('click', '.link', function (){
-       location.href = _host + '/board/detail?id='+$(this).data('bid')+'&typ=' + $('#typ').val();
+       window.open(_host + '/board/detail?id='+$(this).data('bid')+'&typ=' + $('#typ').val());
    })
 })
 function getList(){

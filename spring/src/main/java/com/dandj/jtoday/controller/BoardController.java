@@ -24,7 +24,7 @@ import java.util.List;
 public class BoardController {
     private final BoardService boardService;
 
-    @GetMapping({"/list", "write", "detail"})
+    @GetMapping({"/list", "/write", "/detail", "/qna"})
     public void View(){
     }
 

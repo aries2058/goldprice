@@ -1,0 +1,13 @@
+.member-info{
+    display: none;
+}
+.member-info.on{
+    display: block;
+}
+.member-info label{
+    font-size: 0.8rem;
+    font-weight: lighter;
+}
+#confirm{
+    display: none;
+}

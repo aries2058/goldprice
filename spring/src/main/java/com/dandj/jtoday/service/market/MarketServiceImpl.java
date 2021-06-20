@@ -1,9 +1,12 @@
 package com.dandj.jtoday.service.market;
 
 import com.dandj.jtoday.dto.market.MarketDto;
+import com.dandj.jtoday.dto.market.MarketMapDto;
 import com.dandj.jtoday.entity.market.Market;
 import com.dandj.jtoday.entity.market.MarketImages;
+import com.dandj.jtoday.entity.market.MarketMap;
 import com.dandj.jtoday.repository.market.MarketImagesRepository;
+import com.dandj.jtoday.repository.market.MarketMapRepository;
 import com.dandj.jtoday.repository.market.MarketRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -19,6 +22,7 @@ import java.util.Optional;
 public class MarketServiceImpl implements MarketService{
     private final MarketRepository marketRepository;
     private final MarketImagesRepository marketImagesRepository;
+    private final MarketMapRepository marketMapRepository;
 
     @Override
     public Long register(MarketDto marketDto) {
@@ -52,5 +56,35 @@ public class MarketServiceImpl implements MarketService{
             return ret;
         }
         return new MarketDto();
+    }
+
+    @Override
+    public List<MarketMapDto> getMap(){
+        List<MarketMap> data = marketMapRepository.findAll();
+        List<MarketMapDto> ret = new ArrayList<>();
+
+        data.forEach(x->{
+            Optional<List<Market>> market = marketRepository.findMarketsByMapId(x.getId());
+            List<MarketDto> markets = new ArrayList<>();
+            if(market.isPresent()){
+                market.get().forEach(m->{
+                    markets.add(entityToDto(m));
+                });
+            }
+            ret.add(entityToMarketMapDto(x, markets));
+        });
+        return ret;
+    }
+
+    @Override
+    public List<MarketDto> getMarketList(Long mapid) {
+        Optional<List<Market>> data = marketRepository.findMarketsByMapId(mapid);
+        List<MarketDto> ret = new ArrayList<>();
+        data.ifPresent(x->{
+            x.forEach(m->{
+                ret.add(entityToDto(m));
+            });
+        });
+        return ret;
     }
 }

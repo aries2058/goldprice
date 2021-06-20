@@ -26,15 +26,15 @@
             </div>
         </div>
         <ul class="list-group list-group-flush border-top">
-            <li class="list-group-item pb-3 border-0"><a class="text-dark" th:href="@{/mypage/myinfo}">
+            <li class="list-group-item pb-3 border-0"><a class="text-dark" th:href="@{/mypage/list}">
                 <img th:src="@{/images/icon_mypage.svg}" /> 내 정보 변경</a></li>
-            <li class="list-group-item pb-3 border-0"><a class="text-dark" th:href="@{/board/write?typ=02}">
+            <li class="list-group-item pb-3 border-0"><a class="text-dark" th:href="@{/board/qna}">
                 <img th:src="@{/images/icon_qna.svg}" /> 문의하기</a></li>
             <li class="list-group-item pb-3 border-0"><a class="text-dark" th:href="@{/mypage/chat}">
                 <img th:src="@{/images/icon_help.svg}" /> 도움말</a></li>
             <li class="list-group-item pb-3 border-0"><a class="text-dark" th:href="@{/auth/login}">
                 <img th:src="@{/images/icon_logout.svg}" /> 로그아웃</a></li>
-            <li class="list-group-item pb-3 border-0"><a class="text-dark" th:href="@{/admin}">
+            <li class="list-group-item pb-3 border-0"><a class="text-dark" id="menu-admin" th:href="@{/admin/qna}">
                 <img th:src="@{/images/icon_admin.svg}" /> 관리자</a></li>
         </ul>
     </div>

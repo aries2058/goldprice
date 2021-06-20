@@ -16,15 +16,19 @@ $(function(){
             typ: 'G'
         },
         success: function(res){
-            var regdate = res[0].regdt.replace('T', ' ');
-            $('.update-dt').html(regdate.substr(0, regdate.indexOf('.'))+' 업데이트');
+            console.log(res)
+            $('.update-dt').html(dateFormat(res[0].regdt, 'yyyy-MM-dd hh:mm:ss')+' 업데이트');
             $('.vat').html(comma(res[0].vat+''))
-            $('.ivat').html(comma(res[0].vat*1.1+''))
+            $('.ivat').html(comma((res[0].vat*1.1).toFixed(0)+''))
             $('.sell').html(comma(res[0].sell+''))
         }
     })
 
     $('.calc').click(function (){
         location.href = _host + '/calc/gold?price=' + $(this).prev().text().replace('원/돈', '');
+    })
+
+    $('.btn-register').click(function (){
+        location.href = _host + '/market/write?id='+_user.market_id
     })
 })

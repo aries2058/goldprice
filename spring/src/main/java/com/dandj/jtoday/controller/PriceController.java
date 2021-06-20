@@ -23,6 +23,9 @@ import java.util.List;
 public class PriceController {
     private final PriceService priceService;
 
+    @GetMapping({"/gold", "/dia", "subu", "pearl"})
+    public void View(){ }
+
     @GetMapping(value="/getGold")
     public ResponseEntity<List<PriceGoldDto>> getGold(String typ) {
         return new ResponseEntity<>(priceService.getGold(typ), HttpStatus.OK);
@@ -30,7 +33,7 @@ public class PriceController {
     @PostMapping(value = "/registerGold")
     public ResponseEntity<String> registerGold(PriceGoldDto priceGoldDto){
         priceService.registerGold(priceGoldDto);
-        return  new ResponseEntity<>("", HttpStatus.OK);
+        return  new ResponseEntity<>("OK", HttpStatus.OK);
     }
     @GetMapping(value="/getDia")
     public ResponseEntity<List<PriceDiaDto> >getDia() {

@@ -1,6 +1,6 @@
 $(function () {
-    $('#btn-list').click(function (){
-        location.href = _host + '/board/list?typ='+ $('#typ').val()
+    $('#btn-close').click(function (){
+        window.close();
     })
     $.ajax({
         url: _host + '/board/getBoard',
@@ -8,6 +8,11 @@ $(function () {
         success: function (res){
             $('#title').html(res.title)
             $('#contents').html(res.contents)
+            $('#biznm').text(res.biz_nm)
+            $('#usernm').text(res.user_nm)
+            $('#userid').text(res.writer)
+            $('#moddt').text(dateFormat(res.moddt, 'yyyy-MM-dd hh:mm:ss'))
+            $('#comment-cnt').text(res.cmt_cnt)
         }
     })
     getComments();
@@ -23,7 +28,7 @@ $(function () {
                     contents: $('#text-comment').val(),
                     pid: $('#bid').val(),
                     typ: $('#typ').val(),
-                    writer: 'system',
+                    writer: _user.user_id,
                     cmt_cnt: parseInt($('#comment-cnt').text()) +1
                 },
                 success: function (res){
@@ -43,8 +48,7 @@ function getComments(){
             if(res.length > 0){
                 var tmp = _.template($('#tmpl-list').html());
                 $('#list').html(tmp({data: res}))
-            }else {
-                $('#list').html("<tr><td>댓글이 없습니다.</td></tr>")
+                $('.comment-list').show();
             }
         }
     })

@@ -80,12 +80,17 @@ input[type=text]:focus, input[type=number]:focus, input[type=password]:focus, in
     background-size: cover;
     padding:12px 20px
 }
+.top-bar .title.after
+{
+    margin-left: 35px;
+    line-height: 40px;
+}
 .back{
     position:fixed;
     z-index:9998;
     width:100%;
     top:0px;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.8);
     display:none;
 }
 .sidebar{
@@ -169,4 +174,14 @@ h2{
     background-image: url("../images/icon_market.svg");
     display: inline-block
 ;
+}
+
+.ellipsis{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#menu-admin{
+    display: none;
 }

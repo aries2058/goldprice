@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+        <link th:href="@{/css/admin/comm.css}" rel="stylesheet">
+        <style>
+            .disp{
+                margin-top:4px;
+                color:#666;
+                font-weight: bolder;
+                display: block;
+            }
+        </style>
+
+        <div class="fixed-top top-bar">
+            <span class="title">관리자</span>
+            <a class="position-absolute" id="btn-close"><img th:src="@{/images/btn_close.svg}" /></a>
+        </div>
+
+        <div class="d-flex mb-4 admintab">
+            <div class="w-25 text-center p-3"><a th:href="@{/admin/member}">회원</a></div>
+            <div class="w-25 text-center p-3"><a th:href="@{/admin/qna}">문의</a></div>
+            <div class="w-25 text-center p-3"><a th:href="@{/admin/market}">업체</a></div>
+            <div class="w-25 text-center p-3 on"><a th:href="@{/admin/price}">시세</a></div>
+        </div>
+
+
+        <div class="container-fluid price">
+            <div class="row mb-4">
+                <div class="col-6 mt-3">
+                    <h4 class="title">금 시세 <small>(원/돈)</small> </h4>
+                </div>
+                <div class="col-6 mt-3 text-end">
+                    <a class="btn border-gold text-gold btn-save" data-typ="G">변경</a>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-6 text-end pe-4">
+                    <label>현재 VAT별도</label>
+                    <span class="disp-vat disp"></span>
+                </div>
+                <div class="col-6">
+                    <label>오늘 VAT별도</label>
+                    <input type="number" class="form-control w-100 vat border" value="0" />
+                </div>
+                <div class="col-6 text-end pe-4">
+                    <label>현재 판매</label>
+                    <span class="disp-sell disp"></span>
+                </div>
+                <div class="col-6">
+                    <label>오늘 판매</label>
+                    <input type="number" class="form-control w-100 sell border" value="0" />
+                </div>
+                <div class="col-6 text-end pe-4">
+                    <label>현재 매입</label>
+                    <span class="disp-buy disp"></span>
+                </div>
+                <div class="col-6">
+                    <label>오늘 매입</label>
+                    <input type="number" class="form-control w-100 buy border" value="0" />
+                </div>
+
+                <div class="col-12 mt-2">
+                    <a class="btn w-100 btn-gold text-white fw-light btn-send">Push알림</a>
+                </div>
+            </div>
+            <hr />
+            <div class="row mb-4 price">
+                <div class="col-6 mt-3">
+                    <h4 class="title">은 시세 <small>(원/돈)</small> </h4>
+                </div>
+                <div class="col-6 mt-3 text-end">
+                    <a class="btn border-gold text-gold btn-save" data-typ="S">변경</a>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-6 text-end pe-4">
+                    <label>현재 VAT별도</label>
+                    <span class="disp-vat disp"></span>
+                </div>
+                <div class="col-6">
+                    <label>오늘 VAT별도</label>
+                    <input type="number" class="form-control w-100 vat border" value="0" />
+                </div>
+                <div class="col-6 text-end pe-4">
+                    <label>현재 판매</label>
+                    <span class="disp-sell disp"></span>
+                </div>
+                <div class="col-6">
+                    <label>오늘 판매</label>
+                    <input type="number" class="form-control w-100 sell border" value="0" />
+                </div>
+                <div class="col-6 text-end pe-4">
+                    <label>현재 매입</label>
+                    <span class="disp-buy disp"></span>
+                </div>
+                <div class="col-6">
+                    <label>오늘 매입</label>
+                    <input type="number" class="form-control w-100 buy border" value="0" />
+                </div>
+            </div>
+            <hr />
+            <div class="row mb-4 price">
+                <div class="col-6 mt-3">
+                    <h4 class="title">백금 시세 <small>(원/돈)</small> </h4>
+                </div>
+                <div class="col-6 mt-3 text-end">
+                    <a class="btn border-gold text-gold btn-save" data-typ="W">변경</a>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-6 text-end pe-4">
+                    <label>현재 판매</label>
+                    <span class="disp-sell disp"></span>
+                </div>
+                <div class="col-6">
+                    <label>오늘 판매</label>
+                    <input type="number" class="form-control w-100 sell border" value="0" />
+                </div>
+                <div class="col-6 text-end pe-4">
+                    <label>현재 매입</label>
+                    <span class="disp-buy disp"></span>
+                </div>
+                <div class="col-6">
+                    <label>오늘 매입</label>
+                    <input type="number" class="form-control w-100 buy border" value="0" />
+                </div>
+            </div>
+        </div>
+
+        <script th:src="@{/js/admin/comm.js}"></script>
+        <script th:src="@{/js/admin/price.js}"></script>
+    </th:block>
+</th:block>

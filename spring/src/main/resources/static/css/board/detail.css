@@ -10,3 +10,29 @@
 .bottom-empty{
     display: none;
 }
+#title{
+    font-weight: lighter;
+    font-size: 24px;
+}
+.writer-info{
+    color:#666;
+    font-weight: lighter;
+}
+#contents{
+    font-size: 1.2rem;
+}
+.comment-list{
+    display: none;
+}
+#list{
+    background: #F5F5F5;
+    color:#868686;
+}
+#list div{
+    padding:4px 12px 8px;
+}
+.moddt{
+    color:#BFC1C3;
+    font-size: 12px;
+    font-weight: lighter;
+}

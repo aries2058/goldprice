@@ -14,9 +14,40 @@
         <script>
             $(function (){
                 setTimeout(function (){
-                    $('#btn-area').fadeIn(500)
+                    if( localStorage.getItem('autologin') != null && localStorage.getItem('autologin') != "N" ){
+                        autologin();
+                    }else{
+                        $('#btn-area').fadeIn(500)
+                    }
                 }, 300)
             })
+
+            function autologin(){
+                if(localStorage.getItem('autologin').indexOf("|")>0){
+                    let arr = localStorage.getItem('autologin').split('|')
+                    $.ajax({
+                        type: 'post',
+                        url: _host + '/auth/login',
+                        data: {
+                            userid: arr[0],
+                            pw: arr[1]
+                        },
+                        success: function(res){
+                            if(res.user_id == null){
+                                $('#btn-area').fadeIn(500)
+                                localStorage.setItem('autologin', "N")
+                            }else if(res.confirm_yn == null){
+                                location.href = _host + '/auth/join?userid=' + res.user_id
+                            }else{
+                                $.cookie('authkey', res.token, { expires: 7, path: '/' });
+                                localStorage.setItem('autologin',arr[0]+'|'+arr[1])
+                                localStorage.setItem('profile', JSON.stringify(res))
+                                location.href = _host + '/main/main'
+                            }
+                        }
+                    })
+                }
+            }
         </script>
     </th:block>
 </th:block>

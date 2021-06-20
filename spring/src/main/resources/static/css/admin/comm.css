@@ -1,0 +1,13 @@
+.admintab div{
+    color:#868686;
+    border-bottom:2px solid #ECECEC;
+    font-width: bold;
+}
+.admintab div.on{
+    color:#6CD1CB;
+    border-color:#6CD1CB;
+}
+.admintab a{
+    color: inherit;
+    text-decoration: none;
+}

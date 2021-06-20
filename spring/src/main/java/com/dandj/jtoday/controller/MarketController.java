@@ -1,9 +1,9 @@
 package com.dandj.jtoday.controller;
 
 import com.dandj.jtoday.dto.market.MarketDto;
+import com.dandj.jtoday.dto.market.MarketMapDto;
 import com.dandj.jtoday.service.market.MarketService;
 import com.dandj.jtoday.service.member.MemberService;
-import com.sun.org.apache.regexp.internal.RE;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 @Log4j2
@@ -23,7 +24,7 @@ public class MarketController {
     private final MarketService marketService;
     private final MemberService memberService;
 
-    @GetMapping({"/list", "write", "detail"})
+    @GetMapping({"/listByItem", "/write", "/detail", "map", "list"})
     public void View(){
     }
 
@@ -41,5 +42,15 @@ public class MarketController {
     public ResponseEntity<String> updateMarketId(String bizNo, Long marketId) {
         memberService.updateMarketId(bizNo, marketId);
         return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @GetMapping("/getMap")
+    public ResponseEntity<List<MarketMapDto>> getMap(){
+        return new ResponseEntity<>(marketService.getMap(), HttpStatus.OK);
+    }
+
+    @GetMapping("/getMarketList")
+    public ResponseEntity<List<MarketDto>> getMarketList(Long mapid){
+        return new ResponseEntity<>(marketService.getMarketList(mapid), HttpStatus.OK);
     }
 }

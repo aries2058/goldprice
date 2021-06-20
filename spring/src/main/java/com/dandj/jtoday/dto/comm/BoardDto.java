@@ -15,6 +15,8 @@ public class BoardDto {
     private String title;
     private String contents;
     private String writer;
+    private String biz_nm;
+    private String user_nm;
     private String lock_yn;
     private LocalDateTime regdt;
     private LocalDateTime moddt;

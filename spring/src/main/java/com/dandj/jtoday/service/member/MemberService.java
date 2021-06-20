@@ -16,7 +16,7 @@ public interface MemberService {
     MemberDto checkMember(String userId, String password);
     MemberDto getMember(String userId);
     String register(MemberDto memberDto);
-    String update(MemberDto dto);
+    void update(MemberDto dto);
     void updateMarketId(String bizNo, Long marketId);
     void updatePassword(String userid, String password);
     String findId(String email, String mobile);
@@ -35,6 +35,7 @@ public interface MemberService {
                 .marketId(memberDto.getMarket_id())
                 .imageId(memberDto.getImage_id())
                 .tel(memberDto.getTel())
+                .confirmYn("N")
                 .email(memberDto.getEmail())
                 .mobile(memberDto.getMobile()).build();
         String[] arr = memberDto.getUser_typ().split(",");
@@ -57,6 +58,7 @@ public interface MemberService {
                 .market_id(entity.getMarketId())
                 .image_id(entity.getImageId())
                 .confirm_yn(entity.getConfirmYn())
+                .regdt(entity.getRegDate())
                 .roleSet(entity.getRoleSet().stream()
                         .map(role->role.name()).collect(Collectors.toList())).build();
         return dto;
@@ -75,6 +77,25 @@ public interface MemberService {
                 .image_id(entity.getImageId())
                 .token(token)
                 .confirm_yn(entity.getConfirmYn())
+                .roleSet(entity.getRoleSet().stream()
+                        .map(role->role.name()).collect(Collectors.toList())).build();
+        return dto;
+    }
+
+    default MemberDto entityToDto(Member entity, List<Long> imgIds){
+        MemberDto dto = MemberDto.builder()
+                .user_id(entity.getUserId())
+                .user_nm(entity.getUserNm())
+                .biz_nm(entity.getBizNm())
+                .biz_no(entity.getBizNo())
+                .mobile(entity.getMobile())
+                .tel(entity.getTel())
+                .email(entity.getEmail())
+                .market_id(entity.getMarketId())
+                .image_id(entity.getImageId())
+                .confirm_yn(entity.getConfirmYn())
+                .regdt(entity.getRegDate())
+                .images_ids(imgIds)
                 .roleSet(entity.getRoleSet().stream()
                         .map(role->role.name()).collect(Collectors.toList())).build();
         return dto;

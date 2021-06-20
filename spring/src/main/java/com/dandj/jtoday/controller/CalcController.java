@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/calc")
 @RequiredArgsConstructor
 public class CalcController {
-    @GetMapping({"/gold", "etc"})
+    @GetMapping({"/gold", "/etc"})
     public void View(){
     }
 }

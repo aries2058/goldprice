@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+        <link th:href="@{/css/market/list.css}" rel="stylesheet">
+        <input type="hidden" id="typ" th:value="${param.typ}" />
+
+        <div class="fixed-top top-bar border-bottom">
+            <a class="position-absolute" id="btn-back"><img th:src="@{/images/icon_back.svg}" /></a>
+            <span class="title after">내 정보 변경</span>
+            <div class="btn-nav-area scroll-x">
+                <a class="btn-nav"><span>순금</span></a>
+                <a class="btn-nav"><span>웨딩</span></a>
+                <a class="btn-nav"><span>패션</span></a>
+                <a class="btn-nav"><span>귀걸이</span></a>
+                <a class="btn-nav"><span>체인</span></a>
+                <a class="btn-nav"><span>커플링</span></a>
+                <a class="btn-nav"><span>진주,유색</span></a>
+                <a class="btn-nav"><span>레이져각인,땜</span></a>
+                <a class="btn-nav"><span>도금</span></a>
+            </div>
+        </div>
+
+        <script th:src="@{/js/market/listByItem.js}"></script>
+    </th:block>
+</th:block>
