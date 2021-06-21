@@ -53,7 +53,7 @@ $(document).on('click', '.btn-confirm', function (){
         url: _host + '/auth/confirmMember',
         data: {userid: userid, confirm: 'Y'},
         success: function(){
-            alert('승인 처리하였습니다.')
+            modal.alert('승인 처리하였습니다.')
             location.reload();
         }
     })

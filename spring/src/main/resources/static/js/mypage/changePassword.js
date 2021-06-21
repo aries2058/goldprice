@@ -24,7 +24,7 @@ $(function (){
                 userid : _user.user_id,
                 password: $('#password').val()
             }, success : function(res){
-                alert("변경했습니다.")
+                modal.alert("변경했습니다.")
             }
         })
     })

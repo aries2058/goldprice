@@ -163,3 +163,36 @@ function itemtyp(items){
     })
     return ret;
 }
+
+let modal = {
+    alert : function (msg){
+        $('.modal-alert .modal-body').html(msg)
+        $('.back, .modal-alert').show();
+    },
+
+    confirm : function (msg, trueCallback, falseCallback){
+        $('.modal-confirm .modal-body').html(msg)
+        $('.back, .modal-confirm').show();
+
+        $('.btn-confirm-yes').off('click');
+        $('.btn-confirm-yes').on('click', function (){
+            trueCallback();
+            $('.modal').hide()
+            $('.back').hide()
+        });
+
+        if(falseCallback != null){
+            $('.btn-confirm-no').off('click');
+            $('.btn-confirm-no').on('click', function (){
+                falseCallback();
+                $('.modal').hide()
+                $('.back').hide()
+            });
+        }
+    }
+}
+
+$(document).on('click', '.btn-alert-ok, .modal .close', function (){
+    $('.modal').hide()
+    $('.back').hide()
+});

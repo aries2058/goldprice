@@ -65,6 +65,15 @@ input[type=text]:focus, input[type=number]:focus, input[type=password]:focus, in
     border-color: #6CD1CB !important;
 }
 
+.modal-alert, .modal-confirm {
+    border-right: 16px;
+    z-index: 10000;
+}
+.modal-footer{
+    margin-top: 12px;
+    justify-content: center
+}
+
 
 
 /* ========= top-bar, side-bar, bottom-bar ========= */

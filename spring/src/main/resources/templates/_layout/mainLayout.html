@@ -16,7 +16,6 @@
     <th:block th:replace="${content}"></th:block>
     <div class="bottom-empty" style="height: 160px;">&nbsp;</div>
 
-    <div class="back"></div>
     <div class="container-fluid sidebar">
         <div class="pt-2 pb-2 text-end">
             <a class="btn btn-close-sidebar"><img th:src="@{/images/btn_close.svg}" /></a>
@@ -40,7 +39,7 @@
     </div>
 
     <div th:replace="/_layout/_footer.html :: fragment-footer"></div>
-
+    <div th:replace="/_layout/_modal.html :: fragment-modal"></div>
     </body>
 </th:block>
 </html>

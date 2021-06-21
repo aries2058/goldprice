@@ -274,7 +274,7 @@ let register = function(image_id, values){
                 success: function (){
                     _user.image_id = image_id;
                     _user.market_id = market_id;
-                    alert('등록되었습니다.')
+                    modal.alert('등록되었습니다.')
                 }
             })
         }

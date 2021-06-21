@@ -14,7 +14,7 @@ $(function () {
 
     $('#btn-reply').click(function (){
         if($('#text-comment').val() == ''){
-            alert('내용을 입력하세요.')
+            modal.alert('내용을 입력하세요.')
         }else{
             $.ajax({
                 type: 'post',

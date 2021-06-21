@@ -1,9 +1,9 @@
 $(function(){
     $('#btn-findid').click(function(){
         if($('#email').val() == ''){
-            alert('이메일주소를 입력하세요.')
+            modal.alert('이메일주소를 입력하세요.')
         }else if($('#mobile').val() == ''){
-            alert('핸드폰번호를 입력하세요.')
+            modal.alert('핸드폰번호를 입력하세요.')
         }else{
             $.ajax({
                 type: 'post',
@@ -31,7 +31,7 @@ $(function(){
                             }
                         })
                     }else{
-                        alert("정보가 일치하는 계정이 없습니다.")
+                        modal.alert("정보가 일치하는 계정이 없습니다.")
                     }
                 }
             })

@@ -94,17 +94,17 @@ $(function(){
     })
 
     $('#btn-submit').click(function (){
-        if(confirm('등록하시겠습니까?')){
+        modal.confirm('등록하시겠습니까?', function (){
             $.ajax({
                 type:'post',
                 url: _host + '/board/register',
                 data: $('#frm').serialize(),
                 success: function (res){
-                    alert('등록하였습니다.');
+                    modal.alert('등록하였습니다.');
                     $('.qnatab div').eq(1).click();
                 }
             })
-        }
+        })
     })
 })
 

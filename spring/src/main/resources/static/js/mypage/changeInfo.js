@@ -22,7 +22,7 @@ $(function (){
                 _user.email = $('#email').val();
                 let info = _user;
                 localStorage.setItem('profile', JSON.stringify(info))
-                alert("변경했습니다.")
+                modal.alert("변경했습니다.")
             }
         })
     })

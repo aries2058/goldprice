@@ -50,7 +50,7 @@ $(function(){
                 }
             })
         }else{
-            alert('사업자등록번호가 아닙니다.')
+            modal.alert('사업자등록번호가 아닙니다.')
         }
     })
 
@@ -67,15 +67,15 @@ $(function(){
                 },
                 success: function(res){
                     if(res.user_id != null){
-                        alert('중복 된 아이디입니다.')
+                        modal.alert('중복 된 아이디입니다.')
                     }else {
-                        alert('사용하실 수 있는 아이디입니다.')
+                        modal.alert('사용하실 수 있는 아이디입니다.')
                         $('#check-userid').val('Y');
                     }
                 }
             })
         }else{
-            alert('아이디를 입력하세요.')
+            modal.alert('아이디를 입력하세요.')
         }
     })
 
@@ -199,21 +199,21 @@ function goStep2(){
 }
 function goStep3(){
     if($('#biz_nm').val() == ''){
-        alert('사업장 이름을 입력하세요.')
+        modal.alert('사업장 이름을 입력하세요.')
     }else if($('#user_nm').val() == ''){
-        alert('사용자 이름을 입력하세요.')
+        modal.alert('사용자 이름을 입력하세요.')
     }else if($('#tel').val() == ''){
-        alert('사업장 전화번호를 입력하세요.')
+        modal.alert('사업장 전화번호를 입력하세요.')
     }else if($('#email').val() == ''){
-        alert('이메일주소를 입력하세요.')
+        modal.alert('이메일주소를 입력하세요.')
     }else if($('#tel').val().length < 8){
-        alert('사업장 전화번호를 다시 확인하세요.')
+        modal.alert('사업장 전화번호를 다시 확인하세요.')
     }else if($('#update_yn').val() == 'N' && $('#img1').val() == ''){
-        alert('사업자등록증을 입력하세요.')
+        modal.alert('사업자등록증을 입력하세요.')
     }else if($('#update_yn').val() == 'N' && $('div.biz').hasClass('on') && $('#img2').val() == ''){
-        alert('매장사진을 입력하세요')
+        modal.alert('매장사진을 입력하세요')
     }else if($('#update_yn').val() == 'N' && $('div.other').hasClass('on') && $('#img3').val() == ''){
-        alert('명함사진을 입력하세요')
+        modal.alert('명함사진을 입력하세요')
     }else{
         $('.step.on').removeClass('on')
         $('#step3').addClass('on')
@@ -221,9 +221,9 @@ function goStep3(){
 }
 function goStep4(){
     if($('#update_yn').val() == 'N' && $('#check-userid').val() != 'Y'){
-        alert('아이디 중복확인을 하세요.');
+        modal.alert('아이디 중복확인을 하세요.');
     }else if($('#password').val() == '' ||  $('#msg-password').html() != ''){
-        alert('비밀번호를 입력하세요.')
+        modal.alert('비밀번호를 입력하세요.')
     }else{
         var prms = [];
         var p = null;
