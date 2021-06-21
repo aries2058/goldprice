@@ -253,7 +253,7 @@ function goStep4(){
                 data: $('#form').serialize(),
                 type: 'post',
                 success: function(res){
-                    console.log(res)
+                    $('.top-bar').hide();
                     $('.step.on').removeClass('on')
                     $('#step4').addClass('on')
                 }

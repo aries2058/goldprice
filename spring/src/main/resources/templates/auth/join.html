@@ -15,7 +15,7 @@
         <form id="form">
             <input type="hidden" id="update_yn" value="<%= userid == null ? 'N': 'Y'%>" />
 
-            <div class="container-fluid step on" id="step0">
+            <div class="container-fluid step" id="step0">
                 <h2 class="text-gold">사업자번호</h2>
                 <input type="number" class="form-control border" id="biz_no" name="biz_no" value="1283809049" placeholder="'-' 기호 제외" />
                 <a class="btn w-100 btn-gold text-white fw-light" id="btn-check-bizno">입력</a>
@@ -132,9 +132,10 @@
                 <a class="btn w-100 btn-gold text-white fw-light" id="btn-submit" onclick="goStep4();">가입신청</a>
             </div>
 
-            <div class="container-fluid mt-3 step" id="step4">
+            <div class="container-fluid text-center step on" style="margin-top:110px" id="step4">
+                <img th:src="@{/images/icon_bigchk.svg}" />
                 <h2 class="text-gold">가입 신청 완료</h2>
-                <div class="text-center" style="font-size: 20px; margin-top:64px">
+                <div class="text-center" style="font-size: 20px; margin-top:64px; color:#3B3B3B;">
                     가입 신청이 완료되었습니다.<br />
                     가입 승인까지 <b>최대 1일</b> 소요되며<br />
                     승인 완료 시 문자가 전송됩니다.
