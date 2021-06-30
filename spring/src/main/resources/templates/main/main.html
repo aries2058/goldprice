@@ -7,35 +7,32 @@
         <script th:src="@{/js/main.js}"></script>
 
         <div class="container-fluid">
-            <div class="text-center top-area-tit">
+            <div class="top-area-tit">
                 오늘 종로의<br />
-                <span class="text-yellow">금 판매 시세</span>는?
+                <span class="fw-bolder">금 판매 시세</span>는?
             </div>
-            <div class="text-center top-area-date">
-                업데이트 2021.06.02 15:58:11
+            <div class="top-area-date">
+                 <span class="update-dt"></span>
             </div>
         </div>
         <div class="container-fluid">
             <div class="price-area d-flex">
                 <div class="tit tit1">
-                    <img class="chk" th:src="@{/images/left_check1.svg}" />
-                    부가세<br />별도판매
+                    # 부가세 별도
                 </div>
                 <div class="flex-grow-1 price"><span class="vat"></span><span class="unit">원/돈</span></div>
                 <div class="calc"><img th:src="@{/images/btn_calc_icon1.svg}" /></div>
             </div>
             <div class="price-area d-flex justify-content-between">
                 <div class="tit tit2">
-                    <img class="chk" th:src="@{/images/left_check2.svg}" />
-                    부가세<br />포함판매
+                    # 부가세 포함
                 </div>
                 <div class="flex-grow-1 price"><span class="ivat"></span><span class="unit">원/돈</span></div>
                 <div class="calc"><img th:src="@{/images/btn_calc_icon2.svg}" /></div>
             </div>
             <div class="price-area d-flex justify-content-between">
                 <div class="tit tit3">
-                    <img class="chk" th:src="@{/images/left_check3.svg}" />
-                    종로<br />평균판매
+                    # 종로 평균
                 </div>
                 <div class="flex-grow-1 price"><span class="sell"></span><span class="unit">원/돈</span></div>
                 <div class="calc"><img th:src="@{/images/btn_calc_icon3.svg}" /></div>
@@ -46,7 +43,7 @@
                 <small class="msg">* 평균시세입니다. 금액은 변동될 수 있습니다.</small>
             </div>
         </div>
-        <div class="container-fluid ps-4 pe-4">
+        <div class="container-fluid ps-4 pe-4 main-bg-dark">
             <div class="row">
                 <div class="col-3 p-0 text-center">
                     <a><img th:src="@{/images/btn_price1.svg}" /></a></a></div>
@@ -59,27 +56,15 @@
             </div>
         </div>
         <div class="container-fluid main-btn-area">
-            <div class="row">
-                <div class="col-9 pe-3">
-                    <a class="w-100 btn-left" th:href="@{/calc/gold}">
-                        <p style="margin-bottom:6px; color:#868686; font-size: 12px">중량 얼마? 공임 얼마?</p>
-                        <p style="margin-bottom:4px; color:#3B3B3B; font-size: 16px; font-weight: bold;">계산기 두드리고 하는 실수,</p>
-                        <p style="margin-bottom:16px; color:#3B3B3B; font-size: 16px; font-weight: bold;">제품 소싱할 때
-                            <span style="color:#11AE99; font-size: 16px; font-weight: bold; text-decoration: underline">간단 계산법</span></p>
-                        <p>
-                            <img style="margin-top:38px" class="float-start" th:src="@{/images/icon_calc_sm.svg}" />
-                            <img class="float-end" th:src="@{/images/icon_calc.svg}" />
-                        </p>
-                    </a>
-                </div>
-                <div class="col-3 ps-0">
-                    <a class="w-100 btn-right" th:href="@{/market/map}">
-                        <img th:src="@{/images/icon_map.svg}" />
-                        <span>종로 지도</span>
-                    </a>
-                    <a th:href="@{/calc/etc}" class="w-100 btn-right btn-gold-dark text-white">잡금교환<br />계산기</a>
-                </div>
+            <div class="row gx-2">
+                <div class="col-12 pt-3">
+                    <a th:href="@{/calc/gold}" class="w-100"><img class="w-100" th:src="@{/images/btn_main_bigcalc.svg}" /></a></div>
+                <div class="col-6 pt-3">
+                    <a th:href="@{/calc/etc}" class="w-100"><img class="w-100" th:src="@{/images/btn_main_subcalc.svg}" /></a></div>
+                <div class="col-6 pt-3">
+                    <a th:href="@{/market/map}" class="w-100"><img class="w-100" th:src="@{/images/btn_main_map.svg}" /></a></div>
             </div>
+
         </div>
 
         <div class="container-fluid market-area mt-5">

@@ -22,7 +22,7 @@ $(function(){
 
     $('.btn-send').click(function() {
         $.ajax({
-            url: _host + '/push/send',
+            url: _host + '/func/sendPush',
             data: { message: "teawradfasdfasdfasdfasdf"},
             success: function(res){
                 console.log(res)

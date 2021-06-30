@@ -3,6 +3,7 @@ package com.dandj.jtoday.controller;
 import com.dandj.jtoday.dto.comm.MailDto;
 import com.dandj.jtoday.service.func.ImageService;
 import com.dandj.jtoday.service.func.MailService;
+import com.dandj.jtoday.service.func.PushService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
@@ -25,6 +26,7 @@ import java.util.List;
 public class FuncController {
     private final MailService mailService;
     private final ImageService imageService;
+    private final PushService pushService;
 
     @PostMapping("/mail")
     public ResponseEntity<String> execMail(MailDto mailDto) {
@@ -46,8 +48,24 @@ public class FuncController {
         List<Long> ret = imageService.uploadImageFiles(uploadFiles);
         return  new ResponseEntity<>(ret, HttpStatus.OK);
     }
+
     @PostMapping("/uploadImage")
     public ResponseEntity<Long> uploadImage(String imageString) throws SQLException {
         return new ResponseEntity<>(imageService.uploadImage(imageString), HttpStatus.OK) ;
+    }
+
+    @PostMapping(value="/setPushToken")
+    public ResponseEntity<Long> register(Long uuid, String token, String typ, String pushYn, Long id){
+        if(pushYn.equals("Y")){
+            return new ResponseEntity<>(pushService.register(token, typ, uuid, id), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(pushService.ignorePush(token, typ, uuid, id), HttpStatus.OK);
+        }
+    }
+
+    @PostMapping(value="/sendPush")
+    public ResponseEntity<String> sendPush(){
+        pushService.send("");
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 }

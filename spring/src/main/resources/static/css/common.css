@@ -40,13 +40,13 @@ input[type=number]:focus,
     background: #0DAE99 !important;
 }
 .border-gold{
-    border-color:#6CD1CB !important;
+    border-color:#36BEBF !important;
 }
 .text-gold{
-    color:#6CD1CB !important
+    color:#36BEBF !important
 }
 .btn-gold{
-    background: #6CD1CB !important;
+    background: #36BEBF !important;
 }
 
 .btn.fw-light.w-100{
@@ -58,11 +58,11 @@ input[type=text], input[type=number], input[type=password], input[type=email], t
     padding:12px 20px;
     font-size: 16px;
     border:1px; 
-    border-color: #d9d9d9 !important;
+    border-color: #DAD9D9 !important;
 }
 
 input[type=text]:focus, input[type=number]:focus, input[type=password]:focus, input[type=email]:focus, textarea:focus{
-    border-color: #6CD1CB !important;
+    border-color: #36BEBF !important;
 }
 
 .modal-alert, .modal-confirm {
@@ -79,15 +79,16 @@ input[type=text]:focus, input[type=number]:focus, input[type=password]:focus, in
 /* ========= top-bar, side-bar, bottom-bar ========= */
 
 .bg-top{
-    background: url('../images/bg.png') no-repeat;
-    background-size: cover;
+    background: #36BEBF;
     z-index: -1;
 }
 .top-bar{
     z-index: 9997;
-    background: url('../images/topback.svg') no-repeat;
-    background-size: cover;
+    background: #36BEBF;
     padding:12px 20px
+}
+.top-bar .logo{
+    width:102px
 }
 .top-bar .title.after
 {
@@ -137,6 +138,7 @@ input[type=text]:focus, input[type=number]:focus, input[type=password]:focus, in
     padding: 6px 0px 6px;
     display: block;
     width: 100%;
+    color:#000
 }
 .sidebar .list-group li a img{
     margin-right:6px;
@@ -166,9 +168,10 @@ input[type=text]:focus, input[type=number]:focus, input[type=password]:focus, in
 h2{
     font-size: 34px;
     text-align: center;
-    font-weight: lighter;
     margin-bottom: 32px;
     margin-top:12px;
+    font-weight: normal;
+    line-height: 56px;
 }
 .btn.fw-light.w-100{
     margin-top:20px;
@@ -193,4 +196,20 @@ h2{
 
 #menu-admin{
     display: none;
+}
+
+.tab div{
+    color:#868686;
+    border-bottom:2px solid #ECECEC;
+    font-width: bold;
+}
+.tab div a{
+    text-decoration: none;
+    color:#868686
+}
+.tab div.on{
+    border-color:#6CD1CB;
+}
+.tab div.on a{
+    color:#6CD1CB;
 }

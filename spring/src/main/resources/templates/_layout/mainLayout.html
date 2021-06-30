@@ -6,9 +6,9 @@
         <div th:replace="/_layout/_header.html :: fragment-header"></div>
     </head>
     <body>
-    <div class="fixed-top top-bar d-flex justify-content-between">
-        <a th:href="@{/main/main}"><img th:src="@{/images/logo.svg}" /></a>
-        <a class="btn-open-sidebar"><img th:src="@{/images/top_menu.svg}" /></a>
+    <div class="fixed-top top-bar text-center">
+        <a th:href="@{/main/main}"><img class="logo" th:src="@{/images/logo.svg}" /></a>
+        <a class="btn-open-sidebar position-absolute end-0 me-3"><img th:src="@{/images/top_menu.svg}" /></a>
     </div>
     <div class="bg-top position-absolute w-100 top-0"></div>
 
@@ -22,18 +22,19 @@
             <div class="userinfo" id="btn-update-userinfo">
                 <a id="btn-main-photo"></a>
                 <div><span>&nbsp;&nbsp;</span> <span class="biznm"></span> <img th:src="@{/images/arrow-right.svg}" style="margin-top:-4px" /></div>
+                <span class="usernm" style="color:#7A7A7A"></span>
             </div>
         </div>
         <ul class="list-group list-group-flush border-top">
-            <li class="list-group-item pb-3 border-0"><a class="text-dark" th:href="@{/mypage/list}">
+            <li class="list-group-item pb-2 border-0"><a th:href="@{/mypage/list}">
                 <img th:src="@{/images/icon_mypage.svg}" /> 내 정보 변경</a></li>
-            <li class="list-group-item pb-3 border-0"><a class="text-dark" th:href="@{/board/qna}">
+            <li class="list-group-item pb-2 border-0"><a th:href="@{/board/qna}">
                 <img th:src="@{/images/icon_qna.svg}" /> 문의하기</a></li>
-            <li class="list-group-item pb-3 border-0"><a class="text-dark" th:href="@{/mypage/chat}">
+            <li class="list-group-item pb-2 border-0"><a th:href="@{/mypage/chat}">
                 <img th:src="@{/images/icon_help.svg}" /> 도움말</a></li>
-            <li class="list-group-item pb-3 border-0"><a class="text-dark" th:href="@{/auth/login}">
+            <li class="list-group-item pb-2 border-0"><a th:href="@{/auth/login}">
                 <img th:src="@{/images/icon_logout.svg}" /> 로그아웃</a></li>
-            <li class="list-group-item pb-3 border-0"><a class="text-dark" id="menu-admin" th:href="@{/admin/qna}">
+            <li class="list-group-item pb-2 border-0" style="margin-top:5px"><a id="menu-admin" th:href="@{/admin/qna}">
                 <img th:src="@{/images/icon_admin.svg}" /> 관리자</a></li>
         </ul>
     </div>

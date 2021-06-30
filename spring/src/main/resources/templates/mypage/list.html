@@ -24,14 +24,14 @@
                 <li class="list-group-item p-3">
                     푸시알림 허용
                     <div class="form-check form-switch float-end">
-                        <input class="form-check-input gold" type="checkbox" id="flexSwitchCheckDefault">
+                        <input class="form-check-input gold" type="checkbox" id="chk-push">
                     </div>
                 </li>
-                <li class="list-group-item p-3" data-link="/mypage/changeInfo">
+                <li class="list-group-item link p-3" data-link="/mypage/changeInfo">
                     개인정보 변경
                     <img class="float-end m-2" th:src="@{/images/arrow-right.svg}" />
                 </li>
-                <li class="list-group-item p-3" data-link="/mypage/changePassword">
+                <li class="list-group-item link p-3" data-link="/mypage/changePassword">
                     비밀번호 변경
                     <img class="float-end m-2" th:src="@{/images/arrow-right.svg}" />
                 </li>
@@ -40,11 +40,45 @@
 
         <script>
             $(function (){
-                $('.list-group-item').click(function (){
+                $('.list-group-item.link').click(function (){
                     location.href = _host + $(this).data('link')
                 })
                 $('#btn-close').click(function (){
                     window.history.back();
+                })
+                let push = getPush();
+                if(push.push_yn == 'Y'){
+                    $('#chk-push').prop('checked', true)
+                }else{
+                    $('#chk-push').prop('checked', false)
+                }
+
+                $('#chk-push').change(function (){
+                    if($(this).is(':checked')){
+                        push.push_yn = 'Y'
+                        $.ajax({
+                            type: 'post',
+                            url: _host + '/func/setPushToken',
+                            data: push,
+                            success: function (res){
+                                console.log(res)
+                                alert("푸시허용처리됨!")
+                                setPush(push)
+                            }
+                        })
+                    }else{
+                        push.push_yn = 'N'
+                        $.ajax({
+                            type: 'post',
+                            url: _host + '/func/setPushToken',
+                            data: push,
+                            success: function (res){
+                                console.log(res)
+                                alert("푸시거절처리됨!")
+                                setPush(push)
+                            }
+                        })
+                    }
                 })
             })
         </script>

@@ -225,8 +225,8 @@ function goStep4(){
     }else if($('#password').val() == '' ||  $('#msg-password').html() != ''){
         modal.alert('비밀번호를 입력하세요.')
     }else{
-        var prms = [];
-        var p = null;
+        let prms = [];
+        let p = null;
         if($('#dispImg1').attr('src') != null){
             p = new Promise(function(resolve, reject){
                 uploadImage($('#dispImg1').attr('src'), resolve)

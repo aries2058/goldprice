@@ -28,8 +28,8 @@ $(function (){
                     })
                 }
 
-
                 if(res.image_id != null){
+
                     $.ajax({
                         url: _host + '/func/getImage',
                         data: {id: res.image_id},
@@ -40,20 +40,38 @@ $(function (){
                 }
 
                 if(res.image_ids != null && res.image_ids.length > 0){
+                    let prms = [];
+                    let p = null;
                     _.each(res.image_ids, function(v){
-                        $.ajax({
-                            url: _host + '/func/getImage',
-                            data: {id: v},
-                            success: function (res){
-                                let tmp = _.template($('#tmpl-added-photos').html());
-                                $('.added-photos').append(tmp({data: res}))
-                                $('.photo').height($('.photo').width())
-                            }
+                        p = new Promise(function(resolve, reject){
+                            $.ajax({
+                                url: _host + '/func/getImage',
+                                data: {id: v},
+                                success: function (res){
+                                    let tmp = _.template($('#tmpl-added-photos').html());
+                                    $('.added-photos').append(tmp({data: res, flag: true}))
+                                    $('.photo>div').height($('.photo>div').width())
+                                    resolve(res)
+                                }
+                            })
                         })
+                        prms.push(p)
                     })
+
+                    Promise.all(prms).then(function(values){
+                        if($('.photo').length < 3){
+                            dispPhotoAddButton()
+                        }
+                    })
+                }
+                else{
+                    dispPhotoAddButton()
                 }
             }
         })
+    }
+    else {
+        dispPhotoAddButton()
     }
 
     $('.market_typ').change(function (){
@@ -81,20 +99,28 @@ $(function (){
     $('#btn-main-photo').click(function (){
         $('#file-main-photo').click()
     })
-    $('#btn-add-photo').click(function (){
-        $('#file-photo').click();
-    })
 
     $('#file-photo').change(function(){
-        _flag_photos = true;
         let obj = $('#file-photo')[0];
-        _.each(obj.files, function(v, i){
-            converterImage(v, function (dataURL){
+        if(obj.files.length > 0){
+            _flag_photos = true;
+            let tmp = _.template($('#tmpl-added-photos').html());
+            if(obj.files.length > 3){
+                modal.alert('이미지파일은 최대 3장까지 등록 가능합니다.')
+            }else{
+                $('#btn-add-photo').parents('.photo').remove()
                 let tmp = _.template($('#tmpl-added-photos').html());
-                $('.added-photos').append(tmp({data: dataURL}))
-                $('.photo').height($('.photo').width())
-            })
-        })
+                _.each(obj.files, function(v, i){
+                    converterImage(v, function (dataURL){
+                        $('.added-photos').append(tmp({data: dataURL, flag: true}))
+                        $('.photo>div').height($('.photo>div').width())
+                        if(obj.files.length < 3 && $('.photo').length == obj.files.length){
+                            dispPhotoAddButton()
+                        }
+                    })
+                })
+            }
+        }
     })
     $('#file-main-photo').change(function (){
         _flag_main_photo = true;
@@ -130,9 +156,25 @@ $(function (){
     })
 })
 
-$(document).on('click', '.btn-del-photo', function (){
-    $(this).parent().remove();
+$(document).on('click', '#btn-add-photo', function (){
+    $('#file-photo').click();
 })
+$(document).on('click', '.btn-del-photo', function (){
+    _flag_photos = true;
+
+    $(this).parents('.photo').remove();
+
+    if($('.photo').length < 3){
+        dispPhotoAddButton()
+    }
+})
+
+function dispPhotoAddButton(){
+    $('#btn-add-photo').parents('.photo').remove()
+    let tmp = _.template($('#tmpl-added-photos').html());
+    $('.added-photos').append(tmp({data: _host + "/images/photo_add.svg", flag: false}))
+    $('.photo>div').height($('.photo>div').width())
+}
 
 function converterImage(file, callback){
     let reader = new FileReader();

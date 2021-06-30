@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // 로그인 필요없는 화면
         http.authorizeRequests()
-                .antMatchers("/main/*").permitAll()
+                .antMatchers("/main/splash").permitAll()
                 .antMatchers("/auth/*").permitAll()
                 .antMatchers("/func/*").permitAll();
 

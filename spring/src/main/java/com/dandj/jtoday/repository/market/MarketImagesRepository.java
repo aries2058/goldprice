@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface MarketImagesRepository extends JpaRepository<MarketImages, Long> {
     Optional<List<MarketImages>> findMarketImagesByMarketId(Long id);
+
 }

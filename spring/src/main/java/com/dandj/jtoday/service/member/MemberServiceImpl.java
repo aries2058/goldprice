@@ -1,8 +1,10 @@
 package com.dandj.jtoday.service.member;
 
 import com.dandj.jtoday.dto.member.MemberDto;
+import com.dandj.jtoday.entity.comm.PushToken;
 import com.dandj.jtoday.entity.member.Member;
 import com.dandj.jtoday.entity.member.MemberImages;
+import com.dandj.jtoday.repository.comm.PushTokenRepository;
 import com.dandj.jtoday.repository.member.MemberImagesRepository;
 import com.dandj.jtoday.repository.member.MemberRepository;
 import com.dandj.jtoday.spec.MemberSpec;
@@ -25,6 +27,7 @@ public class MemberServiceImpl implements MemberService {
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
     private final MemberImagesRepository memberImagesRepository;
+    private final PushTokenRepository pushTokenRepository;
 
     @Override
     public List<MemberDto> getMemberListByBizNo(String bizNo) {
@@ -195,10 +198,5 @@ public class MemberServiceImpl implements MemberService {
             x.setConfirmYn(confirm);
             memberRepository.save(x);
         });
-    }
-
-    @Override
-    public String setPushToken(String userid, String token, String typ) {
-        return "";
     }
 }

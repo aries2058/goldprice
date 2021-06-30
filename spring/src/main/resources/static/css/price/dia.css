@@ -1,0 +1,10 @@
+.filter{
+    display: none;
+}
+.filter.on{
+    display: block;
+}
+
+.filter .btn.on{
+    background: #0DAE99;
+}

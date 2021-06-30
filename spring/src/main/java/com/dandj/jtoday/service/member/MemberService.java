@@ -1,12 +1,14 @@
 package com.dandj.jtoday.service.member;
 
 import com.dandj.jtoday.dto.member.MemberDto;
+import com.dandj.jtoday.entity.comm.PushToken;
 import com.dandj.jtoday.entity.member.Member;
 import com.dandj.jtoday.entity.member.MemberRole;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public interface MemberService {
@@ -21,7 +23,6 @@ public interface MemberService {
     void updatePassword(String userid, String password);
     String findId(String email, String mobile);
     void confirmMember(String userid, String confirm);
-    String setPushToken(String userid, String token, String typ);
 
 
     default Member dtoToEntity(MemberDto memberDto , String enPw){
@@ -59,6 +60,7 @@ public interface MemberService {
                 .image_id(entity.getImageId())
                 .confirm_yn(entity.getConfirmYn())
                 .regdt(entity.getRegDate())
+                .uuid(entity.getUuid())
                 .roleSet(entity.getRoleSet().stream()
                         .map(role->role.name()).collect(Collectors.toList())).build();
         return dto;
@@ -76,6 +78,7 @@ public interface MemberService {
                 .market_id(entity.getMarketId())
                 .image_id(entity.getImageId())
                 .token(token)
+                .uuid(entity.getUuid())
                 .confirm_yn(entity.getConfirmYn())
                 .roleSet(entity.getRoleSet().stream()
                         .map(role->role.name()).collect(Collectors.toList())).build();

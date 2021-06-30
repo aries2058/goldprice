@@ -10,18 +10,34 @@ $(function(){
 
     $('input[type=checkbox]').change(function(){
         let p = $(this).parents('.lb-checkbox')
-        if($(this).is(':checked')){
-            $('img', p).attr('src', $('img', p).attr('src').replace('off', 'on'));
-        }else{
-            $('img', p).attr('src', $('img', p).attr('src').replace('on', 'off'));
+        if(p.length > 0){
+            if($(this).is(':checked')){
+                $('img', p).attr('src', $('img', p).attr('src').replace('off', 'on'));
+            }else{
+                $('img', p).attr('src', $('img', p).attr('src').replace('on', 'off'));
+            }
         }
     })
 })
+
+function pushToken(token, typ){
+    alert(token)
+    setPush({token: token, typ: typ, uuid: _user.uuid})
+}
+
+function getPush(){
+    return JSON.parse(localStorage.getItem('push'))
+}
+function setPush(push){
+    localStorage.setItem('push', JSON.stringify(push))
+}
+
 
 
 function dispSidebar(){
     $('.sidebar, .back').height($(window).height())
     $('.btn-open-sidebar').on('click', ()=>{
+        $('.usernm').text(_user.user_nm + " 님")
         $('.biznm').text(_user.biz_nm)
         $('.back').show();
         $('.sidebar').animate({

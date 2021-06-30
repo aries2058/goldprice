@@ -82,7 +82,7 @@
                     <input type="hidden" id="lat" name="lat" />
                     <input type="hidden" id="lng" name="lng" />
 
-                    <label>업체소개</label>
+                    <label>매장 소개</label>
                 </div>
             </div>
             <div class="edit-mode text-end"><a class="btn" id="btn-ok">완료</a></div>
@@ -90,23 +90,30 @@
         </div>
         <div class="container-fluid">
             <div class="col-12"><label>매장사진</label></div>
-            <a class="btn btn-gold" id="btn-add-photo">추가</a>
             <input type="file" id="file-photo" multiple accept="image/*;capture=camera" style="display: none" />
 
-            <div class="added-photos row"></div>
+            <div class="added-photos row gx-2">
+            </div>
+            <p><small class="text-gold">* 이미지파일은 최대 3장까지 등록 가능합니다.</small></p>
             <script type="text/template" id="tmpl-added-photos">
-                <div class="photo col-3" style="background-image: url(<%- data %>)">
-                    <a class="btn-del-photo">삭제</a>
-                    <input type="hidden" class="hid-photo" value="<%- data %>" />
+                <div class="photo col-4">
+                    <% if(flag){%>
+                    <div class="rounded" style="background-image: url(<%- data %>)">
+                        <a class="btn-del-photo float-end"><img th:src="@{/images/photo_close.svg}"></a>
+                        <input type="hidden" class="hid-photo" value="<%- data %>" />
+                    </div>
+                    <%}else{%>
+                    <div id="btn-add-photo" class="rounded" style="background-image: url(<%- data %>)"></div>
+                    <%}%>
                 </div>
             </script>
         </div>
 
         <div class="container-fluid">
-            <div th:if="${!param.id.toString().isEmpty()}" class="text-end">
-                <small>최초등록일자: <span id="regdt"></span></small><br />
-                <small>마지막수정일: <span id="moddt"></span></small>
-            </div>
+<!--            <div th:if="${!param.id.toString().isEmpty()}" class="text-end">-->
+<!--                <small>최초등록일자: <span id="regdt"></span></small><br />-->
+<!--                <small>마지막수정일: <span id="moddt"></span></small>-->
+<!--            </div>-->
 
             <a class="btn w-100 btn-gold text-white fw-light" id="btn-register">등록</a>
         </div>

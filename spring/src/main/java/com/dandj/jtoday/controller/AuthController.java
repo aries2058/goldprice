@@ -63,11 +63,6 @@ public class AuthController {
     public ResponseEntity<MemberDto> login(String userid, String pw){
         return new ResponseEntity<>(service.checkMember(userid, pw), HttpStatus.OK);
     }
-
-    @PostMapping(value = "/setPushToken")
-    public ResponseEntity<String> setPushToken(String userid, String token, String typ){
-        return new ResponseEntity<>(service.setPushToken(userid, token, typ), HttpStatus.OK);
-    }
     @PostMapping(value = "findIdPw")
     public ResponseEntity<String> findIdPw(String email, String mobile){
         return new ResponseEntity<>(service.findId(email, mobile), HttpStatus.OK) ;

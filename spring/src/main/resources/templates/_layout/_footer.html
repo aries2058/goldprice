@@ -8,8 +8,8 @@
             <img th:if="${!#httpServletRequest.requestURI.contains('main')}" th:src="@{/images/menu01_off.svg}" />
         </a>
         <a th:href="@{/board/list?typ=01}" class="btn-menu">
-            <img th:if="${#httpServletRequest.requestURI.contains('board')&&#httpServletRequest.requestURI.contains('typ=01')}" th:src="@{/images/menu02_on.svg}" />
-            <img th:if="${!(#httpServletRequest.requestURI.contains('board')&&#httpServletRequest.requestURI.contains('typ=01'))}" th:src="@{/images/menu02_off.svg}" />
+            <img th:if="${#httpServletRequest.requestURI.contains('board')}" th:src="@{/images/menu02_on.svg}" />
+            <img th:if="${!(#httpServletRequest.requestURI.contains('board'))}" th:src="@{/images/menu02_off.svg}" />
         </a>
         <a th:href="@{/market/map}" class="btn-menu">
             <img th:if="${#httpServletRequest.requestURI.contains('map')}" th:src="@{/images/menu03_on.svg}" />
@@ -19,8 +19,9 @@
             <img th:if="${#httpServletRequest.requestURI.contains('calc')}" th:src="@{/images/menu04_on.svg}" />
             <img th:if="${!#httpServletRequest.requestURI.contains('calc')}" th:src="@{/images/menu04_off.svg}" />
         </a>
-        <a class="btn-menu">
-            <img th:src="@{/images/menu05_off.svg}" />
+        <a th:href="@{/price/gold}" class="btn-menu">
+            <img th:if="${#httpServletRequest.requestURI.contains('price')}" th:src="@{/images/menu05_on.svg}" />
+            <img th:if="${!#httpServletRequest.requestURI.contains('price')}" th:src="@{/images/menu05_off.svg}" />
         </a>
     </div>
 </div>

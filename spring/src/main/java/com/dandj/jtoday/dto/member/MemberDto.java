@@ -29,13 +29,11 @@ public class MemberDto {
     private String ipaddr;
     private String user_typ;
     private String token;
-    private String push_yn;
-    private String push_token;
-    private String push_typ;
     private Blob photo;
     private String login_msg;
     private List<Long> images_ids;
     private String str_images_ids;
+    private Long uuid;
     private LocalDateTime regdt;
 
     @Builder.Default
