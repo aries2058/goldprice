@@ -32,6 +32,18 @@ public class MarketDto {
     private String market_typ;
     private String item_typ;
 
+    private String link_kakao;
+    private String link_goldpen;
+    private String link_sns;
+    private String link_homepage;
+
+    private Double lat;
+    private Double lng;
+
+    private String hot_yn;
+
+    private String marketImage;
+
     @Builder.Default
     private List<Long> image_ids = new ArrayList<>();
 }

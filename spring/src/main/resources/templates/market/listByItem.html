@@ -1,15 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
+<th:block th:replace="~{/_layout/basicLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
-        <link th:href="@{/css/market/list.css}" rel="stylesheet">
+        <link th:href="@{/css/market/byitem.css}" rel="stylesheet">
         <input type="hidden" id="typ" th:value="${param.typ}" />
 
-        <div class="fixed-top top-bar border-bottom">
+        <div class="fixed-top top-bar">
             <a class="position-absolute" id="btn-back"><img th:src="@{/images/icon_back.svg}" /></a>
-            <span class="title after">내 정보 변경</span>
+            <span class="title">종로 도매 업체</span>
+            <div class="search-bar">
+                <input type="text" id="search-market" class="w-100" placeholder="업체명 또는 제품으로 검색하세요." />
+                <a class="position-absolute" id="btn-search"><img th:src="@{/images/icon_search.svg}" /></a>
+            </div>
+            <div id="hot-area" class="carousel slide pb-2" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                </div>
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#hot-area" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#hot-area" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#hot-area" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#hot-area" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#hot-area" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                </div>
+            </div>
             <div class="btn-nav-area scroll-x">
+                <a class="btn-nav"><span>전체</span></a>
                 <a class="btn-nav"><span>순금</span></a>
                 <a class="btn-nav"><span>웨딩</span></a>
                 <a class="btn-nav"><span>패션</span></a>
@@ -21,6 +37,69 @@
                 <a class="btn-nav"><span>도금</span></a>
             </div>
         </div>
+
+        <script id="tmpl-market-hot" type="template/text">
+            <% _.each(data, function(v, i){%>
+            <div class="carousel-item <%- i == 0 ? 'active' : ''%>">
+                <div class="market d-flex p-2" data-marketid="<%- v.id %>">
+                    <div class="photo flex-shrink-0 link-detail">
+                        <% if(v.image_id == ''){%>
+                        <img th:src="@{/images/photo_add.svg}" data-imageid="<%- v.image_id %>"  />
+                        <%}else{%>
+                        <a data-imageid="<%- v.image_id %>"></a>
+                        <%}%>
+                    </div>
+                    <div class="text-start ps-2 flex-grow-1">
+                        <p class="mb-1 link-detail"><%- v.market_nm %></p>
+                        <small class=" link-detail"><%- v.addr %> <%- v.addr_detail %></small>
+                        <div class="d-flex justify-content-start mt-2">
+                            <%if(v.link_homepage != null){%>
+                            <a href="<%- v.link_homepage %>"><img th:src="@{/images/icon_homepage.svg}"/></a>
+                            <%} if(v.link_goldpen != null){%>
+                            <a href="<%- v.link_goldpen %>"><img th:src="@{/images/icon_goldpen.svg}"/></a>
+                            <%} if(v.link_kakao != null){%>
+                            <a href="<%- v.link_kakao %>"><img th:src="@{/images/icon_kakao.svg}"/></a>
+                            <%} if(v.link_sns != null){%>
+                            <a href="<%- v.link_sns %>"><img th:src="@{/images/icon_sns.svg}"/></a>
+                            <%}%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%})%>
+        </script>
+
+        <div id="market-list"></div>
+
+        <script id="tmpl-market" type="template/text">
+            <% _.each(data, function(v, i){%>
+            <div class="market d-flex p-2" data-marketid="<%- v.id %>">
+                <div class="photo flex-shrink-0 link-detail">
+                    <% if(v.image_id == ''){%>
+                    <img th:src="@{/images/photo_add.svg}" data-imageid="<%- v.image_id %>"  />
+                    <%}else{%>
+                    <a data-imageid="<%- v.image_id %>"></a>
+                    <%}%>
+                </div>
+                <div class="text-start ps-2 flex-grow-1">
+                    <p class="mb-1 link-detail"><%- v.market_nm %></p>
+                    <small class=" link-detail"><%- v.addr %> <%- v.addr_detail %></small>
+                    <div class="d-flex justify-content-start mt-2">
+                        <%if(v.link_homepage != null){%>
+                        <a href="<%- v.link_homepage %>"><img th:src="@{/images/icon_homepage.svg}"/></a>
+                        <%} if(v.link_goldpen != null){%>
+                        <a href="<%- v.link_goldpen %>"><img th:src="@{/images/icon_goldpen.svg}"/></a>
+                        <%} if(v.link_kakao != null){%>
+                        <a href="<%- v.link_kakao %>"><img th:src="@{/images/icon_kakao.svg}"/></a>
+                        <%} if(v.link_sns != null){%>
+                        <a href="<%- v.link_sns %>"><img th:src="@{/images/icon_sns.svg}"/></a>
+                        <%}%>
+                    </div>
+                </div>
+            </div>
+            <%})%>
+        </script>
+
 
         <script th:src="@{/js/market/listByItem.js}"></script>
     </th:block>

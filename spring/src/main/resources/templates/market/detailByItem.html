@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+        <link th:href="@{/css/market/byitem.css}" rel="stylesheet">
+        <style>
+            .top-empty{ height: 63px !important}
+        </style>
+
+        <input type="hidden" th:value="${param.id}" id="market_id" />
+
+        <div class="fixed-top top-bar mb-0">
+            <a class="position-absolute" id="btn-back"><img th:src="@{/images/icon_back.svg}" /></a>
+            <span class="title"></span>
+        </div>
+
+        <div class="carousel slide pb-0" data-bs-ride="carousel" id="carousel-photo-area">
+            <div class="carousel-inner" id="photo-area">
+            </div>
+            <div>
+                <div id="photo-page" class="position-absolute start-50 translate-middle"></div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div id="contents" class="mt-4 mb-4"></div>
+            <div class="d-flex justify-content-center mt-3 mb-4" id="link-items"></div>
+        </div>
+        <div class="container-fluid p-1 border bg-light"></div>
+        <div class="container-fluid pt-4">
+            <label class="mt-2">기본정보</label>
+            <div id="map" class="mt-2"></div>
+            <div class="row mt-2">
+                <div class="col-2 pe-0"><label>주소</label></div>
+                <div class="col-10 ps-0"><span class="text-secondary" id="addr"></span></div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-2 pe-0"><label>전화</label></div>
+                <div class="col-10 ps-0"><span class="text-secondary" id="tel"></span></div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-2 pe-0"><label>상품</label></div>
+                <div class="col-10 ps-0"><span class="text-secondary" id="items"></span></div>
+            </div>
+        </div>
+        <script type="template/text" id="tmpl-photo">
+            <div class="carousel-item"
+                 style="background-image:url(<%- data %>)"></div>
+        </script>
+
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b014172c9c9d6ef867195084fe9b1c19&libraries=services"></script>
+        <script th:src="@{/js/market/detailByItem.js}"></script>
+    </th:block>
+</th:block>

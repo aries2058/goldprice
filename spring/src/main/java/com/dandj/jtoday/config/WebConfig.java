@@ -17,14 +17,10 @@ public class WebConfig implements WebMvcConfigurer {
         return builder.build();
     }
 
-    @Value("${app.upload.path}")
-    private String uploadPath;
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         registry
-                .addResourceHandler("/jtoday/**")
-                .addResourceLocations(uploadPath);
+                .addResourceHandler("/jtoday/**");
     }
 
     @Override

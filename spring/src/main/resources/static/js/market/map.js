@@ -23,10 +23,16 @@ $(function(){
     })
 
     $('#search-place').keyup(function(e){
+        if($(this).val()==""){
+            $('.search-area').removeClass('on')
+            $('#search-list').hide();
+        }
+
         if(e.keyCode == 13){
             let $p = $('#search-list .place').eq(0)
             ShowPlace($p.data('id'), $p.data('mid'))
         }else{
+            $('.search-area').addClass('on')
             let tmp = _.template($('#tmpl-search-list').html())
             $('#search-list').html(tmp({data : autoComplate()}))
             $('#search-list').show();

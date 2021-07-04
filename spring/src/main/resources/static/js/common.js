@@ -1,5 +1,5 @@
-var _host = '/jtoday'
-var _user = null;
+let _host = '/jtoday'
+let _user = null;
 
 $(function(){
     if(_user == null){
@@ -18,11 +18,24 @@ $(function(){
             }
         }
     })
+
+    if(window.android != undefined){
+        window.android.checkCameraPermission()
+        let push = getPush();
+        if(localStorage.getItem('push') == null){
+            window.android.getToken()
+        }
+    }
+
+    //테스트용 나중에 지워
+    // if(localStorage.getItem('push') == null){
+    //     setPush({token: 'eqbVsPG-QXmGwpPTuE09k3:APA91bExmZt1FbBADjvooWNUYo87PVC-bYda5ySDaDVCnMft_8pOHN9xDh2hwAlmL3QZKHKQDhtRmqKHVkEBRMDozWo1uW1oYOBwAuLoO4a_lnE3bVexMI_IJ9sykqjmuuf4IrwgMXFz', typ: 'fcm', uuid: null, id: null})
+    // }
 })
 
 function pushToken(token, typ){
     alert(token)
-    setPush({token: token, typ: typ, uuid: _user.uuid})
+    setPush({token: token, typ: typ, uuid: null, id: null})
 }
 
 function getPush(){
@@ -122,6 +135,9 @@ function uploadImage(imageString, resolve){
         success: function(res){
             console.log('uploadImage: ' + res)
             resolve(res)
+        },
+        error: function (a,b,c){
+            console.log(a,b,c)
         }
     })
 }

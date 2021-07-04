@@ -24,7 +24,7 @@ public class MarketController {
     private final MarketService marketService;
     private final MemberService memberService;
 
-    @GetMapping({"/listByItem", "/write", "/detail", "map", "list"})
+    @GetMapping({"/listByItem","/detailByItem", "/write", "/detail", "map", "list"})
     public void View(){
     }
 
@@ -52,5 +52,14 @@ public class MarketController {
     @GetMapping("/getMarketList")
     public ResponseEntity<List<MarketDto>> getMarketList(Long mapid){
         return new ResponseEntity<>(marketService.getMarketList(mapid), HttpStatus.OK);
+    }
+
+    @GetMapping("/getMarketListByItem")
+    public ResponseEntity<List<MarketDto>> getMarketList(String searchVal, int sttPage, int perPage){
+        return new ResponseEntity<>(marketService.getMarketList(searchVal, sttPage, perPage), HttpStatus.OK);
+    }
+    @GetMapping("/getHotMarketList")
+    public ResponseEntity<List<MarketDto>> getHotMarketList(){
+        return new ResponseEntity<>(marketService.getHotMarketList(), HttpStatus.OK);
     }
 }

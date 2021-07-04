@@ -1,7 +1,8 @@
 package com.dandj.jtoday.repository.market;
 
 import com.dandj.jtoday.entity.market.Market;
-import jdk.nashorn.internal.runtime.options.Option;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -11,4 +12,8 @@ public interface MarketRepository extends JpaRepository<Market, Long> {
     Optional<Market> findMarketById(Long id);
     Optional<Market> findMarketByMapId(Long id);
     Optional<List<Market>> findMarketsByMapId(Long id);
+
+    Optional<List<Market>> findMarketsByHotYn(String hotyn);
+    Optional<List<Market>> findMarketsBy(Pageable pageable);
+    Optional<List<Market>> findMarketsBy(Specification<Market> spec, Pageable pageable);
 }

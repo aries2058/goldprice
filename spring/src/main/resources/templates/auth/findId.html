@@ -3,18 +3,6 @@
 
 <th:block th:replace="~{/_layout/basicLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
-        <style>
-            .top-bar{
-                padding: 11px 20px;
-                position: relative;
-                margin-bottom: 25px;
-                background: #fff;
-            }
-            #btn-back{
-                top:13px;
-                left: 20px
-            }
-        </style>
         <script th:src="@{/js/auth/findId.js}"></script>
 
         <div class="fixed-top text-center top-bar">

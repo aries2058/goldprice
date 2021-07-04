@@ -1,11 +1,14 @@
 
 .top-bar{
     padding: 11px 20px;
-    position: relative;
     margin-bottom: 25px;
     background: #fff;
     font-size: 20px;
     text-align: center;
+}
+.top-bar .title{
+    display: block;
+    margin-top: 4px;
 }
 #btn-back{
     top:13px;

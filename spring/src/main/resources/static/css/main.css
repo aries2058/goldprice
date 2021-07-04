@@ -7,12 +7,29 @@
     margin-bottom: 8px;
     line-height: 34px;
     margin-left: 18px;
+    margin-top:24px
 }
 .top-area-date{
     color:#C3F2E7;
     font-size: 14px;
     margin-bottom: 16px;
     margin-left: 18px;
+}
+.search-bar{
+    background: #fff;
+    margin-top:62px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px #2F9192;
+    padding:10px 16px 12px;
+    position:relative;
+    color:#C2C2C2;
+}
+.search-bar #search-market{
+    padding:0px
+}
+#btn-search{
+    top:8px;
+    right: 16px
 }
 .price-area{
     border-radius: 10px;

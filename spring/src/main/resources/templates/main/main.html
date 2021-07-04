@@ -5,7 +5,12 @@
     <th:block th:fragment="content">
         <link th:href="@{/css/main.css}" rel="stylesheet">
         <script th:src="@{/js/main.js}"></script>
-
+        <div class="container-fluid">
+            <div class="search-bar">
+                <span>어떤 도매 업체를 찾으시나요?</span>
+                <a class="position-absolute" id="btn-search"><img th:src="@{/images/icon_main_search.svg}" /></a>
+            </div>
+        </div>
         <div class="container-fluid">
             <div class="top-area-tit">
                 오늘 종로의<br />

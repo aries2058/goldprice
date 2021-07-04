@@ -22,6 +22,7 @@ $(function(){
 
     $('.btn-send').click(function() {
         $.ajax({
+            type:'post',
             url: _host + '/func/sendPush',
             data: { message: "teawradfasdfasdfasdfasdf"},
             success: function(res){

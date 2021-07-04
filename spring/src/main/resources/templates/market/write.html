@@ -83,30 +83,24 @@
                     <input type="hidden" id="lng" name="lng" />
 
                     <label>매장 소개</label>
+                    <textarea class="form-control" id="contents" rows="5"></textarea>
                 </div>
             </div>
-            <div class="edit-mode text-end"><a class="btn" id="btn-ok">완료</a></div>
-            <textarea class="form-control" id="contents" rows="5"></textarea>
         </div>
         <div class="container-fluid">
             <div class="col-12"><label>매장사진</label></div>
-            <input type="file" id="file-photo" multiple accept="image/*;capture=camera" style="display: none" />
-
-            <div class="added-photos row gx-2">
-            </div>
-            <p><small class="text-gold">* 이미지파일은 최대 3장까지 등록 가능합니다.</small></p>
-            <script type="text/template" id="tmpl-added-photos">
-                <div class="photo col-4">
-                    <% if(flag){%>
-                    <div class="rounded" style="background-image: url(<%- data %>)">
-                        <a class="btn-del-photo float-end"><img th:src="@{/images/photo_close.svg}"></a>
-                        <input type="hidden" class="hid-photo" value="<%- data %>" />
-                    </div>
-                    <%}else{%>
-                    <div id="btn-add-photo" class="rounded" style="background-image: url(<%- data %>)"></div>
-                    <%}%>
-                </div>
-            </script>
+            <div th:replace="/_layout/_photos.html :: fragment-photos"></div>
+        </div>
+        <div class="container-fluid">
+            <input type="hidden" id="hot_yn" name="hot_yn" />
+            <label>홈페이지</label>
+            <input type="text" class="form-control border" name="link_homepage" id="link_homepage" placeholder="(예:http://homepage.com)" />
+            <label>골드펜</label>
+            <input type="text" class="form-control border" name="link_goldpen" id="link_goldpen" placeholder="(예:http://homepage.com)" />
+            <label>카카오톡</label>
+            <input type="text" class="form-control border" name="link_kakao" id="link_kakao" placeholder="(예:http://homepage.com)" />
+            <label>SNS</label>
+            <input type="text" class="form-control border" name="link_sns" id="link_sns" placeholder="(예:http://homepage.com)" />
         </div>
 
         <div class="container-fluid">

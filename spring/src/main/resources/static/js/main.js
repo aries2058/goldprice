@@ -1,7 +1,5 @@
 $(function(){
-    $('.bg-top').height($(window).height()*0.15+360);
-    $('.top-area-tit').css('margin-top',$(window).height()*0.12);
-
+    $('.bg-top').height($(window).height()*0.15+400);
 
     $.ajax({
         url: _host + '/price/getGold',
@@ -17,7 +15,11 @@ $(function(){
         }
     })
 
-    $('.calc').click(function (){
+    $('.search-bar').click(function (){
+        location.href = _host + '/market/listByItem?typ=00'
+    })
+
+    $('.price-area').click(function (){
         location.href = _host + '/calc/gold?price=' + $(this).prev().text().replace('원/돈', '');
     })
 
@@ -27,6 +29,8 @@ $(function(){
 
     let push = getPush();
     if(push !=null && push.push_yn == null){
+        alert('getPush OK!! : ' + push.token)
+        push.uuid = _user.uuid
         modal.confirm("Push알림을 허용하시겠습니까?", function (){
             push.push_yn = 'Y'
             $.ajax({
@@ -34,8 +38,8 @@ $(function(){
                 url: _host + '/func/setPushToken',
                 data: push,
                 success: function (res){
-                    console.log(res)
                     alert("푸시허용처리됨!")
+                    push.uuid = res;
                     setPush(push)
                 }
             })

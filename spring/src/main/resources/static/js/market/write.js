@@ -1,5 +1,4 @@
 let _flag_main_photo = false;
-let _flag_photos = false;
 let _market = null;
 $(function (){
     if($('#market_id').val() != ''){
@@ -27,6 +26,12 @@ $(function (){
                         }
                     })
                 }
+                $('#link_homepage').val(res.link_homepage)
+                $('#link_goldpen').val(res.link_goldpen)
+                $('#link_kakao').val(res.link_kakao)
+                $('#link_sns').val(res.link_sns)
+                $('#hot_yn').val(res.hot_yn)
+
 
                 if(res.image_id != null){
 
@@ -47,11 +52,11 @@ $(function (){
                             $.ajax({
                                 url: _host + '/func/getImage',
                                 data: {id: v},
-                                success: function (res){
+                                success: function (xres){
                                     let tmp = _.template($('#tmpl-added-photos').html());
-                                    $('.added-photos').append(tmp({data: res, flag: true}))
+                                    $('.added-photos').append(tmp({data: xres, flag: true}))
                                     $('.photo>div').height($('.photo>div').width())
-                                    resolve(res)
+                                    resolve(xres)
                                 }
                             })
                         })
@@ -87,41 +92,10 @@ $(function (){
         history.back();
     })
 
-    $('#contents').focus(function (){
-        $('.info, #btn-register').hide();
-        $('.edit-mode').show()
-    })
-    $('#btn-ok').click(function (){
-        $('.edit-hide').hide()
-        $('.info, #btn-register').show();
-    })
-
     $('#btn-main-photo').click(function (){
         $('#file-main-photo').click()
     })
 
-    $('#file-photo').change(function(){
-        let obj = $('#file-photo')[0];
-        if(obj.files.length > 0){
-            _flag_photos = true;
-            let tmp = _.template($('#tmpl-added-photos').html());
-            if(obj.files.length > 3){
-                modal.alert('이미지파일은 최대 3장까지 등록 가능합니다.')
-            }else{
-                $('#btn-add-photo').parents('.photo').remove()
-                let tmp = _.template($('#tmpl-added-photos').html());
-                _.each(obj.files, function(v, i){
-                    converterImage(v, function (dataURL){
-                        $('.added-photos').append(tmp({data: dataURL, flag: true}))
-                        $('.photo>div').height($('.photo>div').width())
-                        if(obj.files.length < 3 && $('.photo').length == obj.files.length){
-                            dispPhotoAddButton()
-                        }
-                    })
-                })
-            }
-        }
-    })
     $('#file-main-photo').change(function (){
         _flag_main_photo = true;
         let file = $('#file-main-photo')[0].files[0];
@@ -155,74 +129,6 @@ $(function (){
         }
     })
 })
-
-$(document).on('click', '#btn-add-photo', function (){
-    $('#file-photo').click();
-})
-$(document).on('click', '.btn-del-photo', function (){
-    _flag_photos = true;
-
-    $(this).parents('.photo').remove();
-
-    if($('.photo').length < 3){
-        dispPhotoAddButton()
-    }
-})
-
-function dispPhotoAddButton(){
-    $('#btn-add-photo').parents('.photo').remove()
-    let tmp = _.template($('#tmpl-added-photos').html());
-    $('.added-photos').append(tmp({data: _host + "/images/photo_add.svg", flag: false}))
-    $('.photo>div').height($('.photo>div').width())
-}
-
-function converterImage(file, callback){
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onload = function(ev) {
-        let img = new Image();
-        img.src = ev.target.result;
-
-        img.onload = function(e){
-            // HTML5 canvas 객체를 생성합니다
-            let canvas = document.createElement('canvas');
-            let ctx = canvas.getContext("2d");
-            // 캔버스에 업로드된 이미지를 그려줍니다
-            ctx.drawImage(img, 0, 0);
-
-            // 최대폭을 400 으로 정했다고 가정했을때
-            // 최대폭을 넘어가는 경우 canvas 크기를 변경해 줍니다.
-            let MAX_WIDTH = 1024;
-            let MAX_HEIGHT = 1024;
-            let width = img.width;
-            let height = img.height;
-
-            if (width > height) {
-                if (width > MAX_WIDTH) {
-                    height *= MAX_WIDTH / width;
-                    width = MAX_WIDTH;
-                }
-            }
-            else {
-                if (height > MAX_HEIGHT) {
-                    width *= MAX_HEIGHT / height;
-                    height = MAX_HEIGHT;
-                }
-            }
-            canvas.width = width;
-            canvas.height = height;
-
-            // canvas에 변경된 크기의 이미지를 다시 그려줍니다.
-            ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, width, height);
-            // canvas 에 있는 이미지를 img 태그로 넣어줍니다
-            let dataURL = canvas.toDataURL("image/png");
-
-            callback(dataURL);
-        }
-    }
-}
 
 function goPopup() {
     new daum.Postcode({
@@ -283,7 +189,6 @@ function uploadMarketPhotos(callback, image_id){
 let register = function(image_id, values){
     let item_typ = '';
     _.each($('.item_typ'), function(v){
-        console.log(v)
         if($(v).is(':checked')){
             item_typ += $(v).val() + ',';
         }

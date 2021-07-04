@@ -40,3 +40,8 @@
     color:#11AE99;
     font-size: 12px;
 }
+.photo>div{
+    background-repeat: no-repeat;
+    background-size: cover;
+    border:1px solid #E4E3E3
+}

@@ -121,3 +121,36 @@
     opacity: 0.1;
     margin:8px 0px
 }
+
+#photo-area .carousel-item {
+    width:100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#photo-page{
+    color:#fff;
+    bottom:0px;
+    padding:4px 16px;
+    border-radius: 24px;
+    background-color: rgba(0,0,0,0.5);
+    font-weight: lighter;
+    font-size: 12px;
+}
+#link-items a{
+    padding:4px
+}
+#map{
+    height: 92px;
+    width: 100%;
+}
+label{
+    font-weight: bold;
+}
+.badge{
+    background: #F7F7F7;
+    color:#7A7A7A;
+    border-radius: 8px;
+    padding-bottom: 6px;
+    display: inline-block;
+    margin-right: 6px;
+}

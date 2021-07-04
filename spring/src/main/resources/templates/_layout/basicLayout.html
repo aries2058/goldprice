@@ -6,7 +6,9 @@
         <div th:replace="/_layout/_header.html :: fragment-header"></div>
     </head>
     <body>
+    <link th:href="@{/css/page.css}" rel="stylesheet">
 
+    <div class="top-empty" style="height: 63px;">&nbsp;</div>
     <th:block th:replace="${content}"></th:block>
 
     <div th:replace="/_layout/_modal.html :: fragment-modal"></div>

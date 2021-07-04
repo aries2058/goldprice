@@ -11,10 +11,11 @@ import java.util.List;
 
 public interface MarketService {
     Long register(MarketDto marketDto);
-    List<MarketDto> getMarketList(MarketDto marketDto);
     MarketDto getMarket(Long id);
     List<MarketMapDto> getMap();
+    List<MarketDto> getMarketList(String searchVal, int sttPage, int perPage);
     List<MarketDto> getMarketList(Long mapid);
+    List<MarketDto> getHotMarketList();
 
     default Market dtoToEntity(MarketDto dto){
         Market entity = Market.builder()
@@ -30,6 +31,11 @@ public interface MarketService {
                 .mapId(dto.getMap_id())
                 .itemTyp(dto.getItem_typ())
                 .marketTyp(dto.getMarket_typ())
+                .linkGoldpen(dto.getLink_goldpen())
+                .linkHomepage(dto.getLink_homepage())
+                .linkKakao(dto.getLink_kakao())
+                .linkSns(dto.getLink_sns())
+                .hotYn(dto.getHot_yn())
                 .writer(dto.getWriter()).build();
 
         return entity;
@@ -50,6 +56,11 @@ public interface MarketService {
                 .writer(entity.getWriter())
                 .market_typ(entity.getMarketTyp())
                 .item_typ(entity.getItemTyp())
+                .link_goldpen(entity.getLinkGoldpen())
+                .link_homepage(entity.getLinkHomepage())
+                .link_kakao(entity.getLinkKakao())
+                .link_sns(entity.getLinkSns())
+                .hot_yn(entity.getHotYn())
                 .regdt(entity.getRegDate())
                 .moddt(entity.getModDate()).build();
         return dto;

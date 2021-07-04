@@ -6,6 +6,7 @@ import com.dandj.jtoday.entity.member.MemberRole;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -43,6 +44,13 @@ public class Market extends BaseEntity {
 
     private String marketTyp;   // 매장구분
     private String itemTyp;      // 취급상품구분
+
+    private String linkKakao;
+    private String linkGoldpen;
+    private String linkSns;
+    private String linkHomepage;
+
+    private String hotYn;
 
 
     @Column(length = 20)

@@ -8,8 +8,12 @@ import com.dandj.jtoday.entity.market.MarketMap;
 import com.dandj.jtoday.repository.market.MarketImagesRepository;
 import com.dandj.jtoday.repository.market.MarketMapRepository;
 import com.dandj.jtoday.repository.market.MarketRepository;
+import com.dandj.jtoday.spec.MarketSpec;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,16 +47,16 @@ public class MarketServiceImpl implements MarketService{
     }
 
     @Override
-    public List<MarketDto> getMarketList(MarketDto marketDto) {
-        return null;
-    }
-
-    @Override
     public MarketDto getMarket(Long id) {
         Optional<Market> data = marketRepository.findMarketById(id);
         Optional<List<MarketImages>> images = marketImagesRepository.findMarketImagesByMarketId(id);
         if(data.isPresent()){
             MarketDto ret = entityToDto(data.get());
+            if(data.get().getMapId() != null){
+                Optional<MarketMap> map = marketMapRepository.findById(data.get().getMapId());
+                ret.setLat(map.get().getLat());
+                ret.setLng(map.get().getLng());
+            }
             List<Long> ids = new ArrayList<>();
             images.ifPresent(img->{
                 img.forEach(x->{ids.add(x.getImageId());
@@ -79,6 +83,46 @@ public class MarketServiceImpl implements MarketService{
             }
             ret.add(entityToMarketMapDto(x, markets));
         });
+        return ret;
+    }
+
+
+    @Override
+    public List<MarketDto> getHotMarketList() {
+        List<MarketDto> ret = new ArrayList<>();
+        Optional<List<Market>> market = marketRepository.findMarketsByHotYn("Y");
+        market.ifPresent(x->{
+            x.forEach(m->{
+                ret.add(entityToDto(m));
+            });
+        });
+
+        return ret;
+    }
+    @Override
+    public List<MarketDto> getMarketList(String searchVal, int sttPage, int perPage) {
+        List<MarketDto> ret = new ArrayList<>();
+        Pageable pageable = PageRequest.of(sttPage, perPage);
+
+        if(searchVal.isEmpty()){
+            Optional<List<Market>> data = marketRepository.findMarketsBy(pageable);
+
+            data.ifPresent(x->{
+                x.forEach(m->{
+                    ret.add(entityToDto(m));
+                });
+            });
+        }else{
+            Specification<Market> spec = Specification.where(MarketSpec.marketNmLike(searchVal));
+            spec.or(Specification.where(MarketSpec.contentsLike(searchVal)));
+            Optional<List<Market>> data = marketRepository.findMarketsBy(spec, pageable);
+
+            data.ifPresent(x->{
+                x.forEach(m->{
+                    ret.add(entityToDto(m));
+                });
+            });
+        }
         return ret;
     }
 

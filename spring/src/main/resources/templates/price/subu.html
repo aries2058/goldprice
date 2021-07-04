@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-</body>
-</html>
+<th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+        <link th:href="@{/css/board/qna.css}" rel="stylesheet">
+
+        <div class="fixed-top top-bar">
+            <span class="title">시세조회</span>
+            <a class="position-absolute" id="btn-close"><img th:src="@{/images/btn_close.svg}" /></a>
+        </div>
+
+        <div class="d-flex tab mb-4">
+            <div class="w-50 text-center p-3"><a th:href="@{/price/gold}">금/은</a></div>
+            <div class="w-50 text-center p-3"><a th:href="@{/price/dia}">다이아</a></div>
+            <div class="w-50 text-center p-3 on"><a th:href="@{/price/subu}">쓰브</a></div>
+            <div class="w-50 text-center p-3"><a th:href="@{/price/pearl}">진주</a></div>
+        </div>
+
+
+        <script th:src="@{/js/price/gold.js}"></script>
+    </th:block>
+</th:block>

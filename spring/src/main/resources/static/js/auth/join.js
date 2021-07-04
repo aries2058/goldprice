@@ -115,8 +115,15 @@ $(function(){
         $('#check-userid').val('N')
     });
 
+    let pattern1 = /[0-9]/;
+    let pattern2 = /[a-zA-Z]/;
+    let pattern3 = /[~!@\#$%<>^&*]/;     // 원하는 특수문자 추가 제거
     // 비밀번호 입력 시
     $('#password').keydown(function(){
+        let pw = $(this).val()
+        if(!pattern1.test(pw)||!pattern2.test(pw)||!pattern3.test(pw)||pw.length<8||pw.length>50){
+            $('#msg-password').html('영문,숫자,특수기호 8자리 이상으로 구성하여야 합니다.');
+        }
         if($('#confirm-password').val() != ''){
             $('#confirm-password').val('')
             $('#msg-password').html('')

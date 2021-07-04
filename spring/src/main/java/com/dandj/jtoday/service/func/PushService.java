@@ -1,11 +1,11 @@
 package com.dandj.jtoday.service.func;
 
+import com.dandj.jtoday.dto.comm.PushDto;
 import com.dandj.jtoday.entity.comm.PushToken;
-import com.dandj.jtoday.entity.member.Member;
 import com.dandj.jtoday.repository.comm.PushTokenRepository;
-import com.dandj.jtoday.repository.member.MemberRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -18,62 +18,54 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
-
 @Service
 @RequiredArgsConstructor
 public class PushService {
 
     @Autowired
+    private ObjectMapper objectMapper;
+
+    @Autowired
     private RestTemplate restTemplate;
+
     @Value("${kakao.restapi.key}")
     private String apikey;
 
     private final PushTokenRepository pushTokenRepository;
 
-    public String send(String message){
-        Optional<List<PushToken>> list = pushTokenRepository.findPushTokensByPushYn("Y");
-        StringBuilder uuids = new StringBuilder();
-        list.ifPresent(push->{
+    public String send(String title, String body) throws JsonProcessingException {
+        Optional<List<PushToken>> pushTokens = pushTokenRepository.findPushTokensByPushYn("Y");
+        List<String> list = new ArrayList<>();
+        pushTokens.ifPresent(push->{
             push.forEach(x->{
-                uuids.append(x+",");
+                list.add(x.toString());
             });
         });
+        String uuids = "[" + String.join(",", list) + "]";
+
+        PushDto.PushNotificationDto notificationDto = PushDto.PushNotificationDto.builder().title(title).body(body).build();
+        PushDto.PushCustomFieldDto customFieldDto = PushDto.PushCustomFieldDto.builder().url("http://naver.com").build();
+        PushDto.PushFcmDto fcmDto = PushDto.PushFcmDto.builder().customField(customFieldDto).notification(notificationDto).build();
+        PushDto pushDto = PushDto.builder().forFcm(fcmDto).build();
+
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("uuids", uuids);
+        params.add("push_message", objectMapper.writeValueAsString(pushDto));
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.add("Authorization", "KakaoAK " + apikey);
 
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("uuids", "[" + uuids.toString()+ "]");
-        params.add("push_message", "{\n" +
-                "  \"for_apns\":{\n" +
-                "    \"badge\":3,\n" +
-                "    \"sound\":\"sound_file\",\n" +
-                "    \"push_alert\":true,\n" +
-                "    \"message\":\"홍길동님 외 2명이 댓글을 달았습니다.\",\n" +
-                "    \"custom_field\":{\n" +
-                "      \"article_id\":\"111\",\n" +
-                "      \"comment_id\":\"222\"\n" +
-                "    }\n" +
-                "  },\n" +
-                "  \"for_fcm\":{\n" +
-                "    \"collapse\": \"articleId123\",\n" +
-                "    \"delay_while_idle\":false,\n" +
-                "    \"custom_field\": {\n" +
-                "      \"article_id\": 111,\n" +
-                "      \"comment_id\": 222,\n" +
-                "      \"comment_preview\": \"나의 댓글을 받아랏!...(생략)\"\n" +
-                "    }\n" +
-                "  }\n" +
-                "}");
-
-        restTemplate.postForObject(
+        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
+        ResponseEntity<String> response = restTemplate.exchange(
                 "https://kapi.kakao.com/v2/push/send",
-                params, String.class);
+                HttpMethod.POST,
+                entity,
+                String.class);
 
-        return "";
+
+        return response.getBody();
     }
 
     public Long register(String token, String typ, Long uuid, Long id){

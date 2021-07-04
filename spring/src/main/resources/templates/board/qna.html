@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
+<th:block th:replace="~{/_layout/basicLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
-        <link th:href="@{/plugins/summernote-0.8.18-dist/summernote-lite.css}" rel="stylesheet" />
         <link th:href="@{/css/board/qna.css}" rel="stylesheet">
 
-        <script th:src="@{/plugins/summernote-0.8.18-dist/summernote-lite.js}"></script>
-        <script th:src="@{/plugins/summernote-0.8.18-dist/lang/summernote-ko-KR.js}"></script>
-
         <div class="fixed-top top-bar">
-            <span class="title">문의하기</span>
+            <span class="title">1:1 문의</span>
             <a class="position-absolute" id="btn-close"><img th:src="@{/images/btn_close.svg}" /></a>
         </div>
 
@@ -24,13 +20,11 @@
                 <input type="hidden" id="board_typ" name="board_typ" value="02" />
                 <input type="hidden" id="writer" name="writer" />
                 <input type="text" class="form-control border mb-2" id="title" name="title" placeholder="제목을 입력하세요." />
-                <div class="btn-area" style="display: none">
-                    <a class="btn" id="btn-photo">사진첨부</a> <a class="btn" id="btn-ok">완료</a>
-                    <input type="file" id="file-photo" accept="image/*;capture=camera" style="display: none;" />
-                    <canvas id="canvas" style="display: none;"></canvas>
-                </div>
-                <textarea id="contents" name="contents"></textarea>
-                <a class="btn w-100 btn-gold text-white fw-light" id="btn-submit">문의하기</a>
+                <textarea id="contents" name="contents" rows="8" class="form-control border p-3 mb-2" placeholder="문의하실 내용을 입력하세요." ></textarea>
+
+                <div th:replace="/_layout/_photos.html :: fragment-photos"></div>
+
+                <a class="btn w-100 btn-gold text-white fw-light" id="btn-submit">등록</a>
             </form>
         </div>
         <div class="container-fluid screen" id="list"></div>
