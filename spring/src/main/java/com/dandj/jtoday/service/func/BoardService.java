@@ -2,7 +2,11 @@ package com.dandj.jtoday.service.func;
 
 import com.dandj.jtoday.dto.comm.BoardDto;
 import com.dandj.jtoday.entity.comm.Board;
+import com.dandj.jtoday.entity.comm.BoardImages;
+import com.dandj.jtoday.entity.market.Market;
+import com.dandj.jtoday.entity.market.MarketImages;
 import com.dandj.jtoday.entity.member.Member;
+import com.dandj.jtoday.repository.comm.BoardImagesRepository;
 import com.dandj.jtoday.repository.comm.BoardRepository;
 import com.dandj.jtoday.repository.member.MemberRepository;
 import com.dandj.jtoday.spec.BoardSpec;
@@ -29,6 +33,7 @@ import java.util.Optional;
 public class BoardService {
     private final BoardRepository boardRepository;
     private final MemberRepository memberRepository;
+    private final BoardImagesRepository boardImagesRepository;
 
     public List<BoardDto> getList(int sttPage, int perPage, String typ, String searchTyp, String searchVal){
         List<BoardDto> ret = new ArrayList<>();
@@ -107,6 +112,18 @@ public class BoardService {
                 boardRepository.save(x);
             });
         }
+        if(!dto.getImage_ids().isEmpty()){
+            Optional<List<BoardImages>> imgs = boardImagesRepository.findBoardImagesByBoardId(board.getId());
+            imgs.ifPresent(x->{
+                x.forEach(img->{
+                    boardImagesRepository.delete(img);
+                });
+            });
+            dto.getImage_ids().forEach(x->{
+                boardImagesRepository.save(dtoToBoardImageEntity(x, board));
+            });
+        }
+
         return board.getId();
     }
 
@@ -141,6 +158,13 @@ public class BoardService {
                 .lockYn(dto.getLock_yn())
                 .cmtCnt(dto.getCmt_cnt())
                 .build();
+        return entity;
+    }
+
+    private BoardImages dtoToBoardImageEntity(Long imageId, Board board){
+        BoardImages entity = BoardImages.builder()
+                .imageId(imageId)
+                .board(board).build();
         return entity;
     }
 }

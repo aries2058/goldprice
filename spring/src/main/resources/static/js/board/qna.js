@@ -23,14 +23,21 @@ $(function(){
 
     $('#btn-submit').click(function (){
         modal.confirm('등록하시겠습니까?', function (){
-            $.ajax({
-                type:'post',
-                url: _host + '/board/register',
-                data: $('#frm').serialize(),
-                success: function (res){
-                    modal.alert('등록하였습니다.');
-                    $('.qnatab div').eq(1).click();
-                }
+            uploadBoardPhotos(function(values){
+            console.log(values)
+                $('#image_ids').val(values)
+                $.ajax({
+                    type:'post',
+                    url: _host + '/board/register',
+                    data: $('#frm').serialize(),
+                    success: function (res){
+                        modal.alert('등록하였습니다.');
+                        $('#title').val('')
+                        $('#contents').val('')
+                        dispPhotoAddButton()
+                        $('.qnatab div').eq(1).click();
+                    }
+                })
             })
         })
     })
@@ -84,5 +91,21 @@ function getList(){
             var tmp = _.template($('#tmpl-qna').html());
             $('#list').html(tmp({data: res}))
         }
+    })
+}
+
+
+function uploadBoardPhotos(callback){
+    let prms = [];
+    let p = null;
+    _.each($('.hid-photo'), function(v, i){
+        p = new Promise(function(resolve, reject){
+            uploadImage($(v).val(), resolve)
+        })
+        prms.push(p)
+    })
+
+    Promise.all(prms).then(function(values){
+        callback(values)
     })
 }

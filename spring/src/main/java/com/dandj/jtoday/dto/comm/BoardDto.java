@@ -3,6 +3,8 @@ package com.dandj.jtoday.dto.comm;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor
@@ -21,4 +23,7 @@ public class BoardDto {
     private LocalDateTime regdt;
     private LocalDateTime moddt;
     private int cmt_cnt;
+
+    @Builder.Default
+    private List<Long> image_ids = new ArrayList<>();
 }
