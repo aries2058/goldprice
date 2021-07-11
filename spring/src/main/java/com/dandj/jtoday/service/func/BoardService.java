@@ -49,15 +49,23 @@ public class BoardService {
             }
         }
 
-        //Sort sort = Sort.by("moddate").descending();
-        //Pageable pageable = PageRequest.of(sttPage, perPage, sort);
         Pageable pageable = PageRequest.of(sttPage, perPage);
         Page<Board> data = boardRepository.findBoardsByBoardTypOrderByModDateDesc(typ, pageable);
 
         data.forEach(x->{
             try {
                 Optional<Member> member = memberRepository.findByUserId(x.getWriter());
-                ret.add(entityToDto(x, member.get()));
+                BoardDto dto = entityToDto(x, member.get());
+
+
+                Optional<List<BoardImages>> images = boardImagesRepository.findBoardImagesByBoardId(x.getId());
+                List<Long> ids = new ArrayList<>();
+                images.ifPresent(img->{
+                    img.forEach(i->{ ids.add(i.getImageId()); });
+                });
+                dto.setImage_ids(ids);
+                ret.add(dto);
+
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
@@ -89,7 +97,13 @@ public class BoardService {
         Optional<Board> data = boardRepository.findById(id);
         if(data.isPresent()){
             Optional<Member> member = memberRepository.findByUserId(data.get().getWriter());
+            Optional<List<BoardImages>> images = boardImagesRepository.findBoardImagesByBoardId(data.get().getId());
+            List<Long> ids = new ArrayList<>();
+            images.ifPresent(img->{
+                img.forEach(i->{ ids.add(i.getImageId()); });
+            });
             ret = entityToDto(data.get(), member.get());
+            ret.setImage_ids(ids);
         }
         return ret;
     }

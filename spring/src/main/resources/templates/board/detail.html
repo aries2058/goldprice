@@ -5,9 +5,9 @@
     <th:block th:fragment="content">
         <link th:href="@{/css/board/detail.css}" rel="stylesheet">
         <div class="fixed-top top-bar">
+            <a class="position-absolute" id="btn-back"><img th:src="@{/images/icon_back.svg}" /></a>
             <span th:if="${param.typ.toString().equals('01')}" class="title">제품요청</span>
             <span th:if="${param.typ.toString().equals('02')}" class="title">문의하기</span>
-            <a class="position-absolute" id="btn-close"><img th:src="@{/images/btn_close.svg}" /></a>
         </div>
 
         <div class="container-fluid board-info">
@@ -17,11 +17,12 @@
             <div class="border-bottom">
                 <p id="title"></p>
             </div>
-            <div class="writer-info mt-2">
+            <div class="writer-info mt-2 mb-2">
                 <span id="moddt" class="float-end"></span>
                 <b id="biznm"></b><br /><span class="text-decoration-underline"><span id="usernm"></span>(<span id="userid"></span>)</span><br />
             </div>
-            <div id="contents" class="mt-5"></div>
+            <div class="swiper-container"></div>
+            <div id="contents" class="mt-2"><pre></pre></div>
         </div>
 
         <div class="container-fluid comment-list">

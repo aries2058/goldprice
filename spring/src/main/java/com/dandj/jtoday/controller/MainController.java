@@ -7,9 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Log4j2
-@RequestMapping("/main")
+@RequestMapping("/")
 public class MainController {
-    @GetMapping({"/main", "/splash", "viewPhoto"})
+    @GetMapping({"/"})
+    public String Root(){
+        return "main/splash";
+    }
+    @GetMapping({"main/main", "main/splash", "main/viewPhoto"})
     public void View(){
 
     }

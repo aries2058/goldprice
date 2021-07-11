@@ -17,11 +17,11 @@ public class WebConfig implements WebMvcConfigurer {
         return builder.build();
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry){
-        registry
-                .addResourceHandler("/jtoday/**");
-    }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry){
+//        registry
+//                .addResourceHandler("/jtoday/**");
+//    }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {

@@ -1,18 +1,32 @@
+let imgHtml = '';
 $(function () {
-    $('#btn-close').click(function (){
+    $('#btn-back').click(function (){
         window.close();
     })
     $.ajax({
         url: _host + '/board/getBoard',
         data: {id : $('#bid').val()},
         success: function (res){
-            $('#title').html(res.title)
-            $('#contents').html(res.contents)
+            $('#title').text(res.title)
+            $('#contents pre').text(res.contents)
             $('#biznm').text(res.biz_nm)
             $('#usernm').text(res.user_nm)
             $('#userid').text(res.writer)
             $('#moddt').text(dateFormat(res.moddt, 'yyyy-MM-dd hh:mm:ss'))
-            $('#comment-cnt').text(res.cmt_cnt)
+            $('#comment-cnt').text(res.cmt_cnt);
+
+            if(res.image_ids.length > 0){
+                _.each(res.image_ids, function(v){
+                    $.ajax({
+                        url: _host + '/func/getImage',
+                        data: {id: v},
+                        success: function (res){
+                            imgHtml += '<img class="img-fluid mb-1 mt-1" src="'+res+'" />'
+                        }
+                    })
+                })
+
+            }
         }
     })
     getComments();
@@ -38,6 +52,10 @@ $(function () {
         }
     })
 })
+
+$(document).ajaxStop(function () {
+    $('.swiper-container').html(imgHtml)
+});
 
 function getComments(){
     $.ajax({

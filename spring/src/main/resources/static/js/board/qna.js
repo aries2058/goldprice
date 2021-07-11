@@ -1,4 +1,3 @@
-let sttPage = 0
 let qna = null;
 $(function(){
     dispPhotoAddButton()
@@ -12,7 +11,11 @@ $(function(){
             $('.screen').eq($(this).index()).addClass('on')
 
             if($(this).index() == 1){
-                getList()
+                getList('02', 'W', _user.user_id, function(res){
+                    qna = res;
+                    let tmp = _.template($('#tmpl-qna').html());
+                    $('#list').html(tmp({data: res}))
+                })
             }
         }
     })
@@ -46,66 +49,21 @@ $(function(){
 $(document).on('click', '.qna-item', function (){
     let p = $(this);
     let src = $('.title img', p).attr("src");
-    console.log(src)
     if($(this).hasClass('on')){
         $(this).removeClass('on')
         $('.title img', p).attr("src", src.replace("up", "down"))
     }else {
         $(this).addClass('on')
-        if($('.contents>div', p).html() == ""){
-            $('.contents>div', p).html(_.where(qna, {id: p.data("id")})[0].contents)
-
-            getComments(p.data("id"), $('.contents', p))
+        let detail = _.where(qna, {id: p.data("id")})[0];
+        if($('.comments', p).html() == ""){
+            getComments(p.data("id"), $('.comments', p))
+        }
+        if(detail.image_ids.length > 0){
+            let slide = $('.swiper-slide', p).eq(0);
+            if($('img', slide).attr('src') == undefined){
+                getImages($('.swiper-slide', p), p.data("id"))
+            }
         }
         $('.title img', p).attr("src", src.replace("down", "up"))
     }
 })
-
-function getComments(bid, obj){
-    $.ajax({
-        url: _host + '/board/getComments',
-        data: {id : bid},
-        success: function (res){
-            $('#comment-cnt').html(res.length)
-            if(res.length > 0){
-                var tmp = _.template($('#tmpl-comment').html());
-                obj.append(tmp({data: res}))
-            }
-        }
-    })
-}
-
-function getList(){
-    $.ajax({
-        url: _host + '/board/getList',
-        data: {
-            typ: '02',
-            searchTyp: "W",
-            searchVal: _user.user_id,
-            sttPage: sttPage,
-            perPage: 50
-        },
-        success: function (res){
-            console.log(res)
-            qna = res;
-            var tmp = _.template($('#tmpl-qna').html());
-            $('#list').html(tmp({data: res}))
-        }
-    })
-}
-
-
-function uploadBoardPhotos(callback){
-    let prms = [];
-    let p = null;
-    _.each($('.hid-photo'), function(v, i){
-        p = new Promise(function(resolve, reject){
-            uploadImage($(v).val(), resolve)
-        })
-        prms.push(p)
-    })
-
-    Promise.all(prms).then(function(values){
-        callback(values)
-    })
-}
