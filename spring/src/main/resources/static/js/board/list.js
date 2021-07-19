@@ -14,6 +14,7 @@ $(function (){
             $(this).addClass('on')
             $('.screen').eq($(this).index()).addClass('on')
             $('#all-list, #my-list').empty()
+            sttPage = 0;
             if($(this).index() == 0){
                 getList($('#typ').val(), null, null, function (res){
                     let tmp = _.template($('#tmpl-list').html());

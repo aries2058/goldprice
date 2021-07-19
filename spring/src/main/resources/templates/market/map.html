@@ -16,7 +16,7 @@
 
         <div id="list" class="container border-top"></div>
 
-        <div id="detail" class="container p-3"></div>
+        <div id="detail" class="container p-3 bg-white"></div>
 
         <script id="tmpl-list" type="text/template">
             <% _.each(data, function(v, i){%>
@@ -29,7 +29,7 @@
             <%}) %>
         </script>
         <script id="tmpl-detail" type="text/template">
-            <div class="d-flex bg-white">
+            <div class="d-flex">
                 <div>
                     <img th:src="@{/images/photo_add.svg}" />
                 </div>
