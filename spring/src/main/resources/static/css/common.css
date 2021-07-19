@@ -25,11 +25,11 @@ input[type=number]:focus,
 [type=password].form-control:focus, 
 [type=email].form-control:focus, 
 [type=tel].form-control:focus, 
-[contenteditable].form-control:focus {
-    box-shadow: inset 0 -1px 0 #ddd;
-    outline: none;
+[contenteditable].form-control:focus,
+select.form-select:focus {
+    box-shadow: inset 0 -1px 0 #ddd !important;
+    outline: none !important;
 }
-
 *{
     font-family:'Noto Sans KR', sans-serif;
 }
@@ -45,6 +45,9 @@ input[type=number]:focus,
 }
 .text-gold{
     color:#36BEBF !important
+}
+.text-gold-dark{
+    color:#0DAE99 !important
 }
 .btn-gold{
     background: #36BEBF !important;
@@ -227,4 +230,15 @@ h2{
     display: block;
     margin: 0px auto;
     vertical-align: middle;
+}
+#loading{
+    display: none;
+}
+.lb-checkbox img{
+    display: inline-block;
+    margin-right:4px;
+    vertical-align: top;
+}
+.lb-checkbox input{
+    display: none;
 }

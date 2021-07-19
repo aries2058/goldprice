@@ -41,9 +41,6 @@ public class MarketDto {
     private Double lng;
 
     private String hot_yn;
-
-    private String marketImage;
-
     @Builder.Default
     private List<Long> image_ids = new ArrayList<>();
 }

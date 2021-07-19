@@ -1,38 +1,32 @@
 
 #btn-reply{
-    padding: 28px 18px;
-    text-align: center;
-    color:#fff;
+    font-size: 0.9rem;
 }
 .comment-area{
-    bottom:50px
+    bottom:50px;
+    border-top:1px solid #f2f2f2;
+    background: #fff !important;
 }
 .bottom-empty{
     display: none;
 }
-#title{
-    font-weight: lighter;
-    font-size: 24px;
-}
-.writer-info{
-    color:#666;
-    font-weight: lighter;
-}
-#contents{
-    font-size: 1.2rem;
-}
 .comment-list{
     display: none;
 }
-#list{
-    background: #F5F5F5;
-    color:#868686;
+#list>div{
+    padding:8px 0px;
 }
-#list div{
-    padding:4px 12px 8px;
+textarea:focus{
+    border:none !important;
+    box-shadow: none !important;
+}
+#text-comment{
+    font-size: 0.9rem;
 }
 .moddt{
-    color:#BFC1C3;
-    font-size: 12px;
-    font-weight: lighter;
+    padding:0px
+}
+.c-writer{
+    font-size: 0.9rem;
+    line-height: 14px;
 }

@@ -3,11 +3,13 @@ package com.dandj.jtoday.service.func;
 import com.dandj.jtoday.dto.comm.BoardDto;
 import com.dandj.jtoday.entity.comm.Board;
 import com.dandj.jtoday.entity.comm.BoardImages;
+import com.dandj.jtoday.entity.comm.Images;
 import com.dandj.jtoday.entity.market.Market;
 import com.dandj.jtoday.entity.market.MarketImages;
 import com.dandj.jtoday.entity.member.Member;
 import com.dandj.jtoday.repository.comm.BoardImagesRepository;
 import com.dandj.jtoday.repository.comm.BoardRepository;
+import com.dandj.jtoday.repository.comm.ImagesRepository;
 import com.dandj.jtoday.repository.member.MemberRepository;
 import com.dandj.jtoday.spec.BoardSpec;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +36,7 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final MemberRepository memberRepository;
     private final BoardImagesRepository boardImagesRepository;
+    final private ImagesRepository imagesRepository;
 
     public List<BoardDto> getList(int sttPage, int perPage, String typ, String searchTyp, String searchVal){
         List<BoardDto> ret = new ArrayList<>();
@@ -57,13 +60,14 @@ public class BoardService {
                 Optional<Member> member = memberRepository.findByUserId(x.getWriter());
                 BoardDto dto = entityToDto(x, member.get());
 
-
                 Optional<List<BoardImages>> images = boardImagesRepository.findBoardImagesByBoardId(x.getId());
                 List<Long> ids = new ArrayList<>();
                 images.ifPresent(img->{
                     img.forEach(i->{ ids.add(i.getImageId()); });
+                    if(ids.size()> 0){
+                        dto.setImage_ids(ids);
+                    }
                 });
-                dto.setImage_ids(ids);
                 ret.add(dto);
 
             } catch (SQLException throwables) {
@@ -155,6 +159,7 @@ public class BoardService {
                 .moddt(entity.getModDate())
                 .biz_nm(member.getBizNm())
                 .user_nm(member.getUserNm())
+
                 .cmt_cnt(entity.getCmtCnt()).build();
         return dto;
     }

@@ -2,6 +2,8 @@ package com.dandj.jtoday.dto.comm;
 
 import lombok.*;
 
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,7 @@ public class BoardDto {
     private LocalDateTime regdt;
     private LocalDateTime moddt;
     private int cmt_cnt;
+    private byte[] mainImage;
 
     @Builder.Default
     private List<Long> image_ids = new ArrayList<>();

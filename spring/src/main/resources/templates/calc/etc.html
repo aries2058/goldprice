@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="~{/_layout/mainLayout :: setContent(~{this::content})}">
+<th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <link rel="stylesheet" th:href="@{/css/calc/calc.css}" />
         <script th:src="@{/js/calc/etc.js}"></script>
 
-        <div class="container-fluid mt-3">
-            <div class="row">
-                <div class="col-12">
-                    <a class="btn" href="/main">닫기</a>
-                </div>
-            </div>
+        <div class="fixed-top top-bar">
+            <span class="title">잡금 계산기</span>
+            <a class="position-absolute" id="btn-back"><img th:src="@{/images/icon_back.svg}" /></a>
+        </div>
+
+        <div class="d-flex tab board-tab mb-4">
+            <div class="w-50 text-center p-3"><a th:href="@{/calc/gold}">금 계산기</a></div>
+            <div class="w-50 text-center p-3 on"><a th:href="@{/calc/etc}">잡금 계산기</a></div>
+        </div>
+
+        <div class="container-fluid text-end">
+            <a><img th:src="@{/images/btn_init.svg}" /></a>
         </div>
 
         <div class="container-fluid">
@@ -48,7 +54,7 @@
         </div>
 
 
-        <div class="container-fluid bg-dark p-0 fixed-bottom keypad">
+        <div class="container-fluid bg-light p-0 fixed-bottom keypad">
             <table class="table table-bordered border-secondary m-0" style="table-layout: fixed;">
                 <tr>
                     <td>1</td>
@@ -71,7 +77,7 @@
                     <td>.</td>
                 </tr>
             </table>
-            <a class="btn btn-warning w-100 rounded-0 pt-3 pb-3 btn-close-keypad">완료</a>
+            <a class="btn btn-gold text-white w-100 rounded-0 pt-4 pb-4 btn-close-keypad">완료</a>
         </div>
     </th:block>
 </th:block>

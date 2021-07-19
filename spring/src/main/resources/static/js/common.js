@@ -1,5 +1,4 @@
-//let _host = '/jtoday'
-let _host = '/'
+let _host = '/jtoday'
 let _user = null;
 
 $(function(){

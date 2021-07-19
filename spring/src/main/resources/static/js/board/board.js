@@ -1,5 +1,12 @@
 let sttPage = 0
+let _typ; let _searchTyp; let _searchVal; let _callback;
 
+$(window).scroll(function() {
+    if($(window).scrollTop() + $(window).height() == $(document).height()) {
+        sttPage++;
+        getList()
+    }
+});
 function getComments(bid, obj){
     $.ajax({
         url: _host + '/board/getComments',
@@ -14,33 +21,26 @@ function getComments(bid, obj){
     })
 }
 
-function getImages(obj, id){
-    _.each(obj, function(v, i){
-        $.ajax({
-            url: _host + '/func/getImage',
-            data: {id: $(v).data('imgid')},
-            success: function (res){
-                $('img', v).attr('src', res);
-            }
-        })
-    })
-    if(obj.length > 1){
-        const swiper = new Swiper('.swiper-area'+id)
-    }
-}
-
 function getList(typ, searchTyp, searchVal, callback){
+    $('#loading').show();
+    if(typ != null){
+        _typ=typ;
+        _searchTyp=searchTyp;
+        _searchVal=searchVal;
+        _callback=callback;
+    }
     $.ajax({
         url: _host + '/board/getList',
         data: {
-            typ: typ,
-            searchTyp: searchTyp,
-            searchVal: searchVal,
+            typ: _typ,
+            searchTyp: _searchTyp,
+            searchVal: _searchVal,
             sttPage: sttPage,
-            perPage: 50
+            perPage: 5
         },
         success: function (res){
-            callback(res);
+            $('#loading').hide();
+            _callback(res);
         }
     })
 }

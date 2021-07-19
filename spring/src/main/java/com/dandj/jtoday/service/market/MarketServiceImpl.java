@@ -34,11 +34,9 @@ public class MarketServiceImpl implements MarketService{
         marketRepository.save(data);
         if(!marketDto.getImage_ids().isEmpty()){
             Optional<List<MarketImages>> imgs = marketImagesRepository.findMarketImagesByMarketId(marketDto.getId());
-            imgs.ifPresent(x->{
-                x.forEach(img->{
-                    marketImagesRepository.delete(img);
-                });
-            });
+            imgs.ifPresent(x-> x.forEach(img->{
+                marketImagesRepository.delete(img);
+            }));
             marketDto.getImage_ids().forEach(x->{
                 marketImagesRepository.save(dtoToMarketImageEntity(x, data));
             });

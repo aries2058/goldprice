@@ -4,9 +4,9 @@ $(function(){
 
     $('#writer').val(_user.user_id)
 
-    $('.qnatab div').click(function (){
+    $('.board-tab div').click(function (){
         if(!$(this).hasClass('on')){
-            $('.qnatab div.on, .screen.on').removeClass('on')
+            $('.board-tab div.on, .screen.on').removeClass('on')
             $(this).addClass('on')
             $('.screen').eq($(this).index()).addClass('on')
 
@@ -38,7 +38,7 @@ $(function(){
                         $('#title').val('')
                         $('#contents').val('')
                         dispPhotoAddButton()
-                        $('.qnatab div').eq(1).click();
+                        $('.board-tab div').eq(1).click();
                     }
                 })
             })
@@ -67,3 +67,18 @@ $(document).on('click', '.qna-item', function (){
         $('.title img', p).attr("src", src.replace("down", "up"))
     }
 })
+
+function getImages(obj, id){
+    _.each(obj, function(v, i){
+        $.ajax({
+            url: _host + '/func/getImage',
+            data: {id: $(v).data('imgid')},
+            success: function (res){
+                $('img', v).attr('src', res);
+            }
+        })
+    })
+    if(obj.length > 1){
+        const swiper = new Swiper('.swiper-area'+id)
+    }
+}

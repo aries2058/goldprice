@@ -1,35 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="~{/_layout/mainLayout :: setContent(~{this::content})}">
+<th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
-        <link th:href="@{/css/board/list.css}" rel="stylesheet">
-
-        <div class="container-fluid board-info">
-            <div class="info" th:if="${param.typ.toString().equals('01')}">
-                <h1>제품요청</h1>
-                <p>필요한 제품이 있으면 도매상인들에게 제품을 요청하세요.</p>
-                <a class="btn btn-gold text-white" th:href="@{/board/write?typ=01}" id="btn-register">글쓰기</a>
-            </div>
-
-            <input type="hidden" th:value="${param.typ}" id="typ" />
-
-            <table id="list" class="table"></table>
+        <link th:href="@{/css/board/board.css}" rel="stylesheet">
+        <input type="hidden" id="typ" value="01" />
+        <div class="fixed-top top-bar">
+            <span class="title">제품 요청</span>
+            <a class="position-absolute" id="btn-back"><img th:src="@{/images/icon_back.svg}" /></a>
         </div>
 
-        <script type="text/template" id="tmpl-list">
+        <div class="d-flex tab board-tab mb-4">
+            <div class="w-50 text-center p-3 on">전체</div>
+            <div class="w-50 text-center p-3">나의 요청</div>
+        </div>
+
+        <div class="container-fluid screen on" id="all-list"></div>
+        <div class="container-fluid screen" id="my-list"></div>
+
+        <a th:href="@{/board/write?typ=01}" class="position-fixed" style="bottom:60px; right:8px"><img th:src="@{/images/icon_write.svg}" /></a>
+
+        <script type="template/text" id="tmpl-list">
             <% _.each(data, function(v, i){%>
-            <tr>
-                <td><a class="link" data-bid="<%- v.id %>"><%- v.title %>
-                    <% if(v.cmt_cnt > 0){%>
-                    <span class="badge bg-primary"><%- v.cmt_cnt %></span>
-                    <%}%>
-                </a></td>
-                <td><%- v.writer %></td>
-                <td><%- v.moddt.replace('T', ' ') %></td>
-            </tr>
+            <div class="border-bottom pb-5 mb-3">
+                <div class="b-writer">
+                    <p class="mb-0 text-secondary"><%- v.biz_nm %>(<%- v.user_nm %>)</p>
+                    <small><%- dateFormat(v.moddt, 'yyyy-MM-dd hh:mm:ss') %></small>
+                </div>
+                <div class="b-title mt-2"><%- v.title%></div>
+                <% if(v.image_ids.length > 0){%>
+                <div class="b-photo" data-id="<%- v.image_ids[0] %>"  data-bid="<%- v.id %>" >
+                    <img />
+                </div>
+                <%}%>
+                <div class="b-contents"><%- v.contents%></div>
+                <div class="b-comment mt-2">
+                    <div class="float-start"><img th:src="@{/images/icon_comment.svg}" /> 댓글 <%- v.cmt_cnt%></div>
+                    <div class="float-end link" data-bid="<%- v.id %>"><a class="text-gold">더보기</a></div>
+                </div>
+            </div>
             <%})%>
         </script>
+
+        <script th:src="@{/js/board/board.js}"></script>
         <script th:src="@{/js/board/list.js}"></script>
     </th:block>
 </th:block>

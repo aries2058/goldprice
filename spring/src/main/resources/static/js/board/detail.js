@@ -1,14 +1,15 @@
 let imgHtml = '';
 $(function () {
     $('#btn-back').click(function (){
-        window.close();
+        window.close()
     })
+
     $.ajax({
         url: _host + '/board/getBoard',
         data: {id : $('#bid').val()},
         success: function (res){
             $('#title').text(res.title)
-            $('#contents pre').text(res.contents)
+            $('#contents').text(res.contents)
             $('#biznm').text(res.biz_nm)
             $('#usernm').text(res.user_nm)
             $('#userid').text(res.writer)
@@ -30,6 +31,15 @@ $(function () {
         }
     })
     getComments();
+
+    $('#text-comment').click(function(){
+        if($(this).attr('rows') == 1){
+            $(this).attr('rows', 4)
+        }
+    })
+    $('#text-comment').focusout(function(){
+        $('#text-comment').attr('rows', 1)
+    })
 
     $('#btn-reply').click(function (){
         if($('#text-comment').val() == ''){
@@ -54,7 +64,7 @@ $(function () {
 })
 
 $(document).ajaxStop(function () {
-    $('.swiper-container').html(imgHtml)
+    $('.b-photo').html(imgHtml)
 });
 
 function getComments(){

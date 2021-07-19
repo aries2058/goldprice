@@ -1,23 +1,59 @@
-var sttPage = 0
 $(function (){
-   getList()
-
-   $(document).on('click', '.link', function (){
-       window.open(_host + '/board/detail?id='+$(this).data('bid')+'&typ=' + $('#typ').val());
-   })
+    getList($('#typ').val(), null, null, function (res){
+        let tmp = _.template($('#tmpl-list').html());
+        $('#all-list').append(tmp({data: res}))
+        _.each($('.b-photo'), function (v){
+            if($('img', v).attr("src") == undefined){
+                getImage(v, $(v).data('id'))
+            }
+        })
+    })
+    $('.board-tab div').click(function (){
+        if(!$(this).hasClass('on')){
+            $('.board-tab div.on, .screen.on').removeClass('on')
+            $(this).addClass('on')
+            $('.screen').eq($(this).index()).addClass('on')
+            $('#all-list, #my-list').empty()
+            if($(this).index() == 0){
+                getList($('#typ').val(), null, null, function (res){
+                    let tmp = _.template($('#tmpl-list').html());
+                    $('#all-list').append(tmp({data: res}))
+                    _.each($('.b-photo'), function (v){
+                        if($('img', v).attr("src") == undefined){
+                            getImage(v, $(v).data('id'))
+                        }
+                    })
+                })
+            }else{
+                getList($('#typ').val(), "W", _user.user_id, function (res){
+                    let tmp = _.template($('#tmpl-list').html());
+                    $('#my-list').append(tmp({data: res}))
+                    _.each($('.b-photo'), function (v){
+                        if($('img', v).attr("src") == undefined){
+                            getImage(v, $(v).data('id'))
+                        }
+                    })
+                })
+            }
+        }
+    })
+    $('#btn-back').click(function (){
+        history.back()
+    })
 })
-function getList(){
+$(document).on('click', '.link', function (){
+    window.open(_host + '/board/detail?id='+$(this).data('bid')+'&typ=' + $('#typ').val());
+})
+$(document).on('click', '.b-photo', function (){
+    window.open(_host + '/board/detail?id='+$(this).data('bid')+'&typ=' + $('#typ').val());
+})
+
+function getImage(obj, id){
     $.ajax({
-        url: _host + '/board/getList',
-        data: {
-            typ: $('#typ').val(),
-            sttPage: sttPage,
-            perPage: 50
-        },
+        url: _host + '/func/getImage',
+        data: {id: id},
         success: function (res){
-            console.log(res)
-            var tmp = _.template($('#tmpl-list').html());
-            $('#list').append(tmp({data: res}))
+            $('img', obj).attr('src', res);
         }
     })
 }

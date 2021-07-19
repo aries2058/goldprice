@@ -1,36 +1,83 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="~{/_layout/mainLayout :: setContent(~{this::content})}">
+<th:block th:replace="~{/_layout/basicLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
-        <link th:href="@{/plugins/summernote-0.8.18-dist/summernote-lite.css}" rel="stylesheet" />
-        <link th:href="@{/css/board/write.css}" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+        <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <link th:href="@{/css/board/board.css}" rel="stylesheet">
 
-        <script th:src="@{/plugins/summernote-0.8.18-dist/summernote-lite.js}"></script>
-        <script th:src="@{/plugins/summernote-0.8.18-dist/lang/summernote-ko-KR.js}"></script>
-
-
-        <div class="container-fluid board-info">
-            <div class="info" th:if="${param.typ.toString().equals('01')}">
-                <h1>제품요청</h1>
-                <p>필요한 제품이 있으면 도매상인들에게 제품을 요청하세요.</p>
-            </div>
-            <a id="btn-submit" class="btn btn-gold w-50 text-white mb-4">등록</a>
-            <form id="frm">
-                <input type="hidden" id="board_typ" name="board_typ" th:value="${param.typ}" />
-                <input type="hidden" id="writer" name="writer" />
-                <div class="edit-area">
-                    <input type="text" class="form-control border mb-2" id="title" name="title" placeholder="제목을 입력하세요." />
-                    <div class="btn-area" style="display: none">
-                        <a class="btn" id="btn-photo">사진첨부</a> <a class="btn" id="btn-ok">완료</a>
-                        <input type="file" id="file-photo" accept="image/*;capture=camera" style="display: none;" />
-                        <canvas id="canvas" style="display: none;"></canvas>
-                    </div>
-                    <textarea id="contents" name="contents"></textarea>
-                </div>
-            </form>
+        <div class="fixed-top top-bar">
+            <span class="title">제품 요청 글쓰기</span>
+            <a class="position-absolute" id="btn-back"><img th:src="@{/images/icon_back.svg}" /></a>
         </div>
 
+        <div class="container-fluid">
+            <form id="frm">
+                <input type="hidden" id="board_typ" name="board_typ" value="01" />
+                <input type="hidden" id="writer" name="writer" />
+                <input type="hidden" id="image_ids" name="image_ids" />
+
+                <input type="text" class="form-control border mb-2" id="title" name="title" placeholder="제목을 입력하세요." />
+                <textarea id="contents" name="contents" rows="8" class="form-control border p-3 mb-2" placeholder="문의하실 내용을 입력하세요." ></textarea>
+
+                <div th:replace="/_layout/_photos.html :: fragment-photos"></div>
+
+                <a class="btn w-100 btn-gold text-white fw-light" id="btn-submit">등록</a>
+            </form>
+        </div>
+        <div class="container-fluid screen" id="list"></div>
+
+        <script type="text/template" id="tmpl-qna">
+            <% _.each(data, function(v, i){%>
+            <div class="qna-item border mt-3" data-id="<%- v.id %>">
+                <div class="title d-flex pe-3 pt-2 ps-3">
+                    <div class="flex-grow-1 ellipsis">
+                        <% if(v.cmt_cnt == 0){%>
+                        <span class="text-red">[답변대기] </span>
+                        <%}else{%>
+                        <span class="text-green">[답변완료] </span>
+                        <%}%>
+                        <%- v.title %></div>
+                    <a><img th:src="@{/images/arrow-down.svg}" /></a>
+                </div>
+                <div class="moddt"><%- dateFormat(v.moddt, 'yyyy-MM-dd hh:mm:ss') %></div>
+                <div class="contents p-1">
+                    <div class="swiper-container swiper-area<%- v.id %>">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <% _.each(v.image_ids, function(xv, xi){%>
+                            <div class="swiper-slide" data-imgid="<%- xv %>">
+                                <img class="img-fluid" />
+                            </div>
+                            <%})%>
+                        </div>
+                    </div>
+                    <div class="pt-2 ps-3 pe-3 pb-3">
+                        <pre><%- v.contents %></pre></div>
+                    <div class="comments"></div>
+                </div>
+            </div>
+            <%})%>
+        </script>
+
+        <script type="text/template" id="tmpl-comment">
+            <div class="comment-area">
+                <% _.each(data, function(v, i){%>
+                <div>
+                    <img th:src="@{/images/arrow-reply.svg}" />
+                    <span class="writer"><%-v.user_nm%></span> <span class="moddt"><%- dateFormat(v.moddt, 'yyyy-MM-dd hh:mm:ss')%></span>
+                    <div>
+                        <pre><%- v.contents %></pre>
+                    </div>
+                </div>
+                <%})%>
+            </div>
+        </script>
+
+        <script th:src="@{/js/board/board.js}"></script>
         <script th:src="@{/js/board/write.js}"></script>
     </th:block>
 </th:block>

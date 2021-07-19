@@ -1,52 +1,64 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="~{/_layout/mainLayout :: setContent(~{this::content})}">
+<th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <link rel="stylesheet" th:href="@{/css/calc/calc.css}" />
         <script th:src="@{/js/calc/gold.js}"></script>
 
+        <div class="fixed-top top-bar">
+            <span class="title">계산기</span>
+            <a class="position-absolute" id="btn-back"><img th:src="@{/images/icon_back.svg}" /></a>
+        </div>
+
+        <div class="d-flex tab board-tab mb-4">
+            <div class="w-50 text-center p-3 on"><a th:href="@{/calc/gold}">금 계산기</a></div>
+            <div class="w-50 text-center p-3"><a th:href="@{/calc/etc}">잡금 계산기</a></div>
+        </div>
+
+        <div class="container-fluid text-end">
+            <a><img th:src="@{/images/btn_init.svg}" /></a>
+        </div>
+
         <input th:type="hidden" th:value="${param.price}" id="hid-price" />
-        <div class="container-fluid bg-dark p-2">
-            <div class="d-flex mt-2 mb-2">
-                <div class="flex-grow-1">
-                    <select class="form-select border-0">
-                        <option>금</option>
+        <div class="container-fluid mt-2">
+            <div class="row gx-2">
+                <div class="col-5">
+                    <select class="form-select p-2">
+                        <option>VAT 포함가</option>
+                        <option>종로 평균금액</option>
                     </select>
                 </div>
-                <div>&nbsp;</div>
-                <div style="width:200px;" class="text-right">
-                    <div class="form-control d-flex">
+                <div class="col-7">
+                    <div class="form-control p-2 d-flex">
                         <small>시세</small> <b class="val-price key flex-fill"></b> <small>원</small>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container-fluid mt-2">
-            <div class="row">
+        <div class="container-fluid mt-3">
+            <div class="row gx-2">
                 <div class="col-5">
                     <span>14K 중량</span>
-                    <div class="form-control d-flex">
+                    <div class="form-control p-2 d-flex">
                         <b class="val-weight key flex-fill">0.65</b> <small>g</small>
                     </div>
                 </div>
                 <div class="col-7">
                     <span>공임비</span>
-                    <div class="form-control d-flex">
+                    <div class="form-control p-2 d-flex">
                         <b class="val-wage key flex-fill">12,000</b> <small>원</small>
                     </div>
                 </div>
             </div>
-            <div class="p-2 bg-light mt-2 rounded-3">
-                <div class="d-flex justify-content-end">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="chk-stone">
-                        <label class="form-check-label" for="chk-stone">
-                            스톤포함
-                        </label>
-                    </div>
+            <div class="p-2 mt-2 rounded-3">
+                <div class="d-flex">
+                    <label class="lb-checkbox fw-light"><input type="checkbox" id="chk-stone" />
+                        <img src="/jtoday/images/check_off.svg">
+                        <span>스톤포함</span>
+                    </label>
                 </div>
-                <div class="row stone-form">
+                <div class="row stone-form gx-2 mt-2">
                     <div class="col-5">
                         <span>수량</span>
                         <div class="form-control d-flex">
@@ -64,13 +76,13 @@
         </div>
 
         <div class="container-fluid mt-4">
-            <span class="title mt-4">원가 배율 예측</span>
-            <table class="table mt-2">
-                <thead>
+            <b class="title mt-4">원가 배율 예측</b>
+            <table class="table mt-2 mb-0">
+                <thead class="bg-light">
                 <tr>
-                    <th class="text-center">배율</th>
-                    <th class="text-center">14K 제품</th>
-                    <th class="text-center">18K 제품</th>
+                    <th class="text-center p-3">배율</th>
+                    <th class="text-center p-3">14K</th>
+                    <th class="text-center p-3">18K</th>
                 </tr>
                 </thead>
                 <tr>
@@ -99,15 +111,14 @@
                     <td class="text-center"><b class="p18k-t18"></b> <small>원</small></td>
                 </tr>
             </table>
-            <div>
-                ※ 예측으로 완벽하게 정확하지 않습니다.<br />
-                ※ 18K는 14K 금중량에 1.25배
-
-            </div>
+            <small class="text-gold-dark">
+                * 예측가로 실제 금액과 오차가 있을 수 있습니다.<br />
+                * 18K는 14K 금 중량에 <b>1.25배</b>입니다.
+            </small>
         </div>
 
 
-        <div class="container-fluid bg-dark p-0 fixed-bottom keypad">
+        <div class="container-fluid bg-light p-0 fixed-bottom keypad">
             <table class="table table-bordered border-secondary m-0" style="table-layout: fixed;">
                 <tr>
                     <td>1</td>
@@ -125,12 +136,12 @@
                     <td>9</td>
                 </tr>
                 <tr>
-                    <td class="del"><i class="fas fa-backspace"></i></td>
-                    <td>0</td>
                     <td>.</td>
+                    <td>0</td>
+                    <td class="del"><img th:src="@{/images/btn_calc_del.svg}"></td>
                 </tr>
             </table>
-            <a class="btn btn-warning w-100 rounded-0 pt-3 pb-3 btn-close-keypad">완료</a>
+            <a class="btn btn-gold text-white w-100 rounded-0 pt-4 pb-4 btn-close-keypad">완료</a>
         </div>
     </th:block>
 </th:block>

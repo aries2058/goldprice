@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @ToString(exclude = "board")

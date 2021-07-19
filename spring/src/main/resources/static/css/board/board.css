@@ -45,3 +45,34 @@
     background-size: cover;
     border:1px solid #E4E3E3
 }
+
+.b-writer{
+    font-size: 0.9rem;
+    line-height: 14px;
+}
+.b-writer p{
+    font-weight: bold;
+}
+.b-writer small{
+    color:#A8A8A8
+}
+.b-title{
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+.b-photo{
+    min-height: 100px;
+}
+.b-photo img{
+    width:100%;
+    margin-bottom: 4px;
+}
+.b-contents{
+    white-space: normal; line-height: 1.2; height: 2.4em; text-align: left;
+    word-wrap: break-word; display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;
+    width: 100%;
+}
+.b-comment{
+    font-size: 0.9rem;
+}
