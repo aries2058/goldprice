@@ -55,10 +55,8 @@ public class ImageService {
         return images.getId();
     }
 
-    public Long saveImageToFile(String user_id, MultipartFile multipartFile) throws Exception {
-        Images images = fileHandler.parseFileInfo(user_id, multipartFile);
-        imagesRepository.save(images);
-
-        return images.getId();
+    public String saveImageToFile(String user_id, MultipartFile multipartFile) throws Exception {
+        String ret = fileHandler.parseFileInfo(user_id, multipartFile);
+        return ret;
     }
 }

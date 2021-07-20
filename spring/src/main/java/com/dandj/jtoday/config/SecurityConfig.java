@@ -52,8 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/main/splash").permitAll()
                 .antMatchers("/auth/*").permitAll()
-                .antMatchers("/func/*").permitAll()
-                .antMatchers("/storage/*").permitAll();
+                .antMatchers("/func/*").permitAll();
 
         //http.rememberMe().tokenValiditySeconds(60*60*7).userDetailsService(memberDetailsService);
     }

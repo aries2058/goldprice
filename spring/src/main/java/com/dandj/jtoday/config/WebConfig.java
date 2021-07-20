@@ -25,11 +25,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         registry
-                .addResourceHandler("/jtoday/**");
-        registry
-                .addResourceHandler("/jtoday/storage/**")
-                .addResourceLocations(uploadPath);
-
+                .addResourceHandler("/jtoday/**").addResourceLocations(this.uploadPath);
     }
 
     @Override

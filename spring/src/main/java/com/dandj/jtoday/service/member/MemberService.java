@@ -19,7 +19,7 @@ public interface MemberService {
     MemberDto getMember(String userId);
     String register(MemberDto memberDto);
     void update(MemberDto dto);
-    void updateMarketId(String bizNo, Long marketId, Long imageId);
+    void updateMarketId(String bizNo, Long marketId, String imagePath);
     void updatePassword(String userid, String password);
     String findId(String email, String mobile);
     void confirmMember(String userid, String confirm);
@@ -34,7 +34,7 @@ public interface MemberService {
                 .bizNo(memberDto.getBiz_no())
                 .bizNm(memberDto.getBiz_nm())
                 .marketId(memberDto.getMarket_id())
-                .imageId(memberDto.getImage_id())
+                .imagePath(memberDto.getImage_path())
                 .tel(memberDto.getTel())
                 .confirmYn("N")
                 .email(memberDto.getEmail())
@@ -57,7 +57,7 @@ public interface MemberService {
                 .tel(entity.getTel())
                 .email(entity.getEmail())
                 .market_id(entity.getMarketId())
-                .image_id(entity.getImageId())
+                .image_path(entity.getImagePath())
                 .confirm_yn(entity.getConfirmYn())
                 .regdt(entity.getRegDate())
                 .uuid(entity.getUuid())
@@ -76,7 +76,8 @@ public interface MemberService {
                 .tel(entity.getTel())
                 .email(entity.getEmail())
                 .market_id(entity.getMarketId())
-                .image_id(entity.getImageId())
+                .image_path(entity.getImagePath())
+                .image_path(entity.getImagePath())
                 .token(token)
                 .uuid(entity.getUuid())
                 .confirm_yn(entity.getConfirmYn())
@@ -95,7 +96,7 @@ public interface MemberService {
                 .tel(entity.getTel())
                 .email(entity.getEmail())
                 .market_id(entity.getMarketId())
-                .image_id(entity.getImageId())
+                .image_path(entity.getImagePath())
                 .confirm_yn(entity.getConfirmYn())
                 .regdt(entity.getRegDate())
                 .images_ids(imgIds)

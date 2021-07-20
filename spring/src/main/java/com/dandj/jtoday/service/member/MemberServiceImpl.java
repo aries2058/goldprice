@@ -1,9 +1,11 @@
 package com.dandj.jtoday.service.member;
 
 import com.dandj.jtoday.dto.member.MemberDto;
+import com.dandj.jtoday.entity.comm.Images;
 import com.dandj.jtoday.entity.comm.PushToken;
 import com.dandj.jtoday.entity.member.Member;
 import com.dandj.jtoday.entity.member.MemberImages;
+import com.dandj.jtoday.repository.comm.ImagesRepository;
 import com.dandj.jtoday.repository.comm.PushTokenRepository;
 import com.dandj.jtoday.repository.member.MemberImagesRepository;
 import com.dandj.jtoday.repository.member.MemberRepository;
@@ -27,7 +29,7 @@ public class MemberServiceImpl implements MemberService {
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
     private final MemberImagesRepository memberImagesRepository;
-    private final PushTokenRepository pushTokenRepository;
+    private final ImagesRepository imagesRepository;
 
     @Override
     public List<MemberDto> getMemberListByBizNo(String bizNo) {
@@ -148,12 +150,12 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void updateMarketId(String bizNo, Long marketId, Long imageId) {
+    public void updateMarketId(String bizNo, Long marketId, String imagePath) {
         Optional<List<Member>> data = memberRepository.findMembersByBizNo(bizNo);
         data.ifPresent(members->{
             members.forEach(x->{
                 x.setMarketId(marketId);
-                x.setImageId(imageId);
+                x.setImagePath(imagePath);
                 memberRepository.save(x);
             });
         });

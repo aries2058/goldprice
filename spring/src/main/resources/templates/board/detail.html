@@ -12,9 +12,14 @@
             <input type="hidden" th:value="${param.typ}" id="typ" />
 
             <div>
-                <div class="b-writer">
-                    <p class="mb-0 text-secondary"><span id="biznm"></span>(<span id="usernm"></span>)</p>
-                    <small id="moddt"></small>
+                <div class="b-writer d-flex justify-content-start">
+                    <div>
+                        <img id="writer-photo" th:src="@{/images/icon_market.svg}" />
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0"><span id="biznm"></span>(<span id="usernm"></span>)</p>
+                        <small id="moddt"></small>
+                    </div>
                 </div>
                 <div class="b-title mt-2" id="title"></div>
                 <div class="b-photo"></div>
@@ -37,12 +42,24 @@
             </div>
         </div>
 
-        <div style="height: 200px"></div>
+        <div style="height: 80px"></div>
         <script type="text/template" id="tmpl-list">
             <% _.each(data, function(v, i){%>
             <div>
-                <div class="c-writer"><span class="text-secondary"><%-v.biz_nm%>(<%-v.user_nm%>)</span><br /><span class="moddt"><%- dateFormat(v.moddt, 'yyyy-MM-dd hh:mm:ss')%></span></div>
-                <div>
+                <div class="b-writer d-flex justify-content-start">
+                    <div>
+                        <% if(v.writer_photo != null){%>
+                        <img src="<%- _display + v.writer_photo %>" />
+                        <%}else{%>
+                        <img src="<%- _host + '/images/icon_market.svg' %>" />
+                        <%}%>
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0"><%- v.biz_nm %>(<%- v.user_nm %>)</p>
+                        <small><%- dateFormat(v.moddt, 'yyyy-MM-dd hh:mm:ss') %></small>
+                    </div>
+                </div>
+                <div class="ps-5">
                     <%- v.contents %>
                 </div>
             </div>

@@ -34,7 +34,7 @@ public class Member extends BaseEntity {
     @Column(length = 1)
     private String confirmYn;
     private Long marketId;
-    private Long imageId;
+    private String imagePath;
     private Long uuid;
 
     @ElementCollection(fetch= FetchType.LAZY)

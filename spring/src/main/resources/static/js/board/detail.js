@@ -1,4 +1,15 @@
 let imgHtml = '';
+
+$(window).scroll(function() {
+    if($(window).scrollTop() + $(window).height() == $(document).height()) {
+        if($('#text-comment').attr('rows') == 1){
+            $('#text-comment').attr('rows', 4)
+        }
+    }else{
+        $('#text-comment').attr('rows', 1)
+    }
+});
+
 $(function () {
     $.ajax({
         url: _host + '/board/getBoard',
@@ -11,6 +22,8 @@ $(function () {
             $('#userid').text(res.writer)
             $('#moddt').text(dateFormat(res.moddt, 'yyyy-MM-dd hh:mm:ss'))
             $('#comment-cnt').text(res.cmt_cnt);
+            if(res.writer_photo != null)
+            $('#writer-photo').attr('src', _display + res.writer_photo);
 
             if(res.image_ids.length > 0){
                 _.each(res.image_ids, function(v){
@@ -27,16 +40,6 @@ $(function () {
         }
     })
     getComments();
-
-    $('#text-comment').click(function(){
-        if($(this).attr('rows') == 1){
-            $(this).attr('rows', 4)
-        }
-    })
-    $('#text-comment').focusout(function(){
-        $('#text-comment').attr('rows', 1)
-    })
-
     $('#btn-reply').click(function (){
         if($('#text-comment').val() == ''){
             modal.alert('내용을 입력하세요.')
@@ -52,6 +55,7 @@ $(function () {
                     cmt_cnt: parseInt($('#comment-cnt').text()) +1
                 },
                 success: function (res){
+                    $('#text-comment').val('')
                     getComments();
                 }
             })

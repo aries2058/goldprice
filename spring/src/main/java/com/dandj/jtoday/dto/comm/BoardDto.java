@@ -19,13 +19,13 @@ public class BoardDto {
     private String title;
     private String contents;
     private String writer;
+    private String writer_photo;
     private String biz_nm;
     private String user_nm;
     private String lock_yn;
     private LocalDateTime regdt;
     private LocalDateTime moddt;
     private int cmt_cnt;
-    private byte[] mainImage;
 
     @Builder.Default
     private List<Long> image_ids = new ArrayList<>();

@@ -20,9 +20,18 @@
         <script type="template/text" id="tmpl-list">
             <% _.each(data, function(v, i){%>
             <div class="border-bottom pb-5 mb-3">
-                <div class="b-writer">
-                    <p class="mb-0 text-secondary"><%- v.biz_nm %>(<%- v.user_nm %>)</p>
-                    <small><%- dateFormat(v.moddt, 'yyyy-MM-dd hh:mm:ss') %></small>
+                <div class="b-writer d-flex justify-content-start">
+                    <div>
+                        <% if(v.writer_photo != null){%>
+                        <img src="<%- _display + v.writer_photo %>" />
+                        <%}else{%>
+                        <img th:src="@{images/icon_market.svg}" />
+                        <%}%>
+                    </div>
+                    <div class="p-2">
+                        <p class="mb-0"><%- v.biz_nm %>(<%- v.user_nm %>)</p>
+                        <small><%- dateFormat(v.moddt, 'yyyy-MM-dd hh:mm:ss') %></small>
+                    </div>
                 </div>
                 <div class="b-title mt-2"><%- v.title%></div>
                 <% if(v.image_ids.length > 0){%>

@@ -39,7 +39,6 @@ public class Market extends BaseEntity {
     @Column(length = 500, nullable = false)
     private String addrDetail;
 
-    private Long imageId;   // 대표이미지
     private Long mapId;     // 빌딩
 
     private String marketTyp;   // 매장구분

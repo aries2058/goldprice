@@ -31,18 +31,7 @@ $(function (){
                 $('#link_kakao').val(res.link_kakao)
                 $('#link_sns').val(res.link_sns)
                 $('#hot_yn').val(res.hot_yn)
-
-
-                if(res.image_id != null){
-
-                    $.ajax({
-                        url: _host + '/func/getImage',
-                        data: {id: res.image_id},
-                        success: function (res){
-                            $('#btn-main-photo').css('backgroundImage', 'url('+res+')');
-                        }
-                    })
-                }
+                $('#btn-main-photo').css('backgroundImage', 'url(' + _display + _user.image_path +')');
 
                 if(res.image_ids != null && res.image_ids.length > 0){
                     let prms = [];
@@ -186,7 +175,7 @@ function uploadMarketPhotos(callback, image_id){
         callback(image_id, values)
     })
 }
-let register = function(image_id, values){
+let register = function(image_path, values){
     let item_typ = '';
     _.each($('.item_typ'), function(v){
         if($(v).is(':checked')){
@@ -203,7 +192,7 @@ let register = function(image_id, values){
             addr_detail: $('#addr_detail').val(),
             tel: $('#tel').val(),
             contents: $('#contents').val(),
-            image_id: image_id ==null ? _market.image_id : image_id,
+            image_path: image_path ==null ? _market.image_path : image_path,
             map_id: _market.map_id,
             writer: _user.user_id,
             image_ids: values,
@@ -217,10 +206,10 @@ let register = function(image_id, values){
                 data:{
                     bizNo : _user.biz_no,
                     marketId: market_id,
-                    imageId: image_id,
+                    imagePath: image_path,
                 },
                 success: function (){
-                    _user.image_id = image_id;
+                    _user.image_path = image_path;
                     _user.market_id = market_id;
                     localStorage.setItem('profile', JSON.stringify(_user))
                     opener.parent.location.reload();

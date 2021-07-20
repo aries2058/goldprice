@@ -24,7 +24,7 @@ public class MarketDto {
     private String tel;
     private String email;
     private String contents;
-    private Long image_id;
+    private String image_path;
     private Long map_id;
     private String writer;
     private LocalDateTime regdt;

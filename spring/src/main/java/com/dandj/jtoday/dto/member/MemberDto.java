@@ -26,6 +26,7 @@ public class MemberDto {
     private String confirm_yn;
     private Long market_id;
     private Long image_id;
+    private String image_path;
     private String ipaddr;
     private String user_typ;
     private String token;

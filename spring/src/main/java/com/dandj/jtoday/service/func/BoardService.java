@@ -155,6 +155,7 @@ public class BoardService {
                 .title(entity.getTitle())
                 .contents(contents)
                 .writer(entity.getWriter())
+                .writer_photo(member.getImagePath())
                 .regdt(entity.getRegDate())
                 .moddt(entity.getModDate())
                 .biz_nm(member.getBizNm())

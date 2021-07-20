@@ -17,7 +17,7 @@ public class FileHandler {
     @Value("${app.upload.path}")
     private String uploadPath;
 
-    public Images parseFileInfo(String user_id, MultipartFile multipartFile) throws Exception{
+    public String parseFileInfo(String user_id, MultipartFile multipartFile) throws Exception{
         String absolutePath = new File(uploadPath).getAbsolutePath();
         String contentType = multipartFile.getContentType();
         String originalFileExtension = ".png";
@@ -36,15 +36,10 @@ public class FileHandler {
         if(!file.exists()){
             file.mkdirs();
         }
-        String str = path + "/" + new_file_name;
-        byte[] buff = str.getBytes();
-        Blob blob = new SerialBlob(buff);
-        Images images = Images.builder()
-                .content(blob).build();
 
         file = new File(absolutePath + path + "/" + new_file_name);
         multipartFile.transferTo(file);
 
-        return images;
+        return path + "/" + new_file_name;
     }
 }

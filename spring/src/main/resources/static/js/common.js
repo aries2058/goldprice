@@ -1,4 +1,5 @@
 let _host = '/jtoday'
+let _display = 'http://mnisdh.synology.me:7070/jtoday/func/display?fileName=';
 let _user = null;
 
 $(function(){
@@ -60,16 +61,7 @@ function dispSidebar(){
         $('.sidebar').animate({
             right:0
         })
-        if(!$('.sidebar #btn-main-photo').hasClass('on') && _user.image_id !=null){
-            $.ajax({
-                url: _host + '/func/getImage',
-                data: {id: _user.image_id},
-                success: function (res){
-                    $('#btn-main-photo').addClass('on')
-                    $('#btn-main-photo').css('backgroundImage', 'url('+res+')');
-                }
-            })
-        }
+        $('#btn-main-photo').css('backgroundImage', 'url(' + _display + _user.image_path +')');
     })
     $('.btn-close-sidebar').on('click', ()=>{
         $('.back').hide();
