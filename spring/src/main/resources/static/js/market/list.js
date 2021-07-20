@@ -11,7 +11,4 @@ $(function (){
         }
     })
 
-    $('#btn-back').click(function (){
-        window.close();
-    })
 })

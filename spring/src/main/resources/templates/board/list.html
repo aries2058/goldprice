@@ -5,10 +5,7 @@
     <th:block th:fragment="content">
         <link th:href="@{/css/board/board.css}" rel="stylesheet">
         <input type="hidden" id="typ" value="01" />
-        <div class="fixed-top top-bar">
-            <span class="title">제품 요청</span>
-            <a class="position-absolute" id="btn-back"><img th:src="@{/images/icon_back.svg}" /></a>
-        </div>
+        <span class="top-bar-title title">제품 요청</span>
 
         <div class="d-flex tab board-tab mb-4">
             <div class="w-50 text-center p-3 on">전체</div>
@@ -18,7 +15,7 @@
         <div class="container-fluid screen on" id="all-list"></div>
         <div class="container-fluid screen" id="my-list"></div>
 
-        <a th:href="@{/board/write?typ=01}" class="position-fixed" style="bottom:60px; right:8px"><img th:src="@{/images/icon_write.svg}" /></a>
+        <a id="btn-board-write" class="position-fixed" style="bottom:60px; right:8px"><img th:src="@{/images/icon_write.svg}" /></a>
 
         <script type="template/text" id="tmpl-list">
             <% _.each(data, function(v, i){%>

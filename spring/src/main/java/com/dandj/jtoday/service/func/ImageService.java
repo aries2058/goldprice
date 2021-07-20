@@ -1,10 +1,12 @@
 package com.dandj.jtoday.service.func;
 
 import com.dandj.jtoday.entity.comm.Images;
+import com.dandj.jtoday.handler.FileHandler;
 import com.dandj.jtoday.repository.comm.ImagesRepository;
 import com.dandj.jtoday.service.market.MarketServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +22,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class ImageService {
     final private ImagesRepository imagesRepository;
+    final private FileHandler fileHandler;
 
     public byte[] getImage(Long imageId) throws SQLException {
         byte[] ret = new byte[0];
@@ -49,6 +52,13 @@ public class ImageService {
         Images images = Images.builder()
                 .content(content).build();
         imagesRepository.save(images);
+        return images.getId();
+    }
+
+    public Long saveImageToFile(String user_id, MultipartFile multipartFile) throws Exception {
+        Images images = fileHandler.parseFileInfo(user_id, multipartFile);
+        imagesRepository.save(images);
+
         return images.getId();
     }
 }

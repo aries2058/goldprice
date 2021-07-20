@@ -4,12 +4,8 @@
 <th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <link th:href="@{/css/admin/comm.css}" rel="stylesheet">
-        <link th:href="@{/css/board/qna.css}" rel="stylesheet">
-
-        <div class="fixed-top top-bar">
-            <span class="title">관리자</span>
-            <a class="position-absolute" id="btn-close"><img th:src="@{/images/btn_close.svg}" /></a>
-        </div>
+        <link th:href="@{/css/board/board.css}" rel="stylesheet">
+        <span class="top-bar-title title">관리자</span>
 
         <div class="d-flex mb-4 admintab">
             <div class="w-25 text-center p-3"><a th:href="@{/admin/member}">회원</a></div>
@@ -37,7 +33,6 @@
             </div>
             <%})%>
         </script>
-        <script th:src="@{/js/admin/comm.js}"></script>
         <script th:src="@{/js/admin/qna.js}"></script>
     </th:block>
 </th:block>

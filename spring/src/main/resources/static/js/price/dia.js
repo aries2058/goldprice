@@ -1,9 +1,5 @@
 let _price = null;
 $(function (){
-    $('#btn-close').click(function (){
-        history.back()
-    })
-
     $('#ct').keyup(function(){
         $('.filter').removeClass('on');
         if($(this).val()< 1){

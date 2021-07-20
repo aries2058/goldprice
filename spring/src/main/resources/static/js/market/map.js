@@ -3,6 +3,7 @@ let place = null;
 let markerLocation = null;
 
 $(function(){
+    $('.top-bar').remove();
     $('#map, #search-list').height($(window).height())
     let mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {

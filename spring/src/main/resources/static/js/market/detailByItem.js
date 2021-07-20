@@ -1,7 +1,4 @@
 $(function () {
-    $('#btn-back').click(function (){
-        history.back()
-    })
     $.ajax({
         url: _host + '/market/getMarket',
         data: {

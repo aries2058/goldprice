@@ -5,10 +5,7 @@
     <th:block th:fragment="content">
         <link th:href="@{/css/board/qna.css}" rel="stylesheet">
 
-        <div class="fixed-top top-bar">
-            <span class="title">시세조회</span>
-            <a class="position-absolute" id="btn-close"><img th:src="@{/images/btn_close.svg}" /></a>
-        </div>
+        <span class="top-bar-title title">시세조회</span>
 
         <div class="d-flex tab mb-4">
             <div class="w-50 text-center p-3"><a th:href="@{/price/gold}">금/은</a></div>

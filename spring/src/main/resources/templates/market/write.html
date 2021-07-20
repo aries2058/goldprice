@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
+<th:block th:replace="~{/_layout/basicLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <link th:href="@{/css/market/write.css}" rel="stylesheet">
         <input type="hidden" th:value="${param.id}" id="market_id" />
 
-        <div class="fixed-top top-bar">
-            <span class="title">업체 정보 변경</span>
-            <a class="position-absolute" id="btn-close"><img th:src="@{/images/btn_close.svg}" /></a>
-        </div>
+        <span class="top-bar-title title">업체 정보 변경</span>
 
         <div class="container-fluid">
             <div class="info">
@@ -22,8 +19,11 @@
                         </span>
                         </div>
                     </div>
-                    <input type="hidden" id="hid-main-photo" />
-                    <input type="file" id="file-main-photo" accept="image/*;capture=camera" style="display: none" />
+                    <form id="frm-file" encType="multipart/form-data">
+                        <input type="hidden" id="hid-main-photo" />
+                        <input type="hidden" id="user_id" name="user_id" />
+                        <input type="file" id="file" name="file" accept="image/*;capture=camera" style="display: none" />
+                    </form>
                     <div class="flex-grow-1 market_nm"></div>
                 </div>
                 <div class="mt-3">

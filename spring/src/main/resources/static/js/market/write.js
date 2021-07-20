@@ -88,17 +88,14 @@ $(function (){
         }
     })
 
-    $('#btn-close').click(function (){
-        history.back();
-    })
 
     $('#btn-main-photo').click(function (){
-        $('#file-main-photo').click()
+        $('#file').click()
     })
 
-    $('#file-main-photo').change(function (){
+    $('#file').change(function (){
         _flag_main_photo = true;
-        let file = $('#file-main-photo')[0].files[0];
+        let file = $('#file')[0].files[0];
         converterImage(file, function (dataURL){
             $('#hid-main-photo').val(dataURL);
             $('.main-photo').hide();
@@ -107,13 +104,16 @@ $(function (){
     })
 
     $('#btn-register').click(function (){
+        $('#user_id').val(_user.user_id)
         if(_flag_main_photo){
             $.ajax({
                 type: 'post',
-                url: _host + '/func/uploadImage',
-                data: {
-                    imageString : $('#hid-main-photo').val()
-                },
+                enctype: 'multipart/form-data',
+                processData: false,
+                contentType: false,
+                cache: false,
+                url: _host + '/func/uploadImageToFile',
+                data: new FormData($('#frm-file')[0]),
                 success: function(res){
                     if(_flag_photos){
                         uploadMarketPhotos(register, res);
@@ -216,11 +216,14 @@ let register = function(image_id, values){
                 url: _host + '/market/updateMarketId',
                 data:{
                     bizNo : _user.biz_no,
-                    marketId: market_id
+                    marketId: market_id,
+                    imageId: image_id,
                 },
                 success: function (){
                     _user.image_id = image_id;
                     _user.market_id = market_id;
+                    localStorage.setItem('profile', JSON.stringify(_user))
+                    opener.parent.location.reload();
                     modal.alert('등록되었습니다.')
                 }
             })

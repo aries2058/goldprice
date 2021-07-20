@@ -3,9 +3,6 @@ $(function(){
 
     $('#writer').val(_user.user_id)
 
-    $('#btn-back').click(function (){
-        history.back()
-    })
 
     $('#btn-submit').click(function (){
         modal.confirm('등록하시겠습니까?', function(values){

@@ -39,8 +39,8 @@ public class MarketController {
     }
 
     @GetMapping("/updateMarketId")
-    public ResponseEntity<String> updateMarketId(String bizNo, Long marketId) {
-        memberService.updateMarketId(bizNo, marketId);
+    public ResponseEntity<String> updateMarketId(String bizNo, Long marketId, Long imageId) {
+        memberService.updateMarketId(bizNo, marketId, imageId);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 

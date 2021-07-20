@@ -20,9 +20,6 @@ $(function(){
         }
     })
 
-    $('#btn-close').click(function (){
-        history.back()
-    })
 
     $('#btn-submit').click(function (){
         modal.confirm('등록하시겠습니까?', function (){

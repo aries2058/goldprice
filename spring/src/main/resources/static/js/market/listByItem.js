@@ -9,16 +9,15 @@ $(function (){
             $(this).addClass('on')
         }
     })
-    $('#btn-back').click(function (){
-        history.back()
-    })
     getHotList();
     getList();
+
+    $('.top-bar-area').appendTo($('.top-bar'))
 })
 
 $(document).on('click', '.link-detail', function (){
     let market = $(this).parents('.market')
-    location.href= _host + '/market/detailByItem?id=' + market.data('marketid')
+    window.open(_host + '/market/detailByItem?id=' + market.data('marketid'))
 })
 
 function getHotList(){

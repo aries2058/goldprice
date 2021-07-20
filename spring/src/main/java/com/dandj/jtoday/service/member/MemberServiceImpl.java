@@ -148,12 +148,12 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void updateMarketId(String bizNo, Long marketId) {
+    public void updateMarketId(String bizNo, Long marketId, Long imageId) {
         Optional<List<Member>> data = memberRepository.findMembersByBizNo(bizNo);
         data.ifPresent(members->{
             members.forEach(x->{
                 x.setMarketId(marketId);
-                x.setImageId(marketId);
+                x.setImageId(imageId);
                 memberRepository.save(x);
             });
         });

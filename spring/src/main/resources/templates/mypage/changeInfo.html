@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
+<th:block th:replace="~{/_layout/basicLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
-        <div class="fixed-top top-bar">
-            <a class="position-absolute" id="btn-back"><img th:src="@{/images/icon_back.svg}" /></a>
-            <span class="title after">내 정보 변경</span>
-        </div>
+        <span class="top-bar-title after">내 정보 변경</span>
 
         <div class="container-fluid">
             <label>사용자 이름</label>

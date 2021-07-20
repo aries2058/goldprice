@@ -13,6 +13,7 @@
 
         <script>
             $(function (){
+                $('.top-bar').eq(0).remove();
                 setTimeout(function (){
                     if( localStorage.getItem('autologin') != null && localStorage.getItem('autologin') != "N" ){
                         autologin();

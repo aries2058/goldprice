@@ -16,29 +16,8 @@
     <th:block th:replace="${content}"></th:block>
     <div class="bottom-empty" style="height: 160px;">&nbsp;</div>
 
-    <div class="container-fluid sidebar">
-        <div class="pt-2 pb-2 text-end">
-            <a class="btn btn-close-sidebar"><img th:src="@{/images/btn_close.svg}" /></a>
-            <div class="userinfo" id="btn-update-userinfo">
-                <a id="btn-main-photo"></a>
-                <div><span>&nbsp;&nbsp;</span> <span class="biznm"></span> <img th:src="@{/images/arrow-right.svg}" style="margin-top:-4px" /></div>
-                <span class="usernm" style="color:#7A7A7A"></span>
-            </div>
-        </div>
-        <ul class="list-group list-group-flush border-top">
-            <li class="list-group-item pb-2 border-0"><a th:href="@{/mypage/list}">
-                <img th:src="@{/images/icon_mypage.svg}" /> 내 정보 변경</a></li>
-            <li class="list-group-item pb-2 border-0"><a th:href="@{/board/qna}">
-                <img th:src="@{/images/icon_qna.svg}" /> 문의하기</a></li>
-            <li class="list-group-item pb-2 border-0"><a th:href="@{/mypage/chat}">
-                <img th:src="@{/images/icon_help.svg}" /> 도움말</a></li>
-            <li class="list-group-item pb-2 border-0"><a th:href="@{/auth/login}">
-                <img th:src="@{/images/icon_logout.svg}" /> 로그아웃</a></li>
-            <li class="list-group-item pb-2 border-0" style="margin-top:5px"><a id="menu-admin" th:href="@{/admin/qna}">
-                <img th:src="@{/images/icon_admin.svg}" /> 관리자</a></li>
-        </ul>
-    </div>
 
+    <div th:replace="/_layout/_sidebar.html :: fragment-sidebar"></div>
     <div th:replace="/_layout/_footer.html :: fragment-footer"></div>
     <div th:replace="/_layout/_modal.html :: fragment-modal"></div>
     </body>

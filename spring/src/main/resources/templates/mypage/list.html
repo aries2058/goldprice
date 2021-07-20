@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
+<th:block th:replace="~{/_layout/basicLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <style>
             .form-check-input:checked{
@@ -14,10 +14,7 @@
             }
         </style>
 
-        <div class="fixed-top top-bar">
-            <span class="title">내 정보 변경</span>
-            <a class="position-absolute" id="btn-close"><img th:src="@{/images/btn_close.svg}" /></a>
-        </div>
+        <span class="top-bar-title title">내 정보 변경</span>
 
         <div class="container-fluid">
             <ul class="list-group list-group-flush">
@@ -42,9 +39,6 @@
             $(function (){
                 $('.list-group-item.link').click(function (){
                     location.href = _host + $(this).data('link')
-                })
-                $('#btn-close').click(function (){
-                    window.history.back();
                 })
                 let push = getPush();
                 if(push.push_yn == 'Y'){

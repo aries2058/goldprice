@@ -1,6 +1,7 @@
 var arrIds = [];
 
 $(function(){
+    $('.top-bar').eq(0).remove();
     if($('#step2').hasClass('on')){
         $('#user_id').prop('readonly', true)
         $('#btn-submit').text('수정')
@@ -140,6 +141,10 @@ $(function(){
      imageConverter($('#img1'), 'canvas1', 'dispImg1');
      imageConverter($('#img2'), 'canvas2', 'dispImg2');
      imageConverter($('#img3'), 'canvas3', 'dispImg3');
+})
+
+$(document).on('click', '.idlist a', function(){
+    location.href = _host + '/auth/login?id=' + $(this).data('id')
 })
 
 function getUserInfo(){

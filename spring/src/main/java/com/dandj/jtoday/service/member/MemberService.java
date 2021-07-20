@@ -19,7 +19,7 @@ public interface MemberService {
     MemberDto getMember(String userId);
     String register(MemberDto memberDto);
     void update(MemberDto dto);
-    void updateMarketId(String bizNo, Long marketId);
+    void updateMarketId(String bizNo, Long marketId, Long imageId);
     void updatePassword(String userid, String password);
     String findId(String email, String mobile);
     void confirmMember(String userid, String confirm);

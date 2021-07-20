@@ -8,10 +8,24 @@
     <body>
     <link th:href="@{/css/page.css}" rel="stylesheet">
 
+    <div class="fixed-top text-center top-bar">
+        <a class="position-absolute" id="btn-close"><img th:src="@{/images/btn_close.svg}" /></a>
+    </div>
+
     <div class="top-empty" style="height: 63px;">&nbsp;</div>
+
     <th:block th:replace="${content}"></th:block>
+    <div class="bottom-empty" style="height: 160px;">&nbsp;</div>
 
     <div th:replace="/_layout/_modal.html :: fragment-modal"></div>
+
+    <script>
+        $(function(){
+            $('#btn-close').click(function(){
+                window.close();
+            })
+        })
+    </script>
     </body>
 </th:block>
 </html>

@@ -4,9 +4,6 @@ $(function (){
     $('#mobile').val(_user.mobile)
     $('#email').val(_user.email)
 
-    $('#btn-back').click(function (){
-        window.history.back()
-    })
     $('#btn-register').click(function (){
         $.ajax({
             type: 'post',

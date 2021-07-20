@@ -8,6 +8,10 @@
     <body>
     <link th:href="@{/css/page.css}" rel="stylesheet">
 
+    <div class="fixed-top top-bar">
+        <a class="position-absolute" id="btn-back"><img th:src="@{/images/icon_back.svg}" /></a>
+        <a class="btn-open-sidebar position-absolute end-0 me-3" style="top:10px"><img th:src="@{/images/top_menu_dark.svg}" /></a>
+    </div>
     <div class="top-empty" style="height: 63px;">&nbsp;</div>
     <th:block th:replace="${content}"></th:block>
     <div class="bottom-empty" style="height: 160px;">&nbsp;</div>
@@ -17,8 +21,17 @@
             <div class="spinner-border text-gold" role="status"></div>
         </div>
     </div>
+
+    <div th:replace="/_layout/_sidebar.html :: fragment-sidebar"></div>
     <div th:replace="/_layout/_footer.html :: fragment-footer"></div>
     <div th:replace="/_layout/_modal.html :: fragment-modal"></div>
+    <script>
+        $(function(){
+            $('#btn-back').click(function(){
+                history.back()
+            })
+        })
+    </script>
     </body>
 </th:block>
 </html>

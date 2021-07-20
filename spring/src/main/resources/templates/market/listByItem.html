@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="~{/_layout/basicLayout :: setContent(~{this::content})}">
+<th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <link th:href="@{/css/market/byitem.css}" rel="stylesheet">
         <input type="hidden" id="typ" th:value="${param.typ}" />
-
-        <div class="fixed-top top-bar">
-            <a class="position-absolute" id="btn-back"><img th:src="@{/images/icon_back.svg}" /></a>
-            <span class="title">종로 도매 업체</span>
+        <span class="top-bar-title title">종로 도매 업체</span>
+        <div class="top-bar-area">
             <div class="search-bar">
                 <input type="text" id="search-market" class="w-100" placeholder="업체명 또는 제품으로 검색하세요." />
                 <a class="position-absolute" id="btn-search"><img th:src="@{/images/icon_search.svg}" /></a>

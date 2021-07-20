@@ -1,9 +1,5 @@
 let imgHtml = '';
 $(function () {
-    $('#btn-back').click(function (){
-        window.close()
-    })
-
     $.ajax({
         url: _host + '/board/getBoard',
         data: {id : $('#bid').val()},

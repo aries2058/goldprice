@@ -10,7 +10,7 @@
         <div class="text-center w-100" style="margin-top:20%"><img th:src="@{/images/logo_green.svg}" /></div>
 
         <div class="container-fluid">
-            <input type="text" id="userid" class="form-control w-100 border fw-light" placeholder="아이디" />
+            <input type="text" id="userid" class="form-control w-100 border fw-light" placeholder="아이디" th:value="${param.id}" />
             <input type="password" id="pw" class="form-control w-100 border fw-light" placeholder="비밀번호" />
             <a class="btn w-100 btn-gold text-white fw-light" id="btn-login">로그인</a>
             <label class="lb-autologin fw-light lb-checkbox"><input type="checkbox" id="autologin" class="form-check-input" />
@@ -18,7 +18,7 @@
                 <span>로그인 유지</span>
             </label>
             <div class="d-flex justify-content-center">
-                <a class="btn-gray" th:href="@{/auth/findId}">계정찾기</a>
+                <a class="btn-gray" id="btn-findId">계정찾기</a>
                 <small class="sm-bar">|</small>
                 <a class="btn-gray" th:href="@{/auth/join}">회원가입</a>
             </div>

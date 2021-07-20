@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
+<th:block th:replace="~{/_layout/basicLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <link th:href="@{/css/board/board.css}" rel="stylesheet">
         <link th:href="@{/css/board/detail.css}" rel="stylesheet">
-        <div class="fixed-top top-bar">
-            <a class="position-absolute" id="btn-back"><img th:src="@{/images/icon_back.svg}" /></a>
-            <span class="title">제품 요청</span>
-        </div>
+        <span class="top-bar-title title">제품 요청</span>
 
         <div class="container-fluid board-info">
             <input type="hidden" th:value="${param.id}" id="bid" />

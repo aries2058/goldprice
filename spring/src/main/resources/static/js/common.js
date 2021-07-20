@@ -8,6 +8,10 @@ $(function(){
     console.log(_user)
     dispSidebar();
 
+    if($('.top-bar-title').length > 0){
+        $('.top-bar-title').prependTo($('.top-bar'))
+    }
+
     $('input[type=checkbox]').change(function(){
         let p = $(this).parents('.lb-checkbox')
         if(p.length > 0){
@@ -79,8 +83,14 @@ function dispSidebar(){
             right:"-75%"
         })
     })
+
     $('#btn-update-userinfo').click(function(){
-        location.href = _host + '/market/write?id=' + (_user.market_id);
+        window.open(_host + '/market/write?id=' + (_user.market_id))
+    })
+    $('.sidebar .list-group-item a').click(function(){
+        if($(this).data('url')){
+            window.open(_host + $(this).data('url'))
+        }
     })
 }
 

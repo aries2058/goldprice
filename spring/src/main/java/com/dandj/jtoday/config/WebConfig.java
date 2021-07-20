@@ -9,6 +9,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.io.File;
+
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
@@ -17,10 +19,17 @@ public class WebConfig implements WebMvcConfigurer {
         return builder.build();
     }
 
+    @Value("${app.upload.path}")
+    private String uploadPath;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         registry
                 .addResourceHandler("/jtoday/**");
+        registry
+                .addResourceHandler("/jtoday/storage/**")
+                .addResourceLocations(uploadPath);
+
     }
 
     @Override

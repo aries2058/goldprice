@@ -1,5 +1,7 @@
 
 $(function(){
+    $('.top-bar').eq(0).remove();
+
     $('#btn-login').click(function(){
         login()
     })
@@ -7,6 +9,13 @@ $(function(){
         if(e.keyCode == 13){
             login()
         }
+    })
+
+    $('#btn-findId').click(function(){
+        window.open(_host + '/auth/findId')
+    })
+    $('#btn-join').click(function(){
+        window.open(_host + '/auth/join')
     })
 })
 

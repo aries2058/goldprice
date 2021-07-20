@@ -5,9 +5,11 @@ import com.dandj.jtoday.dto.market.MarketMapDto;
 import com.dandj.jtoday.entity.market.Market;
 import com.dandj.jtoday.entity.market.MarketImages;
 import com.dandj.jtoday.entity.market.MarketMap;
+import com.dandj.jtoday.entity.member.Member;
 import com.dandj.jtoday.repository.market.MarketImagesRepository;
 import com.dandj.jtoday.repository.market.MarketMapRepository;
 import com.dandj.jtoday.repository.market.MarketRepository;
+import com.dandj.jtoday.repository.member.MemberRepository;
 import com.dandj.jtoday.spec.MarketSpec;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -32,6 +34,7 @@ public class MarketServiceImpl implements MarketService{
     public Long register(MarketDto marketDto) {
         Market data = dtoToEntity(marketDto);
         marketRepository.save(data);
+
         if(!marketDto.getImage_ids().isEmpty()){
             Optional<List<MarketImages>> imgs = marketImagesRepository.findMarketImagesByMarketId(marketDto.getId());
             imgs.ifPresent(x-> x.forEach(img->{

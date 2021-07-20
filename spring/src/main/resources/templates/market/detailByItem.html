@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
+<th:block th:replace="~{/_layout/basicLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
         <link th:href="@{/css/market/byitem.css}" rel="stylesheet">
         <style>
@@ -10,10 +10,7 @@
 
         <input type="hidden" th:value="${param.id}" id="market_id" />
 
-        <div class="fixed-top top-bar mb-0">
-            <a class="position-absolute" id="btn-back"><img th:src="@{/images/icon_back.svg}" /></a>
-            <span class="title"></span>
-        </div>
+        <span class="top-bar-title title"></span>
 
         <div class="carousel slide pb-0" data-bs-ride="carousel" id="carousel-photo-area">
             <div class="carousel-inner" id="photo-area">

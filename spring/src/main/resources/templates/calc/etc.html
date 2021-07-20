@@ -5,11 +5,7 @@
     <th:block th:fragment="content">
         <link rel="stylesheet" th:href="@{/css/calc/calc.css}" />
         <script th:src="@{/js/calc/etc.js}"></script>
-
-        <div class="fixed-top top-bar">
-            <span class="title">잡금 계산기</span>
-            <a class="position-absolute" id="btn-back"><img th:src="@{/images/icon_back.svg}" /></a>
-        </div>
+        <span class="top-bar-title title">잡금 계산기</span>
 
         <div class="d-flex tab board-tab mb-4">
             <div class="w-50 text-center p-3"><a th:href="@{/calc/gold}">금 계산기</a></div>

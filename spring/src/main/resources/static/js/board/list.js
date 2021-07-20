@@ -1,4 +1,8 @@
 $(function (){
+    $('#btn-board-write').click(function(){
+        window.open(_host + '/board/write?typ=01')
+    })
+
     getList($('#typ').val(), null, null, function (res){
         let tmp = _.template($('#tmpl-list').html());
         $('#all-list').append(tmp({data: res}))
@@ -37,9 +41,6 @@ $(function (){
                 })
             }
         }
-    })
-    $('#btn-back').click(function (){
-        history.back()
     })
 })
 $(document).on('click', '.link', function (){

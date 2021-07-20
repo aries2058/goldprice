@@ -13,10 +13,7 @@
             }
         </style>
 
-        <div class="fixed-top top-bar">
-            <span class="title">관리자</span>
-            <a class="position-absolute" id="btn-close"><img th:src="@{/images/btn_close.svg}" /></a>
-        </div>
+        <span class="top-bar-title title">관리자</span>
 
         <div class="d-flex mb-4 admintab">
             <div class="w-25 text-center p-3"><a th:href="@{/admin/member}">회원</a></div>
@@ -129,7 +126,6 @@
             </div>
         </div>
 
-        <script th:src="@{/js/admin/comm.js}"></script>
         <script th:src="@{/js/admin/price.js}"></script>
     </th:block>
 </th:block>

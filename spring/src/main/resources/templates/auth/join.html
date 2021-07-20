@@ -28,7 +28,7 @@
                 <p clss="text-center">이미 가입된 정보가 있습니다.</p>
                 <div class="idlist">
                     <% _.each(data, function(v, i){%>
-                    <a><%- v.user_id %>
+                    <a data-id="<%- v.user_id %>"><%- v.user_id %>
                     <%if(v.confirm_yn != "Y"){%>
                     <span>(가입승인중)</span>
                     <%}%></a>

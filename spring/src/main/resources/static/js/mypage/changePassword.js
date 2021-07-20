@@ -20,9 +20,6 @@ $(function (){
         }
     });
 
-    $('#btn-back').click(function (){
-        window.history.back()
-    })
     $('#btn-register').click(function (){
         $.ajax({
             type: 'post',
