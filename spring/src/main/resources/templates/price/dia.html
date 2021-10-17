@@ -14,70 +14,161 @@
             <div class="w-50 text-center p-3"><a th:href="@{/price/pearl}">진주</a></div>
         </div>
 
-        <div class="mt-5">
-            <h2>준비중입니다.</h2>
+<!--        <div class="mt-5">-->
+<!--            <h2>준비중입니다.</h2>-->
+<!--        </div>-->
+
+        <ul class="nav nav-tabs justify-content-around" role="tablist">
+            <li class="nav-item col-3" role="presentation">
+                <button class="nav-link active w-100" id="tab01" data-bs-toggle="tab" data-bs-target="#content01" type="button" role="tab" aria-controls="home" aria-selected="true">우신</button>
+            </li>
+            <li class="nav-item col-3" role="presentation">
+                <button class="nav-link w-100" id="tab02" data-bs-toggle="tab" data-bs-target="#content02" type="button" role="tab" aria-controls="profile" aria-selected="false">현대</button>
+            </li>
+            <li class="nav-item col-3" role="presentation">
+                <button class="nav-link w-100" id="tab03" data-bs-toggle="tab" data-bs-target="#content03" type="button" role="tab" aria-controls="contact" aria-selected="false">GIA</button>
+            </li>
+        </ul>
+        <div class="container-fluid">
+            <div class="row gx-0 mt-2">
+                <div class="col-12 position-relative"><input id="ct" type="number" class="form-control border text-end pe-5" value="0.3" placeholder="중량" />
+                    <span class="position-absolute" style="top:12px; right:16px">ct</span></div>
+            </div>
+            <div id="autoct"></div>
+        </div>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="content01" role="tabpanel" aria-labelledby="tab01">
+                <div class="container-fluid">
+                    <div class="filter under pt-1 ps-3 pe-3 pb-1 rounded mt-2">
+                        <div class="row">
+                            <div class="col-2 pt-1">색상</div>
+                            <div class="col-10">
+                                <a class="btn rounded-0 border-0 on border-gold f-color">G</a>
+                                <a class="btn rounded-0 border-0 border-gold f-color">F</a>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-2 pt-1">등급</div>
+                            <div class="col-10">
+                                <a class="btn rounded-0 border-0 border-gold on f-level">SI2</a>
+                                <a class="btn rounded-0 border-0 border-gold f-level">SI1</a>
+                                <a class="btn rounded-0 border-0 border-gold f-level">VVS1</a>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-2 pt-1">컷팅</div>
+                            <div class="col-10">
+                                <a class="btn rounded-0 border-0 border-gold on f-cut">GOOD</a>
+                                <a class="btn rounded-0 border-0 border-gold f-cut">V.GOOD</a>
+                                <a class="btn rounded-0 border-0 border-gold f-cut">EX</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter up mt-3">
+                        <div class="row">
+                            <div class="col-2 pt-1">색상</div>
+                            <div class="col-10">
+                                <a class="btn rounded-0 border-0 border-gold f-color on">F</a>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-2 pt-1">등급</div>
+                            <div class="col-10">
+                                <a class="btn rounded-0 border-0 border-gold on f-level">SI2</a>
+                                <a class="btn rounded-0 border-0 border-gold f-level">SI1</a>
+                                <a class="btn rounded-0 border-0 border-gold f-level">VS2</a>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-2 pt-1">컷팅</div>
+                            <div class="col-10">
+                                <a class="btn rounded-0 border-0 border-gold on f-cut">V.GOOD</a>
+                                <a class="btn rounded-0 border-0 border-gold f-cut">3EX</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="content02" role="tabpanel" aria-labelledby="tab02">
+                <div class="container-fluid">
+                    <div class="filter under pt-1 ps-3 pe-3 pb-1 rounded mt-2">
+                        <div class="row">
+                            <div class="col-2 pt-1">색상</div>
+                            <div class="col-10">
+                                <a class="btn rounded-0 border-0 on border-gold f-color">G</a>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-2 pt-1">등급</div>
+                            <div class="col-10">
+                                <a class="btn rounded-0 border-0 border-gold on f-level">SI2</a>
+                                <a class="btn rounded-0 border-0 border-gold f-level">SI1</a>
+                                <a class="btn rounded-0 border-0 border-gold f-level">VVS1</a>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-2 pt-1">컷팅</div>
+                            <div class="col-10">
+                                <a class="btn rounded-0 border-0 border-gold on f-cut">GOOD</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="content03" role="tabpanel" aria-labelledby="tab03">
+                <div class="filter under pt-1 ps-3 pe-3 pb-1 rounded mt-2">
+                    <div class="row">
+                        <div class="col-2 pt-1">색상</div>
+                        <div class="col-10">
+                            <a class="btn rounded-0 border-0 border-gold f-color">D</a>
+                            <a class="btn rounded-0 border-0 on border-gold f-color">E</a>
+                            <a class="btn rounded-0 border-0 border-gold f-color">F</a>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-2 pt-1">등급</div>
+                        <div class="col-10">
+                            <a class="btn rounded-0 border-0 border-gold on f-level">SI2</a>
+                            <a class="btn rounded-0 border-0 border-gold f-level">SI1</a>
+                            <a class="btn rounded-0 border-0 border-gold f-level">VS2</a>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-2 pt-1">컷팅</div>
+                        <div class="col-10">
+                            <a class="btn rounded-0 border-0 border-gold on f-cut">3EX</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-<!--        <ul class="nav nav-tabs" id="myTab" role="tablist">-->
-<!--            <li class="nav-item" role="presentation">-->
-<!--                <button class="nav-link active" id="tab01" data-bs-toggle="tab" data-bs-target="#content01" type="button" role="tab" aria-controls="home" aria-selected="true">우신</button>-->
-<!--            </li>-->
-<!--            <li class="nav-item" role="presentation">-->
-<!--                <button class="nav-link" id="tab02" data-bs-toggle="tab" data-bs-target="#content02" type="button" role="tab" aria-controls="profile" aria-selected="false">현대</button>-->
-<!--            </li>-->
-<!--            <li class="nav-item" role="presentation">-->
-<!--                <button class="nav-link" id="tab03" data-bs-toggle="tab" data-bs-target="#content03" type="button" role="tab" aria-controls="contact" aria-selected="false">GIA</button>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--        <div class="tab-content" id="myTabContent">-->
-<!--            <div class="tab-pane fade show active" id="content01" role="tabpanel" aria-labelledby="tab01">-->
-<!--                <div class="container-fluid">-->
-<!--                    <div class="row gx-0 mt-2">-->
-<!--                        <div class="col-12 position-relative"><input id="ct" type="number" class="form-control border text-end pe-5" placeholder="중량" />-->
-<!--                            <span class="position-absolute" style="top:12px; right:16px">ct</span></div>-->
-<!--                    </div>-->
-<!--                    <div class="filter under">-->
-<!--                        <div class="mt-2">-->
-<!--                            <label>색상 </label> <a class="btn on btn-light f-color">G</a> <a class="btn  btn-light f-color">F</a>-->
-<!--                        </div>-->
-<!--                        <div class="mt-2">-->
-<!--                            <label>등급 </label> <a class="btn on btn-light f-level">SI2</a> <a class="btn  btn-light f-level">SI1</a> <a class="btn  btn-light f-level">VVS1</a>-->
-<!--                        </div>-->
-<!--                        <div class="mt-2">-->
-<!--                            <label>컷팅 </label> <a class="btn on btn-light f-cut">GOOD</a> <a class="btn  btn-light f-cut">V.GOOD</a> <a class="btn  btn-light f-cut">EX</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="filter up">-->
-<!--                        <div class="mt-2">-->
-<!--                            <label>색상 </label> <a class="btn on btn-light f-color">F</a>-->
-<!--                        </div>-->
-<!--                        <div class="mt-2">-->
-<!--                            <label>등급 </label> <a class="btn on btn-light f-level">SI2</a> <a class="btn  btn-light f-level">SI1</a> <a class="btn  btn-light f-level">VS2</a>-->
-<!--                        </div>-->
-<!--                        <div class="mt-2">-->
-<!--                            <label>컷팅 </label> <a class="btn on btn-light f-cut">V.GOOD</a> <a class="btn  btn-light f-cut">3EX</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="tab-pane fade" id="content02" role="tabpanel" aria-labelledby="tab02">...</div>-->
-<!--            <div class="tab-pane fade" id="content03" role="tabpanel" aria-labelledby="tab03">...</div>-->
-<!--        </div>-->
-
-<!--        <div class="container-fluid">-->
-<!--            <table id="list" class="table"></table>-->
-<!--        </div>-->
+        <div class="container-fluid">
+            <a class="float-end text-secondary" th:href="@{/main/viewPhoto?src=price_dia}" target="_blank">전체보기</a>
+            <table id="list" class="table"></table>
+        </div>
 
         <script type="text/template" id="tmpl-list">
+            <tbody>
             <% if(data.length > 0){
             _.each(data, function(v){%>
             <tr>
-                <td><%- v.ct %></td>
-                <td><%- comma(v.price+'') %></td>
+                <td><%- v.ct %> ct</td>
+                <td><%- comma(v.price+'') %>원</td>
             </tr>
-            <%})}else{%>
+            <%})
+            }else{%>
             <tr><td>데이터가 없습니다.</td></tr>
             <%}%>
+            </tbody>
+        </script>
+
+        <script type="text/template" id="tmpl-autoct">
+            <ul class="list-group rounded-0">
+                <% _.each(data, function(v){%>
+                <li class="list-group-item border-top-0 text-end pe-5 ct-item"><%- v %></li>
+                <%})%>
+            </ul>
         </script>
         <script th:src="@{/js/price/dia.js}"></script>
     </th:block>

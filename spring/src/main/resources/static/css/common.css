@@ -60,6 +60,13 @@ pre{
 .text-gold{
     color:#36BEBF !important
 }
+.nav-link{
+    color:#868686 !important
+}
+.nav-link.active{
+    color:#36BEBF !important;
+    font-weight: bold;
+}
 .text-gold-dark{
     color:#0DAE99 !important
 }

@@ -20,16 +20,19 @@
             $(function (){
                 let idx = document.location.href.indexOf("=");
                 let p = document.location.href.substr(idx+1, document.location.href.length - idx -1)
-
-                _.each(p.split(","), function (v){
-                    $.ajax({
-                        url: _host + '/func/getImagePath',
-                        data: {id : v},
-                        success: function (img){
-                            $('#list').append('<img src="'+ _display+img  +'" />')
-                        }
+                if(document.location.href.indexOf('ids') > 0){
+                    _.each(p.split(","), function (v){
+                        $.ajax({
+                            url: _host + '/func/getImagePath',
+                            data: {id : v},
+                            success: function (img){
+                                $('#list').append('<img src="'+ _display+img  +'" />')
+                            }
+                        })
                     })
-                })
+                }else{
+                    $('#list').append('<img src="/jtoday/images/'+ p +'.png" />')
+                }
             })
         </script>
     </th:block>

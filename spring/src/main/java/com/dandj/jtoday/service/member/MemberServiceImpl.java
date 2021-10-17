@@ -76,8 +76,8 @@ public class MemberServiceImpl implements MemberService {
         Pageable pageable = PageRequest.of(sttPage, perPage);
         Page<Member> data = memberRepository.findAll(spec, pageable);
 
-        List<Long> imageIds = new ArrayList<>();
         data.forEach(x -> {
+            List<Long> imageIds = new ArrayList<>();
             memberImagesRepository.findMemberImagesByMember_UserId(x.getUserId()).forEach(y->{
                 imageIds.add(y.getImageId());
             });

@@ -1,10 +1,23 @@
 .filter{
     display: none;
+    background: #f9f9f9;
 }
 .filter.on{
     display: block;
 }
 
 .filter .btn.on{
-    background: #0DAE99;
+    color:#0DAE99;
+    font-weight: bolder;
+}
+.filter .btn{
+    color:#999;
+    font-weight: normal;
+    text-align: left;
+}
+#autoct {
+    display: none;
+}
+#autoct.on{
+    display: block;
 }
