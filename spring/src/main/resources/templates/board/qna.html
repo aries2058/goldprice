@@ -12,7 +12,7 @@
         <span class="top-bar-title title">1:1 문의</span>
 
         <div class="d-flex tab board-tab mb-4">
-            <div class="w-50 text-center p-3 on">1:1문의하기</div>
+            <div class="w-50 text-center p-3 on">1:1 문의하기</div>
             <div class="w-50 text-center p-3">나의 문의 내역</div>
         </div>
 
@@ -71,8 +71,8 @@
                 <div>
                     <img th:src="@{/images/arrow-reply.svg}" />
                     <span class="writer"><%-v.user_nm%></span> <span class="moddt"><%- dateFormat(v.moddt, 'yyyy-MM-dd hh:mm:ss')%></span>
-                    <div>
-                        <pre><%- v.contents %></pre>
+                    <div class="comment">
+                        <%- v.contents %>
                     </div>
                 </div>
                 <%})%>

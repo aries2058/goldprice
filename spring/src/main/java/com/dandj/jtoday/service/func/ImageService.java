@@ -24,39 +24,25 @@ public class ImageService {
     final private ImagesRepository imagesRepository;
     final private FileHandler fileHandler;
 
-    public byte[] getImage(Long imageId) throws SQLException {
-        byte[] ret = new byte[0];
-        Optional<Images> img = imagesRepository.findById(imageId);
-        if(img.isPresent()){
-            int len = (int)img.get().getContent().length();
-            ret = img.get().getContent().getBytes(1, len);
-        }
+    public String uploadMarketMainImage(String user_id, MultipartFile multipartFile) throws Exception {
+        String ret = fileHandler.parseFileInfoForMarketMainImage(user_id, multipartFile);
         return ret;
     }
 
-    public List<Long> uploadImageFiles(MultipartFile[] uploadFiles) throws IOException, SQLException {
-        List<Long> ret = new ArrayList<>();
-        for(MultipartFile uploadFile: uploadFiles){
-            Blob content = new SerialBlob(uploadFile.getBytes());
-            Images images = Images.builder()
-                    .content(content).build();
-            imagesRepository.save(images);
-            ret.add(images.getId());
-        }
-        return  ret;
-    }
-
-    public Long uploadImage(String imageString) throws SQLException {
-        byte[] img = imageString.getBytes(StandardCharsets.UTF_8);
-        Blob content = new SerialBlob(img);
+    public Long uploadImage(String typ, MultipartFile[] multipartFile) throws Exception {
+        String ret = fileHandler.parseFileInfo(multipartFile, typ);
         Images images = Images.builder()
-                .content(content).build();
+                .path(ret).build();
         imagesRepository.save(images);
         return images.getId();
     }
 
-    public String saveImageToFile(String user_id, MultipartFile multipartFile) throws Exception {
-        String ret = fileHandler.parseFileInfo(user_id, multipartFile);
-        return ret;
+    public String getImagePath(Long id){
+        Optional<Images> images = imagesRepository.findById(id);
+        String path = "";
+        if(images.isPresent()){
+            path = images.get().getPath();
+        }
+        return path;
     }
 }

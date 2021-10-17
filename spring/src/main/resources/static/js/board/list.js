@@ -43,11 +43,9 @@ $(function (){
         }
     })
 })
-$(document).on('click', '.link', function (){
-    window.open(_host + '/board/detail?id='+$(this).data('bid')+'&typ=' + $('#typ').val());
-})
-$(document).on('click', '.b-photo', function (){
-    window.open(_host + '/board/detail?id='+$(this).data('bid')+'&typ=' + $('#typ').val());
+$(document).on('click', '.link, .b-contents, .b-photo', function (){
+    let $obj = $(this).parents('.board-item')
+    window.open(_host + '/board/detail?id='+$obj.data('bid')+'&typ=' + $('#typ').val());
 })
 
 function getImage(obj, id){

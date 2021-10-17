@@ -12,22 +12,31 @@
             <input type="hidden" th:value="${param.typ}" id="typ" />
 
             <div>
-                <div class="b-writer d-flex justify-content-start">
-                    <div>
-                        <img id="writer-photo" th:src="@{/images/icon_market.svg}" />
+                <div class="b-writer d-flex justify-content-between">
+                    <div class="d-flex justify-content-start">
+                        <div>
+                            <img id="writer-photo" th:src="@{/images/icon_market.svg}" />
+                        </div>
+                        <div class="p-2">
+                            <p class="mb-0"><span id="biznm"></span>(<span id="usernm"></span>)</p>
+                            <small id="moddt"></small>
+                        </div>
                     </div>
-                    <div class="p-2">
-                        <p class="mb-0"><span id="biznm"></span>(<span id="usernm"></span>)</p>
-                        <small id="moddt"></small>
+                    <div class="position-relative">
+                        <a id="btn-board-menu"><img th:src="@{/images/btn_board_menu.svg}" /></a>
+                        <ul id="board-menu" class="list-group rounded-0 position-absolute end-0">
+                            <li class="list-group-item text-center" id="btn-edit">수정</li>
+                            <li class="list-group-item text-center" id="btn-del">삭제</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="b-title mt-2" id="title"></div>
-                <div class="b-photo"></div>
-                <div class="b-contents" id="contents"></div>
+                <div class="b-photo" style="min-height: 0px;"></div>
+                <div class="b-contents-detail mb-3" id="contents"></div>
             </div>
         </div>
         <div class="container-fluid comment-list">
-            <div class="b-comment">
+            <div class="b-comment link">
                 <img th:src="@{/images/icon_comment.svg}" /> 댓글 <span id="comment-cnt"></span>
             </div>
             <div id="list" class="border-top mt-2"></div>
@@ -42,7 +51,7 @@
             </div>
         </div>
 
-        <div style="height: 80px"></div>
+        <div style="height: 60px"></div>
         <script type="text/template" id="tmpl-list">
             <% _.each(data, function(v, i){%>
             <div>
@@ -59,7 +68,7 @@
                         <small><%- dateFormat(v.moddt, 'yyyy-MM-dd hh:mm:ss') %></small>
                     </div>
                 </div>
-                <div class="ps-5">
+                <div class="c-contents">
                     <%- v.contents %>
                 </div>
             </div>

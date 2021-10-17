@@ -35,6 +35,7 @@ public class Member extends BaseEntity {
     private String confirmYn;
     private Long marketId;
     private String imagePath;
+    @Column(updatable=false, insertable=false)
     private Long uuid;
 
     @ElementCollection(fetch= FetchType.LAZY)

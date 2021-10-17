@@ -7,6 +7,7 @@ $(function (){
         if(!$(this).hasClass('on')){
             $('.btn-nav.on').removeClass('on')
             $(this).addClass('on')
+            getListByTyp($(this).data('typ'))
         }
     })
     getHotList();
@@ -26,13 +27,7 @@ function getHotList(){
         success: function (res){
             console.log(res)
             let tmp = _.template($('#tmpl-market-hot').html());
-            $('#hot-area .carousel-inner').html(tmp({data: res}))
-            _.each($('#hot-area .photo'), function (v, i){
-                let p = $(v)
-                if($('a', p).data('imageid')!=null){
-                    getMarketImage($('a', p).data('imageid'), $('a', p))
-                }
-            })
+            $('#hot-area').html(tmp({data: res}))
         }
     })
 }
@@ -49,21 +44,20 @@ function getList(){
             console.log(res)
             let tmp = _.template($('#tmpl-market').html());
             $('#market-list').html(tmp({data: res}))
-            _.each($('#market-list .photo'), function (v, i){
-                let p = $(v)
-                if($('a', p).data('imageid')!=null){
-                    getMarketImage($('a', p).data('imageid'), $('a', p))
-                }
-            })
         }
     })
 }
-function getMarketImage(imageid, obj){
+function getListByTyp(typ){
     $.ajax({
-        url: _host + '/func/getImage',
-        data: {id: imageid},
+        url: _host + '/market/getMarketListByItemTyp',
+        data: {
+            searchVal : typ,
+            sttPage : sttPage,
+            perPage : 20
+        },
         success: function (res){
-            obj.css('backgroundImage', 'url('+res+')');
+            let tmp = _.template($('#tmpl-market').html());
+            $('#market-list').html(tmp({data: res}))
         }
     })
 }

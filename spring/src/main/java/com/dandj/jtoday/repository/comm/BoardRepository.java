@@ -18,5 +18,5 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     Optional<Board> findBoardById(Long id);
 
     Page<Board> findAll(Specification<Board> spec, Pageable pageable);
-    Page<Board> findBoardsByBoardTypOrderByModDateDesc(String typ, Pageable pageable);
+    Page<Board> findBoardsByBoardTypOrderByModDateDesc(Specification<Board> spec, Pageable pageable);
 }

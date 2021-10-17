@@ -58,6 +58,10 @@ public class MarketController {
     public ResponseEntity<List<MarketDto>> getMarketList(String searchVal, int sttPage, int perPage){
         return new ResponseEntity<>(marketService.getMarketList(searchVal, sttPage, perPage), HttpStatus.OK);
     }
+    @GetMapping("/getMarketListByItemTyp")
+    public ResponseEntity<List<MarketDto>> getMarketListByTyp(String searchVal, int sttPage, int perPage){
+        return new ResponseEntity<>(marketService.getMarketListByTyp(searchVal, sttPage, perPage), HttpStatus.OK);
+    }
     @GetMapping("/getHotMarketList")
     public ResponseEntity<List<MarketDto>> getHotMarketList(){
         return new ResponseEntity<>(marketService.getHotMarketList(), HttpStatus.OK);

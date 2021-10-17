@@ -36,7 +36,7 @@ public interface MemberService {
                 .marketId(memberDto.getMarket_id())
                 .imagePath(memberDto.getImage_path())
                 .tel(memberDto.getTel())
-                .confirmYn("N")
+                .confirmYn("W")
                 .email(memberDto.getEmail())
                 .mobile(memberDto.getMobile()).build();
         String[] arr = memberDto.getUser_typ().split(",");

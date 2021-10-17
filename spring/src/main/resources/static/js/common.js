@@ -1,5 +1,6 @@
 let _host = '/jtoday'
-let _display = 'http://mnisdh.synology.me:7070/jtoday/func/display?fileName=';
+let _display =  location.origin + '/jtoday/func/display?fileName=';
+//let _display = 'http://localhost:8080/jtoday/func/display?fileName=';
 let _user = null;
 
 $(function(){
@@ -25,22 +26,16 @@ $(function(){
     })
 
     if(window.android != undefined){
-        window.android.checkCameraPermission()
         let push = getPush();
-        if(localStorage.getItem('push') == null){
+        if(push == null){
             window.android.getToken()
+            window.android.checkCameraPermission()
         }
     }
-
-    //테스트용 나중에 지워
-    // if(localStorage.getItem('push') == null){
-    //     setPush({token: 'eqbVsPG-QXmGwpPTuE09k3:APA91bExmZt1FbBADjvooWNUYo87PVC-bYda5ySDaDVCnMft_8pOHN9xDh2hwAlmL3QZKHKQDhtRmqKHVkEBRMDozWo1uW1oYOBwAuLoO4a_lnE3bVexMI_IJ9sykqjmuuf4IrwgMXFz', typ: 'fcm', uuid: null, id: null})
-    // }
 })
 
 function pushToken(token, typ){
-    alert(token)
-    setPush({token: token, typ: typ, uuid: null, id: null})
+    setPush({token: token, typ: typ, uuid: null})
 }
 
 function getPush(){
@@ -77,7 +72,7 @@ function dispSidebar(){
     })
 
     $('#btn-update-userinfo').click(function(){
-        window.open(_host + '/market/write?id=' + (_user.market_id))
+        window.open(_host + '/market/write?id=' + (_user.market_id == null ? '': _user.market_id))
     })
     $('.sidebar .list-group-item a').click(function(){
         if($(this).data('url')){
@@ -127,13 +122,42 @@ function biznum(obj){
     }
 }
 
-function uploadImage(imageString, resolve){
+// function uploadImage(imageString, resolve){
+//     $.ajax({
+//         type: 'post',
+//         url: _host + '/func/uploadImage',
+//         data: {
+//             imageString : imageString
+//         },
+//         success: function(res){
+//             console.log('uploadImage: ' + res)
+//             resolve(res)
+//         },
+//         error: function (a,b,c){
+//             console.log(a,b,c)
+//         }
+//     })
+// }
+
+function uploadImage(imgDataUrl, typ, resolve){
+    let formdata = new FormData();
+    let blobBin = atob(imgDataUrl.split(',')[1]);	// base64 데이터 디코딩
+    let array = [];
+    for (let i = 0; i < blobBin.length; i++) {
+        array.push(blobBin.charCodeAt(i));
+    }
+    let file = new Blob([new Uint8Array(array)], {type: 'image/png'});	// Blob 생성
+    formdata.append("file", file);
+    formdata.append("typ", typ);
+
     $.ajax({
         type: 'post',
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
         url: _host + '/func/uploadImage',
-        data: {
-            imageString : imageString
-        },
+        data: formdata,
         success: function(res){
             console.log('uploadImage: ' + res)
             resolve(res)
@@ -199,9 +223,14 @@ function itemtyp(items){
 }
 
 let modal = {
-    alert : function (msg){
+    alert : function (msg, callback){
         $('.modal-alert .modal-body').html(msg)
         $('.back, .modal-alert').show();
+        if(callback != null){
+            $('.btn-alert-ok').on('click', function (){
+                callback();
+            });
+        }
     },
 
     confirm : function (msg, trueCallback, falseCallback){

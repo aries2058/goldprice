@@ -23,10 +23,10 @@
 
                 _.each(p.split(","), function (v){
                     $.ajax({
-                        url: _host + '/func/getImage',
-                        data: {id: v},
-                        success: function (res){
-                            $('#list').append('<img src="'+ res +'" />')
+                        url: _host + '/func/getImagePath',
+                        data: {id : v},
+                        success: function (img){
+                            $('#list').append('<img src="'+ _display+img  +'" />')
                         }
                     })
                 })

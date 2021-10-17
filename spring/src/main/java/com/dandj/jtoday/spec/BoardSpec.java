@@ -41,4 +41,12 @@ public class BoardSpec {
             }
         };
     }
+    public static Specification<Board> notDel(){
+        return new Specification<Board>() {
+            @Override
+            public Predicate toPredicate(Root<Board> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                return criteriaBuilder.notEqual(root.get("delYn"), "Y");
+            }
+        };
+    }
 }

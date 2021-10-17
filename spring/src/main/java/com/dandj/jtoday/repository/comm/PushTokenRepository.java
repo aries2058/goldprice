@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PushTokenRepository  extends JpaRepository<PushToken, Long> {
-    Optional<PushToken> findPushTokenByUuid(Long uuid);
+    PushToken findPushTokenByUuid(Long uuid);
+    PushToken findPushTokenByPushTokenAndUuid(String pushToken, Long uuid);
     Optional<List<PushToken>> findPushTokensByPushYn(String pushYn);
 }

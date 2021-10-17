@@ -21,7 +21,7 @@ function getList(){
             sttPage: sttPage,
             perPage: 20,
             searchVal: $('#searchVal').val(),
-            confirm: $('#confirm').is(':checked') ? "N" : ""
+            confirm: $('#confirm').is(':checked') ? "W" : ""
         },
         success: function (res){
             console.log(res)

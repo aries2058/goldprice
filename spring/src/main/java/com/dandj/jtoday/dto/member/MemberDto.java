@@ -25,17 +25,14 @@ public class MemberDto {
     private String email;
     private String confirm_yn;
     private Long market_id;
-    private Long image_id;
     private String image_path;
-    private String ipaddr;
     private String user_typ;
     private String token;
-    private Blob photo;
     private String login_msg;
     private List<Long> images_ids;
-    private String str_images_ids;
     private Long uuid;
     private LocalDateTime regdt;
+    private String hasImages;
 
     @Builder.Default
     private Collection<String> roleSet = new HashSet<>();

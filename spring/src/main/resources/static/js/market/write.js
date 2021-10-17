@@ -1,11 +1,12 @@
 let _flag_main_photo = false;
 let _market = null;
 $(function (){
-    if($('#market_id').val() != ''){
+    if($('#market_id').val() != '' && $('#market_id').val() > 0){
         $.ajax({
             url: _host + '/market/getMarket',
             data: {id : $('#market_id').val() },
             success: function (res){
+                console.log(res)
                 _market = res;
                 $('.market_nm').text(res.market_nm)
                 $('#tel').val(res.tel);
@@ -39,13 +40,18 @@ $(function (){
                     _.each(res.image_ids, function(v){
                         p = new Promise(function(resolve, reject){
                             $.ajax({
-                                url: _host + '/func/getImage',
+                                url: _host + '/func/getImagePath',
                                 data: {id: v},
                                 success: function (xres){
-                                    let tmp = _.template($('#tmpl-added-photos').html());
-                                    $('.added-photos').append(tmp({data: xres, flag: true}))
-                                    $('.photo>div').height($('.photo>div').width())
-                                    resolve(xres)
+                                    let img = new Image();
+                                    img.src = _display+xres;
+                                    img.onload = function(e){
+                                        let dataURL = draw(img);
+                                        let tmp = _.template($('#tmpl-added-photos').html());
+                                        $('.added-photos').append(tmp({data: dataURL, flag: true}))
+                                        $('.photo>div').height($('.photo>div').width())
+                                    }
+
                                 }
                             })
                         })
@@ -101,7 +107,7 @@ $(function (){
                 processData: false,
                 contentType: false,
                 cache: false,
-                url: _host + '/func/uploadImageToFile',
+                url: _host + '/func/uploadMarketMainImage',
                 data: new FormData($('#frm-file')[0]),
                 success: function(res){
                     if(_flag_photos){
@@ -123,7 +129,6 @@ function goPopup() {
     new daum.Postcode({
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
             // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
             // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
             let fullRoadAddr = data.roadAddress; // 도로명 주소 변수
@@ -166,7 +171,7 @@ function uploadMarketPhotos(callback, image_id){
     let p = null;
     _.each($('.hid-photo'), function(v, i){
         p = new Promise(function(resolve, reject){
-            uploadImage($(v).val(), resolve)
+            uploadImage($(v).val(), 'market', resolve)
         })
         prms.push(p)
     })
@@ -182,6 +187,7 @@ let register = function(image_path, values){
             item_typ += $(v).val() + ',';
         }
     })
+    image_path = image_path ==null ? _user.image_path : image_path;
     $.ajax({
         url: _host + '/market/register',
         data: {
@@ -192,12 +198,17 @@ let register = function(image_path, values){
             addr_detail: $('#addr_detail').val(),
             tel: $('#tel').val(),
             contents: $('#contents').val(),
-            image_path: image_path ==null ? _market.image_path : image_path,
-            map_id: _market.map_id,
+            image_path: image_path,
+            map_id: _market == null ? 0: _market.map_id,
             writer: _user.user_id,
             image_ids: values,
             market_typ: $('.market_typ').val(),
-            item_typ:item_typ.substr(0, item_typ.length-1)
+            hot_yn: $('#hot_yn').val(),
+            item_typ:item_typ.substr(0, item_typ.length-1),
+            link_homepage: $('#link_homepage').val(),
+            link_kakao: $('#link_kakao').val(),
+            link_goldpen: $('#link_goldpen').val(),
+            link_sns: $('#link_sns').val(),
         },
         type: 'post',
         success: function(market_id){
@@ -213,7 +224,9 @@ let register = function(image_path, values){
                     _user.market_id = market_id;
                     localStorage.setItem('profile', JSON.stringify(_user))
                     opener.parent.location.reload();
-                    modal.alert('등록되었습니다.')
+                    modal.alert('등록되었습니다.', function (){
+                        window.close();
+                    });
                 }
             })
         }

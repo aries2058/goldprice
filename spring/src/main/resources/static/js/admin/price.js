@@ -5,7 +5,7 @@ $(function(){
         url: _host + '/price/getGold',
         success: function(res){
             _.each(res, function(v){
-                var p = $('.price').eq(0);
+                let p = $('.price').eq(0);
 
                 if(v.typ == 'S'){
                     p = $('.price').eq(1);
@@ -21,12 +21,17 @@ $(function(){
     })
 
     $('.btn-send').click(function() {
+        let p = $('.price').eq(0);
         $.ajax({
             type:'post',
             url: _host + '/func/sendPush',
-            data: { message: "teawradfasdfasdfasdfasdf"},
+            data: { title: "종로투데이-오늘의시세", body: 'VAT별도: '+$('.disp-vat', p).html()+'원, 판매: '+$('.disp-sell', p).html()+'원, 매입: '+$('.disp-buy', p).html()+'원'},
             success: function(res){
-                console.log(res)
+                if(res == null || res == ''){
+                    modal.alert("Push알림완료")
+                }else{
+                    modal.alert("에러발생")
+                }
             }
         })
 

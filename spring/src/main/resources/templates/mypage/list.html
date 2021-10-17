@@ -41,39 +41,43 @@
                     location.href = _host + $(this).data('link')
                 })
                 let push = getPush();
-                if(push.push_yn == 'Y'){
-                    $('#chk-push').prop('checked', true)
-                }else{
-                    $('#chk-push').prop('checked', false)
-                }
 
-                $('#chk-push').change(function (){
-                    if($(this).is(':checked')){
-                        push.push_yn = 'Y'
-                        $.ajax({
-                            type: 'post',
-                            url: _host + '/func/setPushToken',
-                            data: push,
-                            success: function (res){
-                                console.log(res)
-                                alert("푸시허용처리됨!")
-                                setPush(push)
-                            }
-                        })
+                if(push != null){
+                    if(push.push_yn == 'Y'){
+                        $('#chk-push').prop('checked', true)
                     }else{
-                        push.push_yn = 'N'
-                        $.ajax({
-                            type: 'post',
-                            url: _host + '/func/setPushToken',
-                            data: push,
-                            success: function (res){
-                                console.log(res)
-                                alert("푸시거절처리됨!")
-                                setPush(push)
-                            }
-                        })
+                        $('#chk-push').prop('checked', false)
                     }
-                })
+                    $('#chk-push').change(function (){
+                        push.uuid = _user.uuid
+                        if($(this).is(':checked')){
+                            push.push_yn = 'Y'
+                            $.ajax({
+                                type: 'post',
+                                url: _host + '/func/setPushToken',
+                                data: push,
+                                success: function (res){
+                                    modal.alert("푸시알림을 허용합니다.")
+                                    setPush(push)
+                                }
+                            })
+                        }else{
+                            push.push_yn = 'N'
+                            $.ajax({
+                                type: 'post',
+                                url: _host + '/func/setPushToken',
+                                data: push,
+                                success: function (res){
+                                    modal.alert("푸시알림을 해제합니다.")
+                                    setPush(push)
+                                }
+                            })
+                        }
+
+                    })
+                }else{
+                    $('#chk-push').prop('disabled', true)
+                }
             })
         </script>
 

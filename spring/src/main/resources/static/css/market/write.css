@@ -25,7 +25,7 @@
 .market_nm{
     font-size: 20px;
     color:#3B3B3B;
-    padding:20px;
+    padding:30px 18px;
     font-weight: bold;
 }
 label{
@@ -38,8 +38,10 @@ label{
 .photo>div{
     background-repeat: no-repeat;
     background-size: cover;
-    border:1px solid #E4E3E3
 }
 .itemtyp-area, .item_typ {
     display: none;
+}
+.lb-checkbox{
+    margin:8px 0px 12px !important;
 }

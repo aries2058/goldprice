@@ -36,7 +36,7 @@
     background: #fff;
     padding:8px 2px 2px 2px;
     margin-top:10px;
-    box-shadow: 1px 1px 2px #00000029;
+    box-shadow: 2px 2px 5px #00000029;
 }
 .price-area .tit{
     position: relative;
@@ -158,19 +158,44 @@
     font-width: bold;
     color: #3B3B3B
 }
+/*.market-area .btn-register{*/
+/*    color:#868686;*/
+/*    background: #ECECEC;*/
+/*    font-size: 12px;*/
+/*    display: inline-block;*/
+/*    padding: 4px 12px 6px;*/
+/*    text-decoration: none;*/
+/*    border-radius: 12px;*/
+/*}*/
 .market-area .btn-register{
-    color:#868686;
-    background: #ECECEC;
-    font-size: 12px;
-    display: inline-block;
-    padding: 4px 12px 6px;
+    color:#000;
     text-decoration: none;
-    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color:#7A7A7A;
+    letter-spacing:-1px
 }
 .market-area .market-btn-area{
-    margin-top:20px
+    margin-top:12px
 }
 .market-area .market-btn-area img{
     width:100%;
-    margin:4px 0px
+    margin:4px 0px;
+}
+.market-area .market-btn-area div.bb{
+    border-bottom:1px solid #36BEBF;
+}
+.market-area .market-btn-area div.bl{
+    border-left:1px solid #36BEBF;
+}
+.market-area .market-btn-area div.bt{
+    border-top:1px solid #36BEBF;
+}
+.market-area .market-btn-area a{
+    font-size: 0.9rem;
+    text-decoration: none;
+    color:#3F3D56;
+}
+.bottom-empty{
+    height: 70px !important;
 }

@@ -6,7 +6,6 @@
 }
 .moddt{
     color:#BFC1C3; padding-left:90px;
-    font-weight: lighter;
     padding-bottom: 4px;
     font-size: 12px;
 }
@@ -33,17 +32,18 @@
 .comment-area .moddt{
     color:#BFC1C3;
     font-size: 12px;
-    font-weight: lighter;
     padding-left: 8px;
 }
 .comment-area .writer{
     color:#11AE99;
     font-size: 12px;
 }
+.comment-area .comment{
+    font-size: 14px;
+}
 .photo>div{
     background-repeat: no-repeat;
     background-size: cover;
-    border:1px solid #E4E3E3
 }
 
 .b-writer{
@@ -65,6 +65,7 @@
 .b-title{
     font-size: 1.2rem;
     margin-bottom: 4px;
+    font-weight: bold;
 }
 .b-photo{
     min-height: 100px;
@@ -72,6 +73,7 @@
 .b-photo img{
     width:100%;
     margin-bottom: 4px;
+    border-radius: 4px;
 }
 .b-contents{
     white-space: normal; line-height: 1.2; height: 2.4em; text-align: left;
@@ -79,6 +81,43 @@
     -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;
     width: 100%;
 }
+.b-contents-detail{
+    word-break:break-all;
+}
 .b-comment{
     font-size: 0.9rem;
+}
+.c-contents{
+    background: #eee;
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin-left: 40px;
+}
+.link{
+    color:#7A7A7A;
+}
+.link img{
+    margin-top:-4px
+}
+
+#all-list>div, #my-list>div{
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+#btn-board-menu{
+    padding:0px 8px;
+    display: none;
+}
+#btn-board-menu img{
+    width: 4px;
+    height: 20px;
+    margin-right: 12px;
+    display: block;
+}
+#board-menu{
+    width:80px;
+    display: none;
+}
+#board-menu.on{
+    display: block;
 }

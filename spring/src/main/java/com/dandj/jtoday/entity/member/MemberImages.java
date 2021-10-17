@@ -19,9 +19,6 @@ public class MemberImages extends BaseEntity {
 
     private Long imageId;
 
-    @Column(length = 1)
-    private String delYn;
-
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 }

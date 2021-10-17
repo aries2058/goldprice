@@ -48,16 +48,16 @@
                 <small class="msg">* 평균시세입니다. 금액은 변동될 수 있습니다.</small>
             </div>
         </div>
-        <div class="container-fluid ps-4 pe-4 main-bg-dark">
+        <div class="container-fluid ps-4 pe-4 pb-3 main-bg-dark">
             <div class="row">
                 <div class="col-3 p-0 text-center">
-                    <a><img th:src="@{/images/btn_price1.svg}" /></a></a></div>
+                    <a class="mt-2 p-0" th:href="@{/price/gold}"><img th:src="@{/images/btn_price1.svg}" /></a></div>
                 <div class="col-3 p-0 text-center">
-                    <a><img th:src="@{/images/btn_price2.svg}" /></a></div>
+                    <a class="mt-2 p-0" th:href="@{/price/dia}"><img th:src="@{/images/btn_price2.svg}" /></a></div>
                 <div class="col-3 p-0 text-center">
-                    <a><img th:src="@{/images/btn_price3.svg}" /></a></div>
+                    <a class="mt-2 p-0" th:href="@{/price/subu}"><img th:src="@{/images/btn_price3.svg}" /></a></div>
                 <div class="col-3 p-0 text-center">
-                    <a><img th:src="@{/images/btn_price4.svg}" /></a></div>
+                    <a class="mt-2 p-0" th:href="@{/price/pearl}"><img th:src="@{/images/btn_price4.svg}" /></a></div>
             </div>
         </div>
         <div class="container-fluid main-btn-area">
@@ -74,36 +74,36 @@
 
         <div class="container-fluid market-area mt-5">
             <div class="row">
-                <div class="col tit">종로 도매 업체</div>
-                <div class="col text-end"><a class="btn-register">업체 등록하기</a></div>
+                <div class="col tit"><b style="letter-spacing: -1px">종로 도매 업체</b></div>
+                <div class="col text-end"><a class="btn-register">+ 업체 등록하기</a></div>
             </div>
             <div class="row market-btn-area">
-                <div class="col-3">
-                    <a th:href="@{/market/listByItem?typ=01}"><img th:src="@{/images/순금.png}" /></a>
+                <div class="col-4 text-center pt-3 pb-3 bb bt">
+                    <a th:href="@{/market/listByItem?typ=01}">순금</a>
                 </div>
-                <div class="col-3">
-                    <a th:href="@{/market/listByItem?typ=02}"><img th:src="@{/images/웨딩.png}" /></a>
+                <div class="col-4 text-center pt-3 pb-3 bl bb bt">
+                    <a th:href="@{/market/listByItem?typ=02}">웨딩</a>
                 </div>
-                <div class="col-3">
-                    <a th:href="@{/market/listByItem?typ=03}"><img th:src="@{/images/패션.png}" /></a>
+                <div class="col-4 text-center pt-3 pb-3 bl bb bt">
+                    <a th:href="@{/market/listByItem?typ=03}">패션</a>
                 </div>
-                <div class="col-3">
-                    <a th:href="@{/market/listByItem?typ=04}"><img th:src="@{/images/귀걸이.png}" /></a>
+                <div class="col-4 text-center pt-3 pb-3 bb">
+                    <a th:href="@{/market/listByItem?typ=04}">귀걸이</a>
                 </div>
-                <div class="col-3">
-                    <a th:href="@{/market/listByItem?typ=05}"><img th:src="@{/images/체인.png}" /></a>
+                <div class="col-4 text-center pt-3 pb-3 bl bb">
+                    <a th:href="@{/market/listByItem?typ=05}">체인</a>
                 </div>
-                <div class="col-3">
-                    <a th:href="@{/market/listByItem?typ=06}"><img th:src="@{/images/커플링.png}" /></a>
+                <div class="col-4 text-center pt-3 pb-3 bl bb">
+                    <a th:href="@{/market/listByItem?typ=06}">커플링</a>
                 </div>
-                <div class="col-3">
-                    <a th:href="@{/market/listByItem?typ=07}"><img th:src="@{/images/진주.png}" /></a>
+                <div class="col-4 text-center pt-3 pb-3 bb">
+                    <a th:href="@{/market/listByItem?typ=07}">진주/유색</a>
                 </div>
-                <div class="col-3">
-                    <a th:href="@{/market/listByItem?typ=08}"><img th:src="@{/images/레이저각인.png}" /></a>
+                <div class="col-4 text-center pt-3 pb-3 bl bb">
+                    <a th:href="@{/market/listByItem?typ=08}">레이져각인/땜</a>
                 </div>
-                <div class="col-3">
-                    <a th:href="@{/market/listByItem?typ=09}"><img th:src="@{/images/도금.png}" /></a>
+                <div class="col-4 text-center pt-3 pb-3 bl bb">
+                    <a th:href="@{/market/listByItem?typ=09}">도금</a>
                 </div>
             </div>
         </div>

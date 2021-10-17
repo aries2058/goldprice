@@ -1,6 +1,7 @@
 package com.dandj.jtoday.repository.market;
 
 import com.dandj.jtoday.entity.market.Market;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,5 +16,6 @@ public interface MarketRepository extends JpaRepository<Market, Long> {
 
     Optional<List<Market>> findMarketsByHotYn(String hotyn);
     Optional<List<Market>> findMarketsBy(Pageable pageable);
-    Optional<List<Market>> findMarketsBy(Specification<Market> spec, Pageable pageable);
+    Page<Market> findAll(Specification<Market> spec, Pageable pageable);
+
 }

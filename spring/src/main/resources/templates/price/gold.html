@@ -3,8 +3,9 @@
 
 <th:block th:replace="~{/_layout/pageLayout :: setContent(~{this::content})}">
     <th:block th:fragment="content">
+        <link rel="stylesheet" th:href="@{/css/price/gold.css}" />
 
-        <span class="top-bar-title title">시세조회</span>
+        <span class="top-bar-title title">시세</span>
 
         <div class="d-flex tab mb-4">
             <div class="w-50 text-center p-3 on"><a th:href="@{/price/gold}">금/은</a></div>
@@ -13,6 +14,53 @@
             <div class="w-50 text-center p-3"><a th:href="@{/price/pearl}">진주</a></div>
         </div>
 
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between">
+                <b>오늘의 <span class="text-warning">금 시세</span></b>
+                <div><span id="dt-gold"></span></div>
+            </div>
+            <div id="price-gold" class="mb-5"></div>
+            <div class="d-flex justify-content-between">
+                <b>오늘의 <span class="text-secondary">은 시세</span></b>
+                <div><span id="dt-silver"></span></div>
+            </div>
+            <div id="price-silver"></div>
+        </div>
+
+        <script type="template/text" id="tmpl-price">
+            <div class="price-area d-flex justify-content-between">
+                <div></div>
+                <div>
+                    <h5>VAT 별도 판매</h5>
+                    <p class="price <%- typ=='G'? 'text-warning': 'text-secondary' %>"><%- comma(data.vat+'') %>원/돈</p>
+                </div>
+                <div><a class="btn btn-calc <%- typ=='G'? 'bg-warning': 'bg-secondary' %> text-white">계산하기</a></div>
+            </div>
+            <div class="price-area d-flex justify-content-between">
+                <div></div>
+                <div>
+                    <h5>VAT 포함 판매</h5>
+                    <p class="price <%- typ=='G'? 'text-warning': 'text-secondary' %>"><%- comma((data.vat*1.1).toFixed(0)+'') %>원/돈</p>
+                </div>
+                <div><a class="btn btn-calc <%- typ=='G'? 'bg-warning': 'bg-secondary' %> text-white">계산하기</a></div>
+            </div>
+            <div class="price-area d-flex justify-content-between">
+                <div></div>
+                <div>
+                    <h5>VAT 평균 판매</h5>
+                    <p class="price <%- typ=='G'? 'text-warning': 'text-secondary' %>"><%- comma(data.sell+'') %>원/돈</p>
+                </div>
+                <div><a class="btn btn-calc <%- typ=='G'? 'bg-warning': 'bg-secondary' %> text-white">계산하기</a></div>
+            </div>
+            <div class="price-area d-flex justify-content-between">
+                <div></div>
+                <div>
+                    <h5>VAT 평균 매입</h5>
+                    <p class="price text-gold"><%- comma(data.buy+'') %>원/돈</p>
+                </div>
+                <div><a class="btn btn-gold btn-calc text-white">계산하기</a></div>
+            </div>
+        </script>
 
         <script th:src="@{/js/price/gold.js}"></script>
     </th:block>

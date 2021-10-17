@@ -42,6 +42,7 @@ public class BoardService {
         List<BoardDto> ret = new ArrayList<>();
 
         Specification<Board> spec = Specification.where(BoardSpec.typ(typ));
+        spec = spec.and(Specification.where(BoardSpec.notDel()));
         if(searchTyp != null){
             if(searchTyp.equals("T")){
                 spec = spec.and(Specification.where(BoardSpec.titleLike(searchVal)));
@@ -51,9 +52,9 @@ public class BoardService {
                 spec = spec.and(Specification.where(BoardSpec.writer(searchVal)));
             }
         }
-
-        Pageable pageable = PageRequest.of(sttPage, perPage);
-        Page<Board> data = boardRepository.findBoardsByBoardTypOrderByModDateDesc(typ, pageable);
+        Sort sort = Sort.by("id").descending();
+        Pageable pageable = PageRequest.of(sttPage, perPage, sort);
+        Page<Board> data = boardRepository.findAll(spec, pageable);
 
         data.forEach(x->{
             try {
@@ -170,6 +171,7 @@ public class BoardService {
         Blob contents = new SerialBlob(bytes);
 
         Board entity = Board.builder()
+                .id(dto.getId())
                 .pid(dto.getPid())
                 .boardTyp(dto.getBoard_typ())
                 .title(dto.getTitle())
@@ -177,6 +179,7 @@ public class BoardService {
                 .writer(dto.getWriter())
                 .lockYn(dto.getLock_yn())
                 .cmtCnt(dto.getCmt_cnt())
+                .delYn("N")
                 .build();
         return entity;
     }

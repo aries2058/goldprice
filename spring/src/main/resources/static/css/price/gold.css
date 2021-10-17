@@ -1,0 +1,37 @@
+.price-area{
+    padding:16px;
+    background: #f9f9f9;
+    margin-top:8px;
+}
+.price-area h5{
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+.price-area .price{
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.text-warning{
+    color: #F3B749 !important;
+}
+.text-secondary{
+    color:#7A7A7A !important;
+}
+.bg-warning{
+    background: #F3B749 !important;
+}
+.bg-secondary{
+    background:#7A7A7A !important;
+}
+.btn-calc{
+    margin-top:10px;
+    border-radius: 20px;
+    padding:2px 8px;
+    font-size: 0.9rem;
+}
+#dt-gold, #dt-silver{
+    font-size: 0.9rem;
+    color:#C2C2C2
+}

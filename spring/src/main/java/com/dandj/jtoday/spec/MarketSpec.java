@@ -25,4 +25,12 @@ public class MarketSpec {
             }
         };
     }
+    public static Specification<Market> itemTypLike(final String searchVal){
+        return new Specification<Market>() {
+            @Override
+            public Predicate toPredicate(Root<Market> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                return criteriaBuilder.like(root.get("itemTyp"), "%"+searchVal+"%");
+            }
+        };
+    }
 }

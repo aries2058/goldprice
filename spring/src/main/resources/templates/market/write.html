@@ -37,7 +37,7 @@
                         <option value="ETC">기타</option>
                     </select>
                     <div class="itemtyp-area">
-                        <label>상품구분</label>
+                        <label style="margin-bottom: 0px">상품구분</label>
                         <div class="row gx-1">
                             <div class="col-4"><label class="lb-checkbox fw-light"><input type="checkbox" class="item_typ" name="item_typ" value="01" />
                                 <img th:src="@{/images/check_off.svg}" />
@@ -112,7 +112,7 @@
             <a class="btn w-100 btn-gold text-white fw-light" id="btn-register">등록</a>
         </div>
 
-        <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script th:src="@{/js/market/write.js}"></script>
     </th:block>
 </th:block>

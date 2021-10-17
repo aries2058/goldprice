@@ -14,7 +14,7 @@ $(function(){
                 getList('02', 'W', _user.user_id, function(res){
                     qna = res;
                     let tmp = _.template($('#tmpl-qna').html());
-                    $('#list').html(tmp({data: res}))
+                    $('#list').append(tmp({data: res}))
                 })
             }
         }
@@ -68,10 +68,10 @@ $(document).on('click', '.qna-item', function (){
 function getImages(obj, id){
     _.each(obj, function(v, i){
         $.ajax({
-            url: _host + '/func/getImage',
+            url: _host + '/func/getImagePath',
             data: {id: $(v).data('imgid')},
             success: function (res){
-                $('img', v).attr('src', res);
+                $('img', v).attr('src', _display + res);
             }
         })
     })

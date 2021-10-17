@@ -14,6 +14,13 @@
      }
 }
 
+input[type=file]{
+    color:#868686
+}
+.form-select{
+    padding:12px 20px;
+}
+
 textarea:focus, 
 textarea.form-control:focus, 
 input.form-control:focus, 
@@ -27,13 +34,20 @@ input[type=number]:focus,
 [type=tel].form-control:focus, 
 [contenteditable].form-control:focus,
 select.form-select:focus {
-    box-shadow: inset 0 -1px 0 #ddd !important;
+    /*box-shadow: inset 0 -1px 0 #ddd !important;*/
     outline: none !important;
 }
 *{
     font-family:'Noto Sans KR', sans-serif;
 }
+pre{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.form-control:disabled, .form-control[readonly]{
+    background-color: #F8F8F8;
+    color:#7A7A7A;
 
+}
 .text-yellow{
     color:#EBF22E;
 }
@@ -162,6 +176,7 @@ input[type=text]:focus, input[type=number]:focus, input[type=password]:focus, in
 .bottom-bar{
     background: #fff;
     box-shadow: 0px 1px 2px #000029;
+    padding:3px 0px;
 }
 .bottom-bar .btn-menu{
     display: block;
@@ -217,9 +232,12 @@ h2{
 }
 .tab div.on{
     border-color:#6CD1CB;
+    color:#6CD1CB;
+    font-weight: bold;
 }
 .tab div.on a{
     color:#6CD1CB;
+    font-weight: bold;
 }
 
 .swiper-container {
@@ -230,6 +248,7 @@ h2{
     display: block;
     margin: 0px auto;
     vertical-align: middle;
+    border-radius: 4px;
 }
 #loading{
     display: none;
@@ -241,4 +260,7 @@ h2{
 }
 .lb-checkbox input{
     display: none;
+}
+.top-bar-title{
+    font-weight: bold;
 }

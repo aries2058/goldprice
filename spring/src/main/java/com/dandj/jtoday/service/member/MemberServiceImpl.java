@@ -119,7 +119,12 @@ public class MemberServiceImpl implements MemberService {
         Optional<Member> data = memberRepository.findByUserId(userId);
 
         if(data.isPresent()){
-            ret = entityToDto(data.get());
+            List<Long> imgIds = new ArrayList<>();
+            List<MemberImages> memberImages = memberImagesRepository.findMemberImagesByMember_UserId(data.get().getUserId());
+            memberImages.forEach(x->{
+                imgIds.add(x.getImageId());
+            });
+            ret = entityToDto(data.get(), imgIds);
         }
         return  ret;
     }
@@ -129,12 +134,20 @@ public class MemberServiceImpl implements MemberService {
         String enPw = passwordEncoder.encode(memberDto.getPassword());
         Member member = dtoToEntity(memberDto, enPw);
         memberRepository.save(member);
-        memberDto.getImages_ids().forEach(x->{
-            MemberImages images = MemberImages.builder()
-                    .imageId(x)
-                    .member(member).build();
-            memberImagesRepository.save(images);
-        });
+        if(memberDto.getHasImages().equals("Y")){
+            List<MemberImages> memberImages = memberImagesRepository.findMemberImagesByMember_UserId(member.getUserId());
+            List<Long> imgidx = new ArrayList<>();
+            memberImages.forEach(x->{
+                imgidx.add(x.getImageId());
+            });
+            imagesRepository.deleteAllById(imgidx);
+            memberDto.getImages_ids().forEach(x->{
+                MemberImages images = MemberImages.builder()
+                        .imageId(x)
+                        .member(member).build();
+                memberImagesRepository.save(images);
+            });
+        }
         return member.getUserId();
     }
 

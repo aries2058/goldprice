@@ -1,9 +1,9 @@
 $(function(){
     $('#btn-findid').click(function(){
         if($('#email').val() == ''){
-            modal.alert('이메일주소를 입력하세요.')
+            modal.alert('이메일 주소를 입력하세요.')
         }else if($('#mobile').val() == ''){
-            modal.alert('핸드폰번호를 입력하세요.')
+            modal.alert('핸드폰 번호를 입력하세요.')
         }else{
             $.ajax({
                 type: 'post',
@@ -27,7 +27,7 @@ $(function(){
                                 address: $('#email').val()
                             },
                             success: function(xres){
-                                $('.alert').show();
+                                modal.alert('입력하신 이메일 주소로 계정정보가 발송되었습니다.')
                             }
                         })
                     }else{

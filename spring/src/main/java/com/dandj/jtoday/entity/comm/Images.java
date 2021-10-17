@@ -21,7 +21,5 @@ public class Images extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Lob
-    private Blob content;
+    private String path;
 }

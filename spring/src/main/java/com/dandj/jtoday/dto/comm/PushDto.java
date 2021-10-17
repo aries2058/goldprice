@@ -38,6 +38,7 @@ public class PushDto {
     @Builder
     public static class PushCustomFieldDto{
         private String url;
+        private String type;
     }
 
     @Data

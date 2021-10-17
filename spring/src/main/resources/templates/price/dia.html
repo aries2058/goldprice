@@ -5,7 +5,7 @@
     <th:block th:fragment="content">
         <link th:href="@{/css/price/dia.css}" rel="stylesheet">
 
-        <span class="top-bar-title title">시세조회</span>
+        <span class="top-bar-title title">시세</span>
 
         <div class="d-flex tab mb-4">
             <div class="w-50 text-center p-3"><a th:href="@{/price/gold}">금/은</a></div>
@@ -14,56 +14,59 @@
             <div class="w-50 text-center p-3"><a th:href="@{/price/pearl}">진주</a></div>
         </div>
 
-
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="tab01" data-bs-toggle="tab" data-bs-target="#content01" type="button" role="tab" aria-controls="home" aria-selected="true">우신</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="tab02" data-bs-toggle="tab" data-bs-target="#content02" type="button" role="tab" aria-controls="profile" aria-selected="false">현대</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="tab03" data-bs-toggle="tab" data-bs-target="#content03" type="button" role="tab" aria-controls="contact" aria-selected="false">GIA</button>
-            </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="content01" role="tabpanel" aria-labelledby="tab01">
-                <div class="container-fluid">
-                    <div class="row gx-0 mt-2">
-                        <div class="col-12 position-relative"><input id="ct" type="number" class="form-control border text-end pe-5" placeholder="중량" />
-                            <span class="position-absolute" style="top:12px; right:16px">ct</span></div>
-                    </div>
-                    <div class="filter under">
-                        <div class="mt-2">
-                            <label>색상 </label> <a class="btn on btn-light f-color">G</a> <a class="btn  btn-light f-color">F</a>
-                        </div>
-                        <div class="mt-2">
-                            <label>등급 </label> <a class="btn on btn-light f-level">SI2</a> <a class="btn  btn-light f-level">SI1</a> <a class="btn  btn-light f-level">VVS1</a>
-                        </div>
-                        <div class="mt-2">
-                            <label>컷팅 </label> <a class="btn on btn-light f-cut">GOOD</a> <a class="btn  btn-light f-cut">V.GOOD</a> <a class="btn  btn-light f-cut">EX</a>
-                        </div>
-                    </div>
-                    <div class="filter up">
-                        <div class="mt-2">
-                            <label>색상 </label> <a class="btn on btn-light f-color">F</a>
-                        </div>
-                        <div class="mt-2">
-                            <label>등급 </label> <a class="btn on btn-light f-level">SI2</a> <a class="btn  btn-light f-level">SI1</a> <a class="btn  btn-light f-level">VS2</a>
-                        </div>
-                        <div class="mt-2">
-                            <label>컷팅 </label> <a class="btn on btn-light f-cut">V.GOOD</a> <a class="btn  btn-light f-cut">3EX</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="content02" role="tabpanel" aria-labelledby="tab02">...</div>
-            <div class="tab-pane fade" id="content03" role="tabpanel" aria-labelledby="tab03">...</div>
+        <div class="mt-5">
+            <h2>준비중입니다.</h2>
         </div>
 
-        <div class="container-fluid">
-            <table id="list" class="table"></table>
-        </div>
+<!--        <ul class="nav nav-tabs" id="myTab" role="tablist">-->
+<!--            <li class="nav-item" role="presentation">-->
+<!--                <button class="nav-link active" id="tab01" data-bs-toggle="tab" data-bs-target="#content01" type="button" role="tab" aria-controls="home" aria-selected="true">우신</button>-->
+<!--            </li>-->
+<!--            <li class="nav-item" role="presentation">-->
+<!--                <button class="nav-link" id="tab02" data-bs-toggle="tab" data-bs-target="#content02" type="button" role="tab" aria-controls="profile" aria-selected="false">현대</button>-->
+<!--            </li>-->
+<!--            <li class="nav-item" role="presentation">-->
+<!--                <button class="nav-link" id="tab03" data-bs-toggle="tab" data-bs-target="#content03" type="button" role="tab" aria-controls="contact" aria-selected="false">GIA</button>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--        <div class="tab-content" id="myTabContent">-->
+<!--            <div class="tab-pane fade show active" id="content01" role="tabpanel" aria-labelledby="tab01">-->
+<!--                <div class="container-fluid">-->
+<!--                    <div class="row gx-0 mt-2">-->
+<!--                        <div class="col-12 position-relative"><input id="ct" type="number" class="form-control border text-end pe-5" placeholder="중량" />-->
+<!--                            <span class="position-absolute" style="top:12px; right:16px">ct</span></div>-->
+<!--                    </div>-->
+<!--                    <div class="filter under">-->
+<!--                        <div class="mt-2">-->
+<!--                            <label>색상 </label> <a class="btn on btn-light f-color">G</a> <a class="btn  btn-light f-color">F</a>-->
+<!--                        </div>-->
+<!--                        <div class="mt-2">-->
+<!--                            <label>등급 </label> <a class="btn on btn-light f-level">SI2</a> <a class="btn  btn-light f-level">SI1</a> <a class="btn  btn-light f-level">VVS1</a>-->
+<!--                        </div>-->
+<!--                        <div class="mt-2">-->
+<!--                            <label>컷팅 </label> <a class="btn on btn-light f-cut">GOOD</a> <a class="btn  btn-light f-cut">V.GOOD</a> <a class="btn  btn-light f-cut">EX</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="filter up">-->
+<!--                        <div class="mt-2">-->
+<!--                            <label>색상 </label> <a class="btn on btn-light f-color">F</a>-->
+<!--                        </div>-->
+<!--                        <div class="mt-2">-->
+<!--                            <label>등급 </label> <a class="btn on btn-light f-level">SI2</a> <a class="btn  btn-light f-level">SI1</a> <a class="btn  btn-light f-level">VS2</a>-->
+<!--                        </div>-->
+<!--                        <div class="mt-2">-->
+<!--                            <label>컷팅 </label> <a class="btn on btn-light f-cut">V.GOOD</a> <a class="btn  btn-light f-cut">3EX</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="tab-pane fade" id="content02" role="tabpanel" aria-labelledby="tab02">...</div>-->
+<!--            <div class="tab-pane fade" id="content03" role="tabpanel" aria-labelledby="tab03">...</div>-->
+<!--        </div>-->
+
+<!--        <div class="container-fluid">-->
+<!--            <table id="list" class="table"></table>-->
+<!--        </div>-->
 
         <script type="text/template" id="tmpl-list">
             <% if(data.length > 0){

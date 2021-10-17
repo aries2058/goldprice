@@ -19,7 +19,7 @@
 
         <script type="template/text" id="tmpl-list">
             <% _.each(data, function(v, i){%>
-            <div class="border-bottom pb-5 mb-3">
+            <div class="border-bottom board-item" data-bid="<%- v.id %>">
                 <div class="b-writer d-flex justify-content-start">
                     <div>
                         <% if(v.writer_photo != null){%>
@@ -41,8 +41,7 @@
                 <%}%>
                 <div class="b-contents"><%- v.contents%></div>
                 <div class="b-comment mt-2">
-                    <div class="float-start"><img th:src="@{/images/icon_comment.svg}" /> 댓글 <%- v.cmt_cnt%></div>
-                    <div class="float-end link" data-bid="<%- v.id %>"><a class="text-gold">더보기</a></div>
+                    <div class="link"><img th:src="@{/images/icon_comment.svg}" /> 댓글 <%- v.cmt_cnt%></div>
                 </div>
             </div>
             <%})%>

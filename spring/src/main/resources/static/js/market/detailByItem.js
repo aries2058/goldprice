@@ -27,29 +27,13 @@ $(function () {
                     $('#items').append('<span class="badge">'+v+'</span>')
                 })
             }
-            let mapContainer = document.getElementById('map'), // 지도를 표시할 div
-                mapOption = {
-                    center: new kakao.maps.LatLng(res.lat, res.lng), // 지도의 중심좌표
-                    level: 3 // 지도의 확대 레벨
-                };
-
-            let map = new kakao.maps.Map(mapContainer, mapOption);
-            let markerPosition  = new kakao.maps.LatLng(res.lat, res.lng);
-            let marker = new kakao.maps.Marker({
-                position: markerPosition
-            });
-            marker.setMap(map);
-            $('#map').click(function (){
-                window.open('https://map.kakao.com/link/to/'+res.market_nm+','+ res.lat +',' + res.lng)
-            })
-
             if(res.image_ids != null && res.image_ids.length > 0){
                 let prms = [];
                 let p = null;
                 _.each(res.image_ids, function(v){
                     p = new Promise(function(resolve, reject){
                         $.ajax({
-                            url: _host + '/func/getImage',
+                            url: _host + '/func/getImagePath',
                             data: {id: v},
                             success: function (xres){
                                 let tmp = _.template($('#tmpl-photo').html());
@@ -70,6 +54,23 @@ $(function () {
                         $('#photo-page').text((parseInt($(e.relatedTarget).index() ) + 1) + "/"+values.length)
                     })
                 })
+
+                let mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                    mapOption = {
+                        center: new kakao.maps.LatLng(res.lat, res.lng), // 지도의 중심좌표
+                        level: 3 // 지도의 확대 레벨
+                    };
+
+                let map = new kakao.maps.Map(mapContainer, mapOption);
+                let markerPosition  = new kakao.maps.LatLng(res.lat, res.lng);
+                let marker = new kakao.maps.Marker({
+                    position: markerPosition
+                });
+                marker.setMap(map);
+                $('#map').click(function (){
+                    window.open('https://map.kakao.com/link/to/'+res.market_nm+','+ res.lat +',' + res.lng)
+                })
+
             }
         }
     })

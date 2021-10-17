@@ -38,29 +38,18 @@ public class FuncController {
         return new ResponseEntity("", HttpStatus.OK);
     }
 
-    @GetMapping("/getImage")
-    public ResponseEntity<byte[]> getImage(Long id) throws SQLException {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setCacheControl(CacheControl.noCache().getHeaderValue());
-        byte[] contents = imageService.getImage(id);
-
-        return new ResponseEntity<>(contents, headers, HttpStatus.OK);
+    @PostMapping("/uploadMarketMainImage")
+    public ResponseEntity<String> uploadMarketMainImage(String user_id, MultipartFile file) throws Exception {
+        return new ResponseEntity<>(imageService.uploadMarketMainImage(user_id, file), HttpStatus.OK) ;
     }
-
-    @PostMapping("/uploadImageFiles")
-    public ResponseEntity<List<Long>> uploadImageFiles(MultipartFile[] uploadFiles) throws SQLException, IOException {
-        List<Long> ret = imageService.uploadImageFiles(uploadFiles);
-        return  new ResponseEntity<>(ret, HttpStatus.OK);
-    }
-
     @PostMapping("/uploadImage")
-    public ResponseEntity<Long> uploadImage(String imageString) throws SQLException {
-        return new ResponseEntity<>(imageService.uploadImage(imageString), HttpStatus.OK) ;
+    public ResponseEntity<Long> uploadImage(String typ, MultipartFile[] file) throws Exception {
+        return new ResponseEntity<>(imageService.uploadImage(typ, file), HttpStatus.OK) ;
     }
 
-    @PostMapping("/uploadImageToFile")
-    public ResponseEntity<String> uploadImageToFile(String user_id, MultipartFile file) throws Exception {
-        return new ResponseEntity<>(imageService.saveImageToFile(user_id, file), HttpStatus.OK) ;
+    @GetMapping("/getImagePath")
+    public ResponseEntity<String> getImagePath(Long id) {
+        return new ResponseEntity<>(imageService.getImagePath(id), HttpStatus.OK) ;
     }
 
     @GetMapping({"/display"})
@@ -69,7 +58,7 @@ public class FuncController {
 
         try {
             String srcFileName = URLDecoder.decode(fileName, "UTF-8");
-            File file = new File("/volume1/hjlee/storage" + File.separator + srcFileName);
+            File file = new File("/home/ubuntu/storage" + File.separator + srcFileName);
             HttpHeaders header = new HttpHeaders();
             header.add("Content-Type", "image/jpeg");
             result = new ResponseEntity(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
@@ -83,9 +72,9 @@ public class FuncController {
     @PostMapping(value="/setPushToken")
     public ResponseEntity<Long> register(Long uuid, String token, String typ, String push_yn, Long id){
         if(push_yn.equals("Y")){
-            return new ResponseEntity<>(pushService.register(token, typ, uuid, id), HttpStatus.OK);
+            return new ResponseEntity<>(pushService.register(token, typ, uuid), HttpStatus.OK);
         }else{
-            return new ResponseEntity<>(pushService.ignorePush(token, typ, uuid, id), HttpStatus.OK);
+            return new ResponseEntity<>(pushService.ignorePush(token, typ, uuid), HttpStatus.OK);
         }
     }
 

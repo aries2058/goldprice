@@ -1,9 +1,9 @@
 
 .top-bar{
-    margin-bottom: 25px;
+    margin-bottom: 0px;
     font-size: 20px;
     text-align: center;
-    padding-bottom: 16px;
+    padding-bottom: 0px;
     background: #fff;
 }
 .top-bar .title{
@@ -30,6 +30,10 @@
     white-space: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+}
+.scroll-x::-webkit-scrollbar {
+     height: 0px;
+     background-color: black;
 }
 .btn-nav-area{
     height:37px;
@@ -84,7 +88,8 @@
     background: #36BEBF;
 }
 .market .photo{
-    width:120px
+    width:120px;
+    margin: 7px 0px
 }
 .market .photo img{
     margin-top:4px;
@@ -102,7 +107,7 @@
 }
 .market p{
     font-size: 16px;
-    margin-top: 6px;
+    margin-top: 11px;
     font-weight: bold;
 }
 .market small{
@@ -114,12 +119,13 @@
     line-height: 18px;
 }
 #market-list{
-    margin-top:276px;
+    margin-top:282px;
+    border-top:1px solid #E9EAEA;
     padding:0px 20px
 }
 #market-list hr{
     opacity: 0.1;
-    margin:8px 0px
+    margin:2px 0px
 }
 
 #photo-area .carousel-item {
@@ -142,14 +148,17 @@
 #map{
     height: 92px;
     width: 100%;
+    border:1px solid #eee;
+    border-radius: 6px;
 }
 label{
     font-weight: bold;
+    font-size: 0.9rem;
 }
 .badge{
     background: #F7F7F7;
     color:#7A7A7A;
-    border-radius: 8px;
+    border-radius: 4px;
     padding-bottom: 6px;
     display: inline-block;
     margin-right: 6px;

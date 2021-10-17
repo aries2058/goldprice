@@ -17,7 +17,7 @@ public class FileHandler {
     @Value("${app.upload.path}")
     private String uploadPath;
 
-    public String parseFileInfo(String user_id, MultipartFile multipartFile) throws Exception{
+    public String parseFileInfoForMarketMainImage(String user_id, MultipartFile multipartFile) throws Exception{
         String absolutePath = new File(uploadPath).getAbsolutePath();
         String contentType = multipartFile.getContentType();
         String originalFileExtension = ".png";
@@ -39,6 +39,32 @@ public class FileHandler {
 
         file = new File(absolutePath + path + "/" + new_file_name);
         multipartFile.transferTo(file);
+
+        return path + "/" + new_file_name;
+    }
+
+    public String parseFileInfo(MultipartFile[] multipartFile, String typ) throws Exception{
+        String absolutePath = new File(uploadPath).getAbsolutePath();
+        String contentType = multipartFile[0].getContentType();
+        String originalFileExtension = ".png";
+
+        if(contentType.contains("image/jpeg")){
+            originalFileExtension = ".jpg";
+        }
+        else if(contentType.contains("image/gif")){
+            originalFileExtension = ".gif";
+        }
+        UUID uuid = UUID.randomUUID();
+        String new_file_name = uuid + originalFileExtension;
+
+        String path =  "/"+ typ;
+        File file = new File(absolutePath + "/" + typ);
+        if(!file.exists()){
+            file.mkdirs();
+        }
+
+        file = new File(absolutePath + path + "/" + new_file_name);
+        multipartFile[0].transferTo(file);
 
         return path + "/" + new_file_name;
     }
