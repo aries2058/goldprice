@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface MarketMapRepository extends JpaRepository<MarketMap, Long> {
     Optional<MarketMap> findMarketByAddr(String addr);
+    Optional<MarketMap> findMarketByBuildingCode(String buildingCode);
 }

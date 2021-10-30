@@ -25,7 +25,6 @@ $(function(){
 
     $('#search-place').keyup(function(e){
         if($(this).val()==""){
-            $('.search-area').removeClass('on')
             $('#search-list').hide();
         }
 
@@ -33,7 +32,6 @@ $(function(){
             let $p = $('#search-list .place').eq(0)
             ShowPlace($p.data('id'), $p.data('mid'))
         }else{
-            $('.search-area').addClass('on')
             let tmp = _.template($('#tmpl-search-list').html())
             $('#search-list').html(tmp({data : autoComplate()}))
             $('#search-list').show();
@@ -54,6 +52,12 @@ $(document).on('click', '#search-list .place', function(){
 $(document).on('click','#btn-list', function(){
     $('#detail').hide()
     $('#list').show()
+})
+
+$(document).on('click', '.mapimg', function (){
+    if(_.indexOf(_user.roleSet, 'ADMIN') > -1){
+        alert($(this).parent().data('mapid'))
+    }
 })
 
 function ShowPlace(id, mid){

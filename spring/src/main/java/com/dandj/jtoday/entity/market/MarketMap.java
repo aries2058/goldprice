@@ -26,6 +26,9 @@ public class MarketMap {
     @Column(length = 500, nullable = false)
     private String addrDetail;
 
+    @Column(length = 50, nullable = false)
+    private String buildingCode;
+
     @Column(length = 1)
     private String useYn;
 

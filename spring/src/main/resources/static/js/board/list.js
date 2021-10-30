@@ -50,10 +50,10 @@ $(document).on('click', '.link, .b-contents, .b-photo', function (){
 
 function getImage(obj, id){
     $.ajax({
-        url: _host + '/func/getImage',
+        url: _host + '/func/getImagePath',
         data: {id: id},
         success: function (res){
-            $('img', obj).attr('src', res);
+            $('img', obj).attr('src', _display + res);
         }
     })
 }

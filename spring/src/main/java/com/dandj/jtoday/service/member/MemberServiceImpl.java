@@ -163,18 +163,6 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void updateMarketId(String bizNo, Long marketId, String imagePath) {
-        Optional<List<Member>> data = memberRepository.findMembersByBizNo(bizNo);
-        data.ifPresent(members->{
-            members.forEach(x->{
-                x.setMarketId(marketId);
-                x.setImagePath(imagePath);
-                memberRepository.save(x);
-            });
-        });
-    }
-
-    @Override
     public void updatePassword(String userid, String password) {
         String enPw = passwordEncoder.encode(password);
         Optional<Member> member = memberRepository.findByUserId(userid);

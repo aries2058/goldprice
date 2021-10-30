@@ -35,9 +35,9 @@ public class Market extends BaseEntity {
     @Column(length = 2000)
     private String contents;
 
-    @Column(length = 500, nullable = false)
+    @Column(length = 500)
     private String addr;
-    @Column(length = 500, nullable = false)
+    @Column(length = 500)
     private String addrDetail;
 
     private Long mapId;     // 빌딩

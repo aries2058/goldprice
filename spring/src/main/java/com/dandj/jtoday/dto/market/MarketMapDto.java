@@ -18,6 +18,7 @@ public class MarketMapDto {
     private String addr_detail;
     private Double lat;
     private Double lng;
+    private String building_code;
     private String use_yn;
     private List<MarketDto> market;
 }

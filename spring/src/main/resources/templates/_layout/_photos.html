@@ -116,6 +116,21 @@
             $('.added-photos').append(tmp({data: _host + "/images/photo_add.svg", flag: false}))
             $('.photo>div').height($('.photo>div').width())
         }
+
+        function uploadPhotos(typ, callback){
+            let prms = [];
+            let p = null;
+            _.each($('.hid-photo'), function(v, i){
+                p = new Promise(function(resolve, reject){
+                    uploadImage($(v).val(), typ, resolve)
+                })
+                prms.push(p)
+            })
+
+            Promise.all(prms).then(function(values){
+                callback(values)
+            })
+        }
     </script>
 </div>
 </html>

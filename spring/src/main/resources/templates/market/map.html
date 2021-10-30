@@ -7,14 +7,17 @@
 
         <div id="map"></div>
 
-        <div class="container-fluid fixed-top pb-3 search-area">
-            <div class="search-bar">
+        <div class="container-fluid fixed-top pb-3 ps-0 pe-0 search-area">
+            <div class="ads-area m-1">
+                광고 여기어때?
+            </div>
+            <div class="search-bar ms-3 me-3">
                 <input type="text" id="search-place" class="p-0 w-100" placeholder="업체명 또는 건물명으로 검색하세요." />
                 <a class="position-absolute" id="btn-search"><img th:src="@{/images/icon_main_search.svg}" /></a>
             </div>
         </div>
 
-        <div id="list" class="container border-top"></div>
+        <div id="list" class="container"></div>
 
         <div id="detail" class="container p-3 bg-white"></div>
 
@@ -29,9 +32,9 @@
             <%}) %>
         </script>
         <script id="tmpl-detail" type="text/template">
-            <div class="d-flex">
-                <div>
-                    <img th:src="@{/images/photo_add.svg}" />
+            <div class="d-flex" data-mapid="<%- data.id %>">
+                <div class="map-photo">
+                    <img th:src="@{/images/icon_market.svg}" />
                 </div>
                 <div class="flex-grow-1 ps-2 pe-2 position-relative">
                     <p class="mb-0">
@@ -49,21 +52,18 @@
             </div>
         </script>
 
-        <div id="search-list" class="container-fluid" style="display: none;"></div>
+        <div id="search-list" style="display: none"></div>
+
         <script id="tmpl-search-list" type="text/template">
             <% _.each(data, function(v, i){%>
-            <div class="row">
-                <div class="col-12 place ps-4" data-id="<%- v.id %>" data-mid="<%- v.market_id %>">
-                    <p class="mb-0"><%- v.place_nm %>
-                        <% if(v.ismarket){%>
-                        <span>(<%- v.market_nm %>)</span>
-                        <%}%></p>
-                    <small class="text-lightgray"><%- v.addr %></small>
-                </div>
+            <div class="col-12 place ps-4 mb-3" data-id="<%- v.id %>" data-mid="<%- v.market_id %>">
+                <p class="mb-0"><%- v.place_nm %>
+                    <% if(v.ismarket){%>
+                    <span>(<%- v.market_nm %>)</span>
+                    <%}%></p>
+                <small class="text-lightgray"><%- v.addr %></small>
             </div>
-            <% if(data.length > 1){%>
-            <hr />
-            <%}})%>
+            <%})%>
         </script>
 
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b014172c9c9d6ef867195084fe9b1c19&libraries=services"></script>

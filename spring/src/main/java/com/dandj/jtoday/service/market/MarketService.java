@@ -19,29 +19,32 @@ public interface MarketService {
     List<MarketDto> getHotMarketList();
 
     default Market dtoToEntity(MarketDto dto){
-        Market entity = Market.builder()
-                .id(dto.getId())
-                .marketNm(dto.getMarket_nm())
-                .bizNo(dto.getBiz_no())
-                .addr(dto.getAddr())
-                .addrDetail(dto.getAddr_detail())
-                .contents(dto.getContents())
-                .email(dto.getEmail())
-                .tel(dto.getTel())
-                .mapId(dto.getMap_id())
-                .itemTyp(dto.getItem_typ())
-                .marketTyp(dto.getMarket_typ())
-                .linkGoldpen(dto.getLink_goldpen())
-                .linkHomepage(dto.getLink_homepage())
-                .linkKakao(dto.getLink_kakao())
-                .linkSns(dto.getLink_sns())
-                .hotYn(dto.getHot_yn())
-                .writer(dto.getWriter()).build();
-
-        if(dto.getId() == null){
-
+        Market entity;
+        if(dto.getAddr() != null){
+            entity = Market.builder()
+                    .id(dto.getId())
+                    .marketNm(dto.getMarket_nm())
+                    .bizNo(dto.getBiz_no())
+                    .addr(dto.getAddr())
+                    .addrDetail(dto.getAddr_detail())
+                    .contents(dto.getContents())
+                    .email(dto.getEmail())
+                    .tel(dto.getTel())
+                    .mapId(dto.getMap_id())
+                    .itemTyp(dto.getItem_typ())
+                    .marketTyp(dto.getMarket_typ())
+                    .linkGoldpen(dto.getLink_goldpen())
+                    .linkHomepage(dto.getLink_homepage())
+                    .linkKakao(dto.getLink_kakao())
+                    .linkSns(dto.getLink_sns())
+                    .hotYn(dto.getHot_yn())
+                    .writer(dto.getWriter()).build();
+        }else{
+            entity = Market.builder()
+                    .id(dto.getId())
+                    .marketNm(dto.getMarket_nm())
+                    .bizNo(dto.getBiz_no()).build();
         }
-
         return entity;
     }
 
@@ -99,6 +102,7 @@ public interface MarketService {
                 .place_nm(entity.getPlaceNm())
                 .addr(entity.getAddr())
                 .addr_detail(entity.getAddrDetail())
+                .building_code(entity.getBuildingCode())
                 .lat(entity.getLat())
                 .lng(entity.getLng())
                 .use_yn(entity.getUseYn())
@@ -112,6 +116,7 @@ public interface MarketService {
                 .addrDetail(marketDto.getAddr_detail())
                 .lat(marketDto.getLat())
                 .lng(marketDto.getLng())
+                .buildingCode(marketDto.getBuilding_code())
                 .useYn("Y")
                 .build();
 

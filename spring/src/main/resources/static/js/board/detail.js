@@ -28,7 +28,7 @@ $(function () {
                 data: {id : $('#bid').val()},
                 success: function (){
                     opener.parent.location.reload();
-                    window.close();
+                    self.close();
                 }
             })
         })
@@ -54,10 +54,10 @@ $(function () {
             if(res.image_ids.length > 0){
                 _.each(res.image_ids, function(v){
                     $.ajax({
-                        url: _host + '/func/getImage',
+                        url: _host + '/func/getImagePath',
                         data: {id: v},
                         success: function (res){
-                            imgHtml += '<img class="img-fluid mb-1 mt-1" src="'+res+'" />'
+                            imgHtml += '<img class="img-fluid mb-1 mt-1" src="'+_display +res+'" />'
                         }
                     })
                 })

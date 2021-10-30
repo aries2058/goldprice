@@ -1,5 +1,9 @@
 let _price = null;
 $(function (){
+    $('#btn-show-all').click(function (){
+        window.open(_host + "/main/viewPhoto?src=price_dia");
+    })
+
     $('#ct').keyup(function(e){
         if(e.keyCode == 13){
             getFilter()

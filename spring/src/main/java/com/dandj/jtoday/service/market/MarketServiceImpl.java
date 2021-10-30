@@ -32,20 +32,32 @@ public class MarketServiceImpl implements MarketService{
     private final MarketRepository marketRepository;
     private final MarketImagesRepository marketImagesRepository;
     private final MarketMapRepository marketMapRepository;
+    private final MemberRepository memberRepository;
 
     @Override
     public Long register(MarketDto marketDto) {
         Market data = dtoToEntity(marketDto);
-        if(marketDto.getId() == 0){
-            data.setId(null);
-        }
-        Optional<MarketMap> map = marketMapRepository.findMarketByAddr(marketDto.getAddr());
-        if(map.isPresent()){
-            data.setMapId(map.get().getId());
+
+        if(marketDto.getAddr() != null){
+            Optional<MarketMap> map = marketMapRepository.findMarketByBuildingCode(marketDto.getBuilding_code());
+            if(map.isPresent()){
+                data.setMapId(map.get().getId());
+            }
         }
         marketRepository.save(data);
 
-        if(!marketDto.getImage_ids().isEmpty()){
+        if(marketDto.getImage_path() != null){
+            Optional<List<Member>> members = memberRepository.findMembersByBizNo(marketDto.getBiz_no());
+            members.ifPresent(m->{
+                m.forEach(x->{
+                    x.setMarketId(data.getId());
+                    x.setImagePath(marketDto.getImage_path());
+                    memberRepository.save(x);
+                });
+            });
+        }
+
+        if(marketDto.getImage_ids() != null || !marketDto.getImage_ids().isEmpty()){
             Optional<List<MarketImages>> imgs = marketImagesRepository.findMarketImagesByMarketId(marketDto.getId());
             imgs.ifPresent(x-> x.forEach(img->{
                 marketImagesRepository.delete(img);
@@ -54,6 +66,7 @@ public class MarketServiceImpl implements MarketService{
                 marketImagesRepository.save(dtoToMarketImageEntity(x, data));
             });
         }
+
         return data.getId();
     }
 

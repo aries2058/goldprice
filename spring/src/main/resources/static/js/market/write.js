@@ -1,7 +1,9 @@
 let _flag_main_photo = false;
 let _market = null;
 $(function (){
-    if($('#market_id').val() != '' && $('#market_id').val() > 0){
+    $('#user_id').val(_user.user_id)
+
+    if($('#market_id').val() != ''){
         $.ajax({
             url: _host + '/market/getMarket',
             data: {id : $('#market_id').val() },
@@ -16,17 +18,15 @@ $(function (){
                 $('#regdt').text(dateFormat(res.regdt, 'yyyy-MM-dd hh:mm:ss'))
                 $('#moddt').text(dateFormat(res.moddt, 'yyyy-MM-dd hh:mm:ss'))
                 $('.market_typ').val(res.market_typ)
-                if(res.market_typ == 'RETAIL' || res.market_typ == 'SOLE' || res.market_typ == 'ETC'){
-                    $('.itemtyp-area').show()
-                    let p = null;
-                    _.each($('.item_typ'), function (v, i){
-                        if(res.item_typ.indexOf($(v).val())>-1){
-                            p = $(v).parents('.lb-checkbox')
-                            $('img', p).attr('src', $('img', p).attr('src').replace('off', 'on'));
-                            $(v).prop('checked', true)
-                        }
-                    })
-                }
+                $('.itemtyp-area').show()
+                let p = null;
+                _.each($('.item_typ'), function (v, i){
+                    if(res.item_typ.indexOf($(v).val())>-1){
+                        p = $(v).parents('.lb-checkbox')
+                        $('img', p).attr('src', $('img', p).attr('src').replace('off', 'on'));
+                        $(v).prop('checked', true)
+                    }
+                })
                 $('#link_homepage').val(res.link_homepage)
                 $('#link_goldpen').val(res.link_goldpen)
                 $('#link_kakao').val(res.link_kakao)
@@ -71,23 +71,14 @@ $(function (){
         })
     }
     else {
+        $('.market_nm').text(_user.biz_nm)
         dispPhotoAddButton()
     }
 
-    $('.market_typ').change(function (){
-        if($(this).val() == 'RETAIL' || $(this).val() == 'SOLE' || $(this).val() == 'ETC'){
-            $('.itemtyp-area').show()
-        }else{
-            $('.itemtyp-area').hide()
-            $('.item_typ').prop('checked', false);
-        }
-    })
-
-
+    // 대표사진 등록
     $('#btn-main-photo').click(function (){
         $('#file').click()
     })
-
     $('#file').change(function (){
         _flag_main_photo = true;
         let file = $('#file')[0].files[0];
@@ -95,34 +86,36 @@ $(function (){
             $('#hid-main-photo').val(dataURL);
             $('.main-photo').hide();
             $('#btn-main-photo').css('backgroundImage', 'url('+dataURL+')')
+
+            modal.confirm('대표사진으로 등록하시겠습니까?', function(){
+                $.ajax({
+                    type: 'post',
+                    enctype: 'multipart/form-data',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    url: _host + '/func/uploadMarketMainImage',
+                    data: new FormData($('#frm-file')[0]),
+                    success: function(res){
+                        registerMainPhoto(res)
+                    }
+                })
+            })
+        }, function(){
+            modal.alert('대표사진 등록을 취소했습니다.');
+            $('#btn-main-photo').css('backgroundImage', _host + '/images/icon_market.svg')
         })
     })
 
     $('#btn-register').click(function (){
-        $('#user_id').val(_user.user_id)
-        if(_flag_main_photo){
-            $.ajax({
-                type: 'post',
-                enctype: 'multipart/form-data',
-                processData: false,
-                contentType: false,
-                cache: false,
-                url: _host + '/func/uploadMarketMainImage',
-                data: new FormData($('#frm-file')[0]),
-                success: function(res){
-                    if(_flag_photos){
-                        uploadMarketPhotos(register, res);
-                    }else{
-                        register(res);
-                    }
-                }
-            })
-        }else if(_flag_photos){
-            uploadMarketPhotos(register);
+        if(_flag_photos){
+            uploadPhotos('market', register);
         }else{
             register();
         }
     })
+
+
 })
 
 function goPopup() {
@@ -153,11 +146,11 @@ function goPopup() {
             }
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            console.log(data.zonecode);
-            console.log(fullRoadAddr);
+            console.log(data.buildingCode);
 
 
             $("#addr").val(fullRoadAddr);
+            $("#building_code").val(data.buildingCode);
 
             /* document.getElementById('signUpUserPostNo').value = data.zonecode; //5자리 새우편번호 사용
             document.getElementById('signUpUserCompanyAddress').value = fullRoadAddr;
@@ -166,29 +159,35 @@ function goPopup() {
     }).open();
 }
 
-function uploadMarketPhotos(callback, image_id){
-    let prms = [];
-    let p = null;
-    _.each($('.hid-photo'), function(v, i){
-        p = new Promise(function(resolve, reject){
-            uploadImage($(v).val(), 'market', resolve)
-        })
-        prms.push(p)
-    })
-
-    Promise.all(prms).then(function(values){
-        callback(image_id, values)
+function registerMainPhoto(image_path){
+    $.ajax({
+        type: 'post',
+        url: _host + '/market/register',
+        data: {
+            id : $('#market_id').val(),
+            market_nm : _user.biz_nm,
+            biz_no: _user.biz_no,
+            image_path: image_path,
+        },
+        success: function (res){
+            modal.alert('대표사진이 등록되었습니다.');
+            _user.image_path = image_path
+            _user.market_id = res;
+            setUserInfo(_user)
+            $('#market_id').val(res)
+        }
     })
 }
-let register = function(image_path, values){
+
+let register = function(values){
     let item_typ = '';
     _.each($('.item_typ'), function(v){
         if($(v).is(':checked')){
             item_typ += $(v).val() + ',';
         }
     })
-    image_path = image_path ==null ? _user.image_path : image_path;
     $.ajax({
+        type: 'post',
         url: _host + '/market/register',
         data: {
             id : $('#market_id').val(),
@@ -196,9 +195,10 @@ let register = function(image_path, values){
             biz_no: _user.biz_no,
             addr: $('#addr').val(),
             addr_detail: $('#addr_detail').val(),
+            building_code: $('#building_code').val(),
             tel: $('#tel').val(),
             contents: $('#contents').val(),
-            image_path: image_path,
+            image_path: _user.image_path,
             map_id: _market == null ? 0: _market.map_id,
             writer: _user.user_id,
             image_ids: values,
@@ -210,24 +210,12 @@ let register = function(image_path, values){
             link_goldpen: $('#link_goldpen').val(),
             link_sns: $('#link_sns').val(),
         },
-        type: 'post',
-        success: function(market_id){
-            $.ajax({
-                url: _host + '/market/updateMarketId',
-                data:{
-                    bizNo : _user.biz_no,
-                    marketId: market_id,
-                    imagePath: image_path,
-                },
-                success: function (){
-                    _user.image_path = image_path;
-                    _user.market_id = market_id;
-                    localStorage.setItem('profile', JSON.stringify(_user))
-                    opener.parent.location.reload();
-                    modal.alert('등록되었습니다.', function (){
-                        window.close();
-                    });
-                }
+        success: function (res){
+            _user.market_id = res;
+            setUserInfo(_user);
+            modal.alert('업체 정보가 등록되었습니다.', function (){
+                opener.document.location.reload();
+                self.close();
             })
         }
     })

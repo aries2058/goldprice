@@ -39,6 +39,7 @@ public class MarketDto {
 
     private Double lat;
     private Double lng;
+    private String building_code;
 
     private String hot_yn;
     @Builder.Default

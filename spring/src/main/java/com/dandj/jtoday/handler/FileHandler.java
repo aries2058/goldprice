@@ -31,7 +31,7 @@ public class FileHandler {
         UUID uuid = UUID.randomUUID();
         String new_file_name = uuid + originalFileExtension;
 
-        String path =  "/"+ user_id;
+        String path =  "/marketMain/"+ user_id;
         File file = new File(absolutePath + "/" + user_id);
         if(!file.exists()){
             file.mkdirs();

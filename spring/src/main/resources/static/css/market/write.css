@@ -39,9 +39,6 @@ label{
     background-repeat: no-repeat;
     background-size: cover;
 }
-.itemtyp-area, .item_typ {
-    display: none;
-}
 .lb-checkbox{
     margin:8px 0px 12px !important;
 }

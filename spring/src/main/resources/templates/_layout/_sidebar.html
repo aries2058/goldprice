@@ -6,13 +6,15 @@
     <div class="container-fluid sidebar">
         <div class="pt-2 pb-2 text-end">
             <a class="btn btn-close-sidebar"><img th:src="@{/images/btn_close.svg}" /></a>
-            <div class="userinfo" id="btn-update-userinfo">
+            <div class="userinfo" id="btn-update-userinfo" style="display: none">
                 <a id="btn-main-photo"></a>
                 <div><span>&nbsp;&nbsp;</span> <span class="biznm"></span> <img th:src="@{/images/arrow-right.svg}" style="margin-top:-4px" /></div>
-                <span class="usernm" style="color:#7A7A7A"></span>
             </div>
         </div>
-        <ul class="list-group list-group-flush border-top">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item pb-1">
+                <p class="mb-2">환영합니다. <span class="usernm" style="color:#000; font-width: bold;"></span></p>
+            </li>
             <li class="list-group-item pb-1 border-0"><a data-url="/mypage/list">
                 <img th:src="@{/images/icon_mypage.svg}" /> 내 정보 변경</a></li>
             <li class="list-group-item pb-1 border-0"><a data-url="/board/qna">

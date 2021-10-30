@@ -34,6 +34,14 @@ $(function(){
     }
 })
 
+
+
+function setUserInfo(res){
+    localStorage.setItem('profile', JSON.stringify(res))
+    _user = JSON.parse(localStorage.getItem('profile'))
+}
+
+
 function pushToken(token, typ){
     setPush({token: token, typ: typ, uuid: null})
 }
@@ -56,7 +64,7 @@ function dispSidebar(){
         $('.sidebar').animate({
             right:0
         })
-        $('#btn-main-photo').css('backgroundImage', 'url(' + _display + _user.image_path +')');
+        $('#btn-main-photo').css('backgroundImage', 'url(' +(_user.image_path == '' ? _host + '/images/icon_market.svg' : _display + _user.image_path)  +')');
     })
     $('.btn-close-sidebar').on('click', ()=>{
         $('.back').hide();
@@ -71,9 +79,17 @@ function dispSidebar(){
         })
     })
 
-    $('#btn-update-userinfo').click(function(){
-        window.open(_host + '/market/write?id=' + (_user.market_id == null ? '': _user.market_id))
-    })
+    if(_.indexOf(_user.roleSet, 'SOLE') > -1){
+        $('#btn-update-userinfo').show();
+        $('#btn-update-userinfo').click(function(){
+            window.open(_host + '/market/write?id=' + (_user.market_id == null ? '': _user.market_id))
+            $('.back').hide()
+            $('.sidebar').css({
+                right:"-75%"
+            })
+        })
+    }
+
     $('.sidebar .list-group-item a').click(function(){
         if($(this).data('url')){
             window.open(_host + $(this).data('url'))
@@ -121,23 +137,6 @@ function biznum(obj){
         return '';
     }
 }
-
-// function uploadImage(imageString, resolve){
-//     $.ajax({
-//         type: 'post',
-//         url: _host + '/func/uploadImage',
-//         data: {
-//             imageString : imageString
-//         },
-//         success: function(res){
-//             console.log('uploadImage: ' + res)
-//             resolve(res)
-//         },
-//         error: function (a,b,c){
-//             console.log(a,b,c)
-//         }
-//     })
-// }
 
 function uploadImage(imgDataUrl, typ, resolve){
     let formdata = new FormData();
@@ -243,15 +242,14 @@ let modal = {
             $('.modal').hide()
             $('.back').hide()
         });
-
-        if(falseCallback != null){
-            $('.btn-confirm-no').off('click');
-            $('.btn-confirm-no').on('click', function (){
+        $('.btn-confirm-no').off('click');
+        $('.btn-confirm-no').on('click', function (){
+            if(falseCallback != null){
                 falseCallback();
-                $('.modal').hide()
-                $('.back').hide()
-            });
-        }
+            }
+            $('.modal').hide()
+            $('.back').hide()
+        });
     }
 }
 
