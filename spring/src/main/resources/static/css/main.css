@@ -7,7 +7,7 @@
     margin-bottom: 8px;
     line-height: 34px;
     margin-left: 18px;
-    margin-top:24px
+    margin-top:92px
 }
 .top-area-date{
     color:#C3F2E7;
@@ -17,10 +17,10 @@
 }
 .search-bar{
     background: #fff;
-    margin-top:62px;
+    margin-top:12px;
     border-radius: 8px;
-    box-shadow: 2px 2px 5px #2F9192;
-    padding:10px 16px 12px;
+    border:1px solid #36BEBF;
+    padding:10px 8px 12px;
     position:relative;
     color:#C2C2C2;
 }
@@ -28,8 +28,11 @@
     padding:0px
 }
 #btn-search{
-    top:8px;
-    right: 16px
+    top: 8px;
+    right: 8px;
+    display: block;
+    width: 40px;
+    height: 40px;
 }
 .price-area{
     border-radius: 10px;
@@ -183,13 +186,13 @@
     margin:4px 0px;
 }
 .market-area .market-btn-area div.bb{
-    border-bottom:1px solid #36BEBF;
+    border-bottom:1px solid #eee;
 }
 .market-area .market-btn-area div.bl{
-    border-left:1px solid #36BEBF;
+    border-left:1px solid #eee;
 }
 .market-area .market-btn-area div.bt{
-    border-top:1px solid #36BEBF;
+    border-top:1px solid #eee;
 }
 .market-area .market-btn-area a{
     font-size: 0.9rem;
@@ -197,5 +200,16 @@
     color:#3F3D56;
 }
 .bottom-empty{
-    height: 70px !important;
+    height: 58px !important;
+}
+.main-banner{
+    background: #89C348;
+    position: relative;
+    color:#fff
+}
+.main-banner img{
+    position: absolute;
+    width:35%;
+    right:8px;
+    top:8px;
 }

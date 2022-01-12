@@ -60,6 +60,9 @@ pre{
 .text-gold{
     color:#36BEBF !important
 }
+.bg-gold{
+    background: #36BEBF;
+}
 .nav-link{
     color:#868686 !important
 }

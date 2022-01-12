@@ -9,7 +9,7 @@ $(function(){
                 typ: 'G'
             },
             success: function (res){
-                $('.val-price').html(comma(res[0].vat+''))
+                $('.val-price').html(comma(res[0].sell+''))
                 calc();
 
             }

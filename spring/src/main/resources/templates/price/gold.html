@@ -7,54 +7,81 @@
 
         <span class="top-bar-title title">시세</span>
 
-        <div class="d-flex tab mb-4">
+        <div class="d-flex tab mb-3">
             <div class="w-50 text-center p-3 on"><a th:href="@{/price/gold}">금/은</a></div>
             <div class="w-50 text-center p-3"><a th:href="@{/price/dia}">다이아</a></div>
             <div class="w-50 text-center p-3"><a th:href="@{/price/subu}">쓰브</a></div>
             <div class="w-50 text-center p-3"><a th:href="@{/price/pearl}">진주</a></div>
         </div>
-
-        <div class="container-fluid">
+        <div class="container-fluid ps-0">
+            <div class="bg-gold pt-2 ps-3 pe-3 pb-2 text-white d-inline-block" style="border-bottom-right-radius: 12px">
+                종로투데이 금/은 중계 서비스<br />
+                <small class="text-dark">종로투데이에서 대행 구매해드립니다.</small>
+            </div>
+        </div>
+        <div class="container-fluid mt-2 p-2">
             <div class="d-flex justify-content-between">
                 <b>오늘의 <span class="text-warning">금 시세</span></b>
-                <div><span id="dt-gold"></span></div>
+                <div><span id="dt-gold" class="text-secondary"></span></div>
             </div>
             <div id="price-gold" class="mb-5"></div>
             <div class="d-flex justify-content-between">
                 <b>오늘의 <span class="text-secondary">은 시세</span></b>
-                <div><span id="dt-silver"></span></div>
+                <div><span id="dt-silver" class="text-secondary"></span></div>
             </div>
             <div id="price-silver"></div>
         </div>
 
         <script type="template/text" id="tmpl-price">
-            <div class="price-area d-flex justify-content-between">
-                <div>
-                    <h5>VAT 별도 판매</h5>
-                    <p class="price <%- typ=='G'? 'text-warning': 'text-secondary' %>"><%- comma(data.vat+'') %>원/돈</p>
+            <div class="price-area">
+                <div class="d-flex justify-content-between">
+                    <h5>
+                        부가세 별도 판매<br />
+                        <small class="text-secondary">(<%- comma((data.vat/3.75)+'') %> 원/g)</small>
+                    </h5>
+                    <p class="price text-end <%- typ=='G'? 'text-dark': 'text-secondary' %>">
+                        <span><%- comma(data.vat+'') %> <small>원/돈</small></span><br />
+                        <small>(VAT포함 <b><%- comma((data.vat*1.1)+'') %></b> <small>원/돈</small>)</small>
+                    </p>
                 </div>
-                <div><a class="btn btn-calc <%- typ=='G'? 'bg-warning': 'bg-secondary' %> text-white">계산하기</a></div>
+                <div>
+                    <small>예상 가격 계산</small>
+                    <div class="d-flex cal-price">
+                        <div class="position-relative me-1" style="width:40%">
+                            <input style="padding-right:46px" class="rounded form-control form-control-sm d-inline text-end" type="text" value="1" />
+                            <span class="btn btn-sm btn-warning btn-unit" style="top:8px">돈</span></div>
+                        <div class="position-relative" style="width:60%">
+                            <input style="padding-right:28px" class="rounded form-control form-control-sm d-inline text-end" type="text" value="<%- comma((data.vat/3.75)+'') %>" />
+                            <span style="top:12px">원</span>
+                            <small class="d-block text-end">(부가세 포함 <b>250,500</b> 원)</small>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="price-area d-flex justify-content-between">
-                <div>
-                    <h5>VAT 포함 판매</h5>
-                    <p class="price <%- typ=='G'? 'text-warning': 'text-secondary' %>"><%- comma((data.vat*1.1).toFixed(0)+'') %>원/돈</p>
+            <div class="price-area">
+                <div class="d-flex justify-content-between">
+                    <h5>종로 평균 판매</h5>
+                    <p class="price <%- typ=='G'? 'text-dark': 'text-secondary' %>">
+                        <span><%- comma(data.sell+'') %> <small>원/돈</small></span>
+                    </p>
                 </div>
-                <div><a class="btn btn-calc <%- typ=='G'? 'bg-warning': 'bg-secondary' %> text-white">계산하기</a></div>
-            </div>
-            <div class="price-area d-flex justify-content-between">
-                <div>
-                    <h5>VAT 평균 판매</h5>
-                    <p class="price <%- typ=='G'? 'text-warning': 'text-secondary' %>"><%- comma(data.sell+'') %>원/돈</p>
+                <div class="d-flex justify-content-between">
+                    <h5>종로 평균 매입</h5>
+                    <p class="price <%- typ=='G'? 'text-dark': 'text-secondary' %>">
+                        <span><%- comma(data.buy+'') %> <small>원/돈</small></span>
+                    </p>
                 </div>
-                <div><a class="btn btn-calc <%- typ=='G'? 'bg-warning': 'bg-secondary' %> text-white">계산하기</a></div>
-            </div>
-            <div class="price-area d-flex justify-content-between">
                 <div>
-                    <h5>VAT 평균 매입</h5>
-                    <p class="price text-gold"><%- comma(data.buy+'') %>원/돈</p>
+                    <small>예상 가격 계산</small>
+                    <div class="d-flex cal-price">
+                        <div class="position-relative me-1" style="width:40%">
+                            <input style="padding-right:58px" class="rounded form-control form-control-sm d-inline text-end" type="text" value="1" />
+                            <span class="btn btn-sm btn-warning btn-unit" style="top:8px">g 당</span></div>
+                        <div class="position-relative" style="width:60%">
+                            <input style="padding-right:28px" class="rounded form-control form-control-sm d-inline text-end" type="text" value="<%- comma((data.vat/3.75)+'') %>" />
+                            <span style="top:12px">원</span></div>
+                    </div>
                 </div>
-                <div><a class="btn btn-gold btn-calc text-white">계산하기</a></div>
             </div>
         </script>
 

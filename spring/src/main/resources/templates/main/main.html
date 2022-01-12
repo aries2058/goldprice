@@ -6,12 +6,6 @@
         <link th:href="@{/css/main.css}" rel="stylesheet">
         <script th:src="@{/js/main.js}"></script>
         <div class="container-fluid">
-            <div class="search-bar">
-                <span>어떤 도매 업체를 찾으시나요?</span>
-                <a class="position-absolute" id="btn-search"><img th:src="@{/images/icon_main_search.svg}" /></a>
-            </div>
-        </div>
-        <div class="container-fluid">
             <div class="top-area-tit">
                 오늘 종로의<br />
                 <span class="fw-bolder">금 판매 시세</span>는?
@@ -21,20 +15,31 @@
             </div>
         </div>
         <div class="container-fluid">
-            <div class="price-area d-flex">
-                <div class="tit tit1">
-                    # 부가세 별도
+            <div class="price-area" style="position: relative">
+                <div class="d-flex mb-3">
+                    <div class="tit tit1">
+                        # 부가세 별도
+                    </div>
+                    <div class="flex-grow-1 price">
+                        <span class="vat"></span><span class="unit">원/돈</span>
+                    </div>
+                    <div class="calc"><img th:src="@{/images/btn_calc_icon1.svg}" /></div>
                 </div>
-                <div class="flex-grow-1 price"><span class="vat"></span><span class="unit">원/돈</span></div>
-                <div class="calc"><img th:src="@{/images/btn_calc_icon1.svg}" /></div>
+                <span style="position: absolute;
+                            top: 44px;
+                            right:91px;
+                            font-size: 0.9rem;
+                            font-weight: 300;
+                            color:#000;
+                            text-align: center;">부가세 포함 <span class="ivat"></span><span style="font-size: 0.8rem">원/돈</span></span>
             </div>
-            <div class="price-area d-flex justify-content-between">
-                <div class="tit tit2">
-                    # 부가세 포함
-                </div>
-                <div class="flex-grow-1 price"><span class="ivat"></span><span class="unit">원/돈</span></div>
-                <div class="calc"><img th:src="@{/images/btn_calc_icon2.svg}" /></div>
-            </div>
+<!--            <div class="price-area d-flex justify-content-between">-->
+<!--                <div class="tit tit2">-->
+<!--                    # 부가세 포함-->
+<!--                </div>-->
+<!--                <div class="flex-grow-1 price"><span class="ivat"></span><span class="unit">원/돈</span></div>-->
+<!--                <div class="calc"><img th:src="@{/images/btn_calc_icon2.svg}" /></div>-->
+<!--            </div>-->
             <div class="price-area d-flex justify-content-between">
                 <div class="tit tit3">
                     # 종로 평균
@@ -45,7 +50,7 @@
         </div>
         <div class="container-fluid">
             <div class="row">
-                <small class="msg">* 평균시세입니다. 금액은 변동될 수 있습니다.</small>
+                <small class="msg">* 종로 금 도매업 평균 시세입니다.<br />* 금액은 실시간 변동될 수 있습니다.</small>
             </div>
         </div>
         <div class="container-fluid ps-4 pe-4 pb-3 main-bg-dark">
@@ -69,13 +74,15 @@
                 <div class="col-6 pt-3">
                     <a th:href="@{/market/map}" class="w-100"><img class="w-100" th:src="@{/images/btn_main_map.svg}" /></a></div>
             </div>
-
         </div>
-
         <div class="container-fluid market-area mt-5">
             <div class="row">
                 <div class="col tit"><b style="letter-spacing: -1px">종로 도매 업체</b></div>
                 <div class="col text-end"><a class="btn-register">+ 업체 등록하기</a></div>
+            </div>
+            <div class="row search-bar">
+                <span>어떤 도매 업체를 찾으시나요?</span>
+                <a class="position-absolute" id="btn-search"><img th:src="@{/images/icon_main_search.svg}" /></a>
             </div>
             <div class="row market-btn-area">
                 <div class="col-4 text-center pt-3 pb-3 bb bt">
@@ -105,6 +112,20 @@
                 <div class="col-4 text-center pt-3 pb-3 bl bb">
                     <a th:href="@{/market/listByItem?typ=09}">도금</a>
                 </div>
+            </div>
+        </div>
+        <div class="container-fluid mt-3">
+            <div class="p-3 rounded main-banner">
+                <img th:src="@{/images/online_shopping.jpg}" />
+                <h5>온라인 상점 오픈<br />어려우신가요?</h5>
+                <p class="text-dark pb-0">24시간 언제든지 주문 받을 수 있는<br /><b>온라인 마켓은 필수!</b></p>
+                <a class="btn btn-warning float-end">온라인 마켓 오픈 강의</a>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="container-fluid mt-3 mb-3">
+            <div class="d-flex">
+                <a href="tel:02-745-1145" class="btn btn-gold text-white w-100">상담전화 <small>02-745-1145</small></a>
             </div>
         </div>
     </th:block>

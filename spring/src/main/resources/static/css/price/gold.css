@@ -1,29 +1,22 @@
 .price-area{
     padding:16px;
-    background: #f9f9f9;
+    background: #f8f8f8;
     margin-top:8px;
 }
 .price-area h5{
     font-size: 1rem;
-    margin-bottom: 4px;
+    margin-top: 6px;
+    font-weight: normal;
+    color:#333;
 }
 .price-area .price{
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 0px;
 }
-
-.text-warning{
-    color: #F3B749 !important;
-}
-.text-secondary{
-    color:#7A7A7A !important;
-}
-.bg-warning{
-    background: #F3B749 !important;
-}
-.bg-secondary{
-    background:#7A7A7A !important;
+.price-area small{
+    font-weight: normal;
+    font-size: 0.9rem;
 }
 .btn-calc{
     margin-top:10px;
@@ -32,6 +25,14 @@
     font-size: 0.9rem;
 }
 #dt-gold, #dt-silver{
-    font-size: 0.9rem;
-    color:#C2C2C2
+    font-size: 0.8rem;
+}
+.cal-price span{
+    position: absolute;
+    right:8px;
+}
+.cal-price input{
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding:10px;
 }
