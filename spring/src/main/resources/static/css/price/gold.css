@@ -27,12 +27,12 @@
 #dt-gold, #dt-silver{
     font-size: 0.8rem;
 }
-.cal-price span{
-    position: absolute;
-    right:8px;
-}
 .cal-price input{
     font-size: 1.2rem;
     font-weight: bold;
     padding:10px;
+}
+.btn-unit{
+    width:38px;
+    text-align: center;
 }

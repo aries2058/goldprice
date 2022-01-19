@@ -13,7 +13,7 @@
         </div>
 
         <div class="container-fluid text-end">
-            <a><img th:src="@{/images/btn_init.svg}" /></a>
+            <a id="btn-init"><img th:src="@{/images/btn_init.svg}" /></a>
         </div>
 
         <input th:type="hidden" th:value="${param.price}" id="hid-price" />
@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-7">
                     <div class="form-control d-flex">
-                        <small>시세</small> <b class="val-price key flex-fill"></b> <small>원</small>
+                        <small>시세</small> <input class="val-price key flex-fill" /> <small>원</small>
                     </div>
                 </div>
             </div>
@@ -37,13 +37,13 @@
                 <div class="col-5">
                     <span>14K 중량</span>
                     <div class="form-control d-flex">
-                        <b class="val-weight key flex-fill">0.65</b> <small>g</small>
+                        <input class="val-weight key flex-fill" value="0.65" /> <small>g</small>
                     </div>
                 </div>
                 <div class="col-7">
                     <span>공임비</span>
                     <div class="form-control d-flex">
-                        <b class="val-wage key flex-fill">12,000</b> <small>원</small>
+                        <input class="val-wage key flex-fill" value="12,000" /> <small>원</small>
                     </div>
                 </div>
             </div>
@@ -58,13 +58,13 @@
                     <div class="col-5">
                         <span>수량</span>
                         <div class="form-control d-flex">
-                            <b class="val-stone-cnt key flex-fill">1</b> <small>개</small>
+                            <input class="val-stone-cnt key flex-fill" value="1" /> <small>개</small>
                         </div>
                     </div>
                     <div class="col-7">
                         <span>스톤금액</span>
                         <div class="form-control d-flex">
-                            <b class="val-stone-price key flex-fill">800</b> <small>원</small>
+                            <input class="val-stone-price key flex-fill" value="800"> <small>원</small>
                         </div>
                     </div>
                 </div>

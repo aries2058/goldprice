@@ -9,15 +9,19 @@ $(function(){
                 typ: 'G'
             },
             success: function (res){
-                $('.val-price').html(comma(res[0].sell+''))
+                $('.val-price').val(comma(res[0].sell+''))
                 calc();
 
             }
         })
     }else{
-        $('.val-price').html($('#hid-price').val())
+        $('.val-price').val($('#hid-price').val())
         calc();
     }
+
+    $('#btn-init').on('click', function (){
+        location.reload();
+    })
 
 
     $('#chk-stone').on('change', function(){
@@ -28,6 +32,13 @@ $(function(){
         }
         calc();
     })
+    $('.key').on('keyup', function (){
+        if($(this).val() != ''){
+            $(this).val(comma($(this).val()+""))
+            calc();
+        }
+    })
+    /*
     $('.key').on('click', function(){
         $('.keypad').show();
         $('.key.on').removeClass('on')
@@ -66,16 +77,17 @@ $(function(){
     $('.btn-close-calc').on('click', function(){
         window.history.back();
     })
+     */
 })
 
 function calc(){
-    var v1 = num($('.val-price').text()) / 3.75;
-    var v2 = v1*0.6435*num($('.val-weight').text())+num($('.val-wage').text());
-    var v3 = v1*1.3*0.825*num($('.val-weight').text())+num($('.val-wage').text());
+    var v1 = num($('.val-price').val()) / 3.75;
+    var v2 = v1*0.6435*num($('.val-weight').val())+num($('.val-wage').val());
+    var v3 = v1*1.3*0.825*num($('.val-weight').val())+num($('.val-wage').val());
 
     if($('#chk-stone').is(':checked')){
-        v2 = v2 + (num($('.val-stone-cnt').text())*num($('.val-stone-price').text()))
-        v3 = v3 + (num($('.val-stone-cnt').text())*num($('.val-stone-price').text()))
+        v2 = v2 + (num($('.val-stone-cnt').val())*num($('.val-stone-price').val()))
+        v3 = v3 + (num($('.val-stone-cnt').val())*num($('.val-stone-price').val()))
     }
 
     $('.p14k').html(comma((v2).toFixed(2).toString()))

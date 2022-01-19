@@ -2,7 +2,6 @@ package com.dandj.jtoday.controller;
 
 import com.dandj.jtoday.dto.comm.BoardDto;
 import com.dandj.jtoday.service.func.BoardService;
-import jdk.net.SocketFlow;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;

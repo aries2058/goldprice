@@ -37,49 +37,61 @@
                 <div class="d-flex justify-content-between">
                     <h5>
                         부가세 별도 판매<br />
-                        <small class="text-secondary">(<%- comma((data.vat/3.75)+'') %> 원/g)</small>
+                        <small class="text-secondary">(<%- comma((Math.round(data.vat/3.75))+'') %> 원/g)</small>
                     </h5>
-                    <p class="price text-end <%- typ=='G'? 'text-dark': 'text-secondary' %>">
+                    <p class="price text-end <%- typ=='G'? 'text-warning': 'text-secondary' %>">
                         <span><%- comma(data.vat+'') %> <small>원/돈</small></span><br />
-                        <small>(VAT포함 <b><%- comma((data.vat*1.1)+'') %></b> <small>원/돈</small>)</small>
+                        <small>(VAT포함 <b><%- comma((Math.round(data.vat*1.1))+'') %></b> <small>원/돈</small>)</small>
                     </p>
                 </div>
                 <div>
                     <small>예상 가격 계산</small>
-                    <div class="d-flex cal-price">
-                        <div class="position-relative me-1" style="width:40%">
-                            <input style="padding-right:46px" class="rounded form-control form-control-sm d-inline text-end" type="text" value="1" />
-                            <span class="btn btn-sm btn-warning btn-unit" style="top:8px">돈</span></div>
-                        <div class="position-relative" style="width:60%">
-                            <input style="padding-right:28px" class="rounded form-control form-control-sm d-inline text-end" type="text" value="<%- comma((data.vat/3.75)+'') %>" />
-                            <span style="top:12px">원</span>
-                            <small class="d-block text-end">(부가세 포함 <b>250,500</b> 원)</small>
+                    <div class="d-flex cal-price vat">
+                        <div style="width:40%; padding-right: 4px">
+                            <div class="input-group">
+                                <input type="text" class="inp-amt form-control text-end" value="1" />
+                                <span class="input-group-text btn-unit border-0">돈</span>
+                            </div>
                         </div>
-                    </div>
+                        <div style="width:60%">
+                            <div class="input-group">
+                                <input type="text" class="inp-price form-control text-end" value="<%- comma((data.vat)+'') %>" />
+                                <span class="input-group-text border-0 bg-white">원</span>
+                            </div>
+                            <small class="d-block text-end w-100">(부가세 포함 <b class="inp-price-vat"><%- comma((Math.round(data.vat*1.1))+'') %></b> 원)</small>
+                        </div>
+                     </div>
                 </div>
             </div>
             <div class="price-area">
                 <div class="d-flex justify-content-between">
                     <h5>종로 평균 판매</h5>
-                    <p class="price <%- typ=='G'? 'text-dark': 'text-secondary' %>">
+                    <p class="price <%- typ=='G'? 'text-warning': 'text-secondary' %>">
                         <span><%- comma(data.sell+'') %> <small>원/돈</small></span>
                     </p>
                 </div>
                 <div class="d-flex justify-content-between">
                     <h5>종로 평균 매입</h5>
-                    <p class="price <%- typ=='G'? 'text-dark': 'text-secondary' %>">
+                    <p class="price <%- typ=='G'? 'text-warning': 'text-secondary' %>">
                         <span><%- comma(data.buy+'') %> <small>원/돈</small></span>
                     </p>
                 </div>
                 <div>
                     <small>예상 가격 계산</small>
-                    <div class="d-flex cal-price">
-                        <div class="position-relative me-1" style="width:40%">
-                            <input style="padding-right:58px" class="rounded form-control form-control-sm d-inline text-end" type="text" value="1" />
-                            <span class="btn btn-sm btn-warning btn-unit" style="top:8px">g 당</span></div>
-                        <div class="position-relative" style="width:60%">
-                            <input style="padding-right:28px" class="rounded form-control form-control-sm d-inline text-end" type="text" value="<%- comma((data.vat/3.75)+'') %>" />
-                            <span style="top:12px">원</span></div>
+                    <div class="d-flex cal-price sell">
+                        <div style="width:40%; padding-right: 4px">
+                            <div class="input-group">
+                                <input type="text" class="inp-amt form-control text-end" value="1" />
+                                <span class="input-group-text btn-unit border-0">돈</span>
+                            </div>
+                        </div>
+                        <div style="width:60%">
+                            <div class="input-group">
+                                <input type="text" class="inp-price form-control text-end" value="<%- comma((data.sell)+'') %>" />
+                                <span class="input-group-text border-0 bg-white">원</span>
+                            </div>
+                            <small class="d-block text-end w-100">(부가세 포함 <b class="inp-price-vat"><%- comma((Math.round(data.sell*1.1))+'') %></b> 원)</small>
+                        </div>
                     </div>
                 </div>
             </div>

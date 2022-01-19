@@ -3,18 +3,20 @@ var _newvalue = '';
 
 $(function(){
     $('.keypad').show();
-    $('.btn-init').on('click', function(){
-        $('.key').html('0');
-        $('.price').html('0')
+
+    $('#btn-init').on('click', function (){
+        location.reload();
     })
+
     $('.key').on('click', function(){
         $('.keypad').show();
-        $('.key.on').removeClass('text-lightgray')
+        $('.key.on').removeClass('text-gold')
         $('.key.on').removeClass('on')
-        $(this).addClass('on text-lightgray')
+        $(this).addClass('on text-gold')
         _newvalue = '';
         _oldvalue = $(this).text();
     })
+    /*
     $('.btn-close-keypad').on('click', function(){
         $('.keypad').hide();
         $('.key').removeClass('text-lightgray')
@@ -64,9 +66,10 @@ $(function(){
                 $('.price.unit-g').text((v*3.75).toFixed(2))
             }
 
-            $('.key.on').removeClass('text-lightgray')
+            $('.key.on').removeClass('text-gold')
         }
     })
+     */
 })
 
 function num(val){
